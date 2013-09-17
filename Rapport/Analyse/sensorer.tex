@@ -11,7 +11,24 @@ Kilde: \url{http://www.tik.ee.ethz.ch/tik/education/lectures/PPS/mindstorms/sa_n
 \subsubsection{Ultrasonic}
 Ultrasonic sensoren(US) er en sensor der kan måle afstande til objekter. Dette gøres ved at der sendes en lydbølge og der så beregnes hvor lang tid det tager for denne at ramme objektet og så komme tilbage igen.
 US'en måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm med en præcision på +-3 centimeter.
-\subsubsection{Laser}
-\subsection{Motorer}
+\\
+\\
+Eksperimenter\cite{keylist} har vist:
+\begin{itemize}
+\item Det har vist sig at den minimale aftsand der kan måles er 3 cm.
+\item Desuden er det bedst genkendelig objekt et objekt der har glat og hård overflade og som er firkantet.
+\item Desto mindre objektet er desto sværer har sensoren ved at se objektet.
+\item Sensorens højre 'øje' er det der sender lydbølgen mens det venstre modtager.
+Det gør at US'en 'ser' bedre i højre side når sensoren befinder sig i horisontal position.
+Dette kan tydelig ses når afstand mellem sensor og objekt er under 20 cm, da den slet ikke kommer i sensorens synsfelt i venstre side.
+\item Hvis sensoren anvendes i vertikal position er der det problem at modtagelsen af bølgerne kan blive distraheret af underlaget.
 
+Den bedste opstilling for US'en er i horisontal position, der opnåes de bedste resultater fordi den kritiske region ifht. den vertikale position er mindre.
+En vinkel på mere end 15 grader fra lydbølgen giver hellere ikke klare resultater, desuden er runde genstande også svært genkendelige for US'ens synsfelt.
+\end{itemize}
+
+\subsection{Motorer}
+Motoren består af en rotationssensor som måler omdrejningerne ved grader, denne har en nøjagtighed på 1 grad. Det er med til at gøre motoren ret præcis. Men denne sensor gør det også muligt at styre ret nøjagtigt hvor meget kraft mortoren skal køre med.
+Hvis man kører med flere motorer så har NXT'en indbygget software der gør det muligt at synkronisere disse motorer.
+Det er smart hvis den ene motor skulle være stærkere eller svagere end den anden.
 \end{document}
