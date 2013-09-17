@@ -2,6 +2,11 @@
 [Bb]in/
 [Oo]bj/
 
+*.aux
+*.pdf
+*.out
+*.gz
+
 # mstest test results
 TestResults
 
