@@ -1,0 +1,135 @@
+Distance in cm?
+Actual distance(cm): 260
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 250
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 240
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 230
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 220
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 210
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 200
+Ultrasonic sensors measured distance(cm): 202
+
+
+Distance in cm?
+Actual distance(cm): 190
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 180
+Ultrasonic sensors measured distance(cm): 255
+
+
+Distance in cm?
+Actual distance(cm): 170
+Ultrasonic sensors measured distance(cm): 171
+
+
+Distance in cm?
+Actual distance(cm): 160
+Ultrasonic sensors measured distance(cm): 161
+
+
+Distance in cm?
+Actual distance(cm): 150
+Ultrasonic sensors measured distance(cm): 151
+
+
+Distance in cm?
+Actual distance(cm): 140
+Ultrasonic sensors measured distance(cm): 141
+
+
+Distance in cm?
+Actual distance(cm): 130
+Ultrasonic sensors measured distance(cm): 131
+
+
+Distance in cm?
+Actual distance(cm): 120
+Ultrasonic sensors measured distance(cm): 120
+
+
+Distance in cm?
+Actual distance(cm): 110
+Ultrasonic sensors measured distance(cm): 111
+
+
+Distance in cm?
+Actual distance(cm): 100
+Ultrasonic sensors measured distance(cm): 100
+
+
+Distance in cm?
+Actual distance(cm): 90
+Ultrasonic sensors measured distance(cm): 90
+
+
+Distance in cm?
+Actual distance(cm): 80
+Ultrasonic sensors measured distance(cm): 80
+
+
+Distance in cm?
+Actual distance(cm): 70
+Ultrasonic sensors measured distance(cm): 70
+
+
+Distance in cm?
+Actual distance(cm): 60
+Ultrasonic sensors measured distance(cm): 60
+
+
+Distance in cm?
+Actual distance(cm): 50
+Ultrasonic sensors measured distance(cm): 50
+
+
+Distance in cm?
+Actual distance(cm): 40
+Ultrasonic sensors measured distance(cm): 40
+
+
+Distance in cm?
+Actual distance(cm): 30
+Ultrasonic sensors measured distance(cm): 31
+
+
+Distance in cm?
+Actual distance(cm): 20
+Ultrasonic sensors measured distance(cm): 22
+
+
+Distance in cm?
+Actual distance(cm): 10
+Ultrasonic sensors measured distance(cm): 22
+
+
+Distance in cm?
+Actual distance(cm): 1
+Ultrasonic sensors measured distance(cm): 6
+
+
