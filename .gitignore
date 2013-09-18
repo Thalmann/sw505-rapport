@@ -6,6 +6,7 @@
 *.pdf
 *.out
 *.gz
+*.dvi
 
 # mstest test results
 TestResults
