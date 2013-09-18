@@ -3,6 +3,13 @@
 [Oo]bj/
 
 *.aux
+*.bbl
+*.blg
+*.log
+*.toc
+*.tdo
+*.lof
+*.lot
 *.pdf
 *.out
 *.gz
