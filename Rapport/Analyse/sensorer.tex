@@ -1,11 +1,3 @@
-\documentclass[a4paper,12pt]{report}
-\usepackage[danish]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{hyperref}
-\usepackage{graphicx}
-
-\graphicspath{../graphics//}
-
 \begin{document}
 \section{Sensorer}
 Kilde: \cite{tikNXT}
@@ -38,12 +30,33 @@ Der er gennemført en mindre test af US'en, for at svare på følgende spørgsm�
 \item Ligner resultaterne dem fra eksperimenterne ovenfor?
 \end{itemize}
 
-For at svare på disse spørgsmål kom vi frem til følgende forsøgsopstilling:
-\\
-Billede af opstilling...
-\\
-Testen viste følgende resultater:
-\\
+For at svare på disse spørgsmål kom vi frem til følgende forsøgsopstilling(\ref{opstilling}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{opstilling}
+\caption{Forsøgsopstilling for test af US'ens afstands præcision}
+\label{opstilling}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{us_result_diagram}
+\caption{Testresultater: De blå søjler repræsenterer den målte afstand med tommestok, de andre tre viser US'ens testresultater ifht. hianden.}
+\label{us_diagram}
+\end{figure}
+
+
+\subsubsection{Infarød Sensor}
+Den infarøde afstandssensor(IS) som kan ses på \ref{is} er en afstandssensor med høj præcision og et interval på 10 til 80 cm.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{is} 	
+\caption{High Precision Medium Range Infrared Distance Sensor for NXT (v2)}
+\label{is}
+\end{figure}
 
 \subsection{Motorer}
 Motoren består af en rotationssensor som måler omdrejningerne ved grader, denne har en nøjagtighed på 1 grad. Det er med til at gøre motoren ret præcis. Men denne sensor gør det også muligt at styre ret nøjagtigt hvor meget kraft mortoren skal køre med.
