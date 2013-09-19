@@ -3,11 +3,17 @@
 \mindsqualls tillader kommunikation med NXT enheder via. Bluetooth og USB og fungerer ved at sende og modtager beskeder over disse to teknologier.
 Biblioteket er skrevet i \csharp og kan dermed anvendes af alle de .NET kompatible sprog.
 
+I det følgende afsnit gives en beskrivelse af bibliotekets struktur samt dets anvendelse.
+
+\subsection{Forbindelse til NXT}
+\mindsqualls opretter forbindelse til NXT enheden vha. klassen \lstinline[style=csharp]!NxtCommunicationProtocol!.
+Klassen fungerer, som navnet indikerer, som en protokol ved at definere en række abstrakte funktioner.
 \begin{lstlisting}[style=csharp]
-/// <summary>
-/// This is a summary of a class
-/// </summary>
-public class SubClass : SuperClass
+public abstract void Connect();
+public abstract void Disconnect();
+public abstract bool IsConnected
 {
+    get;
 }
+protected abstract byte[] Send(byte[] request);
 \end{lstlisting}
