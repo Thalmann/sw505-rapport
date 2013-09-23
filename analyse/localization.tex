@@ -12,10 +12,11 @@ Microsofts Kinect benytter et rgb kamera samt en dybdesensor til at fortolke bev
 Kinect er oprindeligt lavet til XBox 360, men findes også i en version til PC, med medfølgende SDK.
 En stor fordel ved at bruge Kinect er at den indeholder en dybdesensor der kan bruges til at lokalisere objekter i et rum.
 
+
 \subsection{Wiimote}
 En anden sensor der kan bruges er Nintendos Wiimote. 
 Wiimote en optisk sensor til at lokalisere infrarødt lys fra den tilhørende sensor bar.
-Ved hjælp af triangulering af det modtagne lys kan wiimoten bestemme sin position.
+Ved hjælp af triangulering af det modtagne lys kan wiimoten bestemme sin position. \cite{wiimote}
 
 \subsection{Dead reckoning}
 Dead Reckoning er en teknik til at finde sin position efter ens bevægelser uden eksterne sensorer.
@@ -30,4 +31,10 @@ Dead reckoning muligheden blev hurtigt udelukket, da gruppen ville fokusere på 
 
 Valget mellem Kinect og Wiimote vandt Kinect af flere grunde. 
 For det første havde vi adgang til en Kinect hvilket gjorde valget oplagt. 
-Også 
+Også det medfølgende SDK gør det let at arbejde med.
+
+\subsection{OpenCV}
+Til at følge et objekt på det optagne billede har vi valgt at benytte et bibliotek kaldet ``OpenCV''.
+OpenCV, eller Open Source Computer Vision Library er et bibliotek der indeholder algoritmer relateret til maskinintelligens, som f.eks. genkendelse af ansigter, identificering af objekter og forfølgelse af objekter.\cite{opencv}
+
+OpenCV bruges i dette projekt til at følge de objekter der findes ved hjælp af Kinect sensoren.
