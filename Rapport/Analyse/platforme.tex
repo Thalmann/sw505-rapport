@@ -1,31 +1,65 @@
 
 \chapter{Valg af platform}
+Her vil blive givet begrundet valg af platform.
+Efterfølgende vil der, indenfor den valgte platform, blive givet et begrundet yderligere valg, af API.
+
+Givet alle uklarhederne omkring projektet, er det klart at der skal vælges et versatilt platform.
+Der skal være mulighed for at lave og afprøve et væld af prototyper, samt mulighed for at vælge et passende API.
+Grundet dets høje tilgængelighed og alsidighed (både ift. konstruktion og programmering) er \legoms et oplagt valg.
+
+% ###
 % Overordnet valg af LEGO Mindstorm
 % Hvorfor? Prototyping, billigt, let-tilgængeligt, mange muligheder ift. sensorer/aktuatorer
 % Hvad er alternativerne? Ikke undersøgt, kort hvorfor
-
 % Klart valg af LEGO
+% ###
 
-\paragraph{LEGO MINDSTORMS}
+\paragraph{\legoms} har et væld af sensorer og aktuatorer, hvilket giver mange muligheder for at løse alverdens problemer.
+Sammen med det faktum at der skal med dette projekt forsøges at løse et generelt (teoretisk) problem og ikke et konkret problem, gør også at \legoms er passende, frem for et mere specialiseret platform.
+
+% ###
 % Mange muligheder for at bygge robotter (prototyping)
 % Mange sensorer/aktutatorer tilgængelig
 % Mange muligheder for valg af API og sprog
 % Giver mening ift. løsning af teoretisk problem
+% ###
 
 \paragraph{Andre platforme}
+Der er ikke blevet undersøgt andre platforme, da valget hurtigt faldt på \legoms.
+Men det forestilles at alternativt skulle der bygges en robot, hvilket ville have krævet kendskab til elektronik og mekanik, hvilket er langt udenfor rækkevidden af dette projekt.
+Yderligere skulle der også laves et interface mellem robot og controller, hvilket igen er udenfor rækkevidden af dette projekt.
+
+% ###
 % Arduino eller andet hardware
 %   Selv bygge robot (for meget elektronik/mekanik)
 %   Selv lave interface mellem Arduino og robot
 %   Ingen grund til hårdførhed da der løses et teoretisk problem og ikke et konkret
+% ###
+
+\section{Forskellige NXT API}
+% ###
+% Tabel over undersøgte
+% Holde op imod kriterier
+% ###
+
+\begin{table}
+\begin{tabularx}{\textwidth}{|l|X|X|X|X|}
+\hline
+& nxt-python & Mindsqualls (.NET) & Mindsqualls (PTVS) & nxtOSEK \\ \hline
+Language & Python & Any CLI language & Python (CPython or IronPython) & C/C++ \\ \hline
+Firmware & Standard & Standard & Standard & Custom \\ \hline
+IDE & Any Python editor & MS Visual Studio & MS Visual Studio & Eclipse + plugin or cygwin + ENXT \\ \hline
+\end{tabularx}
+\end{table}
 
 \section{Kriterier ift. valg af API}
+% ###
 % Fordele/ulemper ved custom firmware+sende apps kontra sende/modtage kommandoer/beskeder eksternt
 % Fordele/ulemper ved forskellige sprog'
 % Kinect i mente
-
-\section{Forskellige NXT API}
-% Tabel over undersøgte
-% Holde op imod kriterier
+% ###
 
 \section{Vores valg}
+% ###
 % Mindsqualls
+% ###
