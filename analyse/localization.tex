@@ -1,5 +1,5 @@
 \section{Lokalisering}
-Når robotten skal kortlægge sine omgivelser er det nødvendigt at vide hvor robotten befinder sig.
+NÃ¥r robotten skal kortlÃ¦gge sine omgivelser er det nÃ¸dvendigt at vide hvor robotten befinder sig.
 Til at finde robottens position har vi overvejet flere forskellige metoder.
 \begin{itemize}
 \item Kinect
@@ -8,21 +8,26 @@ Til at finde robottens position har vi overvejet flere forskellige metoder.
 \end{itemize}
 
 \subsection{Kinect }
-Microsofts Kinect benytter et rgb kamera samt en dybdesensor til at fortolke bevægelse som input i applikationer.
-Kinect er oprindeligt lavet til XBox 360, men findes også i en version til PC, med medfølgende SDK.
+Microsofts Kinect benytter et rgb kamera samt en dybdesensor til at fortolke bevÃ¦gelse som input i applikationer.
+Kinect er oprindeligt lavet til XBox 360, men findes ogsÃ¥ i en version til PC, med medfÃ¸lgende SDK.
 En stor fordel ved at bruge Kinect er at den indeholder en dybdesensor der kan bruges til at lokalisere objekter i et rum.
 
-\subsection{Ansigtsgenkendelse}
-En anden mulighed er at benytte et kamera og følge robotten med ansigtsgenkendelsessoftware.
-
+\subsection{Wiimote}
+En anden sensor der kan bruges er Nintendos Wiimote. 
+Wiimote en optisk sensor til at lokalisere infrarÃ¸dt lys fra den tilhÃ¸rende sensor bar.
+Ved hjÃ¦lp af triangulering af det modtagne lys kan wiimoten bestemme sin position.
 
 \subsection{Dead reckoning}
-Dead Reckoning er en teknik til at finde sin position efter ens bevægelser uden eksterne sensorer.
-Robotten ved hvor den starter, og beregner sin nye position efter hvilken kommando den har udført.\cite{deadrec}
+Dead Reckoning er en teknik til at finde sin position efter ens bevÃ¦gelser uden eksterne sensorer.
+Robotten ved hvor den starter, og beregner sin nye position efter hvilken kommando den har udfÃ¸rt.\cite{deadrec}
 
-Denne teknik kan risikere at være meget upræcis, hvis robottens motorer og sensorer mangler præcision.
+Denne teknik kan risikere at vÃ¦re meget uprÃ¦cis, hvis robottens motorer og sensorer mangler prÃ¦cision.
 
 \subsection{Valg af lokaliseringsmetode}
-Der blev foretaget en indledende test af de tre foreslåede lokaliseringsmetoder for at vælge hvilken der passede bedst til dette projekt.
+Der blev foretaget en indledende test af de tre foreslÃ¥ede lokaliseringsmetoder for at vÃ¦lge hvilken der passede bedst til dette projekt.
 
-Dead reckoning muligheden blev hurtigt 
+Dead reckoning muligheden blev hurtigt udelukket, da gruppen ville fokusere pÃ¥ kortlÃ¦gningsopgaven og dead reckoning ville krÃ¦ve en del mere arbejde end de andre lokaliseringsmetoder.
+
+Valget mellem Kinect og Wiimote vandt Kinect af flere grunde. 
+For det fÃ¸rste havde vi adgang til en Kinect hvilket gjorde valget oplagt. 
+OgsÃ¥ 
