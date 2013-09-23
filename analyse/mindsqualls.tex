@@ -8,7 +8,9 @@ I det følgende afsnit gives en beskrivelse af bibliotekets struktur samt dets a
 \subsection{Forbindelse til NXT}
 \mindsqualls opretter forbindelse til NXT enheden vha. klassen \lstinline[style=csharp]!NxtCommunicationProtocol!.
 Klassen fungerer, som navnet indikerer, som en protokol ved at definere en række abstrakte funktioner.
-\begin{lstlisting}[style=csharp]
+Disse kan ses i \lstref{mindsqualls:abstract}.
+Funktionerne illustrerer godt 
+\begin{lstlisting}[style=csharp, label=mindsqualls:abstract, caption={NxtCommunicationProtocol klassen}]
 public abstract void Connect();
 public abstract void Disconnect();
 public abstract bool IsConnected
