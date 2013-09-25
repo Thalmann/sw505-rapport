@@ -1,4 +1,4 @@
-\section{MindSqualls}
+\section{MindSqualls}\label{mindsqualls}
 \mindsqualls er et .NET bibliotek til LEGOs NXT robotter.
 \mindsqualls tillader kommunikation med NXT enheder via. Bluetooth og USB og fungerer ved at sende og modtager beskeder over disse to teknologier.
 Biblioteket er skrevet i \csharp og kan dermed anvendes af alle de .NET kompatible sprog.
@@ -33,3 +33,24 @@ Tillader kommunikation via USB (kablet)
 \item \lstinline[style=csharp]!NxtBluetoothConnection!\\
 Tillader kommunikation via Bluetooth (trådløst)
 \end{itemize}
+
+\subsection{Input og Output}
+For hver af de sensorer og motorer \lego producerer findes der i \mindsqualls en tilsvarende sensor.
+Disse arver alle fra klassen \lstinline[style=csharp]!NxtPollable! der definerer metoder til at læse værdier fra de forskellige komponenter.
+Dette gøres ved et \emph{Poll} der opdaterer den enkelte klasses tilstand således at den svarer til det fysiske komponent.
+Samtidig er der for \lstinline[style=csharp]!NxtPollable! implementeret parallel automatisk polling.
+Altså er det muligt automatisk at opdatere et komponents status.
+Brugen af polling (både manuel og automatisk) kan ses i \lstref{mindsqualls:polling}.
+
+Som et eksempel på brugen af sensor-klasser betragtes \legos ultralyds sensor (figur \ref{sensor:ultrasonic_sensor}), som er repræsenteret ved klassen \lstinline[style=csharp]!NxtUltrasonicSensor!.
+Denne har en property \lstinline[style=csharp]!DistanceCm! der, som navnet angiver, returnerer afstanden fra sensoren til væggen.
+
+\begin{lstlisting}[style=csharp,caption={Et eksempel på polling i \mindsqualls},label=mindsqualls:polling]
+NxtUltrasonicSensor sensor = new NxtUltrasonicSensor();
+sensor.OnPolled += pollable =>
+    Console.WriteLine("Distance: {0}", sensor.DistanceCm);
+
+sensor.Poll();
+// eller
+sensor.PollInterval = 100;
+\end{lstlisting}
