@@ -1,3 +1,44 @@
 
-\chapter{Valg af platform}
+\chapter{LEGO MINDSTORMS NXT}
+I dette kapitel vil den valgte platform, \legoms, blive kort beskrevet, samt en begrundelse for dette valg.
+Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
 
+\section{Hvad er LEGO MINDSTORMS?}
+\legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter(her menes også andre maskiner der måske ikke altid vil blive betegnet som robotter) i \lego-klodser.
+
+Til at bygge disse robotter er der i MINDSTORMS\texttrademark nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser og ved brug af aktuatorerne kan robotten reagere på disse.
+
+Ud over de originale \lego dele er der også tredjeparts forhandlere, som har et udbud af andre sensorer og aktuatorer.
+
+\subsection{Hvad er NXT?}
+Denne sektion er baseret på \cite{nxt}.
+NXT Intelligent Brick (oftest kaldt blot 'NXT' eller 'brick') er hjernen i \legoms robotten.
+Det er den der står for at modtage og behandle input fra sensorer, samt at styre aktuatorer.
+
+\paragraph{Porte}
+NXT'en har 3 motor porte og 4 sensor porte.
+
+\paragraph{Tilslutningsmuligheder}
+Der kan kommunikeres med NXT'en enten ved at tilslutte den med USB-kabel eller ved Bluetooth\textregistered.
+
+\paragraph{Feedback}
+Til output har NXT'en en 100 x 64 pixel LCD display samt 8 kHz højttaler.
+
+\paragraph{Styring}
+NXT'en kan styres på to måder:
+Man kan sende kommandoer og modtage beskeder (for eksempel sensor aflæsninger) på en ekstern enhed (oftest en computer eller en anden NXT).
+Alternativt kan programmer sendes (via Bluetooth eller USB) til NXT'en, hvorfra de kan køres direkte på NXT'en, uafhængig af eksterne enheder.
+
+Til at styre NXT'en kan bruges et væld af programmeringssprog.
+Yderligere er det også muligt at erstatte den originale firmware med en brugerdefineret, hvilket giver endnu flere muligheder.
+Kombination af firmware og programmeringssprog (samt eventuelle værktøjer) er hvad vi betragter som et API.
+De forskellige API'er samt vores valg af API diskuteres i \cref{nxt_api}.
+
+\section{Hvorfor LEGO MINDSTORMS NXT?}
+
+\chapter{Valg af NXT API}
+\label{nxt_api}
+
+\section{De forskellige API'er}
+
+\section{Vores valg}
