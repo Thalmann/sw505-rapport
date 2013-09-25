@@ -2,12 +2,13 @@
 Kilde: \cite{tikNXT}
 \subsection{Afstandssensorer}
 \subsubsection{Ultrasonic}
-Ultrasonic sensoren(US)(\ref{us}) er en sensor der kan måle afstande til objekter.
+Ultrasonic sensoren(US)(\ref{sensor:ultrasonic_sensor}) er en sensor der kan måle afstande til objekter.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=10cm]{us}
 \caption{Lego Mindstorms Ultrasonic Sensor}
+\label{sensor:ultrasonic_sensor}
 \end{figure}
 
 Dette gøres ved at der sendes en lydbølge og der så beregnes hvor lang tid det tager for denne at ramme objektet og så komme tilbage igen.
@@ -37,13 +38,13 @@ Der er gennemført en mindre test af US'en, for at svare på følgende spørgsm�
 \item Ligner resultaterne dem fra eksperimenterne ovenfor?
 \end{itemize}
 
-For at svare på disse spørgsmål kom vi frem til følgende forsøgsopstilling(\ref{opstilling}).
+For at svare på disse spørgsmål kom vi frem til følgende forsøgsopstilling(\ref{sensor:ultrasonic_opstilling}).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=10cm]{opstilling}
 \caption{Forsøgsopstilling for test af US'ens afstands præcision}
-\label{opstilling}
+\label{sensor:ultrasonic_opstilling}
 \end{figure}
 
 Forsøgsopstillingen består af følgende dele:
@@ -54,7 +55,7 @@ Forsøgsopstillingen består af følgende dele:
 \end{itemize}
 
 Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sensoren aflæst.
-På \ref{us_data} kan man se de indsamlede data fra forsøget.
+På \ref{sensor:ultrasonic_test_data} kan man se de indsamlede data fra forsøget.
 \bruno{skal evt. i appendix}
 
 \begin{figure}[h]
@@ -91,29 +92,29 @@ optimal & test1 & test2 & test3 \\
 260&	255&	255&	255\\
 \end{tabular}
 \caption{Forsøgsresultater: afstande til objekt i cm.}
-\label{us_data}
+\label{sensor:ultrasonic_test_data}
 \end{figure}
 
-På figur \ref{us_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når US'en er mindre en 20 cm fra objektet.
-Desuden kan det ses på \ref{us_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod størrer usikkerhed.
+På figur \ref{sensor:ultrasonic_resultat_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når US'en er mindre en 20 cm fra objektet.
+Desuden kan det ses på \ref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod størrer usikkerhed.
 Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm på målingerne, men forsøget viser at der kun med sikkerhed kan måles mellem 20 og 170 cm.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=10cm]{us_result_diagram}
 \caption{Testresultater: De blå søjler repræsenterer den målte afstand med tommestok, de andre tre viser US'ens testresultater ifht. hianden.}
-\label{us_diagram}
+\label{sensor:ultrasonic_resultat_diagram}
 \end{figure}
 
 
 \subsubsection{Infarød Sensor}
-Den infarøde afstandssensor(IS) som kan ses på \ref{is} er en afstandssensor med høj præcision og et interval på 10 til 80 cm.
+Den infarøde afstandssensor(IS) som kan ses på \ref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=10cm]{is} 	
 \caption{High Precision Medium Range Infrared Distance Sensor for NXT (v2)}
-\label{is}
+\label{sensor:infraroed_sensor}
 \end{figure}
 
 \subsection{Motorer}
