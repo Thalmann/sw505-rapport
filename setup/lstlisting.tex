@@ -3,7 +3,9 @@
 % F#: fsharp
 
 % 
-% Listings kan refereres vha. \lstref{}
+% Listings kan refereres vha. \cref{}
+\crefname{listing}{kode eksempel}{kode eksempler}
+\Crefname{listing}{Kode eksempel}{kode eksempler}
 % 
 
 \lstdefinestyle{csharp}
@@ -12,17 +14,28 @@
 	frame=shadowbox,
 	framesep=5pt,
 	rulecolor=\color{blue!40!black},
-	basicstyle=\ttfamily\footnotesize,
+	rulesepcolor=\color{white!93!black},
+	basicstyle=\ttfamily\normalsize,
 	numbers=left,
 	numberstyle=\tiny,
 	numberfirstline=true,
-	numberblanklines=false,
-	stepnumber=3,
+	%numberblanklines=false,
+	stepnumber=1,
 	numbersep=9pt
+}
+\lstdefinestyle{csharpsmall}
+{
+	style=csharp,
+	basicstyle=\ttfamily\footnotesize
 }
 \lstdefinestyle{fsharp}
 {
 	language=[Sharp]F,
 	frame=lr,
 	rulecolor=\color{blue!80!black}
+}
+\lstdefinestyle{fsharpsmall}
+{
+	style=fsharp,
+	basicstyle=\ttfamily\footnotesize
 }

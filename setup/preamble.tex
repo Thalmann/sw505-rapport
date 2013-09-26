@@ -7,21 +7,19 @@
 % Fixing the font issue
 \usepackage{ae,aecompl}
 
+% Color package
+\PassOptionsToPackage{dvipsnames}{xcolor}
+	\RequirePackage{xcolor} % [dvipsnames] 
+	
 % Allows page-links in pdf file
-\usepackage{hyperref}
+\usepackage[colorlinks=true]{hyperref}
 % Todo notes package and commands
 \usepackage{todonotes}
-\input{./setup/todonotes}
 % Allows commands to emit a space "at the end"
 \usepackage{xspace}
 
 % Listings setup
 \usepackage{listings}
-\renewcommand{\lstlistingname}{Kode eksempel}
-\input{./setup/lstlisting}
-
-% Additional commands
-\input{./setup/commands}
 
 % Graphics setup
 \usepackage{graphicx}
@@ -32,3 +30,11 @@
 
 % Clever references
 \usepackage{cleveref}
+
+% Bibliography
+\PassOptionsToPackage{square,numbers}{natbib}
+ \usepackage{natbib}
+% Additional commands
+\input{./setup/todonotes}
+\input{./setup/lstlisting}
+\input{./setup/commands}
