@@ -53,12 +53,12 @@ brickBT.Connect();
 brickBT.Disconnect();
 \end{lstlisting}
 
-I \lstref{mindsqualls:connect} ses to eksempler på hvordan der skal oprettes forbindelse til enheden.
+I \cref{mindsqualls:connect} ses to eksempler på hvordan der skal oprettes forbindelse til enheden.
 Selve forbindelsen oprettes ved kald til funktionen \lstinline[style=csharp]!Connect()! og afbrydes igen med \lstinline[style=csharp]!Disconnect()!.
 Sensorer kan ''kobles'' til enheden ved de fire properties \lstinline[style=csharp]!Sensor1!, \lstinline[style=csharp]!Sensor2!, \lstinline[style=csharp]!Sensor3! og \lstinline[style=csharp]!Sensor4!.
 Motorer anvender istedet \lstinline[style=csharp]!MotorA!, \lstinline[style=csharp]!MotorB! og \lstinline[style=csharp]!MotorC!.
 Alle disse properties afspejler direkte den fysiske NXT enhed.
-I \lstref{mindsqualls:polling} er et eksempel på hvordan en sensor ''kobles'' til en enhed.
+I \cref{mindsqualls:polling} er et eksempel på hvordan en sensor ''kobles'' til en enhed.
 
 Når \lstinline[style=csharp]!Connect()! funktionen kaldes initialiseres enhedens tilknyttede sensorer.
 Hvis man først knytter sensorer til enheden efter der er oprettet forbindelse, kaldes funktionen \lstinline[style=csharp]!InitSensors()! der sikrer at de nyligt tilknyttede sensorer er initialiserede.
@@ -69,7 +69,7 @@ Disse arver alle fra klassen \lstinline[style=csharp]!NxtPollable! der definerer
 Dette gøres ved et \emph{Poll} der opdaterer den enkelte klasses tilstand således at den svarer til det fysiske komponent.
 Samtidig er der for \lstinline[style=csharp]!NxtPollable! implementeret parallel automatisk polling.
 Altså er det muligt automatisk at opdatere et komponents status.
-Brugen af polling (både manuel og automatisk) kan ses i \lstref{mindsqualls:polling}.
+Brugen af polling (både manuel og automatisk) kan ses i \cref{mindsqualls:polling}.
 Her ses det også at polling er implementeret med et event der smides hver gang \lstinline[style=csharp]!Poll! kaldes.
 I eksemplet er eventhandleren implementeret med et lambda udtryk der udskriver tilstanden for sensoren.
 
@@ -88,4 +88,4 @@ sonar.PollInterval = 1000;
 
 Som et eksempel på brugen af sensor-klasser betragtes \legos ultralyds sensor (\cref{sensor:ultrasonic_sensor}), som er repræsenteret ved klassen \lstinline[style=csharp]!NxtUltrasonicSensor!.
 Denne har en property \lstinline[style=csharp]!DistanceCm! der, som navnet angiver, returnerer afstanden fra sensoren til det objekt der er foran den.
-I \lstref{mindsqualls:polling} ses et eksempel på hvordan en sådan sensor oprettes og forbindes til NXT'en.
+I \cref{mindsqualls:polling} ses et eksempel på hvordan en sådan sensor oprettes og forbindes til NXT'en.
