@@ -7,6 +7,10 @@
 % Fixing the font issue
 \usepackage{ae,aecompl}
 
+% Color package
+\PassOptionsToPackage{dvipsnames}{xcolor}
+	\RequirePackage{xcolor} % [dvipsnames] 
+	
 % Allows page-links in pdf file
 \usepackage{hyperref}
 % Todo notes package and commands
@@ -32,3 +36,7 @@
 
 % Clever references
 \usepackage{cleveref}
+
+% Bibliography
+\PassOptionsToPackage{square,numbers}{natbib}
+ \usepackage{natbib}
