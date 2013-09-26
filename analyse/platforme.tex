@@ -11,10 +11,10 @@ Til at bygge disse robotter er der i \legoms nogle sensorer og aktuatorer. Senso
 Ud over de originale \lego dele er der også tredjeparts forhandlere, som har et udbud af andre sensorer og aktuatorer.
 
 \subsection{Hvad er NXT?}
-Denne sektion er baseret på \cite{nxt}.
+Denne sektion er baseret på \cite{nxt}, hvilket omhandler NXT 2.0, som er den version der bruges i dette projekt.
 NXT Intelligent Brick (oftest kaldt blot 'NXT' eller 'brick') er hjernen i \legoms robotten.
 Det er den der står for at modtage og behandle input fra sensorer, samt at styre aktuatorer.
-Et billede af NXT'en kan ses i \cref{platform:nxt}.
+Et billede af NXT 2.0 kan ses i \cref{platform:nxt}.
 
 \begin{figure}
 \begin{center}
@@ -25,13 +25,13 @@ Et billede af NXT'en kan ses i \cref{platform:nxt}.
 \end{figure}
 
 \paragraph{Porte}
-NXT'en har 3 motor porte og 4 sensor porte.
+NXT'en har 3 motor porte (kaldet A, B og C) og 4 sensor porte (kaldet 1, 2, 3 og 4).
 
 \paragraph{Tilslutningsmuligheder}
-Der kan kommunikeres med NXT'en enten ved at tilslutte den med USB-kabel eller ved Bluetooth\textregistered.
+Der kan kommunikeres med NXT'en ved at tilslutte den til en anden enhed med USB-kabel eller Bluetooth\textregistered.
 
 \paragraph{Feedback}
-Til output har NXT'en en 100 x 64 pixel LCD display samt 8 kHz højttaler.
+Til output har NXT'en en 100 x 64 pixel LCD display samt en 8 kHz højttaler.
 
 \paragraph{Styring}
 NXT'en kan styres på to måder:
@@ -44,7 +44,7 @@ Kombination af firmware og programmeringssprog (samt eventuelle værktøjer) er 
 De forskellige API'er samt vores valg af API diskuteres i \cref{nxt_api}.
 
 \paragraph{Tekniske specifikationer}
-De tekniske specifikationer for NXT'en:\cite{nxt}
+De tekniske specifikationer for NXT 2.0:\cite{nxt}
 \begin{itemize}
 \item{32-bit ARM7 microcontroller}
 \item{256 Kb FLASH, 64 Kb RAM}
@@ -75,7 +75,7 @@ Grundet at \lego (inkl. \legoms) er ment til almindelige brugere, er det massepr
 
 \paragraph{Nemt at gå til}
 Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms sensorer/aktuatorer, gør at det i første gang er nemt at lave en konstruktion.
-Samtidig er det også nemt at tilpasse en tidligere konstruktion, ved at tilføje/ændre/fjerne klodser eller sensorer/aktuatorer.
+Samtidig er det også nemt at tilpasse en tidligere konstruktion, ved at tilføje/flytte/fjerne klodser eller sensorer/aktuatorer.
 
 Denne høje versatilitet gør at \lego er perfekt til en prototype-orienteret fremgangsmåde.
 
@@ -85,14 +85,18 @@ Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udski
 
 \paragraph{Mange muligheder ift. styring}
 Her menes der både overordnet den måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
-Som nævnt tidligere kan NXT'en udstyres med brugerdefineret firmware, der gør at der er utroligt få begrænsninger ift. styring af den.
-Desuden kan der kommunikeres med NXT'en via et væld af programmeringssprog.
+Som nævnt tidligere kan NXT'en udstyres med brugerdefineret firmware, der gør at der er utroligt mange muligheder ift. styring af den.
+Desuden kan der bruges et væld af programmeringssprog til at programmere NXT'en.
 Der vil blive gået mere i dybden med de forskellige muligheder ift. API i \cref{nxt_api}.
 
 
 \section{Valg af NXT API}
 \label{nxt_api}
 
-\subsection{De forskellige API'er}
+I denne sektion vil der blive argumenteret for valg af API.
+Først vil de forskellige afprøvede API'er blive kort præsenteret, hvorefter vores valg vil blive fremhævet.
+
+\subsection{De afprøvet API'er}
+
 
 \subsection{Vores valg}
