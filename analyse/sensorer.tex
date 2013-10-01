@@ -3,7 +3,7 @@ Dette afsnit vil undersøge de sensorer der er interessante for dette projekt, s
 
 \subsection{Afstandssensorer}
 \subsubsection{Ultrasonic}
-Ultrasonic sensoren(US)(\ref{sensor:ultrasonic_sensor}) er en sensor der kan måle afstande til objekter.
+Ultrasonic sensoren(US)(\cref{sensor:ultrasonic_sensor}) er en sensor der kan måle afstande til objekter.
 
 \begin{figure}[h]
 \centering
@@ -13,7 +13,7 @@ Ultrasonic sensoren(US)(\ref{sensor:ultrasonic_sensor}) er en sensor der kan må
 \end{figure}
 
 Dette gøres ved at der sendes en lydbølge og der så beregnes hvor lang tid det tager for denne at ramme objektet og så komme tilbage igen.
-US'en måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm med en præcision på +-3 centimeter.\cite{tikNXT}
+US'en måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm med en præcision på $\pm$3 centimeter.\cite{tikNXT}
 \\
 \\
 Eksperimenter\cite{tikNXT} har vist:
@@ -51,13 +51,13 @@ For at svare på disse spørgsmål kom vi frem til følgende forsøgsopstilling(
 Forsøgsopstillingen består af følgende dele:
 \begin{itemize}
 \item Tommestok
-\item NXT v2
+\item NXT 2.0
 \item \legoms Ultrasonic Sensor
 \item Et \legoms kabel
 \end{itemize}
 
 Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sensoren aflæst.
-På figur \ref{sensor:ultrasonic_test_data} kan man se de indsamlede data fra forsøget.
+På \cref{sensor:ultrasonic_test_data} kan man se de indsamlede data fra forsøget.
 \bruno{skal evt. i appendix}
 
 \begin{figure}[h]
@@ -97,8 +97,8 @@ optimal & test1 & test2 & test3 \\
 \label{sensor:ultrasonic_test_data}
 \end{figure}
 
-På figur \ref{sensor:ultrasonic_resultat_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når US'en er mindre en 20 cm fra objektet.
-Desuden kan det ses på figur \ref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod størrer usikkerhed.
+På \cref{sensor:ultrasonic_resultat_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når US'en er mindre en 20 cm fra objektet.
+Desuden kan det ses på \cref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod størrer usikkerhed.
 Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm på målingerne, men forsøget viser at der kun med sikkerhed kan måles mellem 20 og 170 cm.
 
 \begin{figure}[h]
