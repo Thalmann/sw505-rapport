@@ -1,5 +1,6 @@
 \section{Sensorer}
-Kilde: \cite{tikNXT}
+Dette afsnit vil undersøge de sensorer der er interessante for dette projekt, samt udføre forsøg for at teste deres nøjagtighed og komme med en konklusion på hvor nøjagtige de er ifht. egne forsøg og andres.
+
 \subsection{Afstandssensorer}
 \subsubsection{Ultrasonic}
 Ultrasonic sensoren(US)(\ref{sensor:ultrasonic_sensor}) er en sensor der kan måle afstande til objekter.
@@ -12,7 +13,7 @@ Ultrasonic sensoren(US)(\ref{sensor:ultrasonic_sensor}) er en sensor der kan må
 \end{figure}
 
 Dette gøres ved at der sendes en lydbølge og der så beregnes hvor lang tid det tager for denne at ramme objektet og så komme tilbage igen.
-US'en måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm med en præcision på +-3 centimeter.
+US'en måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm med en præcision på +-3 centimeter.\cite{tikNXT}
 \\
 \\
 Eksperimenter\cite{tikNXT} har vist:
@@ -22,7 +23,7 @@ Eksperimenter\cite{tikNXT} har vist:
 \item Desto mindre objektet er desto sværer har sensoren ved at se objektet.
 \item Sensorens højre 'øje' er det der sender lydbølgen mens det venstre modtager.
 Det gør at US'en 'ser' bedre i højre side når sensoren befinder sig i horisontal position.
-Dette kan tydelig ses når afstand mellem sensor og objekt er under 20 cm, da den slet ikke kommer i sensorens synsfelt i venstre side.
+Dette kan tydelig ses når afstand mellem sensor og objekt er under 20 cm, da den slet ikke kommer i sensorens venstre synsfelt.
 \item Hvis sensoren anvendes i vertikal position er der det problem at modtagelsen af bølgerne kan blive distraheret af underlaget.
 \end{itemize}
 
@@ -52,11 +53,11 @@ Forsøgsopstillingen består af følgende dele:
 \item Tommestok
 \item NXT v2
 \item \legoms Ultrasonic Sensor
-\item Et \legoms kabler
+\item Et \legoms kabel
 \end{itemize}
 
 Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sensoren aflæst.
-På \ref{sensor:ultrasonic_test_data} kan man se de indsamlede data fra forsøget.
+På figur \ref{sensor:ultrasonic_test_data} kan man se de indsamlede data fra forsøget.
 \bruno{skal evt. i appendix}
 
 \begin{figure}[h]
@@ -110,6 +111,7 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 
 \subsubsection{Infarød Sensor}
 Den infarøde afstandssensor(IS) som kan ses på \ref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm.
+\bruno{sensor not working at the moment :i}
 
 \begin{figure}[h]
 \centering
@@ -123,8 +125,9 @@ Motoren som dette afsnit handler om er en el-motor som er \lego's egen.
 Motoren består af en rotationssensor som måler omdrejningerne ved grader, denne har en nøjagtighed på 1 grad. Det er med til at gøre motoren ret præcis. 
 Desuden gør denne sensor det også muligt at styre, hvor meget kraft mortoren skal køre med.
 Hvis man kører med flere motorer så har NXT'en indbygget software der gør det muligt at synkronisere disse motorer.
-Det er smart hvis den ene motor skulle være stærkere eller svagere end den anden.
+Det er smart hvis den ene motor skulle være stærkere eller svagere end den anden.\cite{tikNXT}
 Motoren kan ses på figur \ref{sensor:motor_sensor}.
+\\
 
 \begin{figure}[h]
 \centering
@@ -134,12 +137,21 @@ Motoren kan ses på figur \ref{sensor:motor_sensor}.
 \label{sensor:motor_sensor}
 \end{figure}
 
+Eksperimenter\cite{tikNXT} har vist:
+\begin{itemize}
+\item Ved forsøg med en TriBot hvor den skal gøre samme vej tilbage som den kom fra, rammer den flere centimeter ved siden af.
+\item Antallet af centimeter den afviger i førnævnte punkt stiger med afstanden og omvendt.
+\item Der er konstateret en afvigelse på +-2 grader, som fortæller os hvorfor den store afvigelse i centimeter i TriBot forsøget.
+\item Selvom den indbyggede rotationssensor har mtorerne ikke stor præcision.
+\end{itemize}
+
 \subsubsection{Test}
 Der er gennemført en test af motoren, for at svare på følgende spørgsmål:
 
 \begin{itemize}
 \item Kan det virkelig passe at den har 1 grads nøjagtighed?
 \item Hvad er den praktiske nøjagtighed?
+\item Giver motorerne det samme resultat når de er synkroniserede?
 \end{itemize}
 
 For at svare på disse spørgsmål kom vi frem til forsøgsopstillingen som kan ses på figur \ref{sensor:motor_sensor_opstilling}.
@@ -176,7 +188,8 @@ Sådan blev forsøget gennemført:
 \item Desuden noteres tacho-værdien(antal grader drejet) som kan trækkes ud fra motorens rotationssensor vha. software.
 \end{enumerate}
 
-Forsøgets data kan ses i figur \ref{sensor:motor_test_data}.
+Forsøgets data kan ses på figur \ref{sensor:motor_test_data}.
+\\
 
 \begin{figure}[h]
 \centering
@@ -211,12 +224,17 @@ grader sat & \parbox{2.5cm}{motor b \\ grader målt*} & \parbox{2.cm}{motor b \\
 Hvis vi kigger på figur \ref{sensor:motor_test_data} så kan vi se at den største afvigelse er +7 grader målt og -4 grader målt.
 Tacho-værdien har en afvigelse på maksimalt +1 og -4 grader.
 Dette stemmer ikke overens med de antagede +-1 grad afvigelse.
+\\
 +7 og +6 grader målt optræder kun en gang ellers er den maksimale målte afvigelse +-4 grader, men selvom vi antager at det er pga. unøjagtige målinger ved forsøgsudførelsen er det stadig ikke +-1 grad.
+\\
 Hvis vi kigger på figur \ref{sensor:motor_sensor_diagram1}
 kan vi se at de målte målinger ligger længst udenfor optimalen(sorte stiplede linje).
 Det vil sige tacho-værdien er bedre at gå efter.
 \\
-Dvs. den målte værdi har en afvigelse på +-4, mens tacho-værdien har en afvigelse på +1 og -4.
+Desuden kan vi se på samme figur at motor b er meget mere unøjagtig end motor c.
+Ideelt ville de to motorer give det samme resultat.
+\\
+Dvs. den målte værdi har en afvigelse på +-4, mens tacho-værdien har en afvigelse på +1 og -4, og at synkronisering af de to motrer ikke giver den ønskede effekt.
 
 \begin{figure}[h]
 \centering
