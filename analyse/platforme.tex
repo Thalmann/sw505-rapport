@@ -1,10 +1,11 @@
+% !TeX spellcheck = da_DK
 
 \chapter{LEGO MINDSTORMS NXT}
 I dette kapitel vil den valgte platform, \legoms, blive kort beskrevet, samt en begrundelse for dette valg.
 Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
 
 \section{Hvad er LEGO MINDSTORMS?}
-\legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter(her menes også andre maskiner der måske ikke altid vil blive betegnet som robotter) i \lego-klodser.
+\legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter i \lego-klodser.
 
 Til at bygge disse robotter er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser og ved brug af aktuatorerne kan robotten reagere på disse.
 
@@ -38,26 +39,36 @@ NXT'en kan styres på to måder:
 Man kan sende kommandoer og modtage beskeder (for eksempel sensor aflæsninger) på en ekstern enhed (oftest en computer eller en anden NXT).
 Alternativt kan programmer sendes (via Bluetooth eller USB) til NXT'en, hvorfra de kan køres direkte på NXT'en, uafhængig af eksterne enheder.
 
-Til at styre NXT'en kan bruges et væld af programmeringssprog.
-Yderligere er det også muligt at erstatte den originale firmware med en brugerdefineret, hvilket giver endnu flere muligheder.
-Kombination af firmware og programmeringssprog (samt eventuelle værktøjer) er hvad vi betragter som et API.
-De forskellige API'er samt vores valg af API diskuteres i \cref{nxt_api}.
+
 
 \subsubsection{Tekniske specifikationer}
-De tekniske specifikationer for NXT 2.0:\cite{nxt}
-\begin{itemize}
-\item{32-bit ARM7 microcontroller}
-\item{256 Kb FLASH, 64 Kb RAM}
-\item{8-bit AVR controller}
-\item{4 Kb FLASH, 512 b RAM}
-\item{Bluetooth wireless communication (Bluetooth Class II V2.0 compliant)}
-\item{USB full speed port (12 Mbit/s)}
-\item{4 input ports, 6-wire cable digital platform (One port includes a IEC 61158 Type 4/EN 50 170 compliant expansion port for future use)}
-\item{3 output ports, 6-wire cable digital platform}
-\item{100 x 64 pixel LCD graphical display}
-\item{Loudspeaker - 8 kHz sound quality. Sound channel with 8-bit resolution and 2-16 kHz sample rate}
-\item{Power source: 6 AA batteries}
-\end{itemize}
+De tekniske specifikationer for NXT 2.0 kan ses på \cref{mindstorms:tekniske_spec}\cite{nxt} 
+
+
+\begin{figure}
+\begin{tabular}{|c |c|}
+\hline
+Microcontroller & \shortstack{\\32-bit ARM7 microcontroller\\ 8-bit AVR controller}\\
+\hline
+RAM & \shortstack{ \\256 Kb FLASH, 64 Kb RAM \\ 4 Kb FLASH, 512 b RAM} \\
+\hline
+Kommuniation & \shortstack{ \\Bluetooth (Bluetooth Class II V2.0 compliant) \\ USB full speed port (12 Mbit/s)}\\
+\hline
+Input porte & 4 \\
+\hline
+Output porte & 3 \\
+\hline
+Display & 100 x 64 pixel LCD \\
+\hline
+Højttaler & 8 kHz lyd. 8-bit lydkanal og 2-16 kHz sample rate\\
+\hline
+Strømkilde & 6 AA batteries\\
+\hline
+\end{tabular}
+\caption{LEGO MINDSTORMS NXT tekniske specifikationer}
+\label{mindstorms:tekniske_spec}
+\end{figure}
+
 
 \section{Hvorfor LEGO MINDSTORMS NXT?}
 Der er mange gode grunde til at vælge \legoms NXT.
@@ -74,20 +85,20 @@ Her er givet fire overordnede punkter, der vil blive gennemgået efterfølgende:
 Grundet at \lego (inkl. \legoms) er ment til almindelige brugere, er det masseproduceret og kan derved købes forholdsvist billigt og i helt almindelige butikker (legetøjsforretninger og ofte også supermarkeder).
 
 \subsubsection{Nemt at gå til}
-Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms sensorer/aktuatorer, gør at det i første gang er nemt at lave en konstruktion.
-Samtidig er det også nemt at tilpasse en tidligere konstruktion, ved at tilføje/flytte/fjerne klodser eller sensorer/aktuatorer.
+Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms sensorer/aktuatorer, gør at det er nemt at lave en konstruktion og derefter modificere den så den udfører sin opgave tilfredsstillende.
 
 Denne høje versatilitet gør at \lego er perfekt til en prototype-orienteret fremgangsmåde.
 
 \subsubsection{Stort udvalg af sensorer}
 Det store udvalg af sensorer gør at der kan bygges robotter der kan løse et væld af opgaver.
-Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udskifte en sensor med en mere passende.
+Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udskifte en sensor.
 
 \subsubsection{Mange muligheder ift. styring}
 Her menes der både overordnet den måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
-Som nævnt tidligere kan NXT'en udstyres med brugerdefineret firmware, der gør at der er utroligt mange muligheder ift. styring af den.
+NXT'en kan udstyres med brugerdefineret firmware, der gør at der er utroligt mange muligheder ift. styring af den.
 Desuden kan der bruges et væld af programmeringssprog til at programmere NXT'en.
 Der vil blive gået mere i dybden med de forskellige muligheder ift. API i \cref{nxt_api}.
+
 
 
 \section{Valg af NXT API}
@@ -100,7 +111,7 @@ Overordnet set er der to muligheder når det kommer til valg af API; standard el
 Forskellene på de to og hvilke mulige sprog/API'er der er indenfor de to vil blive uddybet her.
 
 \subsection{Standard firmware}
-Ens for alle API'er der benytter sig af standard firmware, er at de sender kommandoer til at styre NXT'en.
+Ens for alle API'er der benytter sig af standard firmware, er at de sender kommandoer til at styre NXT'en. \stefan{Er det sandt for alle standard firmware API'er? Også dem vi ikke har prøvet?}
 Derved er det nemt at lave et bibliotek/interface til at styre NXT'en, hvilket også er derfor der er mange muligheder til valg af sprog.
 
 Følgende NXT platforme som benytter sig af standard firmware er blevet undersøgt:
@@ -121,7 +132,7 @@ Yderlige kan der ved brug af Python Tools for Visual Studio (PTVS) udvides til a
 
 \subsection{Custom firmware}
 Med custom firmware er det muligt at lægge programmer på NXT'en og køre dem direkte der på.
-Da det er et større projekt at lave en firmware, er der også færre muligheder end ift. standard firmware.
+Da det er et større projekt at lave en firmware, er der også færre muligheder end ift. standard firmware. \stefan{Hvorfor lave en ny firmware hvis den har færre muligheder end den originale?}
 
 Der er blevet fundet to NXT platforme som benytter sig af custom firmware:
 \begin{itemize}
@@ -145,16 +156,18 @@ Ens for dem begge er at det stadig er muligt at sende kommandoer fra en ekstern 
 
 Siden dette projekt ikke har behov for at den udviklet robot skal reagere hurtigt ift. sine omgivelser, er det ikke et krav at der skal køres programmer direkte på NXT'en.
 Dette gør at det valg der skal foretages i forhold til valg af NXT platform er mere baseret på foretrukket sprog.
+\stefan{Jeg er i tvivl om argumentet med at programmer der kører på enheden kan reagere hurtigere - har vi en kilde på det?}
 
 \paragraph{Sprog}
 Eftersom der kan vælges mellem alle de præsenterede NXT platforme, er det et spørgsmål om smag og behag.
 Alle de præsenterede sprog har fordele og ulemper, men ingen af dem gør det umuligt at løse problemet.
 
 Efter at have prøvet de forskellige muligheder, og opvejet fordele og ulemper, er valget faldet på Mindsqualls og en kombination af \csharp og \fsharp.
-Dette vil blive diskuteret i det følgende afsnit.
 
-\subsection{Mindsqualls og \csharp + \fsharp}
 
+Mindsqualls kan benyttes med alle .NET sprog og kan derfor udvikles i Visual Studio, som gruppen allerede er bekendte med. 
+Det giver også mulighed for at skrive i \csharp, hvilket gruppen allerede har en del erfaring med. 
+.NET platformen gør det også muligt at benytte andre .NET sprog til dele at programmet, og \fsharp kunne her være interessant til at implementere algoritmer.
 
 %\begin{table}
 %\begin{tabularx}{\textwidth}{|X|X|X|X|}
