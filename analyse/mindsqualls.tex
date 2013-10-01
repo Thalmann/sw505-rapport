@@ -89,3 +89,46 @@ sonar.PollInterval = 1000;
 Som et eksempel på brugen af sensor-klasser betragtes \legos ultralyds sensor (\cref{sensor:ultrasonic_sensor}), som er repræsenteret ved klassen \lstinline[style=csharp]!NxtUltrasonicSensor!.
 Denne har en property \lstinline[style=csharp]!DistanceCm! der, som navnet angiver, returnerer afstanden fra sensoren til det objekt der er foran den.
 I \cref{mindsqualls:polling} ses et eksempel på hvordan en sådan sensor oprettes og forbindes til NXT'en.
+
+\subsection{Et eksempel}
+\mikkel{Jeg kunne ikke finde på en bedre titel :/}
+Herunder ses et eksempel på et program skrevet vha. \mindsqualls.
+Programmet er baseret på en robot med to hjul (med hver sin motor), en ultralydssensor samt en knap.
+Robotten kører fremad indtil den når en mur, drejer til venstre og fortsætter fremad.
+For at stoppe robotten trykkes på knappen.
+\mikkel{Indsæt billede af robotten evt?}
+
+\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på et \mindsqualls program},label=mindsqualls:example]
+NxtBrick brick = new NxtBrick(NxtCommLinkType.Bluetooth, 16);
+
+brick.MotorA = left;
+brick.MotorB = right;
+
+brick.Sensor1 = sonar;
+sonar.PollInterval = 50;
+brick.Sensor2 = button;
+button.PollInterval = 50;
+
+brick.Connect();
+
+while (!button.IsPressed.HasValue || !button.IsPressed.Value)
+{
+    forwards = !sonar.DistanceCm.HasValue
+    	     || sonar.DistanceCm.Value >= 50;
+
+    if (forwards)
+    {
+        left.Run(100, 0);
+        right.Run(100, 0);
+    }
+    else
+    {
+        left.Run(-100, 0);
+        right.Run(100, 0);
+    }
+}
+
+left.Brake();
+right.Brake();
+brick.Disconnect();
+\end{lstlisting}
