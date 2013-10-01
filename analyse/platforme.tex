@@ -42,20 +42,33 @@ Alternativt kan programmer sendes (via Bluetooth eller USB) til NXT'en, hvorfra 
 
 
 \subsubsection{Tekniske specifikationer}
-De tekniske specifikationer for NXT 2.0:\cite{nxt}
-\begin{itemize}
-\item{32-bit ARM7 microcontroller}
-\item{256 Kb FLASH, 64 Kb RAM}
-\item{8-bit AVR controller}
-\item{4 Kb FLASH, 512 b RAM}
-\item{Bluetooth wireless communication (Bluetooth Class II V2.0 compliant)}
-\item{USB full speed port (12 Mbit/s)}
-\item{4 input ports, 6-wire cable digital platform (One port includes a IEC 61158 Type 4/EN 50 170 compliant expansion port for future use)}
-\item{3 output ports, 6-wire cable digital platform}
-\item{100 x 64 pixel LCD graphical display}
-\item{Loudspeaker - 8 kHz sound quality. Sound channel with 8-bit resolution and 2-16 kHz sample rate}
-\item{Power source: 6 AA batteries}
-\end{itemize}
+De tekniske specifikationer for NXT 2.0 kan ses på \cref{mindstorms:tekniske_spec}\cite{nxt} 
+
+
+\begin{figure}
+\begin{tabular}{|c |c|}
+\hline
+Microcontroller & \shortstack{\\32-bit ARM7 microcontroller\\ 8-bit AVR controller}\\
+\hline
+RAM & \shortstack{ \\256 Kb FLASH, 64 Kb RAM \\ 4 Kb FLASH, 512 b RAM} \\
+\hline
+Kommuniation & \shortstack{ \\Bluetooth (Bluetooth Class II V2.0 compliant) \\ USB full speed port (12 Mbit/s)}\\
+\hline
+Input porte & 4 \\
+\hline
+Output porte & 3 \\
+\hline
+Display & 100 x 64 pixel LCD \\
+\hline
+Højttaler & 8 kHz lyd. 8-bit lydkanal og 2-16 kHz sample rate\\
+\hline
+Strømkilde & 6 AA batteries\\
+\hline
+\end{tabular}
+\caption{LEGO MINDSTORMS NXT tekniske specifikationer}
+\label{mindstorms:tekniske_spec}
+\end{figure}
+
 
 \section{Hvorfor LEGO MINDSTORMS NXT?}
 Der er mange gode grunde til at vælge \legoms NXT.
@@ -150,10 +163,11 @@ Eftersom der kan vælges mellem alle de præsenterede NXT platforme, er det et s
 Alle de præsenterede sprog har fordele og ulemper, men ingen af dem gør det umuligt at løse problemet.
 
 Efter at have prøvet de forskellige muligheder, og opvejet fordele og ulemper, er valget faldet på Mindsqualls og en kombination af \csharp og \fsharp.
-Dette vil blive diskuteret i det følgende afsnit.
 
-\subsection{Mindsqualls og \csharp + \fsharp}
 
+Mindsqualls kan benyttes med alle .NET sprog og kan derfor udvikles i Visual Studio, som gruppen allerede er bekendte med. 
+Det giver også mulighed for at skrive i \csharp, hvilket gruppen allerede har en del erfaring med. 
+.NET platformen gør det også muligt at benytte andre .NET sprog til dele at programmet, og \fsharp kunne her være interessant til at implementere algoritmer.
 
 %\begin{table}
 %\begin{tabularx}{\textwidth}{|X|X|X|X|}
