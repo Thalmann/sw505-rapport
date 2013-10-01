@@ -51,7 +51,8 @@ Forsøgsopstillingen består af følgende dele:
 \begin{itemize}
 \item Tommestok
 \item NXT v2
-\item Lego Mindstorms Ultrasonic Sensor
+\item \legoms Ultrasonic Sensor
+\item Et \legoms kabler
 \end{itemize}
 
 Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sensoren aflæst.
@@ -96,7 +97,7 @@ optimal & test1 & test2 & test3 \\
 \end{figure}
 
 På figur \ref{sensor:ultrasonic_resultat_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når US'en er mindre en 20 cm fra objektet.
-Desuden kan det ses på \ref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod størrer usikkerhed.
+Desuden kan det ses på figur \ref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod størrer usikkerhed.
 Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm på målingerne, men forsøget viser at der kun med sikkerhed kan måles mellem 20 og 170 cm.
 
 \begin{figure}[h]
@@ -123,5 +124,119 @@ Motoren består af en rotationssensor som måler omdrejningerne ved grader, denn
 Desuden gør denne sensor det også muligt at styre, hvor meget kraft mortoren skal køre med.
 Hvis man kører med flere motorer så har NXT'en indbygget software der gør det muligt at synkronisere disse motorer.
 Det er smart hvis den ene motor skulle være stærkere eller svagere end den anden.
-\\\\
-Som forklaret i \cref{mindsqualls}
+Motoren kan ses på figur \ref{sensor:motor_sensor}.
+
+\begin{figure}[h]
+\centering
+%http://www.philohome.com/nxtmotor/nxtmotor.htm
+\includegraphics[width=10cm]{motor} 	
+\caption{Motor sensor.}
+\label{sensor:motor_sensor}
+\end{figure}
+
+\subsubsection{Test}
+Der er gennemført en test af motoren, for at svare på følgende spørgsmål:
+
+\begin{itemize}
+\item Kan det virkelig passe at den har 1 grads nøjagtighed?
+\item Hvad er den praktiske nøjagtighed?
+\end{itemize}
+
+For at svare på disse spørgsmål kom vi frem til forsøgsopstillingen som kan ses på figur \ref{sensor:motor_sensor_opstilling}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{motor_opstilling} 	
+\caption{Forsøgsopstillingen for motor nøjagtighedstesten.}
+\label{sensor:motor_sensor_opstilling}
+\end{figure}
+
+Forsøgsopstillingen består af følgende dele:
+\begin{itemize}
+\item NXT v2
+\item 2x \legoms motor sensor
+\item 2x \legoms kabler
+\item Lidt \lego til at bygge holderen til motorerne og en forlænger til motorerne for letter måling.
+\item 3 A4 ark(ternet)
+\item Tape
+\item Vinkelmåler
+\item Stiftblyant
+\end{itemize}
+
+Sådan blev forsøget gennemført:
+
+\begin{enumerate}
+\item Der startes med at bygge et stativ til de to motorer på NXT'en.
+\item Derefter sættes de to motorer på stativet og forbindes vha. kablerne til NXT'en.(Her er der brugt noget modvægt, så NXT'en ikke vælter, musen på figur \ref{sensor:motor_sensor_opstilling}).
+\item De tre A4 ark sættes op på en væg, vha. tape, så midten af papiret passer med de to motorers højde.
+\item Der sættes nu en forlænger på de to motorer, så det passer med at forlængeren holder sig over papiret på en omdrejning.
+\item Afmærk midten af motoren på papiret vha. at sætte en stiftblyant igennem midten af motorens akse.
+\item Sæt motoren igang og afmærk hvor forlængeren stopper.
+\item Det afmærkede midter punkt bliver brugt til at måle vinklen, til det afmærkede punkt udenfor forlængeren, vha. vinkelmåleren.
+\item Desuden noteres tacho-værdien(antal grader drejet) som kan trækkes ud fra motorens rotationssensor vha. software.
+\end{enumerate}
+
+Forsøgets data kan ses i figur \ref{sensor:motor_test_data}.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{r | c | c | c | c | r |}
+grader sat & \parbox{2.5cm}{motor b \\ grader målt*} & \parbox{2.cm}{motor b \\ tacho slut**} &  \parbox{2.5cm}{motor b \\ grader målt*} & \parbox{2.5cm}{motor b \\ tacho slut**} & optimal \\
+\hline
+1&	1&	0&	1&	0&	1\\
+2&	2&	2&	2.5&	2&	2\\
+3&	2&	3&	3&	3&	3\\
+4&	5&	4&	4&	3&	4\\
+5&	5&	6&	4&	4&	5\\
+10&	10&	9&	9&	10&	10\\
+15&	11&	16&	14&	15&	15\\
+20&	20&	20&	18&	20&	20\\
+25&	21&	25&	23&	25&	25\\
+50&	57&	50&	56&	50&	50\\
+75&	80&	77&	80&	79&	75\\
+100&	100&	99&	95&	100&	100\\
+150&	150&	149&	145&	150&	150\\
+200&	204&	197&	200&	199&	200\\
+400&	400&	401&	400&	398&	400\\
+800&	799&	800&	800&	799&	800\\
+1200&	1204&	1201&	1200&	1200&	1200\\
+1800&	1796&	1796&	1799&	1800&	1800\\
+3600&	3601&	3600&	3597&	3599&	3600\\
+
+\end{tabular}
+\caption{Forsøgsresultater for motor nøjagtighedstesten.}
+\label{sensor:motor_test_data}
+\end{figure}
+
+Hvis vi kigger på figur \ref{sensor:motor_test_data} så kan vi se at den største afvigelse er +7 grader målt og -4 grader målt.
+Tacho-værdien har en afvigelse på maksimalt +1 og -4 grader.
+Dette stemmer ikke overens med de antagede +-1 grad afvigelse.
++7 og +6 grader målt optræder kun en gang ellers er den maksimale målte afvigelse +-4 grader, men selvom vi antager at det er pga. unøjagtige målinger ved forsøgsudførelsen er det stadig ikke +-1 grad.
+Hvis vi kigger på figur \ref{sensor:motor_sensor_diagram1}
+kan vi se at de målte målinger ligger længst udenfor optimalen(sorte stiplede linje).
+Det vil sige tacho-værdien er bedre at gå efter.
+\\
+Dvs. den målte værdi har en afvigelse på +-4, mens tacho-værdien har en afvigelse på +1 og -4.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{motor_diagram1} 	
+\caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 0 til 50.}
+\label{sensor:motor_sensor_diagram1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{motor_diagram2} 	
+\caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 50 til 200.}
+\label{sensor:motor_sensor_diagram2}
+\bruno{Ikke brugt i teksten, kan være den bare skal smides ud}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{motor_diagram3} 	
+\caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 200 til 3600.}
+\label{sensor:motor_sensor_diagram3}
+\bruno{Ikke brugt i teksten, kan være den bare skal smides ud}
+\end{figure}
