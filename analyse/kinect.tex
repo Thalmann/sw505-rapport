@@ -4,7 +4,7 @@ En Kinect er et Natural User Interface (NUI) udviklet til Microsoft's spillekons
 Den gør det muligt at interagere med sin konsol ved at bevæge kroppen og via talte kommandoer.
 Den første version der udkom i november 2010~\cite{kinectWiki} er oprindeligt udviklet med henblik på at lokke nye typer brugere til Xbox med det argument at det via naturlig (og aktiv) bevægelse er sjovere og mere virkelighedstro at spille.
 
-Dog blev der i februar 2012 lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og non-kommercielle applikationer til Kinect som også kan eksekveres på Windows platformen.
+I februar 2012 blev der lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), der gør det muligt at udvikle både kommercielle og non-kommercielle applikationer til Kinect der kan køres på Windows platformen.
 Kort fortalt er Microsoft's Kinect mere end en input enhed gamere kan bruge for at gøre deres spiloplevelse mere virkelighedstro; af andre anvendelser kan f.eks. nævnes~\cite[s.~17]{kinectProgrammingGuide}:
 
 \begin{itemize}
@@ -27,7 +27,7 @@ Hardware mæssigt har Kinect for Windows den fordel at firmwaren indeholder en s
 Kinect for Xbox har ikke denne funktionalitet, og kan derfor kun følge objekter indtil 80 cm fra enheden, hvilket kan blive et problem i situationer hvor man ønsker at detektere små afstande via dybdebilleder.
 Kinect for Windows kan desuden også benyttes til kommercielle applikationer, hvor dens pendant er beregnet til hobbyister, generel udvikling og forskning~\cite[s.~16]{kinectProgrammingGuide}.
 
-For at Kinecten kan følge et objekt kræver det selvfølgelig noget specifikt hardware, som overordnet set består den af nogle sensorer, et farve kamera samt nogle mikrofoner, der alle bliver styret af en PrimeSense chip.
+For at Kinecten kan følge et objekt er Kinecten udstyret med et antal sensorer der nu vil blive beskrevet.
 
 \begin{figure}
 \centering
@@ -36,12 +36,8 @@ For at Kinecten kan følge et objekt kræver det selvfølgelig noget specifikt h
 \label{kinect:opbygning}
 \end{figure}
 
-\subsubsection{Prime Sense PS1080}
-\thilemann{Skriv noget om at det er den chip der står for genkendelse af bevægelser osv. Se evt. \url{http://www.primesense.com/solutions/technology/}.}
-\stefan{Jeg tror muligvis det er et unødvendigt detaljeniveau, vi får ikke noget ud af at vide hvordan chippen virker}
-
 \subsubsection{Farvekamera}
-For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten.
+For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden.
 Et farvekamera kan være nyttigt i spil, hvor man ønsker at vise spilleren fysisk på skærmen eller hvis man benytter sin Kinect til gruppechat (som et webcam).
 Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet, hvis man ønsker en mere ”flydende” videostrøm~\cite{kinectForWindowsFeatures}.
 Det har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket kan være interessant ift. det miljø hvori Kinecten skal bruges.
@@ -55,7 +51,7 @@ Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfa
 
 \subsubsection{Mikrofoner}
 Kinecten er også i stand til at optage lyd via de indbyggede mikrofoner.
-Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode (til dybde billeder) til at bestemme afstand og retning fra f.eks. en person der taler.
+Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode til at bestemme afstand og retning fra f.eks. en person der taler.
 Rækken af mikrofoner består af 4 stk. som er placeret på fronten af Kinecten.
 En enkelt mikrofon sidder i venstre side mens de tre andre er placeret til højre, hvilket gør det muligt at triangulere lydsignaler for at bestemme retningen af lydkilden.
 Flere mikrofoner gør det også muligt at lave ``noise-suppression'' ift. omgivelserne, hvis man benytter Kinect, mens man spiller, til at kommunikerer med sine med-/modspillere således at unødig støj filtreres fra~\cite[s.~15]{kinectProgrammingGuide}.
@@ -82,17 +78,16 @@ De skriver endvidere i dokumentationen at der kan kompensateres for denne unøja
 \section{Kinect for Windows SDK}
 Til Kinecten findes der et officielt SDK\footnote{ Version 1.8, Udgivet 17 september, 2013~\cite{kinectSDK18}}, som åbner op for al funktionalitet i Kinecten med support fra Microsoft.
 
-API'en er bygget op omkring en solid forståelse for menneskers bevægelser og karaktertræk således API'en kan fungere som et interface der kan genkende skeletelle bevægelser, følge ansigter, genkende gestus og tale.
-Med Microsoft Kinect Toolkit installeret kan man endvidere få adgang til Microsoft.Kinect.Toolkit namespacet, hvilket indeholder Kinect Fusion der gør det muligt at rekonstruere 3D objekter ud fra Kinectens kamera og dybdebilleder fra IR sensorerne.~\cite{kinectForWindowsFeatures}
+API'en er bygget op omkring en solid forståelse for menneskers bevægelser og karaktertræk således API'en kan fungere som et interface der kan genkende personers bevægelser, følge ansigter, genkende gestus og tale.
+Med Microsoft Kinect Toolkit installeret kan man endvidere få adgang til Kinect Fusion der gør det muligt at rekonstruere 3D objekter ud fra Kinectens kamera og dybdebilleder fra IR sensorerne.~\cite{kinectForWindowsFeatures}
 
 
 \subsection{Kinect API}\label{kinect:kinectapi}
-I dette afsnit vil de vigtigste funktioner i Kinect API'en blive gennemgået.
+I dette afsnit vil der blive gennemgået eksempler der demonstrer den basale brug af Kinect API'en.
 
 \subsubsection{Initialisering}
-For at initialisere Kinecten og få adgang til dens forskellige sensorer kontrolleres det først om der er en Kinect tilsluttet systemet. 
-En reference til denne Kinect gemmes derefter til videre brug.
-Et eksempel på initialisering af en Kinect kan se på \cref{kinect:initialisering}. Form1\_Load metoden i linje \ref{kinect:load} køres ved opstart og sørger for at starte sensoren hvis den findes. Fra linje \ref{kinect:enablebegin} til \ref{kinect:enableend} tændes for de billedstreams der er nødvendige. I eksemplet tændes for RGB-kameraet, dybdekameraet samt skeletdetektoren. Hvis der ikke er en Kinect tilsluttet meldes der fejl (linje \ref{kinect:error}).
+For at initialisere Kinecten og få adgang til dens sensorer skal Kinecten initialiseres.
+Et eksempel på initialisering af en Kinect kan se på \cref{kinect:initialisering}. \lstinline[style=csharp]|Form1_Load| metoden i linje \ref{kinect:load} køres ved opstart og sørger for at starte sensoren hvis den findes. Fra linje \ref{kinect:enablebegin} til \ref{kinect:enableend} tændes for de billedstreams der er nødvendige. I eksemplet tændes for RGB-kameraet, dybdekameraet samt skeletdetektoren. Hvis der ikke er en Kinect tilsluttet meldes der fejl (linje \ref{kinect:error}).
 
 \begin{lstlisting}[style=csharp, label=kinect:initialisering, caption={Initialisering af en Kinect sensor}]
 KinectSensor sensor;
@@ -165,7 +160,3 @@ void sensor_ColorFrameReady(object sender,
 }    
 \end{lstlisting}
 
-%\subsection{Coding4Fun Kinect Toolkit}
-%Coding4Fun Kinect Toolkit giver adgang til en række extension metoder som fungerer som et lag der binder sig til Kinect API'en ved at abstrahere de mere lav-niveau detaljer væk. Det betyder bl.a. at man slipper for at konvertere videostrømmen fra kameraet om til en \lstinline!Image! type som nemt kan benyttes sammen med de indbyggede .NET klasser.
-%
-%Resten af denne sektion giver eksempler på brug vha. Coding4Fun Kinect Toolkit, der modsvarer eksemplerne fra \cref{kinect:kinectapi}, hvor Kinect API'en er beskrevet.
