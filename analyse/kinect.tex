@@ -3,7 +3,7 @@ En Kinect er et Natural User Interface (NUI) udviklet til Microsoft's spillekons
 Den gør det muligt at interagerer med sin konsol ved at bevæge kroppen og via talte kommandoer.
 Den første version der udkom i november 2010~\cite{kinectWiki} er oprindeligt udviklet med henblik på at lokke nye typer brugere til Xbox med det argument at det via naturlig (og aktiv) bevægelse er sjovere og mere virkelighedstro at spille.
 
-Dog blev der i februar 2012 lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og non-kommercielle applicationer til Kinect som også kan eksekveres på Windows platformen.
+Dog blev der i februar 2012 lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og non-kommercielle applikationer til Kinect som også kan eksekveres på Windows platformen.
 Kort fortalt er Microsoft's Kinect mere end en input enhed gamere kan bruge for at gøre deres spiloplevelse mere virkelighedstro; af andre anvendelser kan f.eks. nævnes~\cite[s.~17]{kinectProgrammingGuide}:
 
 \begin{itemize}
@@ -35,7 +35,7 @@ For at Kinecten kan følge et objekt kræver det selvfølgelig noget specifikt h
 \end{figure}
 
 \subsubsection{Prime Sense PS1080}
-\thilemann{todo}
+\thilemann{Skriv noget om at det er den chip der står for genkendelse af bevægelser osv. Se evt. \url{http://www.primesense.com/solutions/technology/}.}
 
 \subsubsection{Farvekamera}
 For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten.
@@ -88,7 +88,9 @@ Med Microsoft Kinect Toolkit installeret kan man endvidere få adgang til Micros
 
 
 \subsection{Kinect API}\label{kinect:kinectapi}
-
+For at benytte Kinect API er det første skridt at tilføje en reference til biblioteket i projektet i Visual Studio, og dernæst at tilføje namespacet via \lstinline!using Microsoft.Kinect;!.
+Herefter skal Kinecten initialiseres for at få adgang til dens forskellige sensorer. Som det ses af \cref{kinect:apiopbygning}, er API'en inddelt i klasser alt efter hvilken sensor man vil have adgang til, og hvad funktionen af den pågældende sensor er.
+Dette faktum ligger også til grund for de følgende eksempler på brug af Kinectens sensorer.
 
 \begin{figure}
 \centering
@@ -114,15 +116,8 @@ Coding4Fun Kinect Toolkit giver adgang til en række extension metoder som funge
 
 Resten af denne sektion giver eksempler på brug vha. Coding4Fun Kinect Toolkit, der modsvarer eksemplerne fra \cref{kinect:kinectapi}, hvor Kinect API'en er beskrevet.
 
-\subsubsection{Få forbindelse til Kinect}
+\subsubsection{Opret forbindelse til Kinect}
 
 \subsubsection{Kamera}
 
 \subsubsection{Dybdebillede}
-
-%\subsection{Eksempler på brug}
-%Side 53
-
-%\subsubsection{Microsoft.Kinect namespace}
-%\subsubsection{Coding4Fun.Kinect namespace}
-
