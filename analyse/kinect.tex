@@ -87,7 +87,7 @@ I dette afsnit vil der blive gennemgået eksempler der demonstrer den basale bru
 
 \subsubsection{Initialisering}
 For at initialisere Kinecten og få adgang til dens sensorer skal Kinecten initialiseres.
-Et eksempel på initialisering af en Kinect kan se på \cref{kinect:initialisering}. \lstinline[style=csharp]|Form1_Load| metoden i linje \ref{kinect:load} køres ved opstart og sørger for at starte sensoren hvis den findes. Fra linje \ref{kinect:enablebegin} til \ref{kinect:enableend} tændes for de billedstreams der er nødvendige. I eksemplet tændes for RGB-kameraet, dybdekameraet samt skeletdetektoren. Hvis der ikke er en Kinect tilsluttet meldes der fejl (linje \ref{kinect:error}).
+Et eksempel på initialisering af en Kinect kan se på \cref{kinect:initialisering}. \lstinline[style=csharp]|Form1_Load| metoden i linje \ref{kinect:load} køres ved applikationens opstart og sørger for at starte sensoren hvis den findes. Fra linje \ref{kinect:enablebegin} til \ref{kinect:enableend} tændes for de billedstreams der er nødvendige. I eksemplet tændes for RGB-kameraet, dybdekameraet samt skeletdetektoren. Hvis der ikke er en Kinect tilsluttet meldes der fejl (linje \ref{kinect:error}).
 
 \begin{lstlisting}[style=csharp, label=kinect:initialisering, caption={Initialisering af en Kinect sensor}]
 KinectSensor sensor;
