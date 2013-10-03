@@ -1,6 +1,6 @@
 \section{Sensorer}
 Dette afsnit vil undersøge de sensorer der er interessante for dette projekt.
-Der vil blive beskrevet de forsøg der er blevet udført, for at teste deres nøjagtighed og komme med en konklusion på hvor nøjagtige de er.
+Der vil blive beskrevet de forsøg der er blevet udført, for at teste deres nøjagtighed og derefter en vurdering af deres nøjagtighed.
 Disse forsøg vil samtidig blive holdt op imod de forsøg der er blevet udført i \cite{tikNXT}, på de samme sensorer.
 
 \subsection{Ultrasonic Sensor}
@@ -13,29 +13,29 @@ Ultrasonic sensoren(US), som kan ses på \cref{sensor:ultrasonic_sensor}, er en 
 \label{sensor:ultrasonic_sensor}
 \end{figure}
 
-Dette gøres ved at der sendes en lydbølge, hvorefter der så beregnes hvor lang tid det tager for denne at ramme objektet og så komme tilbage igen.
-US'en måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm, med en præcision på $\pm$3 centimeter.\cite{tikNXT}
+Dette gøres ved at der sendes en lydbølge, hvorefter der så beregnes hvor lang tid det tager for denne at ramme objektet for derefter at blive tilbage igen.
+Sensoren måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm, med en præcision på $\pm$3 centimeter.\cite{tikNXT}
 
 \paragraph{Eksperimenterne} foretaget i \cite{tikNXT} har vist at
 \begin{itemize}
 \item den minimale aftsand der kan måles er 3 cm.
 \item det bedst genkendelig objekt et objekt der har glat og hård overflade og som er firkantet.
 \item desto mindre objektet er, desto sværere har sensoren ved at se objektet.
-\item sensorens højre 'øje' er det der sender lydbølgen, mens det venstre modtager.
-Det gør at US'en 'ser' bedre i højre side når sensoren befinder sig i horisontal position.
-Dette kan tydelig ses når afstand mellem sensor og objekt er under 20 cm, da den slet ikke kommer i sensorens venstre synsfelt.
+\item Sensorens højre 'øje' er det der sender lydbølgen, mens det venstre modtager.
+Det gør at sensoren 'ser' bedre i højre side når sensoren befinder sig i horisontal position.
+Dette ses tydeligt når afstand mellem sensor og objekt er under 20 cm, da den slet ikke kommer i sensorens venstre synsfelt.
 \item hvis sensoren anvendes i vertikal position er der det problem at modtagelsen af bølgerne kan blive distraheret af underlaget.
 \end{itemize}
 
-\paragraph{Den bedste opstilling} for US'en er i horisontal position, der opnås de bedste resultater, fordi den kritiske region ifht. den vertikale position er mindre.
+\paragraph{Den bedste opstilling} for sensoren er i horisontal position, der opnås de bedste resultater, fordi den kritiske region ifht. den vertikale position er mindre.
 En vinkel på mere end 15 grader fra lydbølgen giver hellere ikke klare resultater.
-Desuden er runde genstande også svært genkendelige for US'ens synsfelt.
+Desuden er runde genstande også svært genkendelige for sensorens synsfelt.
 
 \subsubsection{Test}
-Der er gennemført en mindre test af US'en, for at svare på følgende spørgsmål:
+Der er gennemført en mindre test af sensoren, for at svare på følgende spørgsmål:
 
 \begin{itemize}
-\item Hvor langt rækker US'en i praksis?
+\item Hvor langt rækker sensoren i praksis?
 \item Hvor stor nøjagtighed har den i praksis?
 \item Ligner resultaterne dem fra eksperimenterne ovenfor?
 \end{itemize}
