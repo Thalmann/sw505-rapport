@@ -49,7 +49,7 @@ brickBT.MotorA = ...
 brickBT.Sensor1 = ...
 
 brickBT.Connect();
-// Kommuniker med enheden
+// Kommunikation med enheden
 brickBT.Disconnect();
 \end{lstlisting}
 
@@ -86,49 +86,28 @@ sonar.Poll();
 sonar.PollInterval = 1000;
 \end{lstlisting}
 
+\subsubsection{Brug af sensorer}
 Som et eksempel på brugen af sensor-klasser betragtes \legos ultralyds sensor (\cref{sensor:ultrasonic_sensor}), som er repræsenteret ved klassen \lstinline[style=csharp]!NxtUltrasonicSensor!.
 Denne har en property \lstinline[style=csharp]!DistanceCm! der, som navnet angiver, returnerer afstanden fra sensoren til det objekt der er foran den.
 I \cref{mindsqualls:polling} ses et eksempel på hvordan en sådan sensor oprettes og forbindes til NXT'en.
 
-\subsection{Et eksempel}
-\mikkel{Jeg kunne ikke finde på en bedre titel :/}
-Herunder ses et eksempel på et program skrevet vha. \mindsqualls.
-Programmet er baseret på en robot med to hjul (med hver sin motor), en ultralydssensor samt en knap.
-Robotten kører fremad indtil den når en mur, drejer til venstre og fortsætter fremad.
-For at stoppe robotten trykkes på knappen.
-\mikkel{Indsæt billede af robotten evt?}
+\subsubsection{Brug af motorer}
+\legoms Servo Motoren er både en aktuator og en sensor, hvorfor det er muligt både at aflæse motorens nuværende position (med position menes der ændringen i grader ift. udgangspunktet), eller at sende kommandoer til at manipulere den nuværende position.
 
-\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på et \mindsqualls program},label=mindsqualls:example]
-NxtBrick brick = new NxtBrick(NxtCommLinkType.Bluetooth, 16);
+Til at aflæse løbende opdateringen, bruges samme metode som til aflæsning af de andre sensorer, via \textit{Polling}.
 
-brick.MotorA = left;
-brick.MotorB = right;
+De vigtigste metoder til styring af motoren kan ses i brug i \cref{mindsqualls:motor}.
+Her initialiseres en ny motor, hvorefter den roterer en hel omgang (360 grader), med hastighedsniveau 50 (som går fra 0 til 127).
+Hvorefter den ny position bliver aflæst og skrevet til konsollen.
 
-brick.Sensor1 = sonar;
-sonar.PollInterval = 50;
-brick.Sensor2 = button;
-button.PollInterval = 50;
+\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af en motor i \mindsqualls},label=mindsqualls:motor]
+NxtMotor motor = new NxtMotor();
+brick.MotorA = motor;
 
-brick.Connect();
+motor.Run(20, 360);
+motor.Brake();
 
-while (!button.IsPressed.HasValue || !button.IsPressed.Value)
-{
-    forwards = !sonar.DistanceCm.HasValue
-    	     || sonar.DistanceCm.Value >= 50;
-
-    if (forwards)
-    {
-        left.Run(100, 0);
-        right.Run(100, 0);
-    }
-    else
-    {
-        left.Run(-100, 0);
-        right.Run(100, 0);
-    }
-}
-
-left.Brake();
-right.Brake();
-brick.Disconnect();
+Console.WriteLine("Position: {0}", motor.TachoCount ?? 0);
 \end{lstlisting}
+
+\subsubsection{Synkronisering af motorer}
