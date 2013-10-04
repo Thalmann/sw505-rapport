@@ -1,3 +1,4 @@
+% !TeX spellcheck = da_DK
 \section{Sensorer}
 Dette afsnit vil undersøge de sensorer der er interessante for dette projekt.
 Der vil blive beskrevet de forsøg der er blevet udført, for at teste deres nøjagtighed og derefter en vurdering af deres nøjagtighed.
@@ -16,7 +17,7 @@ Ultrasonic sensoren(US), som kan ses på \cref{sensor:ultrasonic_sensor}, er en 
 Dette gøres ved at der sendes en lydbølge, hvorefter der så beregnes hvor lang tid det tager for denne at ramme objektet for derefter at blive tilbage igen.
 Sensoren måler afstanden i cm eller tommer og den maksimale aftsand der kan måles er 255 cm, med en præcision på $\pm$3 centimeter.\cite{tikNXT}
 
-\paragraph{Eksperimenterne} foretaget i \cite{tikNXT} har vist at
+\paragraph{Eksperimenterne i \cite{tikNXT}} har vist at
 \begin{itemize}
 \item den minimale aftsand der kan måles er 3 cm.
 \item det bedst genkendelig objekt et objekt der har glat og hård overflade og som er firkantet.
@@ -40,14 +41,27 @@ Der er gennemført en mindre test af sensoren, for at svare på følgende spørg
 \item Ligner resultaterne dem fra eksperimenterne ovenfor?
 \end{itemize}
 
-\paragraph{Opstillingen} som blev brugt til at svare på disse spørgsmål kan ses i \cref{sensor:ultrasonic_opstilling}, bestående af: tommestok, NXT 2.0, \legoms Ultrasonic Sensor og \legoms kabel.
+\paragraph{Opstillingen} som blev brugt til at svare på disse spørgsmål kan ses i \cref{sensor:ultrasonic_opstilling}, bestående af: 
+
+\begin{tabular}{|l|}
+\hline
+Tommestok\\
+\hline
+NXT 2.0\\
+\hline
+\legoms Ultrasonic Sensor\\
+\hline
+\legoms kabel.\\
+\hline
+\end{tabular}
+\paragraph{}
 Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sensoren aflæst.
 \mikael{Er det vigtigt med et billede af opstillingen? Er det ikke nok bare at beskrive den?}
 \bruno{skal evt. i appendix}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.75\textwidth]{opstilling}
+\includegraphics[width=.6\textwidth]{opstilling}
 \caption{Forsøgsopstilling for test af US'ens afstands præcision}
 \label{sensor:ultrasonic_opstilling}
 \end{figure}
@@ -90,7 +104,7 @@ optimal & test1 & test2 & test3 \\
 \end{figure}
 
 \paragraph{Resultaterne} fra forsøget kan ses i \cref{sensor:ultrasonic_test_data}.
-I \cref{sensor:ultrasonic_resultat_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når US'en er mindre en 20 cm fra objektet.
+I \cref{sensor:ultrasonic_resultat_diagram} kan det ses hvordan at de tre tests alle giver forkerte resultater når sensoren er mindre en 20 cm fra objektet.
 Desuden kan det ses på \cref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, men de andre tests nåede 200(test2) og 230(test3) cm før der opstod større usikkerhed.
 Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm på målingerne, men forsøget viser at der kun med sikkerhed kan måles mellem 20 og 170 cm.
 
@@ -99,7 +113,9 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 \includegraphics[width=\textwidth]{us_result_diagram}
 \caption{Testresultater: De blå søjler repræsenterer den målte afstand med tommestok, de andre tre viser US'ens testresultater ifht. hianden.}
 \label{sensor:ultrasonic_resultat_diagram}
+\stefan{Ændr US'en til sensoren}
 \end{figure}
+
 
 
 \subsection{Infarød Sensor}
@@ -130,12 +146,12 @@ Motoren kan ses på figur \ref{sensor:motor_sensor}.
 \label{sensor:motor_sensor}
 \end{figure}
 
-\paragraph{Eksperimenterne} i \cite{tikNXT} har vist at
+\paragraph{Eksperimenterne i \cite{tikNXT}}  har vist at
 \begin{itemize}
 \item ved forsøg med en TriBot hvor den skal gøre samme vej tilbage som den kom fra, rammer den flere centimeter ved siden af.
-\item antallet af centimeter den afviger i førnævnte punkt stiger med afstanden og omvendt.
+\item antallet af centimeter den afviger i førnævnte punkt stiger med afstanden og omvendt. \stefan{Hvad betyder ``og omvendt'' helt præcist?}
 \item der er konstateret en afvigelse på $\pm$2 grader, som fortæller os hvorfor den store afvigelse i centimeter i TriBot forsøget.
-\item selvom den indbyggede rotationssensor har motorerne ikke stor præcision.
+\item på trods af den indbyggede rotationssensor har motorerne ikke stor præcision.
 \end{itemize}
 
 \subsubsection{Test}
@@ -158,28 +174,38 @@ Der er gennemført en test af motoren, for at svare på følgende spørgsmål:
 \end{figure}
 
 Forsøgsopstillingen består af følgende dele:
-\begin{itemize}
-\item NXT v2
-\item 2x \legoms motor sensor
-\item 2x \legoms kabler
-\item Lidt \lego til at bygge holderen til motorerne og en forlænger til motorerne for letter måling.
-\item 3 A4 ark(ternet)
-\item Tape
-\item Vinkelmåler
-\item Stiftblyant
-\end{itemize}
 
-Sådan blev forsøget gennemført:
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+NXT v2 & 3 A4 ark(ternet)\\
+\hline
+2x \legoms motor sensor & Tape\\
+\hline
+2x \legoms kabler & Vinkelmåler\\
+\hline
+LEGO & Stiftblyant\\
+\hline
+\end{tabularx}
+
+\paragraph{}
+
+Opstillingen blev bygget efter følgende fremgangsmåde.
 
 \begin{enumerate}
 \item Der startes med at bygge et stativ til de to motorer på NXT'en.
 \item Derefter sættes de to motorer på stativet og forbindes vha. kablerne til NXT'en.(Her er der brugt noget modvægt, så NXT'en ikke vælter, musen på figur \ref{sensor:motor_sensor_opstilling}).
-\item De tre A4 ark sættes op på en væg, vha. tape, så midten af papiret passer med de to motorers højde.
+\item De tre A4 ark sættes op på en væg, vha. tape, så motoren er centreret på papirets højde
 \item Der sættes nu en forlænger på de to motorer, så det passer med at forlængeren holder sig over papiret på en omdrejning.
 \item Afmærk midten af motoren på papiret vha. at sætte en stiftblyant igennem midten af motorens akse.
+\end{enumerate}
+
+\paragraph{}
+Sådan blev forsøget gennemført:
+
+\begin{enumerate}
 \item Sæt motoren igang og afmærk hvor forlængeren stopper.
-\item Det afmærkede midter punkt bliver brugt til at måle vinklen, til det afmærkede punkt udenfor forlængeren, vha. vinkelmåleren.
-\item Desuden noteres tacho-værdien(antal grader drejet) som kan trækkes ud fra motorens rotationssensor vha. software.
+\item Det afmærkede midterpunkt bliver brugt til at måle vinklen, til det afmærkede punkt udenfor forlængeren, vha. vinkelmåleren.
+\item Tacho-værdien(antal grader drejet) noteres. Denne værdi kan trækkes ud af motorens rotationssensor vha. software.
 \end{enumerate}
 
 \begin{figure}[h]
@@ -218,7 +244,7 @@ Tacho-værdien har en afvigelse på maksimalt +1 og -4 grader.
 Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
 
 +7 og +6 grader målt optræder kun en gang ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager at det er pga. unøjagtige målinger ved forsøgsudførelsen er det stadig ikke $\pm$1 grad.
-
+\stefan{Man kan ikke direkte aflæse afvigelserne fra tabellen}
 Hvis vi kigger på figur \ref{sensor:motor_sensor_diagram1}
 kan vi se at de målte målinger ligger længst udenfor optimalen(sorte stiplede linje).
 Det vil sige tacho-værdien er bedre at gå efter.
@@ -241,6 +267,7 @@ Dvs. den målte værdi har en afvigelse på $\pm$4, mens tacho-værdien har en a
 \caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 50 til 200.}
 \label{sensor:motor_sensor_diagram2}
 \bruno{Ikke brugt i teksten, kan være den bare skal smides ud}
+\stefan{grafen er meget upræcis at aflæse}
 \end{figure}
 
 \begin{figure}[h]
@@ -249,4 +276,5 @@ Dvs. den målte værdi har en afvigelse på $\pm$4, mens tacho-værdien har en a
 \caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 200 til 3600.}
 \label{sensor:motor_sensor_diagram3}
 \bruno{Ikke brugt i teksten, kan være den bare skal smides ud}
+
 \end{figure}
