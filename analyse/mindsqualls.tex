@@ -110,4 +110,30 @@ motor.Brake();
 Console.WriteLine("Position: {0}", motor.TachoCount ?? 0);
 \end{lstlisting}
 
-\subsubsection{Synkronisering af motorer}
+\subsubsection{Styring af motorer}
+Ved at sende kommandoer til ændring af motor-tilstand direkte til NXT'en kan der være høj unøjagtighed.
+Dette gælder ved rotation af en enkelt motor, dette er især et problem hvis der er to motorer der bør køre synkront.
+Derfor er det nødvendigt at benytte \textit{MotorControl}.
+
+\paragraph{MotorControl} er et program der lægges ind på NXT'en (en .rxe-fil), som kører motor kommandoerne i stedet for det normale output.
+På denne måde bør der være helt ned til 1 grads unøjagtighed.
+
+Den måde som MotorControl bruges i mindsqualls, er med et sæt nye klasser til brick og motorer: \lstinline[style=csharp]!McNxtBrick!, \lstinline[style=csharp]!McNxtMotor! og \lstinline[style=csharp]!McNxtMotorSync!.
+Alternativt kan der bruges den statiske klasse \lstinline[style=csharp]!MotorControlProxy! hvor der kan kommunikeres direkte med MotorControl på NXT'en, uden lige så høj abstraktion.
+
+\paragraph{Eksempel} på brugen af MotorControl kan ses i \cref{mindsqualls:motorcontrol}, hvor der udføres samme funktionalitet som i \cref{mindsqualls:motor}, blot med brug af MotorControl.
+Yderligere aktiveres MotorControl programmet på NXT'en, hvis det ikke allerede kører.
+
+\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af MotorControl},label=mindsqualls:motorcontrol]
+McNxtMotor mcMotorA = new McNxtMotor();
+
+mcBrick.MotorA = mcMotorA;
+
+if (!mcBrick.IsMotorControlRunning())
+    mcBrick.StartMotorControl();
+
+mcMotorA.Run(20, 360);
+
+Console.WriteLine("Position: {0}", mcMotorA.TachoCount ?? 0);
+\end{lstlisting}
+
