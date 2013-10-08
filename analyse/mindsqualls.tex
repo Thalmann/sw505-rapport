@@ -20,9 +20,8 @@ Herunder gives en kort gennemgang af de primære klasser i \mindsqualls.
 
 \subsection{NXT kommunikation}
 \mindsqualls opretter forbindelse til NXT enheden vha. klassen \lstinline[style=csharp]!NxtCommunicationProtocol!.
-Klassen fungerer, som navnet indikerer, som en protokol ved at definere en række abstrakte funktioner;
-Der kan oprettes forbindelse til NXT enheden.
-Denne kan afbrydes igen, og det kan til enhver tid fastslås om der er forbindelse til enheden.
+Klassen fungerer, som navnet indikerer som en protokol ved at definere en række abstrakte funktioner.
+Disse muliggører at man kan oprette forbindelse til NXT enheden, afbryde forbindelsen, og det kan til enhver tid fastslås om der er forbindelse til enheden.
 Selve kommunikationen sker via kald til funktionen \lstinline[style=csharp]!Send! der tager et array af bytes som input og giver et array af bytes som output.
 Altså kan funktionen både sende og modtage beskeder til og fra enheden.
 Ved at lave specialiseringer af \lstinline[style=csharp]!NxtCommunicationProtocol! klassen, der definere disse funktioner, kan der kommunikeres med NXT enheden.
