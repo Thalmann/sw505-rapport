@@ -1,10 +1,10 @@
 \section{Lokalisering}
-Når robotten skal kortlægge sine omgivelser er det nødvendigt at vide hvor robotten befinder sig.
-Til at finde robottens position har vi overvejet flere forskellige metoder.
+Når robotten skal kortlægge sine omgivelser er det nødvendigt at vide hvor den befinder sig.
+Til at finde positionen har vi overvejet flere forskellige metoder.
 \begin{itemize}
 \item Kinect
 \item Dead reckoning
-\item Kamera ansigtsgenkendelse
+\item Kamera ansigtsgenkendelse \thilemann{Er det ikke mere blob genkendelse via OpenCV der menes?}
 \end{itemize}
 
 \subsection{Kinect }
@@ -22,16 +22,17 @@ Ved hjælp af triangulering af det modtagne lys kan wiimoten bestemme sin positi
 Dead Reckoning er en teknik til at finde sin position efter ens bevægelser uden eksterne sensorer.
 Robotten ved hvor den starter, og beregner sin nye position efter hvilken kommando den har udført.\cite{deadrec}
 
-Denne teknik kan risikere at være meget upræcis, hvis robottens motorer og sensorer mangler præcision.
+Denne teknik er ikke det bedste valg i de situationer hvor man ønsker en meget præcis lokalisering af robotten, hvilket skyldes de usikkerheder for motorer og sensorer som man ofte arbejder med.
 
 \subsection{Valg af lokaliseringsmetode}
 Der blev foretaget en indledende test af de tre foreslåede lokaliseringsmetoder for at vælge hvilken der passede bedst til dette projekt.
 
 Dead reckoning muligheden blev hurtigt udelukket, da gruppen ville fokusere på kortlægningsopgaven og dead reckoning ville kræve en del mere arbejde end de andre lokaliseringsmetoder.
 
-Valget mellem Kinect og Wiimote vandt Kinect af flere grunde. 
+Efter sammenligning af Kinect og Wiimote blev det besluttet at fokusere på Kinect af flere årsager.
 For det første havde vi adgang til en Kinect hvilket gjorde valget oplagt. 
 Også det medfølgende SDK gør det let at arbejde med.
+\thilemann{Her mangler lidt, f.eks. "For det andet..."?}
 
 \subsection{OpenCV}
 Til at følge et objekt på det optagne billede har vi valgt at benytte et bibliotek kaldet ``OpenCV''.
