@@ -1,0 +1,21 @@
+% Kilde: http://www.hitechnic.com/cgi-bin/commerce.cgi?preadd=action&key=NMC1034
+
+\section{HiTechnic NXT Compass Sensor}
+\textit{''Calibration is optional and usually not required for normal operation. To minimize the need for calibration make sure you mount the compass at least 4 – 6 inches (10 – 15 cm) away from the NXT and NXT motors.''}
+
+\section{Brug af Compass Sensor}
+Til at styre denne sensor i \mindsqualls, skal der bruges en af de seperate klasser til HiTechnic sensorerne, som findes i namespace \lstinline[style=csharp]!NXT.MindSqualls.HiTechnic!.
+Til Compass Sensor hedder klassen \lstinline[style=csharp]!HiTechnicCompassSensor!.
+
+\subsection{Målinger}
+Compass Sensor aflæses som alle andre sensorer, da den også arver fra \lstinline[style=csharp]!Pollable!-klassen.
+Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et lige heltal mellem 0 og 358 (dvs. 180 værdier i alt).
+
+\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af Compass Sensor},label=compass:example]
+HiTechnicCompassSensor compas =
+	new HiTechnicCompassSensor();
+brick.Sensor1 = compas;
+
+compas.Poll();
+Console.WriteLine(HiTechnicCompassSensor.Heading);
+\end{lstlisting}
