@@ -28,7 +28,8 @@ Console.WriteLine(HiTechnicCompassSensor.Heading);
 \subsection{Præcisionstest}
 Der blev udført i alt to tests; en med kompasset monteret på robotten og en hvor kompasset var del af en selvstændig konstruktion.
 Test-værdier blev fundet ud fra samme metode, ved at rotere kompasset vilkårligt og derefter sammenligne vinklen mellem to afmålinger, ved brug af vinkelmåler.
-I de to tabeller med oversigt over resultater ses først hvilke to kompas-afmålinger der sammenlignes, sammen med den målte vinkel.
+I de to tabeller, med oversigt over resultater, ses først hvilke to kompas-afmålinger der sammenlignes, sammen med den målte vinkel.
+Yderligere er der lavet et boksplot for de to tests, hvor prikken repræsenterer gennemsnits-afvigelsen.
 Koden der blev kørt til udførelse af begge tests kan ses i \cref{kompas:kode_test}.
 
 \begin{figure}[h]
@@ -55,6 +56,12 @@ Første forsøg blev udført med kompasset monteret ovenpå ultralyds-sensoren, 
 Denne konstruktion var dog meget ustabil, da kompasset skulle være forholdsvist højt oppe ift. base-konstruktionen.
 En oversigt over resultaterne er givet i \cref{kompas:resultat_paa_robot}.
 
+\begin{description}
+\item[Største afvigelse]{8\dg}
+\item[Mindste afvigelse]{0\dg}
+\item[Gennemsnitlig afvigelse]{2.67}
+\end{description}
+
 \begin{table}[h]
 \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
@@ -74,15 +81,45 @@ En oversigt over resultaterne er givet i \cref{kompas:resultat_paa_robot}.
 \label{kompas:resultat_stabil}
 \end{table}
 
-\begin{description}
-\item[Største afvigelse]{8\dg}
-\item[Mindste afvigelse]{0\dg}
-\item[Gennemsnitlig afvigelse]{2.67}
-\end{description}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[thick]
+\draw(1,0) rectangle (3,1); % Boks
+\draw (2,0) -- (2,1); % Median streg
+\draw (3,0.5) -- (8,0.5); % Fra øvre kvartil til maks
+\draw (1,0.5) -- (0,0.5);% Fra nedre kvartil til min
+\draw (8,0.3) -- (8,0.7); % Maksimum vertikal streg
+\draw (0,0.3) -- (0,0.7); % Minimum vertikal streg
+\filldraw[color=black] (2.67,0.5) circle (0.05cm); % Gennemsnittet
+
+% Linje med værdier
+\draw (0,-1) -- (10,-1);
+\draw[snake=ticks,segment length=1cm] (0,-1) -- (10,-1);
+
+% Tal på linje
+\node[below] at (0,-1.1) {$0$};
+\node[below] at (1,-1.1) {$1$};
+\node[below] at (2,-1.1) {$2$};
+\node[below] at (3,-1.1) {$3$};
+\node[below] at (4,-1.1) {$1$};
+\node[below] at (5,-1.1) {$2$};
+\node[below] at (6,-1.1) {$3$};
+\node[below] at (7,-1.1) {$3$};
+\node[below] at (8,-1.1) {$8$};
+\end{tikzpicture}
+\caption{Boksplot for Test 1}
+\label{kompas:test_1_boksplot}
+\end{figure}
 
 \subsubsection{Test 2 - På stabil konstruktion}
 Andet forsøg blev udført med kompasset monteret på en selvstændig og langt mere stabil konstruktion, for at se om dette ville kunne forbedre resultaterne.
 Disse resultater kan ses i \cref{kompas:resultat_stabil}.
+
+\begin{description}
+\item[Største afvigelse]{6\dg}
+\item[Mindste afvigelse]{0\dg}
+\item[Gennemsnitlig afvigelse]{1.66}
+\end{description}
 
 \begin{table}[h]
 \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
@@ -102,8 +139,28 @@ Disse resultater kan ses i \cref{kompas:resultat_stabil}.
 \label{kompas:resultat_paa_robot}
 \end{table}
 
-\begin{description}
-\item[Største afvigelse]{6\dg}
-\item[Mindste afvigelse]{0\dg}
-\item[Gennemsnitlig afvigelse]{1.66}
-\end{description}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[thick]
+\draw(0.5,0) rectangle (2.5,1); % Boks
+\draw (1.5,0) -- (1.5,1); % Median streg
+\draw (2.5,0.5) -- (6,0.5); % Fra øvre kvartil til maks
+\draw (0.5,0.5) -- (0,0.5);% Fra nedre kvartil til min
+\draw (6,0.3) -- (6,0.7); % Maksimum vertikal streg
+\draw (0,0.3) -- (0,0.7); % Minimum vertikal streg
+\filldraw[color=black] (1.66,0.5) circle (0.05cm); % Gennemsnittet
+
+% Linje med værdier
+\draw (0,-1) -- (10,-1);
+\draw[snake=ticks,segment length=1cm] (0,-1) -- (10,-1);
+
+% Tal på linje
+\node[below] at (0,-1.1) {$0$};
+\node[below] at (1,-1.1) {$1$};
+\node[below] at (2,-1.1) {$2$};
+\node[below] at (3,-1.1) {$3$};
+\node[below] at (8,-1.1) {$8$};
+\end{tikzpicture}
+\caption{Boksplot for Test 1}
+\label{kompas:test_1_boksplot}
+\end{figure}
