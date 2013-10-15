@@ -78,7 +78,8 @@ Denne projicering betegnes $y_2$ og dermed kan følgende model opstilles:
 For at kunne bestemme $y_2$ konstruerer vi en linie fra ``enden'' af $y_1$ til $y_2$.
 Linien konstrueres således at den står ortogonalt på $y_1$.
 Ved at forlængde liniestykket $d$ og den nye linie konstrueres en trekant, som kan ses på \cref{localization:trekant}.
-\mikkel{Der er tvivl om hvorvidt vi kan antage at vinklen ved ($x_1,y_1$) er ret.}
+\mikkel[Localization antagelse 1]{Der er tvivl om hvorvidt vi kan antage at vinklen ved ($x_1,y_1$) er ret.
+Det bliver afgjort ved at implementere og teste.}
 
 \begin{figure}
 \centering
@@ -119,12 +120,30 @@ Ved at forlængde liniestykket $d$ og den nye linie konstrueres en trekant, som 
 \label{localization:trekant}
 \end{figure}
 
-\begin{itemize}
-\item $\beta = 180 - v$
-\item $\delta = 180 - (90+ \beta) = 90 - \beta = v-90$
-\item $q = \frac{y_1}{sin(\delta)}$
-\item $y_2 = tan(\delta)(q+d)$
-\end{itemize}
+Ud fra \cref{localization:trekant} udledes nu $y_2$, så denne er udtrykt ved de tre variable $y_1$, $v$ og $d$.
+Først findes de to vinkler $\beta$ og $\delta$:
+\begin{align*}
+\beta &= 180 - v\\
+\delta &= 180-(90 + \beta)\\
+&= 180 - (90 + 180 - v)\\
+&= v-90
+\end{align*}
 
-dvs. at mapping funktionen f på formen $R \times R \times R \times R \rightarrow R \times R$ ser således ud.
-$$f(x_1,y_1,v,d)=(x_1,tan(v-90)(\frac{y_1}{sin(v-90)}+d)$$
+Herefter benyttes en sinus-relation til bestemmelse af $q$:
+$$q = \frac{y_1}{\sin{\delta}}$$
+
+Til sidst kan $y_2$ udledes ved hjælp af tangens:
+\begin{align*}
+y_2 &= \tan(\delta)(q+d)\\
+&= \tan(v-90)\left(\frac{y_1}{\sin(v-90)} + d\right)
+\end{align*}
+
+Det skal her bemærkes at den opstillede model udelukkende beskriver koordinater i \'en dimension i planet.
+For at kunne finde et punkt i planet er det naturligvis også nødvendigt at håndtere yderligere en koordinat.
+Det ønskes hermed at opstille en funktion $f$ der beregner mapping fra $(x_1,y_1)$ til $(x_2,y_2)$, under forudsætning af at $y_1$, $v$ og $d$ kendes på forhånd;
+$$f: \mathbb{R} \times \mathbb{R} \times \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R} \times \mathbb{R}$$
+\mikkel[Localization antagelse 2]{Beskriv hvorfor det er ok at antage at førstekoordinaten kan overføres.
+Jeg går ud fra at vi laver et eksperiment der viser at det passer - eller at vi finder en anden metode.}
+Det antages derfor at $x_1$ = $x_2$, og funktionen $f$ kan nu opstilles:
+
+$$f(x_1,y_1,v,d)=\left(x_1,\;\tan(v-90)\left(\frac{y_1}{\sin(v-90)} + d\right)\right)$$
