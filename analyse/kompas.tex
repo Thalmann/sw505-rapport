@@ -1,42 +1,21 @@
 \section{HiTechnic NXT Compass Sensor}
-\textit{''Calibration is optional and usually not required for normal operation. To minimize the need for calibration make sure you mount the compass at least 4 – 6 inches (10 – 15 cm) away from the NXT and NXT motors.''}
-\footnote{\url{http://www.hitechnic.com/cgi-bin/commerce.cgi?preadd=action&key=NMC1034}}
+Kompasset fra HiTechnic er et digitalt kompas der måles jordens magnetiske felt, hvor kompasset kan returnere en værdi der repræsenterer den nuværende retning (heading).
+Kompasset er præcist ned til 1 grad (repræsenteret ved en værdi mellem 0-179) og opdaterer sin heading op til 100 gange i sekundet.
 
-\subsection{Brug af Compass Sensor}
+Kalibrering er ikke nødvendigt.
+Dog er det nødvendigt for at minimere forstyrrelser, at kompasset holdes 10-15 cm væk fra forstyrrende elementer, herunder \lego NXT og motorer.\cite{hitechnic_compass}
+
+\subsection{Compass Sensor i \mindsqualls}
 Til at styre denne sensor i \mindsqualls, skal der bruges en af de seperate klasser til HiTechnic sensorerne, som findes i namespace \lstinline[style=csharp]!NXT.MindSqualls.HiTechnic!.
 Til Compass Sensor hedder klassen \lstinline[style=csharp]!HiTechnicCompassSensor!.
 
-\subsection{Aflæsning af værdier}
+\subsubsection{Aflæsning af værdier}
 Compass Sensor aflæses som alle andre sensorer, da den også arver fra \lstinline[style=csharp]!Pollable!-klassen.
-Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et lige heltal mellem 0 og 358 (dvs. 180 værdier i alt).
+Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et lige heltal mellem 0 og 358 (180 værdier i alt).
+Et eksempel på en simpel aflæsning af værdi kan ses i \cref{kompas:kode_eksempel}.
 
-\subsection{Test}
-Der blev udført i alt to tests; en med kompasset monteret på robotten og en hvor kompasset var del af en selvstændig konstruktion.
-Test-værdier blev fundet ud fra samme metode, ved at rotere kompasset vilkårligt og derefter sammenligne vinklen mellem to afmålinger ved brug af vinkelmåler.
-I de to tabeller med oversigt over resultater ses først hvilke to kompas-afmålinger der sammenlignes, sammen med det afmålte ved brug af vinkelmåler.
-
-\subsubsection{Test 1 - På robot}
-Første forsøg blev udført med kompasset monteret ovenpå ultralyds-sensoren, for at holde en minimum-afstand på 15 cm fra brick og motorer.
-Denne konstruktion var dog meget ustabil, da kompasset skulle være forholdsvist højt oppe ift. base-konstruktionen.
-En oversigt over resultaterne er givet i \cref{kompas:resultat_paa_robot}.
-
-\begin{description}
-\item[Største afvigelse]{8\dg}
-\item[Mindste afvigelse]{0\dg}
-\item[Gennemsnitlig afvigelse]{2.67}
-\end{description}
-
-\subsubsection{Test 2 - På stabil konstruktion}
-Andet forsøg blev udført med kompasset monteret på en selvstændig og langt mere stabil konstruktion, for at se om dette ville kunne forbedre resultaterne.
-Disse resultater kan ses i \cref{kompas:resultat_stabil}.
-
-\begin{description}
-\item[Største afvigelse]{6\dg}
-\item[Mindste afvigelse]{0\dg}
-\item[Gennemsnitlig afvigelse]{1.66}
-\end{description}
-
-\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af Compass Sensor},label=compass:example,frame=single]
+\begin{figure}[h]
+\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af Compass Sensor},label=kompas:kode_eksempel,frame=single]
 HiTechnicCompassSensor compas =
 	new HiTechnicCompassSensor();
 brick.Sensor1 = compas;
@@ -44,8 +23,16 @@ brick.Sensor1 = compas;
 compas.Poll();
 Console.WriteLine(HiTechnicCompassSensor.Heading);
 \end{lstlisting}
+\end{figure}
 
-\begin{lstlisting}[style=csharpsmall,caption={Kode brugt til test},label=compass:test,frame=single]
+\subsection{Præcisionstest}
+Der blev udført i alt to tests; en med kompasset monteret på robotten og en hvor kompasset var del af en selvstændig konstruktion.
+Test-værdier blev fundet ud fra samme metode, ved at rotere kompasset vilkårligt og derefter sammenligne vinklen mellem to afmålinger, ved brug af vinkelmåler.
+I de to tabeller med oversigt over resultater ses først hvilke to kompas-afmålinger der sammenlignes, sammen med den målte vinkel.
+Koden der blev kørt til udførelse af begge tests kan ses i \cref{kompas:kode_test}.
+
+\begin{figure}[h]
+\begin{lstlisting}[style=csharpsmall,caption={Kode brugt til test},label=kompas:kode_test,frame=single]
 NxtBrick brick = new NxtBrick(NxtCommLinkType.Bluetooth, 8);
 HiTechnicCompassSensor compas = new HiTechnicCompassSensor();
 brick.Sensor1 = compas;
@@ -61,26 +48,14 @@ Console.ReadKey();
 
 brick.Disconnect();
 \end{lstlisting}
+\end{figure}
 
-\begin{table}
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} \\ \hline
-0-0		& 4,5\dg	& 110-120	& 12\dg		& 296-314	& 20,5\dg \\ \hline
-0-2		& 0,5\dg	& 120-146 	& 18\dg		& 314-338	& 21\dg \\ \hline
-2-14	& 13\dg		& 146-160	& 15,5\dg	& 338-338	& 6\dg \\ \hline
-14-32	& 22\dg		& 160-188	& 20,5\dg	& 338-340	& 0\dg \\ \hline
-32-42	& 11\dg		& 188-210	& 21\dg		& 340-358	& 17\dg \\ \hline
-42-68	& 29\dg		& 210-234	& 22\dg		& 358-360		& 2,5\dg \\ \hline
-68-74	& 5\dg		& 234-262	& 30,5\dg	& 			& \\ \hline
-74-94	& 19\dg		& 262-288	& 26\dg		& 			& \\ \hline
-94-110	& 13\dg		& 288-296	& 10,5\dg	& 			& \\ \hline
-\end{tabularx}
-\caption{Målinger foretaget med kompas monteret på stang over ultra sound sensor}
-\label{kompas:resultat_paa_robot}
-\end{table}
+\subsubsection{Test 1 - På robot}
+Første forsøg blev udført med kompasset monteret ovenpå ultralyds-sensoren, for at holde en minimum-afstand på 15 cm fra brick og motorer.
+Denne konstruktion var dog meget ustabil, da kompasset skulle være forholdsvist højt oppe ift. base-konstruktionen.
+En oversigt over resultaterne er givet i \cref{kompas:resultat_paa_robot}.
 
-\begin{table}
+\begin{table}[h]
 \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} \\ \hline
@@ -98,3 +73,37 @@ brick.Disconnect();
 \caption{Målinger foretaget med kompas på selvstændig og stabil konstruktion}
 \label{kompas:resultat_stabil}
 \end{table}
+
+\begin{description}
+\item[Største afvigelse]{8\dg}
+\item[Mindste afvigelse]{0\dg}
+\item[Gennemsnitlig afvigelse]{2.67}
+\end{description}
+
+\subsubsection{Test 2 - På stabil konstruktion}
+Andet forsøg blev udført med kompasset monteret på en selvstændig og langt mere stabil konstruktion, for at se om dette ville kunne forbedre resultaterne.
+Disse resultater kan ses i \cref{kompas:resultat_stabil}.
+
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} \\ \hline
+0-0		& 4,5\dg	& 110-120	& 12\dg		& 296-314	& 20,5\dg \\ \hline
+0-2		& 0,5\dg	& 120-146 	& 18\dg		& 314-338	& 21\dg \\ \hline
+2-14	& 13\dg		& 146-160	& 15,5\dg	& 338-338	& 6\dg \\ \hline
+14-32	& 22\dg		& 160-188	& 20,5\dg	& 338-340	& 0\dg \\ \hline
+32-42	& 11\dg		& 188-210	& 21\dg		& 340-358	& 17\dg \\ \hline
+42-68	& 29\dg		& 210-234	& 22\dg		& 358-360		& 2,5\dg \\ \hline
+68-74	& 5\dg		& 234-262	& 30,5\dg	& 			& \\ \hline
+74-94	& 19\dg		& 262-288	& 26\dg		& 			& \\ \hline
+94-110	& 13\dg		& 288-296	& 10,5\dg	& 			& \\ \hline
+\end{tabularx}
+\caption{Målinger foretaget med kompas monteret på stang over ultralyds-sensor}
+\label{kompas:resultat_paa_robot}
+\end{table}
+
+\begin{description}
+\item[Største afvigelse]{6\dg}
+\item[Mindste afvigelse]{0\dg}
+\item[Gennemsnitlig afvigelse]{1.66}
+\end{description}
