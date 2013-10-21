@@ -121,8 +121,102 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 
 
 \subsection{Infarød Sensor}
-Den infarøde afstandssensor (IS) som kan ses på \cref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm.
-\bruno{sensor not working at the moment :i}
+Den infarøde afstandssensor som kan ses på \cref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm. 
+Denne sensor er produceret af Mindsensors.com. 
+Sensoren virker som den ultrasoniske sensor, men sender i stedet for en ultrasonisk impuls et infrarødt signal. 
+
+\subsection{Test}
+For at afprøve sensorens præcision og rækkevidde er der foretaget en test af sensoren.
+
+Opstillingen brugt til udførelse af testen bestod af tre A4 ark spændt ud på gulvet ind til en væg. 
+Papiret havde markeringer for hver 2 cm fra væggen.
+
+Udførelsen af testen gik ud på at stille en NXT med påsat infrarød sensor ved hver indikator for derefter at aflæse sensorens måling.
+
+\paragraph{Resultater}
+
+Resultaterne fra testen er præsenteret i \cref{sensor:infrared_data}. 
+Disse resultater er sat op i en graf på \cref{sensor:infrared_chart}.
+Den røde linje er den reele afstand mens de blå firkanter er målepunkter.
+Den sorte linje er en lineær regression over måleresultaterne.
+
+Ud fra grafen kan det ses at der er stor usikkerhed i starten og slutningen, hvilket stemmer overens med den lovede rækkevidde på 10 til 80 cm.
+De bedste resultater findes dog imellem 8cm og 5.2 cm
+\paragraph{}
+
+\begin{figure}
+\begin{tabular}{ll}
+
+
+\begin{tabular}{|l|l|}
+\hline
+Reel afstand / mm & Målt afstand / mm \\
+\hline
+20 & 183 \\
+\hline
+40 & 73 \\
+\hline
+60 & 70 \\
+\hline
+80 & 79 \\ \hline
+100 & 98 \\ \hline
+120 & 117 \\ \hline
+140 & 136 \\ \hline
+160 & 163 \\ \hline
+180 & 180 \\ \hline
+200 & 198 \\ \hline
+220 & 218 \\ \hline
+240 & 241 \\ \hline
+260 & 255 \\ \hline
+280 & 280 \\ \hline
+300 & 306 \\ \hline
+320 & 326 \\ \hline
+340 & 351 \\ \hline
+360 & 375 \\ \hline
+380 & 395 \\ \hline
+400 & 425 \\ \hline
+420 & 440 \\ \hline
+
+\end{tabular}
+
+&
+
+\begin{tabular}{|l|l|}
+\hline
+Reel afstand / mm & Målt afstand / mm \\ \hline
+440 & 457 \\ \hline
+460 & 471 \\ \hline
+480 & 500 \\ \hline
+500 & 527 \\ \hline
+520 & 523 \\ \hline
+540 & 551 \\ \hline
+560 & 583 \\ \hline
+580 & 610 \\ \hline
+600 & 639 \\ \hline
+620 & 639 \\ \hline
+640 & 666 \\ \hline
+660 & 666 \\ \hline
+680 & 689 \\ \hline
+700 & 742 \\ \hline
+720 & 742 \\ \hline
+740 & 734 \\ \hline
+760 & 528 \\ \hline
+780 & 792 \\ \hline
+800 & 792 \\ \hline
+820 & 846 \\ \hline
+840 & 853 \\ \hline
+\end{tabular}
+\end{tabular}
+\caption{Forsøgsresultater fra testen af den infrarøde sensor}
+\label{sensor:infrared_data}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth,trim= 100 300 100 100]{Infraredchart}
+\caption{Graf over forsøgsresultaterne fra testen af den infrarøde sensor}
+\label{sensor:infrared_chart}
+\end{figure}
+\todo{Continue stefan woot wat}
 
 \begin{figure}[h]
 \centering
