@@ -120,12 +120,12 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 
 
 
-\subsection{Infarød Sensor}
-Den infarøde afstandssensor som kan ses på \cref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm. 
+\subsection{Infrarød Sensor}
+Den infrarøde afstandssensor som kan ses på \cref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm. 
 Denne sensor er produceret af Mindsensors.com. 
 Sensoren virker som den ultrasoniske sensor, men sender i stedet for en ultrasonisk impuls et infrarødt signal. 
 
-\subsection{Test}
+\subsubsection{Test}
 For at afprøve sensorens præcision og rækkevidde er der foretaget en test af sensoren.
 
 Opstillingen brugt til udførelse af testen bestod af tre A4 ark spændt ud på gulvet ind til en væg. 
@@ -133,12 +133,12 @@ Papiret havde markeringer for hver 2 cm fra væggen.
 
 Udførelsen af testen gik ud på at stille en NXT med påsat infrarød sensor ved hver indikator for derefter at aflæse sensorens måling.
 
-\paragraph{Resultater}
+\subsubsection{Resultater}
 
 Resultaterne fra testen er præsenteret i \cref{sensor:infrared_data}. 
-Disse resultater er sat op i en graf på \cref{sensor:infrared_chart}.
-Den røde linje er den reele afstand mens de blå firkanter er målepunkter.
-Den sorte linje er en lineær regression over måleresultaterne.
+Disse resultater er sat op i et diagram på \cref{sensor:infrared_chart}.
+Den røde graf er den reelle afstand mens de blå firkanter er målepunkter.
+Den sorte graf er en lineær regression over måleresultaterne.
 
 Ud fra grafen kan det ses at der er stor usikkerhed i starten og slutningen, hvilket næsten stemmer overens med den lovede rækkevidde på 10 til 80 cm.
 De bedste resultater findes dog imellem 8cm og 56 cm. 
@@ -230,7 +230,7 @@ Reel afstand / mm & Målt afstand / mm \\ \hline
 Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor samt den infrarøde sensor. 
 Den ultrasoniske sensor var præcis med 3 cm fejlmargin fra 20 cm til 170 cm, mens den infrarøde sensor var præcis med 3 cm fejlmargin 10 cm til 56.
 Den infrarøde sensor angiver sine målinger med højere præcision, men da fejlmarginen er 3 cm anses den ikke som værende mere præcis end den ultrasoniske sensor.
-I forhold til afstand måler der en ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
+I forhold til afstand, måler den ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
 Valget mellem de to sensorer står derfor på hvilket krav robotten har til afstand.
 
 \subsection{Motor}
