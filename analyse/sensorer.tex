@@ -64,7 +64,7 @@ Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sen
 \begin{figure}[h]
 \centering
 \includegraphics[width=.6\textwidth]{opstilling}
-\caption{Forsøgsopstilling for test af US'ens afstands præcision}
+\caption{Forsøgsopstilling for test af den ultrasoniske sensors præcision}
 \label{sensor:ultrasonic_opstilling}
 \end{figure}
 
@@ -106,16 +106,16 @@ optimal & test1 & test2 & test3 \\
 \end{figure}
 
 \paragraph{Resultaterne} fra forsøget kan ses i \cref{sensor:ultrasonic_test_data}.
-I \cref{sensor:ultrasonic_resultat_diagram} ses hvordan at de tre tests alle giver forkerte resultater når sensoren er mindre en 20 cm fra objektet.
+Den røde linje indikerer det ideele resultat mens den blå, brune og grønne linje viser de resultaterne fra de tre test.
+Det ses på grafen at de tre tests alle giver forkerte resultater når sensoren er mindre en 20 cm fra objektet.
 Desuden kan det ses på \cref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, hvor de andre tests nåede 200 (test2) og 230 (test3) cm før der opstod større usikkerhed.
 Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm på målingerne, men forsøget viser at der kun med sikkerhed kan måles mellem 20 og 170 cm.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{us_result_diagram}
-\caption{Testresultater: De blå søjler repræsenterer den målte afstand med tommestok, de andre tre viser US'ens testresultater ifht. hianden.}
+\includegraphics[width=\textwidth]{ultrasonicchart}
+\caption{Graf over forsøgsresultaterne fra testen af den ultrasoniske sensor}
 \label{sensor:ultrasonic_resultat_diagram}
-\stefan{Ændr US'en til sensoren}
 \end{figure}
 
 
@@ -140,8 +140,9 @@ Disse resultater er sat op i en graf på \cref{sensor:infrared_chart}.
 Den røde linje er den reele afstand mens de blå firkanter er målepunkter.
 Den sorte linje er en lineær regression over måleresultaterne.
 
-Ud fra grafen kan det ses at der er stor usikkerhed i starten og slutningen, hvilket stemmer overens med den lovede rækkevidde på 10 til 80 cm.
-De bedste resultater findes dog imellem 8cm og 5.2 cm
+Ud fra grafen kan det ses at der er stor usikkerhed i starten og slutningen, hvilket næsten stemmer overens med den lovede rækkevidde på 10 til 80 cm.
+De bedste resultater findes dog imellem 8cm og 56 cm. 
+Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forventet 500, målt 527).
 \paragraph{}
 
 \begin{figure}
@@ -216,7 +217,6 @@ Reel afstand / mm & Målt afstand / mm \\ \hline
 \caption{Graf over forsøgsresultaterne fra testen af den infrarøde sensor}
 \label{sensor:infrared_chart}
 \end{figure}
-\todo{Continue stefan woot wat}
 
 \begin{figure}[h]
 \centering
@@ -224,6 +224,14 @@ Reel afstand / mm & Målt afstand / mm \\ \hline
 \caption{High Precision Medium Range Infrared Distance Sensor for NXT (v2)}
 \label{sensor:infraroed_sensor}
 \end{figure}
+
+\subsection{Sammenligning af afstandssensorer}
+
+Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor samt den infrarøde sensor. 
+Den ultrasoniske sensor var præcis med 3 cm fejlmargin fra 20 cm til 170 cm, mens den infrarøde sensor var præcis med 3 cm fejlmargin 10 cm til 56.
+Den infrarøde sensor angiver sine målinger med højere præcision, men da fejlmarginen er 3 cm anses den ikke som værende mere præcis end den ultrasoniske sensor.
+I forhold til afstand måler der en ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
+Valget mellem de to sensorer står derfor på hvilket krav robotten har til afstand.
 
 \subsection{Motor}
 Motoren beskrevet i dette afsnit er \lego's egen.
