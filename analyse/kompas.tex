@@ -1,31 +1,35 @@
 \section{HiTechnic NXT Compass Sensor}
-Kompasset fra HiTechnic er et digitalt kompas der måles jordens magnetiske felt, hvor kompasset kan returnere en værdi der repræsenterer den nuværende retning (heading).
-Kompasset er præcist ned til 1 grad (repræsenteret ved en værdi mellem 0-179) og opdaterer sin heading op til 100 gange i sekundet.
-
-Kalibrering er ikke nødvendigt.
+Kompasset fra HiTechnic er et digitalt kompas der måler jordens magnetiske felt.
+Kompasset kan returnere en værdi der repræsenterer kompassets nuværende orientering.
+Ifølge HiTechnic er værdierne returneret fra kompasset præcise ned til 1 grad.
+Kalibrering skulle desuden ikke være nødvendig.
 Dog er det nødvendigt for at minimere forstyrrelser, at kompasset holdes 10-15 cm væk fra forstyrrende elementer, herunder \lego NXT og motorer.\cite{hitechnic_compass}
 
+I \cref{kompas:precision} undersøges hvorvidt målinger fra kompasset kan leve op til disse oplysninger.
+
 \subsection{Compass Sensor i \mindsqualls}
-Til at styre denne sensor i \mindsqualls, skal der bruges en af de seperate klasser til HiTechnic sensorerne, som findes i namespace \lstinline[style=csharp]!NXT.MindSqualls.HiTechnic!.
-Til Compass Sensor hedder klassen \lstinline[style=csharp]!HiTechnicCompassSensor!.
+Til at styre denne sensor i \mindsqualls, skal der bruges en af de seperate klasser til HiTechnic sensorerne, som findes i namespacet \lstinline[style=csharp]!NXT.MindSqualls.HiTechnic!.
+Til kompas sensoren anvendes klassen \lstinline[style=csharp]!HiTechnicCompassSensor!.
 
 \subsubsection{Aflæsning af værdier}
-Compass Sensor aflæses som alle andre sensorer, da den også arver fra \lstinline[style=csharp]!Pollable!-klassen.
-Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et lige heltal mellem 0 og 358 (180 værdier i alt).
+Kompas sensoren aflæses som alle andre sensorer, da den også arver fra \lstinline[style=csharp]!Pollable!-klassen.
+Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et ulige heltal mellem 0 og 359.\footnote{Det har været nødvendigt at ændre implementationen af Heading for at aflæse kompassets værdi eksakt.
+Se \cref{} for yderliger detaljer.\mikkel{Det skal beskrives hvilke ændringer der er lavet til klassen og hvorfor - jeg tænker at det bare skal i appendix.}}
 Et eksempel på en simpel aflæsning af værdi kan ses i \cref{kompas:kode_eksempel}.
 
 \begin{figure}[h]
 \begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af Compass Sensor},label=kompas:kode_eksempel,frame=single]
 HiTechnicCompassSensor compas =
 	new HiTechnicCompassSensor();
-brick.Sensor1 = compas;
+	
+/* Instansiering af NxtBrick og forbindelse til NXT */
 
 compas.Poll();
-Console.WriteLine(HiTechnicCompassSensor.Heading);
+Console.WriteLine(compas.Heading);
 \end{lstlisting}
 \end{figure}
 
-\subsection{Præcisionstest}
+\subsection{Præcisionstest}\label{kompas:precision}
 Der blev udført i alt to tests; en med kompasset monteret på robotten og en hvor kompasset var del af en selvstændig konstruktion.
 Test-værdier blev fundet ud fra samme metode, ved at rotere kompasset vilkårligt og derefter sammenligne vinklen mellem to afmålinger, ved brug af vinkelmåler.
 I de to tabeller, med oversigt over resultater, ses først hvilke to kompas-afmålinger der sammenlignes, sammen med den målte vinkel.
