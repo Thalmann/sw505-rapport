@@ -30,11 +30,19 @@ Console.WriteLine(compas.Heading);
 \end{figure}
 
 \subsection{Præcisionstest}\label{kompas:precision}
-Der blev udført i alt to tests; en med kompasset monteret på robotten og en hvor kompasset var del af en selvstændig konstruktion.
-Test-værdier blev fundet ud fra samme metode, ved at rotere kompasset vilkårligt og derefter sammenligne vinklen mellem to afmålinger, ved brug af vinkelmåler.
-I de to tabeller, med oversigt over resultater, ses først hvilke to kompas-afmålinger der sammenlignes, sammen med den målte vinkel.
-Yderligere er der lavet et boksplot for de to tests, hvor prikken repræsenterer gennemsnits-afvigelsen.
-Koden der blev kørt til udførelse af begge tests kan ses i \cref{kompas:kode_test}.
+For at teste kompas sensoren, er målinger taget fra denne og holdt sammen med målinger foretaget med vinkelmåler.
+Sammenligningen er sket ved at tage to målinger med kompasset, og sammenligne differencen med den værdi målt med vinkelmåler.
+I forbindelse med test af sensoren blev der udført i alt tre tests:
+\begin{enumerate}
+\item Kompas monteret på robot med hjul
+\item Kompas monteret på fast konstruktion
+\item Gentagelse af test 2, med \textit{øget præcision}
+\end{enumerate}
+Den øgede præcision der beskrives her, dækker over en opdatering af \mindsqualls klassen \lstinline[style=csharp]!HiTechnicCompassSensor! der blev foretaget efter de første to tests.
+Resultaterne fra de tre tests kan ses i tabellerne \ref{kompas:test1:table}, \ref{kompas:test2:table} og \ref{kompas:test3:table} på side \pageref{kompas:test1:table}.
+
+Af resultaterne er der lavet et boksplot for hver test, hvor prikkerne på plottet repræsenterer den gennemsnitlige afvigelse.
+Koden der blev kørt til udførelse af tests kan ses i \cref{kompas:kode_test}.
 
 \begin{figure}[h]
 \begin{lstlisting}[style=csharpsmall,caption={Kode brugt til test},label=kompas:kode_test,frame=single]
@@ -58,32 +66,13 @@ brick.Disconnect();
 \subsubsection{Test 1 - På robot}
 Første forsøg blev udført med kompasset monteret ovenpå ultralyds-sensoren, for at holde en minimum-afstand på 15 cm fra brick og motorer.
 Denne konstruktion var dog meget ustabil, da kompasset skulle være forholdsvist højt oppe ift. base-konstruktionen.
-En oversigt over resultaterne er givet i \cref{kompas:resultat_paa_robot}.
+En oversigt over resultaterne er givet i \cref{kompas:test1:table}.
 
 \begin{description}
 \item[Største afvigelse]{8\dg}
 \item[Mindste afvigelse]{0\dg}
 \item[Gennemsnitlig afvigelse]{2.67}
 \end{description}
-
-\begin{table}[h]
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} \\ \hline
-0-2		& 2\dg& 44-60	& 12,5\dg& 172-194& 23\dg \\ \hline
-2-4		& 1,5\dg& 60-72	& 13,5\dg& 194-224& 30,5\dg \\ \hline
-4-6		& 1,5\dg& 72-84	& 11\dg& 224-256& 29,5\dg \\ \hline
-6-8		& 1,5\dg& 84-100	& 16\dg& 256-282& 27,5\dg \\ \hline
-8-8		& 2\dg& 100-108	& 9\dg& 282-354& 78\dg \\ \hline
-8-10	& 1,5\dg& 108-110	& 0\dg& 354-356& 2\dg \\ \hline
-10-16	& 6\dg& 110-116	& 7\dg& 356-358& 2,5\dg \\ \hline
-16-26	& 11,5\dg& 116-144	& 24,5\dg& 358-358& 1,5\dg \\ \hline
-26-38	& 10,5\dg& 144-158	& 11\dg& 358-0& 2\dg \\ \hline
-38-44	& 8,5\dg& 158-172	& 10\dg& & \\ \hline
-\end{tabularx}
-\caption{Målinger foretaget med kompas på selvstændig og stabil konstruktion}
-\label{kompas:resultat_stabil}
-\end{table}
 
 \begin{figure}[h]
 \centering
@@ -112,12 +101,12 @@ En oversigt over resultaterne er givet i \cref{kompas:resultat_paa_robot}.
 \node[below] at (8,-1.1) {$8$};
 \end{tikzpicture}
 \caption{Boksplot for Test 1}
-\label{kompas:test_1_boksplot}
+\label{kompas:test1:boksplot}
 \end{figure}
 
 \subsubsection{Test 2 - På stabil konstruktion}
 Andet forsøg blev udført med kompasset monteret på en selvstændig og langt mere stabil konstruktion, for at se om dette ville kunne forbedre resultaterne.
-Disse resultater kan ses i \cref{kompas:resultat_stabil}.
+Disse resultater kan ses i \cref{kompas:test1:table}.
 
 \begin{description}
 \item[Største afvigelse]{6\dg}
@@ -125,23 +114,7 @@ Disse resultater kan ses i \cref{kompas:resultat_stabil}.
 \item[Gennemsnitlig afvigelse]{1.66}
 \end{description}
 
-\begin{table}[h]
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X||>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-\hline
-\textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} & \textbf{Aflæst} & \textbf{Målt} \\ \hline
-0-0		& 4,5\dg	& 110-120	& 12\dg		& 296-314	& 20,5\dg \\ \hline
-0-2		& 0,5\dg	& 120-146 	& 18\dg		& 314-338	& 21\dg \\ \hline
-2-14	& 13\dg		& 146-160	& 15,5\dg	& 338-338	& 6\dg \\ \hline
-14-32	& 22\dg		& 160-188	& 20,5\dg	& 338-340	& 0\dg \\ \hline
-32-42	& 11\dg		& 188-210	& 21\dg		& 340-358	& 17\dg \\ \hline
-42-68	& 29\dg		& 210-234	& 22\dg		& 358-360		& 2,5\dg \\ \hline
-68-74	& 5\dg		& 234-262	& 30,5\dg	& 			& \\ \hline
-74-94	& 19\dg		& 262-288	& 26\dg		& 			& \\ \hline
-94-110	& 13\dg		& 288-296	& 10,5\dg	& 			& \\ \hline
-\end{tabularx}
-\caption{Målinger foretaget med kompas monteret på stang over ultralyds-sensor}
-\label{kompas:resultat_paa_robot}
-\end{table}
+\input{./analyse/kompas_table2}
 
 \begin{figure}[h]
 \centering
@@ -166,5 +139,5 @@ Disse resultater kan ses i \cref{kompas:resultat_stabil}.
 \node[below] at (8,-1.1) {$8$};
 \end{tikzpicture}
 \caption{Boksplot for Test 1}
-\label{kompas:test_1_boksplot}
+\label{kompas:test1:boksplot}
 \end{figure}
