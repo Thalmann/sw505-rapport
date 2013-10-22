@@ -2,10 +2,10 @@
 \section{Sensorer}
 Følgende afsnit vil undersøge de sensorer der er interessante for dette projekt.
 Da der er stor forskel på sensorerne der er tilrådighed er der foretaget forskellige forsøg, hvis formål er at klarlægge præcisionen af de forskellige sensorer.
-Disse vil samtidig blive holdt op imod de forsøg der er blevet udført i \citet{tikNXT}, på de samme sensorer.
+Disse vil samtidig blive holdt op imod de forsøg der er blevet udført i \cite{tikNXT}, på de samme sensorer.
 
 \subsection{Ultrasonic Sensor}
-Ultrasonic sensoren (US), som kan ses på \cref{sensor:ultrasonic_sensor}, er en sensor der kan måle afstande til objekter.
+Ultrasonic sensoren, som kan ses på \cref{sensor:ultrasonic_sensor}, er en sensor der kan måle afstand til objekter.
 
 \begin{figure}[h]
 \centering
@@ -18,7 +18,7 @@ Det gøres ved at sende en lydbølge, hvorefter der beregnes hvor lang tid det t
 Sensoren måler afstanden i cm eller tommer.
 Den maksimale afstand der kan måles er 255 cm, med en præcision på $\pm$3 centimeter.\cite{tikNXT}
 
-\paragraph{Eksperimenterne i \citet{tikNXT}} har vist at \thilemann{En anden løsning på henvisninger til kilden?}
+\paragraph{Eksperimenterne i \cite{tikNXT}} har vist at
 \begin{itemize}
 \item den minimale aftsand der kan måles er 3 cm.
 \item det bedst genkendelig objekt er firkantet med en glat og hård overflade.
@@ -121,9 +121,8 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 
 
 \subsection{Infrarød Sensor}
-Den infrarøde afstandssensor som kan ses på \cref{sensor:infraroed_sensor} er en afstandssensor med høj præcision og et interval på 10 til 80 cm. 
-Denne sensor er produceret af Mindsensors.com. 
-Sensoren virker som den ultrasoniske sensor, men sender i stedet for en ultrasonisk impuls et infrarødt signal. 
+Den infrarøde afstandssensor fra mindsensors.com, som kan ses på \cref{sensor:infraroed_sensor}, er en afstandssensor med høj præcision og måler afstande mellem 10 og 80 cm.
+Sensoren virker som ultrasonisk sensoren, men sender et infrarødt signal i stedet for en ultrasonisk impuls.\cite{infrared}
 
 \subsubsection{Test}
 For at afprøve sensorens præcision og rækkevidde er der foretaget en test af sensoren.
@@ -131,13 +130,14 @@ For at afprøve sensorens præcision og rækkevidde er der foretaget en test af 
 Opstillingen brugt til udførelse af testen bestod af tre A4 ark spændt ud på gulvet ind til en væg. 
 Papiret havde markeringer for hver 2 cm fra væggen.
 
-Udførelsen af testen gik ud på at stille en NXT med påsat infrarød sensor ved hver indikator for derefter at aflæse sensorens måling.
+Udførelsen af testen gik ud på at placere en NXT med påsat infrarød sensor ved hver indikator, for derefter at aflæse sensorens måling.
+På denne måde blev afmålingen fra sensoren ved en given afstand holdt op imod den egentlige afstand til væggen, som afmålt på papiret.
 
 \subsubsection{Resultater}
 
 Resultaterne fra testen er præsenteret i \cref{sensor:infrared_data}. 
-Disse resultater er sat op i et diagram på \cref{sensor:infrared_chart}.
-Den røde graf er den reelle afstand mens de blå firkanter er målepunkter.
+Disse resultater er sat op i et diagram i \cref{sensor:infrared_chart}.
+Den røde graf er den reelle afstand, som aflæst på papiret/med lineal, mens de blå firkanter er målepunkter.
 Den sorte graf er en lineær regression over måleresultaterne.
 
 Ud fra grafen kan det ses at der er stor usikkerhed i starten og slutningen, hvilket næsten stemmer overens med den lovede rækkevidde på 10 til 80 cm.
@@ -145,7 +145,7 @@ De bedste resultater findes dog imellem 8cm og 56 cm.
 Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forventet 500, målt 527).
 \paragraph{}
 
-\begin{figure}
+\begin{table}[h]
 \begin{tabular}{ll}
 
 
@@ -210,7 +210,7 @@ Reel afstand / mm & Målt afstand / mm \\ \hline
 \end{tabular}
 \caption{Forsøgsresultater fra testen af den infrarøde sensor}
 \label{sensor:infrared_data}
-\end{figure}
+\end{table}
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth,trim= 100 300 100 100]{Infraredchart}
@@ -227,8 +227,9 @@ Reel afstand / mm & Målt afstand / mm \\ \hline
 
 \subsection{Sammenligning af afstandssensorer}
 
-Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor samt den infrarøde sensor. 
-Den ultrasoniske sensor var præcis med 3 cm fejlmargin fra 20 cm til 170 cm, mens den infrarøde sensor var præcis med 3 cm fejlmargin 10 cm til 56.
+Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor og den infrarøde sensor. 
+Den ultrasoniske sensor var præcis med en afvigelse på $\pm$3 cm mellem 20 cm og 170 cm.
+Den infrarøde sensor var præcis med afvigelse på $\pm$3 cm, mellem 10 cm og 56 cm.
 Den infrarøde sensor angiver sine målinger med højere præcision, men da fejlmarginen er 3 cm anses den ikke som værende mere præcis end den ultrasoniske sensor.
 I forhold til afstand, måler den ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
 Valget mellem de to sensorer står derfor på hvilket krav robotten har til afstand.
@@ -249,7 +250,7 @@ Motoren kan ses på \cref{sensor:motor_sensor}.
 \label{sensor:motor_sensor}
 \end{figure}
 
-\paragraph{Eksperimenterne i \citet{tikNXT}} har vist at
+\paragraph{Eksperimenterne i \cite{tikNXT}} har vist at
 \begin{itemize}
 \item ved forsøg med en TriBot hvor den skal køre samme vej tilbage som den kom fra, rammer den flere centimeter ved siden af.
 \item antallet af centimeter den afviger i førnævnte punkt stiger med afstanden og omvendt. \stefan{Hvad betyder ``og omvendt'' helt præcist?}
