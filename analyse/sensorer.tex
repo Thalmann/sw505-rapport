@@ -2,113 +2,56 @@
 \section{Sensorer}
 Følgende afsnit vil undersøge de sensorer der er interessante for dette projekt.
 Da der er stor forskel på sensorerne der er tilrådighed er der foretaget forskellige forsøg, hvis formål er at klarlægge præcisionen af de forskellige sensorer.
-Disse vil samtidig blive holdt op imod de forsøg der er blevet udført i \cite{tikNXT}, på de samme sensorer.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{.4\textwidth}
+\centering
+\includegraphics[width=.5\textwidth]{us}
+\caption{Ultrasonisk sensor}
+\label{sensor:ultrasonic_sensor}
+\end{subfigure}
+\begin{subfigure}[b]{.4\textwidth}
+\centering
+\includegraphics[width=.5\textwidth]{infrared_sensor}
+\caption{Infrarød sensor}
+\label{sensor:infraroed_sensor}
+\end{subfigure}
+\begin{subfigure}[b]{.4\textwidth}
+\centering
+\includegraphics[width=.5\textwidth]{lego_motor}
+\caption{Servomotor}
+\label{sensor:servo_motor}
+\end{subfigure}
+\begin{subfigure}[b]{.4\textwidth}
+\centering
+\includegraphics[width=.5\textwidth]{hitechnic_compass}
+\caption{Kompas}
+\label{sensor:compass}
+\end{subfigure}
+\end{figure}
 
 \subsection{Ultrasonic Sensor}
 Ultrasonic sensoren, som kan ses på \cref{sensor:ultrasonic_sensor}, er en sensor der kan måle afstand til objekter.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=.5\textwidth]{us}
-\caption{\legoms Ultrasonic Sensor}
-\label{sensor:ultrasonic_sensor}
-\end{figure}
-
 Det gøres ved at sende en lydbølge, hvorefter der beregnes hvor lang tid det tager for denne at ramme objektet, for derefter at blive reflekteret tilbage igen.
 Sensoren måler afstanden i cm eller tommer.
-Den maksimale afstand der kan måles er 255 cm, med en præcision på $\pm$3 centimeter.\cite{tikNXT}
-
-\paragraph{Eksperimenterne i \cite{tikNXT}} har vist at
-\begin{itemize}
-\item den minimale aftsand der kan måles er 3 cm.
-\item det bedst genkendelig objekt er firkantet med en glat og hård overflade.
-\item desto mindre objektet er, desto sværere har sensoren ved at se det.
-\item Sensorens højre 'øje' er det der sender lydbølgen, mens det venstre modtager.
-Det betyder at sensoren 'ser' bedre i højre side når den befinder sig i horisontal position.
-Dette ses tydeligt når afstand mellem sensor og objekt er under 20 cm, da den således ikke ligger indenfor sensorens synsfelt.
-\item anvendes sensoren i vertikal position kan den blive distraheret af underlaget når bølgerne reflekteres tilbage til sensoren.
-\end{itemize}
-
-\paragraph{Den bedste opstilling} for sensoren er når den bruges i horisontal position
-Det giver de bedste resultater, fordi den kritiske region ifht. den vertikale position er mindre.
-En vinkel på mere end 15 grader fra lydbølgen giver hellere ikke klare resultater. \thilemann{Måske en illustration af hvad der menes?}
-Desuden er runde genstande også svært genkendelige for sensorens synsfelt. \thilemann{Hvorfor?}
+Den maksimale afstand der kan måles er 255 cm med en præcision på $\pm$3 centimeter.
+De bedste aflæsninger fås ved måling af store flade objekter med hård overflade, i modsætning til mindre objekter med rund og/eller blød overflade.\cite{nxt}
 
 \subsubsection{Test}
-Der er gennemført en mindre test af sensoren, for at svare på følgende spørgsmål:
+Der er gennemført en mindre test af sensoren, for at finde ud af hvor nøjagtig den er.
 
-\begin{itemize}
-\item Hvor langt rækker sensoren i praksis?
-\item Hvor stor nøjagtighed har den i praksis?
-\item Ligner resultaterne dem fra eksperimenterne ovenfor?
-\end{itemize}
+Testen blev udført ved at lave en simpel konstruktion kun bestående af NXT og den ultrasoniske sensor.
+Konstruktionen blev placeret i en række afstande fra en væg, hvor sensoreren var placeret vandret, pegende direkte på væggen.
+Herefter blev sensoren aflæst, samtidig med at afstanden mellem væg og sensor blev målt med lineal.
 
-\paragraph{Opstillingen} som blev brugt til at svare på disse spørgsmål kan ses i \cref{sensor:ultrasonic_opstilling}, bestående af: 
+\subsubsection{Resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
 
-\begin{tabular}{|l|}
-\hline
-Tommestok\\
-\hline
-NXT 2.0\\
-\hline
-\legoms Ultrasonic Sensor\\
-\hline
-\legoms kabel.\\
-\hline
-\end{tabular}
-\paragraph{}
-Tommestokken blev brugt til at måle den nøjagtige afstand og derefter blev sensoren aflæst.
-\mikael{Er det vigtigt med et billede af opstillingen? Er det ikke nok bare at beskrive den?}
-\bruno{skal evt. i appendix}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=.6\textwidth]{opstilling}
-\caption{Forsøgsopstilling for test af den ultrasoniske sensors præcision}
-\label{sensor:ultrasonic_opstilling}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{r | c | c | c |}
-optimal & test1 & test2 & test3 \\
-\hline
-1 & 6 & 6 & 6 \\
-10&	22&	23&	23\\
-20&	22&	23&	23\\
-30&	31&	31&	32\\
-40&	40&	41&	40\\
-50&	50&	50&	51\\
-60&	60&	61&	61\\
-70&	70&	71&	66\\
-80&	80&	81&	81\\
-90&	90&	91&	91\\
-100&	100&	101&	102\\
-110&	111&	112&	112\\
-120&	120&	121&	121\\
-130&	131&	131&	131\\
-140&	141&	141&	141\\
-150&	151&	151&	151\\
-160&	161&	161&	163\\
-170&	171&	171&	171\\
-180&	255&	181&	181\\
-190&	255&	190&	191\\
-200&	202&	201&	202\\
-210&	255&	255&	213\\
-220&	255&	255&	222\\
-230&	255&	255&	232\\
-240&	255&	255&	255\\
-250&	255&	255&	255\\
-260&	255&	255&	255\\
-\end{tabular}
-\caption{Forsøgsresultater: afstande til objekt i cm.}
-\label{sensor:ultrasonic_test_data}
-\end{figure}
-
-\paragraph{Resultaterne} fra forsøget kan ses i \cref{sensor:ultrasonic_test_data}.
+En graf-repræsentation af resultaterne kan ses i \cref{sensor:ultrasonic_resultat_diagram}.
 Den røde linje indikerer det ideele resultat mens den blå, brune og grønne linje viser de resultaterne fra de tre test.
 Det ses på grafen at de tre tests alle giver forkerte resultater når sensoren er mindre en 20 cm fra objektet.
-Desuden kan det ses på \cref{sensor:ultrasonic_resultat_diagram} at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, hvor de andre tests nåede 200 (test2) og 230 (test3) cm før der opstod større usikkerhed.
+Desuden kan det ses at der i test1 kun kunne måles op til 170 cm før der opstod usikkerhed, hvor de andre tests nåede 200 (test2) og 230 (test3) cm før der opstod større usikkerhed.
 Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm på målingerne, men forsøget viser at der kun med sikkerhed kan måles mellem 20 og 170 cm.
 
 \begin{figure}[h]
@@ -135,7 +78,7 @@ På denne måde blev afmålingen fra sensoren ved en given afstand holdt op imod
 
 \subsubsection{Resultater}
 
-Resultaterne fra testen er præsenteret i \cref{sensor:infrared_data}. 
+Resultaterne fra testen er præsenteret i \cref{appendix:infrared}. 
 Disse resultater er sat op i et diagram i \cref{sensor:infrared_chart}.
 Den røde graf er den reelle afstand, som aflæst på papiret/med lineal, mens de blå firkanter er målepunkter.
 Den sorte graf er en lineær regression over måleresultaterne.
@@ -143,86 +86,11 @@ Den sorte graf er en lineær regression over måleresultaterne.
 Ud fra grafen kan det ses at der er stor usikkerhed i starten og slutningen, hvilket næsten stemmer overens med den lovede rækkevidde på 10 til 80 cm.
 De bedste resultater findes dog imellem 8cm og 56 cm. 
 Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forventet 500, målt 527).
-\paragraph{}
-
-\begin{table}[h]
-\begin{tabular}{ll}
-
-
-\begin{tabular}{|l|l|}
-\hline
-Reel afstand / mm & Målt afstand / mm \\
-\hline
-20 & 183 \\
-\hline
-40 & 73 \\
-\hline
-60 & 70 \\
-\hline
-80 & 79 \\ \hline
-100 & 98 \\ \hline
-120 & 117 \\ \hline
-140 & 136 \\ \hline
-160 & 163 \\ \hline
-180 & 180 \\ \hline
-200 & 198 \\ \hline
-220 & 218 \\ \hline
-240 & 241 \\ \hline
-260 & 255 \\ \hline
-280 & 280 \\ \hline
-300 & 306 \\ \hline
-320 & 326 \\ \hline
-340 & 351 \\ \hline
-360 & 375 \\ \hline
-380 & 395 \\ \hline
-400 & 425 \\ \hline
-420 & 440 \\ \hline
-
-\end{tabular}
-
-&
-
-\begin{tabular}{|l|l|}
-\hline
-Reel afstand / mm & Målt afstand / mm \\ \hline
-440 & 457 \\ \hline
-460 & 471 \\ \hline
-480 & 500 \\ \hline
-500 & 527 \\ \hline
-520 & 523 \\ \hline
-540 & 551 \\ \hline
-560 & 583 \\ \hline
-580 & 610 \\ \hline
-600 & 639 \\ \hline
-620 & 639 \\ \hline
-640 & 666 \\ \hline
-660 & 666 \\ \hline
-680 & 689 \\ \hline
-700 & 742 \\ \hline
-720 & 742 \\ \hline
-740 & 734 \\ \hline
-760 & 528 \\ \hline
-780 & 792 \\ \hline
-800 & 792 \\ \hline
-820 & 846 \\ \hline
-840 & 853 \\ \hline
-\end{tabular}
-\end{tabular}
-\caption{Forsøgsresultater fra testen af den infrarøde sensor}
-\label{sensor:infrared_data}
-\end{table}
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth,trim= 100 300 100 100]{Infraredchart}
 \caption{Graf over forsøgsresultaterne fra testen af den infrarøde sensor}
 \label{sensor:infrared_chart}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=.5\textwidth]{is} 	
-\caption{High Precision Medium Range Infrared Distance Sensor for NXT (v2)}
-\label{sensor:infraroed_sensor}
 \end{figure}
 
 \subsection{Sammenligning af afstandssensorer}
@@ -358,28 +226,3 @@ Desuden kan vi se på samme figur at motor b er meget mere unøjagtig end motor 
 Ideelt ville de to motorer give det samme resultat.
 
 Dvs. den målte værdi har en afvigelse på $\pm$4 grader, mens tacho-værdien har en afvigelse på +1 og -4 grader, og at synkronisering af de to motrer ikke giver den ønskede effekt.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=.75\textwidth]{motor_diagram1} 	
-\caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 0 til 50.}
-\label{sensor:motor_sensor_diagram1}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=.75\textwidth]{motor_diagram2} 	
-\caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 50 til 200.}
-\label{sensor:motor_sensor_diagram2}
-\bruno{Ikke brugt i teksten, kan være den bare skal smides ud}
-\stefan{grafen er meget upræcis at aflæse}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=.75\textwidth]{motor_diagram3} 	
-\caption{Forsøgsdiagram for forsøget omkring motorens nøjagtighed, grader 200 til 3600.}
-\label{sensor:motor_sensor_diagram3}
-\bruno{Ikke brugt i teksten, kan være den bare skal smides ud}
-
-\end{figure}
