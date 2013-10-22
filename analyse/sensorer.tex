@@ -116,8 +116,9 @@ Til dette blev en test opstillet hvor to moterer roteres et bestemt antal grader
 Motorernes egentlige rotation aflæses med vinkelmåler og holdes op mod den ønskede rotation, samt den rotation motorerne angiver at de har roteret.
 Sidstenævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
 
-\paragraph{Resultaterne} fra forsøget kan ses på \cref{sensor:motor_test_data}.
-Hvis vi kigger på \cref{sensor:motor_test_data} kan vi bestemme den største afvigelse til +7 og -4 grader målt.
+\paragraph{Resultaterne} fra forsøget kan ses i \cref{sensor:motor_test_data} på side \pageref{sensor:motor_test_data}.
+\mikkel{Der er nogle fejl i dette afsnit som skal rettes efter vi har sendt til vejleder}
+Af resultaterne kan vi bestemme den største afvigelse til +7 og -4 grader målt.
 Tacho-værdien har en afvigelse på maksimalt +1 og -4 grader.
 Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
 
@@ -125,7 +126,13 @@ Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
 Ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager at det er pga. unøjagtige målinger ved forsøgsudførelsen, er det stadig ikke $\pm$1 grad.
 \stefan{Man kan ikke direkte aflæse afvigelserne fra tabellen}
 \thilemann{Synes heller ikke meningen står helt klar}
-Kigger vi på \cref{sensor:motor_sensor_diagram1} kan vi se at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator på at det er bedre at benytte tacho-værdien.
+Kigger vi på \cref{sensor:motor_sensor_diagram} kan vi se at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator på at det er bedre at benytte tacho-værdien.
+
+\begin{figure}
+\includegraphics{motor_diagram}
+\caption{Afvigelser i test-resultaterne}
+\label{sensor:motor_sensor_diagram}
+\end{figure}
 
 Desuden kan vi se på samme figur at motor b er meget mere unøjagtig end motor c.
 Ideelt ville de to motorer give det samme resultat.
