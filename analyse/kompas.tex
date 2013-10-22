@@ -11,23 +11,17 @@ I \cref{kompas:precision} undersøges hvorvidt målinger fra kompasset kan leve 
 Til at styre denne sensor i \mindsqualls, skal der bruges en af de seperate klasser til HiTechnic sensorerne, som findes i namespacet \lstinline[style=csharp]!NXT.MindSqualls.HiTechnic!.
 Til kompas sensoren anvendes klassen \lstinline[style=csharp]!HiTechnicCompassSensor!.
 
-\subsubsection{Aflæsning af værdier}
-Kompas sensoren aflæses som alle andre sensorer, da den også arver fra \lstinline[style=csharp]!Pollable!-klassen.
-Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et heltal mellem 0 og 359.\footnote{Det har været nødvendigt at ændre implementationen af Heading for at aflæse kompassets værdi eksakt.
-Se \cref{} for yderliger detaljer.\mikkel{Det skal beskrives hvilke ændringer der er lavet til klassen og hvorfor - jeg tænker at det bare skal i appendix.}}
-Et eksempel på en simpel aflæsning af værdi kan ses i \cref{kompas:kode_eksempel}.
-
-\begin{figure}[h]
-\begin{lstlisting}[style=csharpsmall,caption={Et eksempel på brug af Compass Sensor},label=kompas:kode_eksempel,frame=single]
-HiTechnicCompassSensor compas =
-	new HiTechnicCompassSensor();
-	
-/* Instansiering af NxtBrick og forbindelse til NXT */
-
-compas.Poll();
-Console.WriteLine(compas.Heading);
-\end{lstlisting}
-\end{figure}
+\subsubsection{Aflæsning af værdier}\label{kompas:reading}
+Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading! fra sensores klasse, gives et heltal mellem 0 og 359 der angiver kompassets orientering.
+Det har været nødvendigt at ændre implementationen af \lstinline[style=csharp]!Heading!, da den oprindelige implementation ikke aflæste kompassets orientering ned til \'en grad.
+Sensoren repræsenterer sin orientering på to forskellige måder.
+Begge anvender to bytes.
+Den ene metode beskriver afstanden vha. et 16 heltal.
+Den anden (som var anvendt i implementationen af \lstinline[style=csharp]!Heading!) beskriver afstanden ved at lave den ene byte angive vinklen i intervaller af to grader.
+Altså kunne de værdier der aflæses fra denne byte være 0-179, hvilket efterfølgende ganges med 2 for at få den egentlige værdi.
+Hertil lægges værdien af den anden byte - der kan have værdien 0 eller 1.
+I den oprindelige implementation af \lstinline[style=csharp]!Heading! er der ikke taget højde for denne ekstra værdi.
+Dette er inddraget i test 3 i det følgende afsnit.
 
 \subsection{Præcisionstest}\label{kompas:precision}
 For at teste kompas sensoren, er målinger taget fra denne og holdt sammen med målinger foretaget med vinkelmåler.
@@ -44,26 +38,6 @@ Resultaterne fra de tre tests kan ses i tabellerne \ref{kompas:test1:table}, \re
 Af resultaterne er der lavet et boksplot (\cref{kompas:boksplot}).
 Plottet illustrerer den afvigelse der var fra de værdier der blev aflæst af kompasset, til de værdier der blev målt med vinkelmåler.
 Prikkerne på plottet repræsenterer den gennemsnitlige afvigelse.
-Koden der blev kørt til udførelse af tests kan ses i \cref{kompas:kode_test}.
-
-\begin{figure}[h]
-\begin{lstlisting}[style=csharpsmall,caption={Kode brugt til test},label=kompas:kode_test,frame=single]
-NxtBrick brick = new NxtBrick(NxtCommLinkType.Bluetooth, 8);
-HiTechnicCompassSensor compas = new HiTechnicCompassSensor();
-brick.Sensor1 = compas;
-
-brick.Connect();
-
-compas.OnPolled += pollable =>
-	Console.WriteLine("Heading: {0}",
-	(pollable as HiTechnicCompassSensor).Heading);
-compas.PollInterval = 1000;
-
-Console.ReadKey();
-
-brick.Disconnect();
-\end{lstlisting}
-\end{figure}
 
 \input{./analyse/kompas_boksplot}
 
@@ -77,7 +51,7 @@ Andet forsøg blev udført med kompasset monteret på en selvstændig og langt m
 \subsubsection{Test 3: Forøget præcision (stabil konstruktion)}
 Tredje forsøg var en gentagelse af det andet, efter implementationen af \lstinline[style=csharp]!Heading! blev opdateret.
 Målingerne her skulle altså udtrykke en øget præcision i forhold til den forrige test.
-Det er valgt at medtage de første to tests, da forbedringen af præcisionen højst kunne være \'en grad ved denne tredje test (se \cref{}).\mikkel{Der mangler reference til det ubeskrevne - skal det skrives?}
+Det er valgt at medtage de første to tests, da forbedringen af præcisionen højst kunne være \'en grad ved denne tredje test (se \textit{\cref{kompas:reading}: \nameref*{kompas:reading}}).
 Altså en marginal forbedring i forhold til testresultaterne.
 
 \subsubsection{Resultater}
