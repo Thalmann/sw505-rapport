@@ -13,7 +13,7 @@ Til kompas sensoren anvendes klassen \lstinline[style=csharp]!HiTechnicCompassSe
 
 \subsubsection{Aflæsning af værdier}
 Kompas sensoren aflæses som alle andre sensorer, da den også arver fra \lstinline[style=csharp]!Pollable!-klassen.
-Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et ulige heltal mellem 0 og 359.\footnote{Det har været nødvendigt at ændre implementationen af Heading for at aflæse kompassets værdi eksakt.
+Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading!, gives et heltal mellem 0 og 359.\footnote{Det har været nødvendigt at ændre implementationen af Heading for at aflæse kompassets værdi eksakt.
 Se \cref{} for yderliger detaljer.\mikkel{Det skal beskrives hvilke ændringer der er lavet til klassen og hvorfor - jeg tænker at det bare skal i appendix.}}
 Et eksempel på en simpel aflæsning af værdi kan ses i \cref{kompas:kode_eksempel}.
 
@@ -42,6 +42,7 @@ Den øgede præcision der beskrives her, dækker over en opdatering af \mindsqua
 Resultaterne fra de tre tests kan ses i tabellerne \ref{kompas:test1:table}, \ref{kompas:test2:table} og \ref{kompas:test3:table} på side \pageref{kompas:test1:table}.
 
 Af resultaterne er der lavet et boksplot (\cref{kompas:boksplot}).
+Plottet illustrerer den afvigelse der var fra de værdier der blev aflæst af kompasset, til de værdier der blev målt med vinkelmåler.
 Prikkerne på plottet repræsenterer den gennemsnitlige afvigelse.
 Koden der blev kørt til udførelse af tests kan ses i \cref{kompas:kode_test}.
 
@@ -69,20 +70,12 @@ brick.Disconnect();
 \subsubsection{Test 1: Monteret på robot}
 Første forsøg blev udført med kompasset monteret ovenpå ultralyds-sensoren, for at holde en minimum-afstand på 15 cm fra brick og motorer.
 Denne konstruktion var dog meget ustabil, da kompasset skulle være forholdsvist højt oppe ift. base-konstruktionen.
-En oversigt over resultaterne er givet i \cref{kompas:test1:table}.
-
-\begin{description}
-\item[Største afvigelse]{8\dg}
-\item[Mindste afvigelse]{0\dg}
-\item[Gennemsnitlig afvigelse]{2.67}
-\end{description}
 
 \subsubsection{Test 2: Monteret på stabil konstruktion}
-Andet forsøg blev udført med kompasset monteret på en selvstændig og langt mere stabil konstruktion, for at se om dette ville kunne forbedre resultaterne.
-Disse resultater kan ses i \cref{kompas:test1:table}.
+Andet forsøg blev udført med kompasset monteret på en selvstændig og langt mere stabil konstruktion, for derved at undersøge om dette kunne forbedre resultaterne.
 
-\begin{description}
-\item[Største afvigelse]{6\dg}
-\item[Mindste afvigelse]{0\dg}
-\item[Gennemsnitlig afvigelse]{1.66}
-\end{description}
+\subsubsection{Test 3: Forøget præcision (stabil konstruktion)}
+Tredje forsøg var en gentagelse af det andet, efter implementationen af \lstinline[style=csharp]!Heading! blev opdateret.
+Målingerne her skulle altså udtrykke en øget præcision i forhold til den forrige test.
+Det er valgt at medtage de første to tests, da forbedringen af præcisionen højst kunne være \'en grad ved denne tredje test (se \cref{}).\mikkel{Der mangler reference til det ubeskrevne - skal det skrives?}
+Altså en marginal forbedring i forhold til testresultaterne.
