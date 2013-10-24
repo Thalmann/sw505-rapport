@@ -44,79 +44,106 @@ OpenCV bruges i dette projekt til at følge de objekter der findes ved hjælp af
 \subsection{Mapning mellem punkt på kinect og planen}
 
 Kinectens dybdesensor kan give et billede der indeholder en dybdemålinging for hver pixel. 
-For at benytte dette til at finde ud af hvor en robot er placeret på et gulvplan skal denne dybdemåling omregnes til et punkt i gulvplanen.
+For at benytte dette til at finde ud af hvor en robot er placeret på et gulvplan skal denne dybdemåling omregnes til et punkt i gulvplanet.
 
-Situationen er optegnet på \cref{localization:kinect}.
-Kinect sensoren er placeret i højden $ d $ over gulvplanen. 
-Sensoren ser et punkt ($ x_1,y_1 $)
+%Situationen er optegnet på \cref{localization:kinect}.
+Kinect sensoren er placeret i højden $ d $ over gulvplanet og orienteret i en vinkel $v$ i forhold til lodret.
+Højden af det billede kinecten producerer betegnes $y_1$.
+Af disse informationer ønskes således en projicering af $y_1$ i gulvplanet.
+Denne projicering betegnes $y_2$ og dermed kan følgende model opstilles:
+
+\begin{center}
+\begin{tikzpicture}[extline/.style={shorten >=-#1,shorten <=-#1},
+  extline/.default=1cm,
+  axis/.style={extline=1cm, dashed, color=gray}]
+
+\coordinate (origin) at (1,1);
+\coordinate (v) at (1,4);
+\coordinate (p1) at (3,5);
+\coordinate (p2) at (4.5,1);
+
+\draw [axis] (origin) -- (p2);
+\draw [axis] (v) -- (p1);
+
+\draw (origin) -- (v) node [midway, left] {$d$};
+\draw [thick] (v) -- (p1) node [midway, above] {$y_1$};
+\draw [thick] (origin) -- (p2) node [midway, below] {$y_2$};
+
+\draw ($(v) + (-90:0.55)$) arc (-90:25:0.55);
+
+\node [below right] at (v) {$v$};
+\end{tikzpicture}
+\end{center}
+
+For at kunne bestemme $y_2$ konstruerer vi en linie fra ``enden'' af $y_1$ til $y_2$.
+Linien konstrueres således at den står ortogonalt på $y_1$.
+Ved at forlængde liniestykket $d$ og den nye linie konstrueres en trekant, som kan ses på \cref{localization:trekant}.
+\mikkel[Localization antagelse 1]{Der er tvivl om hvorvidt vi kan antage at vinklen ved ($x_1,y_1$) er ret.
+Det bliver afgjort ved at implementere og teste.}
 
 \begin{figure}
-\begin{tikzpicture}[scale=2]
+\centering
+\begin{tikzpicture}[extline/.style={shorten >=-#1,shorten <=-#1},
+  extline/.default=1cm,
+  axis/.style={extline=1cm, dashed, color=gray}]
 
-\draw (0,0) -- (1.25,0.8) --(0,3) -- (0,0);
-\draw [dashed] (0,0) -- (0,-0.5);
+\coordinate (origin) at (1,1);
+\coordinate (v) at (1,4);
+\coordinate (v') at (1,4.2);
+\coordinate (p1) at (2.95,5);
+\coordinate (p1') at (2.95,5.2);
+\coordinate (p2) at (4.5,1);
+\coordinate (t) at (1,10.2);
 
-\draw [|-|] (-0.25,0) -- (-0.25,3);
-\node [left] at (-0.25, 1.5) {q};
+\draw [axis] (origin) -- (p2);
+\draw [axis] (v) -- (p1);
+\draw [axis] (v') -- (p1');
 
-\draw [|-|] (0.1,-0.15) -- (1.3,0.65);
-\node [below] at (0.9,0.4) {$y_1$};
+\draw [thick] (v') -- (p1');
 
-\draw (0,0.25) arc [radius=0.4, start angle=45, end angle=-45];
-\node [above] at (0.15,0.15) {$\beta$};
-\node [below] at (0.2, -0.15) {v};
+\draw (t) -- (p1') (p1) -- (p2);
+\draw (v') -- (t) node [midway, left] {$q$};
 
-\draw (0,2.5) arc [radius=0.16, start angle=-120, end angle=-20];
-\node [below] at (0.2, 2.5) {$\delta$};
+\draw (origin) -- (v) node [midway, left] {$d$};
+\draw [thick] (v) -- (p1) node [midway, below] {$y_1$};
+\draw [thick] (origin) -- (p2) node [midway, below] {$y_2$};
 
-\draw (1.1,0.7) -- (1.04,0.8) -- (1.20,0.9);
+\draw ($(v) + (-90:0.55)$) arc (-90:25:0.55);
+\draw ($(v') + (25:0.6)$) arc (25:90:0.6);
+\draw ($(v') + (25:0.65)$) arc (25:90:0.65) node [above right] {$\beta$};
+\draw ($(t) + (-90:0.55)$) arc (-90:-68:0.55) node [below] {$\delta$};
+\draw ($(p2) + (180:0.55)$) arc (180:110:0.55) node [left] {$\alpha$};
 
+\node [below right] at (v) {$v$};
 \end{tikzpicture}
-\caption{Trekant til at beregne $ y_2 $}
+\caption{Beregning af $ y_2 $}
 \label{localization:trekant}
 \end{figure}
 
-\begin{figure}
-\begin{tikzpicture}
+Ud fra \cref{localization:trekant} udledes nu $y_2$, så denne er udtrykt ved de tre variable $y_1$, $v$ og $d$.
+Først findes de to vinkler $\beta$ og $\delta$:
+\begin{align*}
+\beta &= 180 - v\\
+\delta &= 180-(90 + \beta)\\
+&= 180 - (90 + 180 - v)\\
+&= v-90
+\end{align*}
 
-\draw (0,1) -- (5,1);
-\draw (1,1) -- (1,4);
-\draw (1.25,1) -- (1.25,1.25) -- (1, 1.25);
-\draw (0,3.5) -- (4,5.5);
-\draw (3, 5) -- (4.5,1);
-\draw (3.07,4.8) -- (3.3,4.9) -- (3.22, 5.1);
+Herefter benyttes en sinus-relation til bestemmelse af $q$:
+$$q = \frac{y_1}{\sin{\delta}}$$
 
-\draw (1,3.6) arc [radius=0.55, start angle=-45, end angle=10];
+Til sidst kan $y_2$ udledes ved hjælp af tangens:
+\begin{align*}
+y_2 &= \tan(\delta)(q+d)\\
+&= \tan(v-90)\left(\frac{y_1}{\sin(v-90)} + d\right)
+\end{align*}
 
-\draw (4.4,1.25) arc [radius=0.4, start angle=-270, end angle=-200];
+Det skal her bemærkes at den opstillede model udelukkende beskriver koordinater i \'en dimension i planet.
+For at kunne finde et punkt i planet er det naturligvis også nødvendigt at håndtere yderligere en koordinat.
+Det ønskes hermed at opstille en funktion $f$ der beregner mapping fra $(x_1,y_1)$ til $(x_2,y_2)$, under forudsætning af at $y_1$, $v$ og $d$ kendes på forhånd;
+$$f: \mathbb{R} \times \mathbb{R} \times \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R} \times \mathbb{R}$$
+\mikkel[Localization antagelse 2]{Beskriv hvorfor det er ok at antage at førstekoordinaten kan overføres.
+Jeg går ud fra at vi laver et eksperiment der viser at det passer - eller at vi finder en anden metode.}
+Det antages derfor at $x_1$ = $x_2$, og funktionen $f$ kan nu opstilles:
 
-\node [above] at (4, 1.1) {$\alpha$};
-\node [below] at (1.3,4) {v};
-
-\draw [|-|] (0.8,1.05) -- (0.8,4);
-\node [left] at (0.8,2.5) {d};
-
-\draw [|-|] (1,0.8) -- (4.5,0.8);
-\node [below] at (2.5,0.8) {$y_2$};
-
-
-\draw [|-|] (1,4.1) -- (3,5.1);
-\node [above] at (2,4.6) {$y_1$};
-
-\node [above] at (3,5.2) {$(x_1,y_1)$};
-\node [below] at (5,0.8) {$(x_2,y_2)$};
-
-\end{tikzpicture}
-\caption{Kinect sensor finder punktet ($ x_1 $, $ y_1 $)}
-\label{localization:kinect}
-\end{figure}
-
-\begin{itemize}
-\item $\beta = 180 - v$
-\item $\delta = 180 - (90+ \beta) = 90 - \beta = v-90$
-\item $q = \frac{y_1}{sin(\delta)}$
-\item $y_2 = tan(\delta)(q+d)$
-\end{itemize}
-
-dvs. at mapping funktionen f på formen $R \times R \times R \times R \rightarrow R \times R$ ser således ud.
-$$f(x_1,y_1,v,d)=(x_1,tan(v-90)(\frac{y_1}{sin(v-90)}+d)$$
+$$f(x_1,y_1,v,d)=\left(x_1,\;\tan(v-90)\left(\frac{y_1}{\sin(v-90)} + d\right)\right)$$
