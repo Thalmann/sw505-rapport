@@ -16,7 +16,7 @@ Ved aflæsning af egenskaben \lstinline[style=csharp]!Heading! fra sensores klas
 Det har været nødvendigt at ændre implementationen af \lstinline[style=csharp]!Heading!, da den oprindelige implementation ikke aflæste kompassets orientering ned til \'en grad.
 Sensoren repræsenterer sin orientering på to forskellige måder.
 Begge anvender to bytes.
-Den ene metode beskriver afstanden vha. et 16 heltal.
+Den ene metode beskriver afstanden vha. et 16-bit heltal.
 Den anden (som var anvendt i implementationen af \lstinline[style=csharp]!Heading!) beskriver afstanden ved at lave den ene byte angive vinklen i intervaller af to grader.
 Altså kunne de værdier der aflæses fra denne byte være 0-179, hvilket efterfølgende ganges med 2 for at få den egentlige værdi.
 Hertil lægges værdien af den anden byte - der kan have værdien 0 eller 1.
@@ -57,7 +57,7 @@ Altså en marginal forbedring i forhold til testresultaterne.
 \subsubsection{Resultater}
 Som det fremgår af \cref{kompas:boksplot} er den gennemsnitlige afvigelse i alle tests meget tæt på 0.
 Altså ved vi at kompasset lave lige mange og lige store (i gennemsnit) udsving til begge sider, hvilket gør det sværere at kalibrere for sådanne udsving.
-Samtidig viser plottet, at halvdelen af kompassets målinger er over 2-3$\dg$ ved siden af de egentlige målinger - med den største afvigelse på 9$dg$.
+Samtidig viser plottet, at halvdelen af kompassets målinger er over 2-3$\dg$ ved siden af de egentlige målinger - med den største afvigelse på 9$\dg$.
 
 Det har i testfasen vist sig, at kompasset er konsistent i dets målinger.
 Dette betyder at der ikke kan opnås yderligere præcision ved at foretage flere målinger af samme grad.
