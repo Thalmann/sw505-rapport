@@ -160,3 +160,53 @@ void sensor_ColorFrameReady(object sender,
 }    
 \end{lstlisting}
 
+
+
+
+\section{OpenCV}
+% evt. en generel beskrivelse af emgu og openCV
+OpenCV (\emph{Open Source Computer Vision Library}) er et Library udviklet af \emph{Intel}
+til brug ved Realtids \emph{computer vision}.
+OpenCV er skrevet i C++ og er frit tilgængeligt under BSD licensen.
+
+\subsection{beskrivelse af udvalgte klasser og funktioner}
+
+
+
+\subsubsection{Metoden findContours}
+Metoden findCountours gennemsøger et billede og finder konturer som den kan returnere 
+repræsenteret på forskellige måder alt aften hvilke parametre metoden kaldes med.
+
+De typiske repræsentationer er CV_RETR_EXTERNAL som kun returnere de yderste konturer,
+CV_RETR_LIST der returnere alle konturer som en liste uden nogen repræsentation af deres hirarki og
+CV_RETR_TREE som placere konturene i en træstruktur der repræsentere deres hirarki.
+
+Metoden kan benytte sig af tre forskellige metoder til at finde konturerne
+
+
+
+%
+% ################# TASK ##################
+%
+%
+% Beskrivelse af Emgu/OpenCV.
+%
+% 	skriv eksempler paa generel brug af emgu, 
+% 	med udgangspunkt i vores brug.
+%
+% ##########################################
+%
+%	Classes.
+%		Contour
+%		Image
+%		Point
+%		PointF
+%
+%	Functions.
+%
+%		Image.ThresholdBinary()
+%		Image.FindContours()
+%		Image.AbsDiff()
+%		Contour<Point>.ApproxPoly()
+
+
