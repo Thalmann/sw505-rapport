@@ -88,7 +88,7 @@ De bedste resultater findes dog imellem 8cm og 56 cm.
 Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forventet 500, målt 527).
 
 \begin{figure}[h]
-\includegraphics[width=\textwidth,trim= 100 300 100 100]{Infraredchart}
+\includegraphics[width=\textwidth]{Infraredchart}
 \caption{Graf over forsøgsresultaterne fra testen af den infrarøde sensor}
 \label{sensor:infrared_chart}
 \end{figure}
@@ -102,117 +102,23 @@ Den infrarøde sensor angiver sine målinger med højere præcision, men da fejl
 I forhold til afstand, måler den ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
 Valget mellem de to sensorer står derfor på hvilket krav robotten har til afstand.
 
-\subsection{Motor}
+\subsection{Motor}\label{sensorer:motorer}
 Motoren beskrevet i dette afsnit er \lego's egen.
 Den består af en rotationssensor som måler omdrejningerne ved grader med en nøjagtighed på 1 grad, hvilket er med til at gøre motoren ret præcis. 
 Desuden gør denne sensor det også muligt at styre hvor meget kraft motoren skal køre med.
 Kører med flere motorer har NXT'en indbygget software der gør det muligt at synkronisere disse, hvilket er smart hvis den ene motor skulle være stærkere eller svagere end den anden.\cite{tikNXT}
 Motoren kan ses på \cref{sensor:motor_sensor}.
-\\
-
-\begin{figure}[h]
-\centering
-%http://www.philohome.com/nxtmotor/nxtmotor.htm
-\includegraphics[width=.5\textwidth]{motor} 	
-\caption{\legoms Servo Motor}
-\label{sensor:motor_sensor}
-\end{figure}
-
-\paragraph{Eksperimenterne i \cite{tikNXT}} har vist at
-\begin{itemize}
-\item ved forsøg med en TriBot hvor den skal køre samme vej tilbage som den kom fra, rammer den flere centimeter ved siden af.
-\item antallet af centimeter den afviger i førnævnte punkt stiger med afstanden og omvendt. \stefan{Hvad betyder ``og omvendt'' helt præcist?}
-\item der er konstateret en afvigelse på $\pm$2 grader, som fortæller os hvorfor TriBot forsøget afviger med flere centimeter.
-\item på trods af den indbyggede rotationssensor har motorerne ikke god præcision.
-\end{itemize}
+\mikkel{Ovenstående skal skrives om - jeg nåede det bare ikke inden vi sendte til vejleder}
 
 \subsubsection{Test}
-Der er gennemført en test af motoren, for at svare på følgende spørgsmål:
+For \legos motorer er det interessant at afklare hvorvidt de kan styres med \'en grads præcision.
+Til dette blev en test opstillet hvor to moterer roteres et bestemt antal grader.
+Motorernes egentlige rotation aflæses med vinkelmåler og holdes op mod den ønskede rotation, samt den rotation motorerne angiver at de har roteret.
+Sidstenævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
 
-\begin{itemize}
-\item Kan det virkelig passe at den har 1 grads nøjagtighed?
-\item Hvad er den praktiske nøjagtighed?
-\item Giver motorerne det samme resultat når de er synkroniserede?
-\end{itemize}
-
-\paragraph{Opstillingen} brugt for at svare på disse spørgsmål kan ses på \cref{sensor:motor_sensor_opstilling}.
-\mikael{Er det nødvendigt at vise opstillingen? Er det ikke nok bare at beskrive den?}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=.75\textwidth]{motor_opstilling} 	
-\caption{Forsøgsopstillingen for nøjagtighedstesten af motoren.}
-\label{sensor:motor_sensor_opstilling}
-\end{figure}
-
-Forsøgsopstillingen består af følgende dele:
-
-\begin{tabularx}{\textwidth}{|X|X|}
-\hline
-NXT v2 & 3 A4 ark(ternet)\\
-\hline
-2x \legoms motor sensor & Tape\\
-\hline
-2x \legoms kabler & Vinkelmåler\\
-\hline
-LEGO & Stiftblyant\\
-\hline
-\end{tabularx}
-
-\paragraph{}
-
-Opstillingen blev bygget efter følgende fremgangsmåde:
-
-\begin{enumerate}
-\item Der startes med at bygge et stativ til de to motorer på NXT'en.
-\item Derefter sættes de to motorer på stativet og forbindes vha. kablerne til NXT'en (Med en mus modvægt (\cref{sensor:motor_sensor_opstilling}), så NXT'en ikke vælter).
-\item De tre A4 ark sættes op på en væg så motoren er centreret ud fra papirets højde.
-\item En forlænger sættes på de to motorer, så den holder sig over papiret på en omdrejning.
-\item Afmærk midten af motoren på papiret ved at sætte en stiftblyant igennem midten af motorens akse.
-\end{enumerate}
-
-\paragraph{}
-Sådan blev forsøget gennemført:
-
-\begin{enumerate}
-\item Sæt motoren i gang og afmærk hvor forlængeren stopper.
-\item Det afmærkede midterpunkt bliver brugt til at måle vinklen til det afmærkede punkt ud for forlængeren.
-\item Tacho-værdien (antal grader drejet) noteres. 
-Denne værdi kan læses ud af motorens rotationssensor vha. software.
-\end{enumerate}
-
-\begin{figure}[h]
-\centering
-\begin{tabular}{r | c | c | c | c | r |}
-grader sat & \parbox{2.5cm}{motor b \\ grader målt*} & \parbox{2.cm}{motor b \\ tacho slut**} &  \parbox{2.5cm}{motor b \\ grader målt*} & \parbox{2.5cm}{motor b \\ tacho slut**} & optimal \\
-\hline
-1&	1&	0&	1&	0&	1\\
-2&	2&	2&	2.5&	2&	2\\
-3&	2&	3&	3&	3&	3\\
-4&	5&	4&	4&	3&	4\\
-5&	5&	6&	4&	4&	5\\
-10&	10&	9&	9&	10&	10\\
-15&	11&	16&	14&	15&	15\\
-20&	20&	20&	18&	20&	20\\
-25&	21&	25&	23&	25&	25\\
-50&	57&	50&	56&	50&	50\\
-75&	80&	77&	80&	79&	75\\
-100&	100&	99&	95&	100&	100\\
-150&	150&	149&	145&	150&	150\\
-200&	204&	197&	200&	199&	200\\
-400&	400&	401&	400&	398&	400\\
-800&	799&	800&	800&	799&	800\\
-1200&	1204&	1201&	1200&	1200&	1200\\
-1800&	1796&	1796&	1799&	1800&	1800\\
-3600&	3601&	3600&	3597&	3599&	3600\\
-
-\end{tabular}
-\caption{Forsøgsresultater for motor nøjagtighedstesten.}
-\label{sensor:motor_test_data}
-\end{figure}
-
-\paragraph{Resultaterne} fra forsøget kan ses på \cref{sensor:motor_test_data}.
-Hvis vi kigger på \cref{sensor:motor_test_data} kan vi bestemme den største afvigelse til +7 og -4 grader målt.
+\paragraph{Resultaterne} fra forsøget kan ses i \cref{sensor:motor_test_data} på side \pageref{sensor:motor_test_data}.
+\mikkel{Der er nogle fejl i dette afsnit som skal rettes efter vi har sendt til vejleder}
+Af resultaterne kan vi bestemme den største afvigelse til +7 og -4 grader målt.
 Tacho-værdien har en afvigelse på maksimalt +1 og -4 grader.
 Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
 
@@ -220,7 +126,13 @@ Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
 Ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager at det er pga. unøjagtige målinger ved forsøgsudførelsen, er det stadig ikke $\pm$1 grad.
 \stefan{Man kan ikke direkte aflæse afvigelserne fra tabellen}
 \thilemann{Synes heller ikke meningen står helt klar}
-Kigger vi på \cref{sensor:motor_sensor_diagram1} kan vi se at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator på at det er bedre at benytte tacho-værdien.
+Kigger vi på \cref{sensor:motor_sensor_diagram} kan vi se at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator på at det er bedre at benytte tacho-værdien.
+
+\begin{figure}
+\includegraphics{motor_diagram}
+\caption{Afvigelser i test-resultaterne}
+\label{sensor:motor_sensor_diagram}
+\end{figure}
 
 Desuden kan vi se på samme figur at motor b er meget mere unøjagtig end motor c.
 Ideelt ville de to motorer give det samme resultat.
