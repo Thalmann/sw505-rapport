@@ -31,33 +31,43 @@ For at Kinecten kan følge et objekt er Kinecten udstyret med et antal sensorer 
 
 \begin{figure}
 \centering
-\includegraphics[width=1.0\textwidth]{kinect}
+\includegraphics[width=1.0\textwidth]{kinect/kinect}
 \caption{Microsoft Kinect for Windows}
 \label{kinect:opbygning}
 \end{figure}
 
 \subsubsection{Farvekamera}
-For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden.
+For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden (jvf. \cref{kinect:opbygning}).
 Et farvekamera kan være nyttigt i spil, hvor man ønsker at vise spilleren fysisk på skærmen eller hvis man benytter sin Kinect til gruppechat (som et webcam).
 Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet, hvis man ønsker en mere ”flydende” videostrøm~\cite{kinectForWindowsFeatures}.
-Det har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket kan være interessant ift. det miljø hvori Kinecten skal bruges.
+Kinecten har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket giver den et vertikalt synsfelt på $\pm 21.5$\degree, hvis den er placeret ift. 0\degree~vandret.
+Et visuelt billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{kinect/kinect_view_angles}
+\caption{Betragtningsvinkler for farvekameraet}
+\label{kinect:vinkler}
+\end{figure}
+
+Disse parametre er interessante i forhold til det hvad Kinecten skal bruges til samt hvilket miljø hvori den skal bruges. Det er f.eks. vigtigt at kende dens betragningsvinkler, hvis den skal benyttes til at lokalisere objekter med, da placeringer af disse skal placeres ift. deres fysiske placering, og ikke kun i Kinectens koordinatsæt.
 
 \subsubsection{Infrarød (IR) sender}
-Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender, som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
+Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender (\cref{kinect:opbygning}), som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
 Disse signaler bliver fanget af en anden sensor på Kinecten; nemlig den infrarøde dybde sensor.
 
 \subsubsection{IR dybde sensor}
-Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren, som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
+Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren (\cref{kinect:opbygning}), som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
 
 \subsubsection{Mikrofoner}
 Kinecten er også i stand til at optage lyd via de indbyggede mikrofoner.
 Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode til at bestemme afstand og retning fra f.eks. en person der taler.
-Rækken af mikrofoner består af 4 stk. som er placeret på fronten af Kinecten.
+Rækken af mikrofoner (se \cref{kinect:opbygning}) består af 4 stk. som er placeret på fronten af Kinecten.
 En enkelt mikrofon sidder i venstre side mens de tre andre er placeret til højre, hvilket gør det muligt at triangulere lydsignaler for at bestemme retningen af lydkilden.
 Flere mikrofoner gør det også muligt at lave ``noise-suppression'' ift. omgivelserne, hvis man benytter Kinect, mens man spiller, til at kommunikerer med sine med-/modspillere således at unødig støj filtreres fra~\cite[s.~15]{kinectProgrammingGuide}.
 
 \subsubsection{Motor til justering af vinklen}
-For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på.
+For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på (jvf. \cref{kinect:opbygning}).
 Den kan bevæge sig fra 0\degree~til 27\degree~ (op) og fra 0\degree~til -27\degree~(ned).
 Denne funktionalitet er ideel hvis man ønsker at kalibrere Kinecten ift. dens fysiske placering og de omgivelser man ønsker at bruge den i.
 Dog anbefaler Microsoft at man ikke benytter motoren kontinuert i sine programmer, da den ikke tåler vedvarende belastninger~\cite{kinectDocElevationAngle}.
