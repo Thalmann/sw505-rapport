@@ -15,24 +15,56 @@ Præcision af motorernes position er heller ikke vigtig, da lokationen bestemmes
 
 \subsection{Simpel Teori}
 Gearing kan foregå på to måder; geare op eller geare ned.
-Det gear der er knyttet direkte til motoren kalder vi fører-gearet og det gear der er knyttet til fører-gearet kalder vi for følger-gearet.
-Eksempel på nedgearing, som er det eneste vi kommer til at bruge:
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=.5\textwidth]{gears/op_og_ned}
-\end{figure}
+Det gear der er knyttet direkte til motoren kalder vi fører-gearet og det gear der er knyttet til fører-gearet kalder vi for følger-gearet (se evt. \cref{gearing:nedgearing}).
 
 \subsubsection{Nedgearing}
 Nedgearing foregår ved at et mindre gear driver et større gear.
 Ratio'en (størrelsen af gearing) er styret af antallet af tænder på gearene.
 For eksempel vil et 24-tands fører-gear drive et 40-tands følger-gear med ratio'en $\frac{40}{24}$, hvilket betyder at der går 40 fører omdrejninger pr. 24 følger omdrejninger. Dvs. at motoren der driver fører-gearet skal rotere $\frac{40}{24} = 1 \frac{2}{3}$ omgange for at rotere følger-gearet én omgang.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=.5\textwidth]{gears/op_og_ned}
+\caption{Eksempel på (ned-)gearing}
+\label{gearing:nedgearing}
+\end{figure}
+
 \subsection{Vores gearing}
 Her vil blive forklaret den teoretiske gearing for henholdsvis ultrasonisk sensor og hjul.
 
 \subsubsection{Ultrasonisk sensor}
 Gearingen for den ultrasoniske sensor består af i alt 4 tandhjul, som alle kan ses i \cref{gearing:tandhjul}.
+
+\begin{figure}[h] % De anvendte tandhjul
+\centering
+\begin{subfigure}[b]{.19\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gears/worm}
+\caption{Orm}
+\end{subfigure}
+\begin{subfigure}[b]{.19\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gears/16-tooth}
+\caption{16-tands}
+\end{subfigure}
+\begin{subfigure}[b]{.19\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gears/24-tooth}
+\caption{24-tands}
+\end{subfigure}
+\begin{subfigure}[b]{.19\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gears/40-tooth}
+\caption{40-tands}
+\end{subfigure}
+\begin{subfigure}[b]{.19\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gears/turntable}
+\caption{56-tands \\ \centering (drejeskive)}
+\end{subfigure}
+\caption{De anvendte tandhjul}
+\label{gearing:tandhjul}
+\end{figure}
 
 Den første kombination består af en orm som fører-gear og 40-tands som følger-gear.
 Ormen kræver en hel rotation for at flytte én tand.
@@ -50,24 +82,41 @@ Derved er gearingen som i det eksemplet: $$ \frac{40}{24} = 1 \frac{2}{3} $$
 \subsection{Test af gearing}
 Nu hvor den teoretiske gearing er fastlagt, vil der her blive udført forsøg for at afgøre præcisionen af motorerne med gearing, evt. at fastlægge en faktisk gearing, hvis denne afviger fra den teoretiske.
 
+\subsubsection{Hjul}
+Da præcisionen på hjulene ikke er så vigtig, da der bruges alternativ metode til lokation (og ikke dead reckoning), er der ikke lavet en grundig test.
+Der blev udført handlinger med antal hjul-omdrejninger (og ikke motor-omdrejninger) som input, med en beregning fra hjul-omdrejninger til motor-omdrejninger, ud fra den teoretiske gearing.
+
+Der er blevet udført test af henholdsvis; $\frac{1}{8}$, $\frac{1}{4}$, $\frac{1}{2}$, 1, 2, 3, 10 hele hjul-omdregninger.
+
+\paragraph{Resultatet} af testen var positiv.
+Samtlige tests gave ingen afvigelse.
+Dette resultat, samt vigtigheden, ledte til at der ikke var behov for flere tests af hjul-gearingen.
+
+\subsubsection{Sensor}
+Denne test er meget vigtigere end hjul-testen, da det er vigtigt at vide den nøjagtige nuværende rotation af sensoren, for at få så præcis en målings-retning som muligt.
+
+\paragraph{Første test} var en grovtest, hvor der blev kørt i den samme retning i et antal sensor-omdrejninger.
+Igen blev der uført handling med sensor-omdrejninger som input, ud fra en beregnet motor-omdrejning, baseret på den teoretiske gearing.
+Denne test gav et perfekt resultat, uden afvigelse.
+
+\paragraph{Anden test} blev udført ved at køre mindre omdrejninger, skiftevis med og mod uret.
+Dette gav en upræcision, da der er slør mellem den øverste gearing, mellem 56-tands og 24-tands gearene.
+Dette slør giver mellem $\frac{1}{4}$ og $\frac{3}{4}$ tands unøjagtighed, da der ved skift af rotations-retning bruges op til en $\frac{3}{4}$ gear-omdrejning for 24-tands gearet at få fat i 56-tands gearets tænder igen.
+
+\paragraph{Sløret} giver giver en unøjagtighed på mellem $\frac{1}{4}$ og $\frac{3}{4}$ tand.
+Dette gør at der kræves ekstra motor-omdrejninger når der skiftes retning.
+For den minimale afvigelse skal der bruges: $ \frac{\frac{1}{40}}{\frac{1}{24}}\cdot\frac{1}{4} = 0.15$ ekstra motor-omdrejninger.
+For den maksimale afvigelse: $ \frac{\frac{1}{40}}{\frac{1}{24}}\cdot\frac{3}{4} = 0.45$
+
+Da hver motor-omdrejning svarer til $\frac{1}{93.\overline{3}}$ sensor-omdrejning, giver det at én motor-omdrejning får sensoren til at rotere $\frac{360}{93.\overline{3}} = 3\frac{6}{7}\deg$.
+Derved giver dette en afvigelse på minimum $3\frac{6}{7}\cdot0.15 = 0.57\overline{857142}\deg$ og maximum $3\frac{6}{7}\cdot0.45 = 1.73\overline{571428}\deg$.
+
+\paragraph{Optimering af slør} kunne foregå ved altid at køre $0.45 - 0.15 = 0.15$ motor-omdrejninger ekstra, når der skiftes retning.
+På denne måde vil den maksimale og ca. afvigelse være $0.57\overline{857142}\deg$.
+
 \begin{figure}[h]
 \centering
-\begin{subfigure}[b]{.2\textwidth}
-\includegraphics[width=\textwidth]{gears/24-tooth}
-\caption{24-tands}
-\end{subfigure}
-\begin{subfigure}[b]{.2\textwidth}
-\includegraphics[width=\textwidth]{gears/40-tooth}
-\caption{40-tands}
-\end{subfigure}
-\begin{subfigure}[b]{.2\textwidth}
-\includegraphics[width=\textwidth]{gears/turntable}
-\caption{56-tands \\ \centering (drejeskive)}
-\end{subfigure}
-\begin{subfigure}[b]{.2\textwidth}
-\includegraphics[width=\textwidth]{gears/worm}
-\caption{Orm}
-\end{subfigure}
-\caption{De anvendte tandhjul}
-\label{gearing:tandhjul}
+\includegraphics[width=0.5\textwidth]{gears/sloer}
+\caption{Slør mellem gear}
+\label{gearing:sloer}
 \end{figure}
