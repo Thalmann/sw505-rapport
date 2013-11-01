@@ -1,6 +1,6 @@
 % !TeX spellcheck = da_DK
 \section{Sensorer}
-Følgende afsnit vil undersøge de sensorer der er interessante for dette projekt.
+Følgende afsnit vil undersøge de sensorer der er til rådighed og som er interessanten for projektet.
 Da der er stor forskel på sensorerne der er tilrådighed er der foretaget forskellige forsøg, hvis formål er at klarlægge præcisionen af de forskellige sensorer.
 
 \begin{figure}[h]
@@ -31,6 +31,7 @@ Da der er stor forskel på sensorerne der er tilrådighed er der foretaget forsk
 \end{subfigure}
 \end{figure}
 
+
 \subsection{Ultrasonic Sensor}
 Ultrasonic sensoren, som kan ses på \cref{sensor:ultrasonic_sensor}, er en sensor der kan måle afstand til objekter.
 
@@ -38,6 +39,14 @@ Det gøres ved at sende en lydbølge, hvorefter der beregnes hvor lang tid det t
 Sensoren måler afstanden i cm eller tommer.
 Den maksimale afstand der kan måles er 255 cm med en præcision på $\pm$3 centimeter.
 De bedste aflæsninger fås ved måling af store flade objekter med hård overflade, i modsætning til mindre objekter med rund og/eller blød overflade.\cite{nxt}
+
+\subsubsection{Formål}
+Formålet med at teste denne sensor er, at robotten skal have en måde at afgøre på, hvor langt der er til objekter omkring den.
+Derfor vil denne test undersøge følgende:
+\begin{itemize}
+\item Hvor nøjagtigt kan denne sensor bestemme afstanden til et objekt?
+\item Hvilket interval kan der måles i, hvad er den minimale og maksiamle måleafstand?
+\end{itemize}
 
 \subsubsection{Test}
 Der er gennemført en mindre test af sensoren, for at finde ud af hvor nøjagtig den er.
@@ -66,6 +75,14 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 \subsection{Infrarød Sensor}
 Den infrarøde afstandssensor fra mindsensors.com, som kan ses på \cref{sensor:infraroed_sensor}, er en afstandssensor med høj præcision og måler afstande mellem 10 og 80 cm.
 Sensoren virker som ultrasonisk sensoren, men sender et infrarødt signal i stedet for en ultrasonisk impuls.\cite{infrared}
+
+\subsubsection{Formål}
+Formålet med at teste denne sensor er, at robotten skal have en måde at afgøre på, hvor langt der er til objekter omkring den.
+Derfor vil denne test undersøge følgende:
+\begin{itemize}
+\item Hvor nøjagtigt kan denne sensor bestemme afstanden til et objekt?
+\item Hvilket interval kan der måles i, hvad er den minimale og maksiamle måleafstand?
+\end{itemize}
 
 \subsubsection{Test}
 For at afprøve sensorens præcision og rækkevidde er der foretaget en test af sensoren.
@@ -106,13 +123,16 @@ Valget mellem de to sensorer står derfor på hvilket krav robotten har til afst
 Motoren beskrevet i dette afsnit er \lego's egen.
 Den består af en rotationssensor som måler omdrejningerne ved grader med en nøjagtighed på 1 grad, hvilket er med til at gøre motoren ret præcis. 
 Desuden gør denne sensor det også muligt at styre hvor meget kraft motoren skal køre med.
-Kører med flere motorer har NXT'en indbygget software der gør det muligt at synkronisere disse, hvilket er smart hvis den ene motor skulle være stærkere eller svagere end den anden.\cite{tikNXT}
+Køres der med flere motorer har NXT'en indbygget software der gør det muligt at synkronisere disse, hvilket er smart hvis den ene motor skulle være stærkere eller svagere end den anden.\cite{tikNXT}
 Motoren kan ses på \cref{sensor:motor_sensor}.
 \mikkel{Ovenstående skal skrives om - jeg nåede det bare ikke inden vi sendte til vejleder}
 
+\subsubsection{Formål}
+Formålet med denne test er at undersøge hvorvidt denne motor kan bruges til projektets robot.
+Det er interessant at afklare hvorvidt de kan styres med \'en grads præcision.
+
 \subsubsection{Test}
-For \legos motorer er det interessant at afklare hvorvidt de kan styres med \'en grads præcision.
-Til dette blev en test opstillet hvor to moterer roteres et bestemt antal grader.
+For at bestemme motorens nøjagtighed i praksis, blev en test opstillet hvor to moterer roteres med et bestemt antal grader.
 Motorernes egentlige rotation aflæses med vinkelmåler og holdes op mod den ønskede rotation, samt den rotation motorerne angiver at de har roteret.
 Sidstenævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
 
