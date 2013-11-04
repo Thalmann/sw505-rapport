@@ -19,8 +19,9 @@ For eksempel vil et 24-tands fører-tandhjul drive et 40-tands følger-tandhjul 
 \label{gearing:nedgearing}
 \end{figure}
 
-\subsection{Vores gearing}
-Her vil blive forklaret den teoretiske gearing for henholdsvis ultrasonisk sensor og hjul.
+\subsection{Aktuelle gearing}
+Dette afsnit fokuserer på den teoretiske gearing for henholdsvis ultrasonisk sensor og hjul.
+\Cref{robot:gearing-test} beskriver forskellige test af begge gearinger for at undersøge om de lever op til de teoretiske værdier.
 
 
 \subsubsection{Ultrasonisk sensor}
@@ -64,6 +65,7 @@ Gearingen for den ultrasoniske sensor består af i alt 4 tandhjul, som alle kan 
 \caption{De anvendte tandhjul}
 \label{gearing:tandhjul}
 \end{figure}
+\thilemann{Fjern billede (e) og tilføj nyt svarende til ny gearing. Ret også tekst.}
 
 Den første kombination består af en orm (se \cref{gearing:orm}) som fører-gear og 40-tands (se \cref{gearing:40tand}) som følger-gear.
 Ormen kræver en hel rotation for at flytte én tand.
@@ -82,7 +84,7 @@ Præcision af motorernes position er heller ikke vigtig, da lokationen bestemmes
 Gearingen for hjulene består hver især af to tandhjul; ét 40-tands og ét 24-tands.
 Derved er gearingen som i eksemplet i \cref{gearing:simpel_teori}: $$ \frac{40}{24} = 1 \frac{2}{3} $$
 
-\subsection{Test af gearing}
+\subsection{Test af gearing}\label{robot:gearing-test}
 Nu hvor den teoretiske gearing er fastlagt, vil der her blive udført forsøg for at afgøre præcisionen af motorerne med gearing, evt. at fastlægge en faktisk gearing, hvis denne afviger fra den teoretiske.
 
 \subsubsection{Hjul}
@@ -112,7 +114,7 @@ For den minimale afvigelse skal der bruges: $ \frac{\frac{1}{40}}{\frac{1}{24}}\
 For den maksimale afvigelse: $ \frac{\frac{1}{40}}{\frac{1}{24}}\cdot\frac{3}{4} = 0.45$.
 
 Da hver motor-omdrejning svarer til $\frac{1}{93.\overline{3}}$ sensor-omdrejning, giver det at én motor-omdrejning får sensoren til at rotere $\frac{360}{93.\overline{3}} = 3\frac{6}{7}\dg$.
-Derved giver dette en afvigelse på minimum $3\frac{6}{7}\cdot0.15 = 0.57\overline{857142}\dg$ og maximum $3\frac{6}{7}\cdot0.45 = 1.73\overline{571428}\dg$.
+Derved giver dette en afvigelse på minimum $3\frac{6}{7}\cdot0.15 = 0.57\overline{857142}\dg$ og maksimum $3\frac{6}{7}\cdot0.45 = 1.73\overline{571428}\dg$.
 
 \paragraph{Optimering af slør} kunne foregå ved altid at køre $0.45 - 0.15 = 0.15$ motor-omdrejninger ekstra, når der skiftes retning.
 På denne måde vil den maksimale og ca. afvigelse være $0.57\overline{857142}\dg$.
