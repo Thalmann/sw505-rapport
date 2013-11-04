@@ -31,8 +31,18 @@ Da der er stor forskel på sensorerne der er tilrådighed er der foretaget forsk
 \end{subfigure}
 \end{figure}
 
+\subsection{Afstandssensorer}
+Dette afsnit beskriver testen af de to afstandssensorer, som kunne være interessante at montere på robotten.
+For at afgøre hvilken der passer bedst til at løse problemet er de blevet testet.
 
-\subsection{Ultrasonic Sensor}
+Formålet med at teste disse sensorer er, at robotten skal have en måde at afgøre på, hvor langt der er til objekter omkring den.
+Derfor vil disse tests undersøge følgende:
+\begin{itemize}
+\item Hvor nøjagtigt kan sensorerne bestemme afstanden til et objekt?
+\item Hvilket interval kan der måles i, hvad er den minimale og maksiamle måleafstand?
+\end{itemize}
+
+\subsubsection{Ultrasonic Sensor}
 Ultrasonic sensoren, som kan ses på \cref{sensor:ultrasonic_sensor}, er en sensor der kan måle afstand til objekter.
 
 Det gøres ved at sende en lydbølge, hvorefter der beregnes hvor lang tid det tager for denne at ramme objektet, for derefter at blive reflekteret tilbage igen.
@@ -40,22 +50,14 @@ Sensoren måler afstanden i cm eller tommer.
 Den maksimale afstand der kan måles er 255 cm med en præcision på $\pm$3 centimeter.
 De bedste aflæsninger fås ved måling af store flade objekter med hård overflade, i modsætning til mindre objekter med rund og/eller blød overflade.\cite{nxt}
 
-\subsubsection{Formål}
-Formålet med at teste denne sensor er, at robotten skal have en måde at afgøre på, hvor langt der er til objekter omkring den.
-Derfor vil denne test undersøge følgende:
-\begin{itemize}
-\item Hvor nøjagtigt kan denne sensor bestemme afstanden til et objekt?
-\item Hvilket interval kan der måles i, hvad er den minimale og maksiamle måleafstand?
-\end{itemize}
-
-\subsubsection{Test}
+\paragraph{Test}
 Der er gennemført en mindre test af sensoren, for at finde ud af hvor nøjagtig den er.
 
 Testen blev udført ved at lave en simpel konstruktion kun bestående af NXT og den ultrasoniske sensor.
 Konstruktionen blev placeret i en række afstande fra en væg, hvor sensoreren var placeret vandret, pegende direkte på væggen.
 Herefter blev sensoren aflæst, samtidig med at afstanden mellem væg og sensor blev målt med lineal.
 
-\subsubsection{Resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
+\paragraph{Resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
 
 En graf-repræsentation af resultaterne kan ses i \cref{sensor:ultrasonic_resultat_diagram}.
 Den røde linje indikerer det ideele resultat mens den blå, brune og grønne linje viser de resultaterne fra de tre test.
@@ -72,19 +74,11 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 
 
 
-\subsection{Infrarød Sensor}
+\subsubsection{Infrarød Sensor}
 Den infrarøde afstandssensor fra mindsensors.com, som kan ses på \cref{sensor:infraroed_sensor}, er en afstandssensor med høj præcision og måler afstande mellem 10 og 80 cm.
 Sensoren virker som ultrasonisk sensoren, men sender et infrarødt signal i stedet for en ultrasonisk impuls.\cite{infrared}
 
-\subsubsection{Formål}
-Formålet med at teste denne sensor er, at robotten skal have en måde at afgøre på, hvor langt der er til objekter omkring den.
-Derfor vil denne test undersøge følgende:
-\begin{itemize}
-\item Hvor nøjagtigt kan denne sensor bestemme afstanden til et objekt?
-\item Hvilket interval kan der måles i, hvad er den minimale og maksiamle måleafstand?
-\end{itemize}
-
-\subsubsection{Test}
+\paragraph{Test}
 For at afprøve sensorens præcision og rækkevidde er der foretaget en test af sensoren.
 
 Opstillingen brugt til udførelse af testen bestod af tre A4 ark spændt ud på gulvet ind til en væg. 
@@ -93,7 +87,7 @@ Papiret havde markeringer for hver 2 cm fra væggen.
 Udførelsen af testen gik ud på at placere en NXT med påsat infrarød sensor ved hver indikator, for derefter at aflæse sensorens måling.
 På denne måde blev afmålingen fra sensoren ved en given afstand holdt op imod den egentlige afstand til væggen, som afmålt på papiret.
 
-\subsubsection{Resultater}
+\paragraph{Resultater}
 
 Resultaterne fra testen er præsenteret i \cref{appendix:infrared}. 
 Disse resultater er sat op i et diagram i \cref{sensor:infrared_chart}.
@@ -110,7 +104,7 @@ Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forvente
 \label{sensor:infrared_chart}
 \end{figure}
 
-\subsection{Sammenligning af afstandssensorer}
+\subsubsection{Sammenligning af afstandssensorer}
 
 Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor og den infrarøde sensor. 
 Den ultrasoniske sensor var præcis med en afvigelse på $\pm$3 cm mellem 20 cm og 170 cm.
