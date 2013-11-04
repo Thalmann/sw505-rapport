@@ -8,9 +8,8 @@
 \Crefname{listing}{Kode eksempel}{kode eksempler}
 % 
 
-\lstdefinestyle{csharp}
+\lstdefinestyle{standard}
 {
-	language=[Sharp]C,
 	frame=shadowbox,
 	framesep=5pt,
 	rulecolor=\color{blue!40!black},
@@ -22,7 +21,19 @@
 	%numberblanklines=false,
 	stepnumber=1,
 	numbersep=9pt,	
+	captionpos=b,
 	escapeinside={(*}{*)}
+}
+
+\lstdefinestyle{c}
+{
+	style=standard
+}
+
+\lstdefinestyle{csharp}
+{
+	style=standard,
+	language=[Sharp]C
 }
 \lstdefinestyle{csharpsmall}
 {
