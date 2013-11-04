@@ -1,5 +1,5 @@
 % !TeX spellcheck = da_DK
-\section{Microsoft Kinect}
+ \section{Microsoft Kinect}
 En Kinect er et Natural User Interface (NUI) udviklet til Microsoft's spillekonsol, Xbox.
 Den gør det muligt at interagere med sin konsol ved at bevæge kroppen og via talte kommandoer.
 Den første version der udkom i november 2010~\cite{kinectWiki} er oprindeligt udviklet med henblik på at lokke nye typer brugere til Xbox med det argument at det via naturlig (og aktiv) bevægelse er sjovere og mere virkelighedstro at spille.
@@ -31,33 +31,43 @@ For at Kinecten kan følge et objekt er Kinecten udstyret med et antal sensorer 
 
 \begin{figure}
 \centering
-\includegraphics[width=1.0\textwidth]{kinect}
+\includegraphics[width=1.0\textwidth]{kinect/kinect}
 \caption{Microsoft Kinect for Windows}
 \label{kinect:opbygning}
 \end{figure}
 
 \subsubsection{Farvekamera}
-For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden.
+For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden (jvf. \cref{kinect:opbygning}).
 Et farvekamera kan være nyttigt i spil, hvor man ønsker at vise spilleren fysisk på skærmen eller hvis man benytter sin Kinect til gruppechat (som et webcam).
 Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet, hvis man ønsker en mere ”flydende” videostrøm~\cite{kinectForWindowsFeatures}.
-Det har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket kan være interessant ift. det miljø hvori Kinecten skal bruges.
+Kinecten har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket giver den et vertikalt synsfelt på $\pm 21.5$\degree, hvis den er placeret ift. 0\degree~vandret.
+Et visuelt billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{kinect/kinect_view_angles}
+\caption{Betragtningsvinkler for farvekameraet}
+\label{kinect:vinkler}
+\end{figure}
+
+Disse parametre er interessante i forhold til det hvad Kinecten skal bruges til samt hvilket miljø hvori den skal bruges. Det er f.eks. vigtigt at kende dens betragningsvinkler, hvis den skal benyttes til at lokalisere objekter med, da placeringer af disse skal placeres ift. deres fysiske placering, og ikke kun i Kinectens koordinatsæt.
 
 \subsubsection{Infrarød (IR) sender}
-Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender, som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
+Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender (\cref{kinect:opbygning}), som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
 Disse signaler bliver fanget af en anden sensor på Kinecten; nemlig den infrarøde dybde sensor.
 
 \subsubsection{IR dybde sensor}
-Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren, som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
+Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren (\cref{kinect:opbygning}), som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
 
 \subsubsection{Mikrofoner}
 Kinecten er også i stand til at optage lyd via de indbyggede mikrofoner.
 Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode til at bestemme afstand og retning fra f.eks. en person der taler.
-Rækken af mikrofoner består af 4 stk. som er placeret på fronten af Kinecten.
+Rækken af mikrofoner (se \cref{kinect:opbygning}) består af 4 stk. som er placeret på fronten af Kinecten.
 En enkelt mikrofon sidder i venstre side mens de tre andre er placeret til højre, hvilket gør det muligt at triangulere lydsignaler for at bestemme retningen af lydkilden.
 Flere mikrofoner gør det også muligt at lave ``noise-suppression'' ift. omgivelserne, hvis man benytter Kinect, mens man spiller, til at kommunikerer med sine med-/modspillere således at unødig støj filtreres fra~\cite[s.~15]{kinectProgrammingGuide}.
 
 \subsubsection{Motor til justering af vinklen}
-For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på.
+For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på (jvf. \cref{kinect:opbygning}).
 Den kan bevæge sig fra 0\degree~til 27\degree~ (op) og fra 0\degree~til -27\degree~(ned).
 Denne funktionalitet er ideel hvis man ønsker at kalibrere Kinecten ift. dens fysiske placering og de omgivelser man ønsker at bruge den i.
 Dog anbefaler Microsoft at man ikke benytter motoren kontinuert i sine programmer, da den ikke tåler vedvarende belastninger~\cite{kinectDocElevationAngle}.
@@ -160,3 +170,52 @@ void sensor_ColorFrameReady(object sender,
 }    
 \end{lstlisting}
 
+
+
+
+\section{OpenCV}
+% evt. en generel beskrivelse af emgu og openCV
+OpenCV (\emph{Open Source Computer Vision Library}) er et Library udviklet af \emph{Intel}
+til brug ved Realtids \emph{computer vision}.
+OpenCV er skrevet i C++ og er frit tilgængeligt under BSD licensen.
+
+\subsection{beskrivelse af udvalgte klasser og funktioner}
+
+\subsubsection{Metoden findContours}
+Metoden findCountours gennemsøger et billede og finder konturer, som den kan returnere 
+repræsenteret på forskellige måder, alt efter hvilke parametre metoden kaldes med.
+
+De typiske repræsentationer er CV\_RETR\_EXTERNAL som kun returnere de yderste konturer,
+CV\_RETR\_LIST der returnere alle konturer som en liste uden nogen repræsentation af deres hirarki og
+CV\_RETR\_TREE som placere konturene i en træstruktur der repræsentere deres hirarki.
+
+Metoden kan benytte sig af flere forskellige metoder til at oversætte konturerne til en kæde af punkter. 
+Der er f.eks. CV\_CHAIN\_APROX\_NONE som oversætter konturen til punkter uden nogen form for komprimering.
+En anden er CV\_CHAIN\_APROX\_SIMPLE der kun indeholder start og slutpunkter for alle horisontale,
+vertikale og diagonale linjestykker, hvilket reducere antallet af punkter og derved algoritmens
+pladskompleksitet.
+\cite{EmguCVLibDoc}
+
+\subsubsection{Metoden thresholdBinary}
+Metoden tresholdBinary tager to parametre som input en threshld værdi og en maksværdi.
+Hvis en pixel i billedet har en intensitet højere end threshold værdien, tildeles denne pixel i resultatet til maksværdien.\cite{EmguCVLibDoc}
+
+$$\text{dst}(x,y) = 
+\begin{cases} 
+max_{val} & \text{if src}(x,y) > threshold \\
+0 & \text{if src}(x,y) \leq threshold
+\end{cases}
+$$
+
+\subsubsection{Metoden AbsDiff}
+Metoden tager et andet billede som input og beregner et billede
+som er den absolutte differens mellem de to billeder således at.
+\cite{EmguCVLibDoc}
+
+$$ \text{dst}(x,y) = \vert \text{imgA}(x,y) - \text{imgB}(x,y) \vert $$
+
+\subsection{Metoden ApproxPoly}
+Denne metode generere en aproximation af konturen med færre punkter ved hjælp af Ramer–Douglas–Peucker algoritmen.
+\cite{opencvrefman}[s.~269]
+Som input tager den en \emph{double} der bruges til at definere resultatets præsition.
+\cite{EmguCVLibDoc}
