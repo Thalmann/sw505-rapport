@@ -107,21 +107,3 @@ Denne test gav et godt resultat, uden afvigelse.
 \paragraph{Anden test} blev udført ved at køre færre omdrejninger, skiftevis med og mod uret.
 Dette gav en upræcision, da der er slør i den øverste gearing, mellem 56-tands og 24-tands tandhjulene.
 Dette slør giver mellem $\frac{1}{4}$ og $\frac{3}{4}$ tands unøjagtighed, da der ved skift af rotations-retning bruges op til $\frac{3}{4}$ tandhjul-omdrejning for 24-tands tandhjulet at få fat i 56-tands tandhjulets tænder igen.
-
-\paragraph{Sløret} giver giver en unøjagtighed på mellem $\frac{1}{4}$ og $\frac{3}{4}$ tand.
-Dette gør at der kræves ekstra motor-omdrejninger når der skiftes retning.
-For den minimale afvigelse skal der bruges: $ \frac{\frac{1}{40}}{\frac{1}{24}}\cdot\frac{1}{4} = 0.15$ ekstra motor-omdrejninger.
-For den maksimale afvigelse: $ \frac{\frac{1}{40}}{\frac{1}{24}}\cdot\frac{3}{4} = 0.45$.
-
-Da hver motor-omdrejning svarer til $\frac{1}{93.\overline{3}}$ sensor-omdrejning, giver det at én motor-omdrejning får sensoren til at rotere $\frac{360}{93.\overline{3}} = 3\frac{6}{7}\dg$.
-Derved giver dette en afvigelse på minimum $3\frac{6}{7}\cdot0.15 = 0.57\overline{857142}\dg$ og maksimum $3\frac{6}{7}\cdot0.45 = 1.73\overline{571428}\dg$.
-
-\paragraph{Optimering af slør} kunne foregå ved altid at køre $0.45 - 0.15 = 0.15$ motor-omdrejninger ekstra, når der skiftes retning.
-På denne måde vil den maksimale og ca. afvigelse være $0.57\overline{857142}\dg$.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{gears/sloer}
-\caption{Slør mellem gear}
-\label{gearing:sloer}
-\end{figure}
