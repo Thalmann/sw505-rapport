@@ -49,11 +49,22 @@ Desuden er NXT enheden også en central del af denne konstruktion.
 Placeringen af denne er primært i forhold til funktionelle behov, da der på fronten er knapper til at tænde/slukke og vælge indstillinger med.
 Der er også taget hensyn til adgang til dens porte for tilslutning af motor, sensor samt opladning.
 
+Vigtigt for basen er højden i forhold til armen hvorpå sensorerne er monteret; for at disse skal kunne se i alle retninger er det essentielt at basens relative højde er så lav som muligt i forhold til de ultrasoniske sensorer, således den ikke er en faktor når de ser bagud i retningen af basen. 
+
 \paragraph{Fremdrift}
+Robotten er ikke designet som en konventionel robot med to hjulsæt, hvor det forreste sæt styrer robotten og de bagerste giver fremdrift.
+Designet er lavet ud fra et ønske om at gøre robotten så kompakt som muligt samt for at øge dens mobilitet.
+Derfor har den kun et \textit{aktivt} hjulsæt der både giver fremdrift og styring.
+Denne funktionalitet opnås ved at hvert hjul (på hver side af robotten) har sin egen motor, således der kan angives både positiv og negativ fremdrift uafhængigt af hvert hjul.
+Dette design gør det muligt at rotere robotten omkring sin egen akse for maksimal mobilitet -- selv på et begrænset område.
+Foruden det ene hjulsæt er der bagerst på robotten monteret et 'baghjul', hvis eneste funktion er at balancere/stabilisere robotten.
+Valget af et hjul til at udføre en sådan funktion er ret begrænset i \lego, hvorfor valget faldt på et 'slæbehjul' med en masse ruller der gør det muligt for hjulet at rotere i alle retninger.
 
-
-- valg af hjul og fremdrift
-- grund til gearing
+På de to første design af robotten var der monteret to store (Ø81,6mm x 15mm) hjul direkte på motorene.
+Denne løsning fungerede fint i forhold til højden af basen (og det faktum at robotten stod så godt som vandret), men et umiddelbart problem gjorde det nødvendigt med en mere avanceret løsning. 
+Da gummiet på disse hjul er meget fleksible i forhold til sideværts bevægelse (når robotten roterer) er det anslået at det vil give for store usikkerheder ved beregningen af rotationen, samt det faktum at der er en vis sandsynlighed for at gummiet kan vrides af fælgen med det resultat at robotten ikke kan køre videre.
+Derfor er der valgt et lavere og bredere hjul som er meget mere stabilt (Ø56mm x 26mm).
+Med dette valg samt den højere friktion (større kontaktflade med underlaget) er det valgt at geare motorene der styrer hjulene, hvilket er beskrevet i \cref{robot:gearing}.
 
 \paragraph{Sensorer}
 - sensorens placering og mobilitet
