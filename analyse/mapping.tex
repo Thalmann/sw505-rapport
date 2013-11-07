@@ -6,6 +6,10 @@ Der findes flere afprøvede metoder indenfor robotik der gør det muligt for en 
 Dette afsnit vil fokusere på to af disse, navnligt \textit{Occupancy Grid} og \textit{Particle Filters}, og give en overordnet beskrivelse der skal danne grundlag for valget af metode for den fortløbende udvikling af projektet.
 Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle fordele og ulemper ved begge.
 
+\section{Notation}
+Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens position, positur og hvordan den bevæger sig, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet{probabilisticRobotics}.
+
+
 \section{Occupancy Grids}
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via en Microsoft Kinect. \cite{probabilisticRobotics}
@@ -24,8 +28,11 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:occupancy_grid}
 \end{figure}
 
+\subsection{Occupancy Grid Mapping}
 
 
 \section{Particle Filters}
 
 \section{Sammenligning}
+
+\
