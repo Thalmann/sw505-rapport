@@ -26,7 +26,13 @@ På \cref{testmiljo:forfra} kan man se hvordan kinecten er monteret under en lof
 \end{figure}
 
 \begin{figure}
-\includegraphics{./verden/oppefra}
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics{./verden/oppefra}};
+    \draw [<->, red, ultra thick] (1.3,0.9) -- (1.5,11.4);
+    \node [red, ultra thick] at (2.5,5.5) {189 cm};
+    \draw [<->, red, ultra thick] (1.3,0.9) -- (16,1);
+    \node [red, ultra thick] at (8, 2) {261 cm};
+\end{tikzpicture}
 \caption{Testmiljøet set fra kinecten.}
 \label{testmiljo:oppefra}
 \end{figure}
