@@ -8,7 +8,7 @@ Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle for
 
 \section{Notation}
 Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens position, positur og hvordan den bevæger sig, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet{probabilisticRobotics}.
-\\
+
 \begin{itemize}
 \item \textbf{Tilstand} betegner den tilstand miljøet er i; altså, robottens positur, omkringliggende objekter som vægge, bygninger osv.. 
 Tilstand kan være \textit{dynamisk} (tilstanden kan ændre sig -- position af en person) og \textit{statisk} (tilstanden ændrer sig ikke -- position af en bygning).
@@ -19,16 +19,14 @@ Den forrige seneste måling angives med $x_{t-1}$ og målingen efter den seneste
 
 \item \textbf{Robot målinger} beskrivelse her...
 
-\\
 $z_t =$ tra lalalala\\
 $z_{t_1:t_2} = z_{t_1}, z_{t_1}+1, z_{t_1}+2, \dots , z_{t_2}$
 \item \textbf{Robot kontrol} beskrivelse her...
 
-\\
 $u_t =$ tra lalalala\\
 $u_{t_1:t_2} = u_{t_1}, u_{t_1}+1, u_{t_1}+2, \dots , u_{t_2}$
 \end{itemize}
-\thilemann{Færdiggør beskrivelse... Tilføj evt. andet relevant notation.}
+\thilemann{Færdiggør beskrivelse... Tilføj evt. andet relevant notation (og ret al den fjollede tekst ovenover...).}
 
 \section{Occupancy Grids}
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
@@ -59,8 +57,25 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:approx_occupancy_grid}
 \end{figure}
 
-\subsection{Occupancy Grid Mapping}
+\subsection{Occupancy Grid Mapping algoritme}
+Den primære grund til at benytte en occupancy grid algoritme er ønsket om at få et estimat af et kort baseret på nogle antagelser om tilstanden af det omkringliggende miljø. Altså,
+\\\\
+\begin{equation}
+\mathcal{P}(m \; | \; z_{1:t}, x_{1:t})
+\end{equation}
+\\\\
+Hvor $m$ angiver kortet, $z_{1:t}$ mængden af alle målinger indtil tiden $t$ og $x_{1:t}$ angiver mængden af positurer for robotten (mængden af positurer over stien den har kørt).
+Viden om robottens kontrol (essentielt dens fysiske position i kortet) $u_{1:t}$, spiller her ingen rolle, da den i forvejen er kendt via Kinecten.\cite{probabilisticRobotics}
 
+På \cref{map:occupancy_grid} gives et eksempel på en inddeling af et kørselsmiljø i $x \times y$ celler, hvor hvert enkelt celle findes ud fra et indeks $i$, således alle celler (hele kortet) beskrives ved
+\\\\
+\begin{equation}\label{map:occupancy_grid_sum}
+m = \sum\limits_{i} \mathbf{m}_{i}
+\end{equation}
+\\\\
+I \cref{map:occupancy_grid_sum} har hver $\mathbf{m}_i$ en værdi som beskriver om cellen er fri eller ej.
+Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{P}(\mathbf{m}i) = 0$, for at kunne beskrive den enkelte celle.
+\thilemann{Ved ikke om det er tilstrækkelig beskrivelse for at kunne sammenligne occupancy grid med particle filters og om der evt. skal indføres mere notation og måske selve occupancy grid algoritmen som angivet i \citet{probabilisticRobotics} kapitel 9.2}
 
 \section{Particle Filters}
 
