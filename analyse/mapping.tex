@@ -8,7 +8,27 @@ Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle for
 
 \section{Notation}
 Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens position, positur og hvordan den bevæger sig, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet{probabilisticRobotics}.
+\\
+\begin{itemize}
+\item \textbf{Tilstand} betegner den tilstand miljøet er i; altså, robottens positur, omkringliggende objekter som vægge, bygninger osv.. 
+Tilstand kan være \textit{dynamisk} (tilstanden kan ændre sig -- position af en person) og \textit{statisk} (tilstanden ændrer sig ikke -- position af en bygning).
+Tilstand beskrives af variablen $x$, som også indeholder information omkring robotten selv, f.eks. dens \textit{positur}, \textit{hastighed} og dens \textit{sensorer}.
 
+\item \textbf{Tilstand i tiden} $\mathbf{t}$ betegnes af variablen $x_t$ og beskriver den seneste \textit{kendte} tilstand. 
+Den forrige seneste måling angives med $x_{t-1}$ og målingen efter den seneste som $x_{t+1}$.
+
+\item \textbf{Robot målinger} beskrivelse her...
+
+\\
+$z_t =$ tra lalalala\\
+$z_{t_1:t_2} = z_{t_1}, z_{t_1}+1, z_{t_1}+2, \dots , z_{t_2}$
+\item \textbf{Robot kontrol} beskrivelse her...
+
+\\
+$u_t =$ tra lalalala\\
+$u_{t_1:t_2} = u_{t_1}, u_{t_1}+1, u_{t_1}+2, \dots , u_{t_2}$
+\end{itemize}
+\thilemann{Færdiggør beskrivelse... Tilføj evt. andet relevant notation.}
 
 \section{Occupancy Grids}
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
