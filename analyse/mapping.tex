@@ -2,12 +2,12 @@
 Behovet for at fremskaffe et kort over en robots omgivelser vil i den ene eller anden forstand altid være påkrævet før robotten er i stand til at interagere med det miljø den er placeret i.
 Det kan f.eks. være et stort udendørs areal man ønsker at bygge et kort over, eller f.eks. robottens eget syn på den verden hvori den bevæger sig.
 
-Der findes flere afprøvede metoder indenfor robotik der gør det muligt for en robot at navigere og bygge kort over dens umiddelbare nærmeste omgivelser.
+Der findes flere afprøvede metoder indenfor robotteknik der gør det muligt for en robot at navigere og bygge kort over dens umiddelbare nærmeste omgivelser.
 Dette afsnit vil fokusere på to af disse, navnligt \textit{Occupancy Grid} og \textit{Particle Filters}, og give en overordnet beskrivelse der skal danne grundlag for valget af metode for den fortløbende udvikling af projektet.
 Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle fordele og ulemper ved begge.
 
 \section{Notation}
-Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens position, positur og hvordan den bevæger sig, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet{probabilisticRobotics}.
+Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens positur dvs. dens position og retning, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet[s.~16-21]{probabilisticRobotics}.
 
 \begin{itemize}
 \item \textbf{Tilstand} betegner den tilstand miljøet er i; altså, robottens positur, omkringliggende objekter som vægge, bygninger osv.. 
@@ -17,20 +17,27 @@ Tilstand beskrives af variablen $x$, som også indeholder information omkring ro
 \item \textbf{Tilstand i tiden} $\mathbf{t}$ betegnes af variablen $x_t$ og beskriver den seneste \textit{kendte} tilstand. 
 Den forrige seneste måling angives med $x_{t-1}$ og målingen efter den seneste som $x_{t+1}$.
 
-\item \textbf{Robot målinger} beskrivelse her...
+\item \textbf{Målingsdata} indeholder information om robottens omgivelser til et bestemt tidspunkt. 
+$z_t$ er således målingsdata til tiden \textit{t}. 
+Notationen
 
-$z_t =$ tra lalalala\\
 $z_{t_1:t_2} = z_{t_1}, z_{t_1}+1, z_{t_1}+2, \dots , z_{t_2}$
-\item \textbf{Robot kontrol} beskrivelse her...
 
-$u_t =$ tra lalalala\\
+betegner alle målinger fra tiden \textit{$ t_1 $} til tiden \textit{$ t_2 $}
+\item \textbf{Kontrol data} indeholder information om ændring af robottens tilstand. 
+Kontrol data kan for eksempel være robottens hastighed, eller en aflæsning af en motors odometer der fortæller hvor mange omdrejninger hjulet har foretaget.
+$u_t$ betegner ændringen af robottens tilstand i intervallet fra \textit{t-1} til \textit{t}.
+Igen betegner notation
+
 $u_{t_1:t_2} = u_{t_1}, u_{t_1}+1, u_{t_1}+2, \dots , u_{t_2}$
+
+mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
-\thilemann{Færdiggør beskrivelse... Tilføj evt. andet relevant notation (og ret al den fjollede tekst ovenover...).}
+
 
 \section{Occupancy Grids}
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
-Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via en Microsoft Kinect. \cite{probabilisticRobotics}
+Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via et kamera. \cite[s.~224]{probabilisticRobotics}
 
 \subsection{Overblik}
 Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær tilfældig variabel der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
@@ -53,7 +60,7 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 	\caption{Eksempel på Occupancy Grid}
 	\label{map:occupancy_grid}
 	\end{subfigure}
-\caption{Illustration af et occupancy grid baseret på projekts kørselsmiljø for robotten. Sorte celler i \cref{map:occupancy_grid} indikerer at $\mathcal{P}(occupied) = 1$, hvilket betegner væggene i kørselsmiljøet (\cref{map:world}) -- her er det antaget at ydervæggenes position er kendt på forhånd. Hvide celler indikerer at $\mathcal{P}(occupied) = 0$ og grå celler angiver ikke-udforsket område. Den røde cirkel indikerer robottens position.}
+\caption{Illustration af et occupancy grid baseret på projekts kørselsmiljø for robotten. Sorte celler i \cref{map:occupancy_grid} indikerer at $\mathcal{P}(occupied) = 1$, hvilket betegner væggene i kørselsmiljøet (\cref{map:world}). Hvide celler indikerer at $\mathcal{P}(occupied) = 0$ og grå celler angiver ikke-udforsket område. Den røde cirkel indikerer robottens position.}
 \label{map:approx_occupancy_grid}
 \end{figure}
 
@@ -65,7 +72,7 @@ Den primære grund til at benytte en occupancy grid algoritme er ønsket om at f
 \end{equation}
 \\\\
 Hvor $m$ angiver kortet, $z_{1:t}$ mængden af alle målinger indtil tiden $t$ og $x_{1:t}$ angiver mængden af positurer for robotten (mængden af positurer over stien den har kørt).
-Viden om robottens kontrol (essentielt dens fysiske position i kortet) $u_{1:t}$, spiller her ingen rolle, da den i forvejen er kendt via Kinecten.\cite{probabilisticRobotics}
+Viden om robottens kontrol data(essentielt dens fysiske position i kortet) $u_{1:t}$, spiller her ingen rolle, da den i forvejen er kendt via Kinecten.\cite{probabilisticRobotics}
 
 På \cref{map:occupancy_grid} gives et eksempel på en inddeling af et kørselsmiljø i $x \times y$ celler, hvor hvert enkelt celle findes ud fra et indeks $i$, således alle celler (hele kortet) beskrives ved
 \\\\
