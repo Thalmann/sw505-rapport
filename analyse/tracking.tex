@@ -8,6 +8,52 @@ Først beskrives den overordnede metode, hvorefter forbedringer af metoden præs
 
 \subsection{Farveforskel}
 %Beskrivelse af den metode der anvendes til at beskrive forskellen mellem farver
+Lokalisering af robotten foretages som udgangspunkt ud fra \'et billede.
+Det vil sige, at systemet skal være i stand til at lokalisere robotten ud fra \'et billede alene.
+Som beskrevet ovenfor udstyres robotten med to mærkninger i klare farver som skal spores.
+Det er altså målet at finde de dele af et enkelt billede der matcher bestemte farver.
+
+\paragraph{Match af farver}
+For at vurdere om to farver matcher hinanden må det først gøres klart at det ikke kan forventes at matche en farve eksakt.
+Til dette spiller faktorer som lys og skygge for stor en rolle.
+Istedet tages der udgangspunkt i en søgt farve og ud fra denne ledes der efter alle \textit{nære} farver.
+Til dette formål betragtes den farve-repræsentation der arbejdes med.
+Farver repræsenteres ved tre værdier; rød, grøn og blå (også kaldet RGB), der angiver alle de mulige farver for en pixel i et billede.
+Ved at betragte de tre farver som hver sin dimension i et tredimensionelt rum kan farver repræsenteres som vektorer.
+Hermed bliver det muligt at tale om forskellen på to farver som \textit{afstanden mellem to farver}.
+
+På \cref{tracking:colorspace} ses et eksempel på afstanden mellem to farver.
+Her er farverne $C_1$ og $C_2$ illustreret med vektorer.
+Forskellen på de to farver udtrykkes ved længden af differencen mellem de to.
+Altså har vi, for to farver $C_a$ og $C_b$, følgende afstand:
+\begin{equation}
+dist_{C_aC_b} = |C_a - C_b|
+\end{equation}
+Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2}$ (forskellen på hvid og sort).
+Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af hinanden.
+Der indføres derfor en konstant $\rho$ der definerer et maksimum for hvor langt to farver må være fra hinanden før de ikke længere er interssante.
+I \cref{tracking:adjust} beskrives bestemmelsen af denne konstant.
+Med $\rho$ i mente kan der udregnes en vægt, der bestemmer hvor interessant en farve er i forhold til en anden farve.
+Lad $C_a$ og $C_b$ være to farver, da har vi
+\[ w_{C_aC_b} = \left\{ 
+  \begin{array}{r l}
+        0 & \quad \text{hvis $dist_{C_aC_b} > \rho$} \\
+       1 - \frac{dist_{C_aC_b}}{\rho} & \quad \text{hvis $dist_{C_aC_b} \leq \rho$}
+  \end{array} \right.\]
+hvor $w_{C_aC_b}$ udtrykker vægten af interesse for $C_b$ i forhold til $C_a$.
+Ved at undersøge alle pixels i et billede fra kinect'en ud fra en bestemt farve kan vægten af alle pixels bestemmes.
+Alle pixels med vægt større end 0 udvælges herefter som interessante.
+Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
+
+\begin{figure}
+\centering
+\input{./analyse/fig_3dcolor}
+\caption{To farver repræsenteret i et tredimensionelt rum}
+\label{tracking:colorspace}
+\end{figure}
+
+\subsection{Filtrering af støj}
+%Beskrivelse af implementationen af mean-filter
 
 \subsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
@@ -15,6 +61,6 @@ Først beskrives den overordnede metode, hvorefter forbedringer af metoden præs
 \subsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
 
-\subsection{Justering}
+\subsection{Justering}\label{tracking:adjust}
 %Beskrivelse af diverse thresholds og hvilke værdier "der fungerer"
 \mikkel{Resultater af colortracking-test}
