@@ -1,7 +1,8 @@
-\include{./setup/preamble}
+\include{setup/preamble}
 
 \begin{document}
 
+\pagenumbering{roman}
 %Front page
 \begin{titlepage}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -9,7 +10,7 @@
 \begin{center}
 
 \HRule \\[0.5cm]
-\textsc{ \Huge Mapping}\\[0.3cm]
+\textsc{ \Huge Mapping}\\
 
 \HRule \\[1cm]
 
@@ -23,11 +24,24 @@
 \end{center}
 \end{titlepage}
 
-%Blank page between front page and table of content
-\newpage\mbox{}\newpage
+\blankpage
+
+\input{frontmatter/titelblad.tex}
+
+\blankpage
+
+\newcommand{\prefaceHeaderName}{Forord}
+\section*{\prefaceHeaderName}
+\addcontentsline{toc}{subsection}{\prefaceHeaderName}
+\input{frontmatter/forord.tex}
+
+\blankpage
+
 
 %Table of content
 \tableofcontents
+
+\pagenumbering{arabic}
 
 \bibliography{bibliography}
 \bibliographystyle{plain}
