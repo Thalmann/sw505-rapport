@@ -1,5 +1,6 @@
 del *.aux
 del *.bbl
+del *.bib~
 del *.blg
 del *.log
 del *.out
