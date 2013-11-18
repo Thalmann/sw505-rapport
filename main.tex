@@ -41,7 +41,25 @@
 %Table of content
 \tableofcontents
 
+\blankpage
+
 \pagenumbering{arabic}
+
+\newcommand{\introductionHeaderName}{Introduktion}
+\section*{\introductionHeaderName}
+\addcontentsline{toc}{subsection}{\introductionHeaderName}
+\input{frontmatter/introduktion.tex}
+
+\blankpage
+
+\part{Analyse}
+\part{Teori}
+\part{Design}
+\part{Implementering}
+\part{Konklusion}
+
+\appendix
+\part{Appendiks}
 
 \bibliography{bibliography}
 \bibliographystyle{plain}
