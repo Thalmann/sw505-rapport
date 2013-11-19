@@ -6,7 +6,7 @@ Der findes flere afprøvede metoder indenfor robotteknik der gør det muligt for
 Dette afsnit vil fokusere på to af disse, navnligt \textit{Occupancy Grid} og \textit{Particle Filters}, og give en overordnet beskrivelse der skal danne grundlag for valget af metode for den fortløbende udvikling af projektet.
 Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle fordele og ulemper ved begge.
 
-\section{Notation}
+\subsection{Notation}
 Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens positur dvs. dens position og retning, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet[s.~16-21]{probabilisticRobotics}.
 
 \begin{itemize}
@@ -35,11 +35,11 @@ mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
 
 
-\section{Occupancy Grids}
+\subsection{Occupancy Grids}
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via et kamera. \cite[s.~224]{probabilisticRobotics}
 
-\subsection{Overblik}
+\subsubsection{Overblik}
 Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær tilfældig variabel der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
 Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på den aktuelle tilstand endnu ikke er kendt.
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
@@ -64,7 +64,7 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:approx_occupancy_grid}
 \end{figure}
 
-\subsection{Occupancy Grid Mapping algoritme}
+\subsubsection{Occupancy Grid Mapping algoritme}
 Den primære grund til at benytte en occupancy grid algoritme er ønsket om at få et estimat af et kort baseret på nogle antagelser om tilstanden af det omkringliggende miljø. Altså,
 \\\\
 \begin{equation}
@@ -84,10 +84,11 @@ I \cref{map:occupancy_grid_sum} har hver $\mathbf{m}_i$ en værdi som beskriver 
 Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{P}(\mathbf{m}i) = 0$, for at kunne beskrive den enkelte celle.
 \thilemann{Ved ikke om det er tilstrækkelig beskrivelse for at kunne sammenligne occupancy grid med particle filters og om der evt. skal indføres mere notation og måske selve occupancy grid algoritmen som angivet i \citet{probabilisticRobotics} kapitel 9.2}
 
-\section{Particle Filters}
+\subsection{Particle Filters}
 
-\section{Sammenligning}
+\subsection{Sammenligning}
 
+<<<<<<< HEAD:analyse/mapping.tex
 
 
 \section{Sensor Models}
@@ -133,8 +134,13 @@ Sensormodel(x,y,xi,yi,z) {
 
 
 \subsection{Inverse Sensor Model}
+=======
+\subsection{Sensor Models}
 
-\subsection{Forward Sensor Model	}
+\subsubsection{Inverse Sensor Model}
+>>>>>>> 04d7eb321a15affa6c4aacf148098599b4ab228f:indhold/mapping.tex
+
+\subsubsection{Forward Sensor Model	}
 
 
 
