@@ -1,7 +1,7 @@
 \include{setup/preamble}
 
 \begin{document}
-
+\listoftodos[Todo liste]
 \pagenumbering{roman}
 %Front page
 \begin{titlepage}
@@ -24,24 +24,24 @@
 \end{center}
 \end{titlepage}
 
-\blankpage
+\clearpage
 
 \input{frontmatter/titelblad.tex}
 
-\blankpage
+\clearpage
 
 \newcommand{\prefaceHeaderName}{Forord}
 \section*{\prefaceHeaderName}
 \addcontentsline{toc}{subsection}{\prefaceHeaderName}
 \input{frontmatter/forord.tex}
 
-\blankpage
+\clearpage
 
 
 %Table of content
 \tableofcontents
 
-\blankpage
+\clearpage
 
 \pagenumbering{arabic}
 
@@ -50,7 +50,7 @@
 \addcontentsline{toc}{subsection}{\introductionHeaderName}
 \input{frontmatter/introduktion.tex}
 
-\blankpage
+\clearpage
 
 \part{Analyse}
 %Sets first chapter to one instead of zero
