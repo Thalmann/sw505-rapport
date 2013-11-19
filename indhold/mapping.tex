@@ -6,7 +6,7 @@ Der findes flere afprøvede metoder indenfor robotteknik der gør det muligt for
 Dette afsnit vil fokusere på to af disse, navnligt \textit{Occupancy Grid} og \textit{Particle Filters}, og give en overordnet beskrivelse der skal danne grundlag for valget af metode for den fortløbende udvikling af projektet.
 Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle fordele og ulemper ved begge.
 
-\section{Notation}
+\subsection{Notation}
 Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens positur dvs. dens position og retning, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet[s.~16-21]{probabilisticRobotics}.
 
 \begin{itemize}
@@ -35,11 +35,15 @@ mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
 
 
+<<<<<<< HEAD:analyse/mapping.tex
 \section{Occupancy Grids}\label{mapping:occupancy_grid}
+=======
+\subsection{Occupancy Grids}
+>>>>>>> 0f5cf81b686b5ef5b35270af5e82e3eb245ed5f0:indhold/mapping.tex
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via et kamera. \cite[s.~224]{probabilisticRobotics}
 
-\subsection{Overblik}
+\subsubsection{Overblik}
 Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær tilfældig variabel der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
 Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på den aktuelle tilstand endnu ikke er kendt.
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
@@ -64,7 +68,7 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:approx_occupancy_grid}
 \end{figure}
 
-\subsection{Occupancy Grid Mapping algoritme}
+\subsubsection{Occupancy Grid Mapping algoritme}
 Den primære grund til at benytte en occupancy grid algoritme er ønsket om at få et estimat af et kort baseret på nogle antagelser om tilstanden af det omkringliggende miljø. Altså,
 \\\\
 \begin{equation}
@@ -87,14 +91,68 @@ Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{
 \section{Particle Filters}\label{mapping:particle_filter}
 
 
-
-
-\section{Sammenligning}
+\subsection{Sammenligning}
 
 \section{Sensor Models}
 
+\subsection{Vertical og Horizontal Sensormodel}
+
+Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser.
+Kan vi konstruere en forholdsvis simpel basal sensormodel.
+Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
+
+$$r_{actual} = abs(x_{cell} - x_{robot} + y_{cell} - y_{robot})$$
+
+$$l_{res} = \begin{cases} 
+	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
+	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
+	l_{free} &\text{ellers}  
+\end{cases}$$
+
+
+
+Modellen vil se således ud i pseudokode.
+
+\begin{lstlisting}[style=c, caption={Basal Sensor Model}, breaklines=true]
+
+Sensormodel(x,y,xi,yi,z) {
+
+  r = abs(xi - x + yi - y);  
+  
+  if(r > min(MAXIMUM_SENSOR_RANGE, z+DETECTION_UNCERTAINTY/2)) {
+  
+    // cell is out of bounds.
+    return DEFAULT_VALUE;
+    
+  } else if (z-DETECTION_UNCERTAINTY/2 <= r <= z+DETECTION_UNCERTAINTY/2) {
+
+    return OCCUPIED_CELL_VALUE;
+  } else {    
+    
+  	return FREE_CELL_VALUE;
+  }
+}
+\end{lstlisting}
+
+
 \subsection{Inverse Sensor Model}
 
-\subsection{Forward Sensor Model	}
+\subsubsection{Forward Sensor Model	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \

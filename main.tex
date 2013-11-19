@@ -1,0 +1,90 @@
+\include{setup/preamble}
+
+\begin{document}
+
+\pagenumbering{roman}
+%Front page
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{center}
+
+\HRule \\[0.5cm]
+\textsc{ \Huge Mapping}\\
+
+\HRule \\[1cm]
+
+\textsc{\Large SW505E13}
+
+\vfill
+{\Large Udvilking af komplekse softwaresystemer}
+\\ ~\\
+{\large Efterårssemesteret 2013}
+
+\end{center}
+\end{titlepage}
+
+\blankpage
+
+\input{frontmatter/titelblad.tex}
+
+\blankpage
+
+\newcommand{\prefaceHeaderName}{Forord}
+\section*{\prefaceHeaderName}
+\addcontentsline{toc}{subsection}{\prefaceHeaderName}
+\input{frontmatter/forord.tex}
+
+\blankpage
+
+
+%Table of content
+\tableofcontents
+
+\blankpage
+
+\pagenumbering{arabic}
+
+\newcommand{\introductionHeaderName}{Introduktion}
+\section*{\introductionHeaderName}
+\addcontentsline{toc}{subsection}{\introductionHeaderName}
+\input{frontmatter/introduktion.tex}
+
+\blankpage
+
+\part{Analyse}
+%Sets first chapter to one instead of zero
+
+\chapter{Platform}
+\input{indhold/platforme}
+\chapter{Sensorer}
+\input{indhold/sensorer}
+\chapter{Microsoft Kinect}
+\input{indhold/kinect}
+\chapter{Sprog}
+\input{indhold/mindsqualls}
+\input{indhold/NXC}
+\part{Teori}
+\chapter{Mapping}
+\input{indhold/mapping}
+\chapter{Bayes sætning}
+\input{indhold/bayestheorem}
+\chapter{Lokalisering}
+\input{indhold/localization}
+
+\part{Design}
+\chapter{Robottens design}
+\input{indhold/robot}
+\input{indhold/gearing}
+\chapter{Forsøgsopstilling}
+\input{indhold/testmiljo}
+\part{Implementering}
+
+\part{Konklusion}
+
+\appendix
+\part{Appendiks}
+
+\bibliography{bibliography}
+\bibliographystyle{plain}
+\end{document}
