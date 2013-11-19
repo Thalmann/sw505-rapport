@@ -88,7 +88,9 @@ Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{
 
 \subsection{Sammenligning}
 
-\section{Sensor Models}
+\section{Inverse Sensor Modeller}
+
+% generelt omkring inverse sensor modeller.
 
 \subsection{Vertikal og horizontal sensor model}
 
@@ -98,13 +100,16 @@ Først beregner vi afstanden fra robotten til den pågældende celle i vores occ
 
 $$r_{actual} = abs(x_{cell} - x_{robot} + y_{cell} - y_{robot})$$
 
+Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
+
 $$l_{res} = \begin{cases} 
 	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 	l_{free} &\text{ellers}  
 \end{cases}$$
 
-Modellen vil se således ud i pseudokode.
+Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
+Modellen vil se således ud beskrevet i pseudokode.
 
 \begin{lstlisting}[style=c, caption={Basal Sensor Model}, breaklines=true]
 
@@ -112,12 +117,12 @@ Sensormodel(x,y,xi,yi,z) {
 
   r = abs(xi - x + yi - y);  
   
-  if(r > min(MAXIMUM_SENSOR_RANGE, z+DETECTION_UNCERTAINTY/2)) {
+  if(r > min(MAXIMUM_SENSOR_RANGE, z+AVG_OBJECT_DEPTH/2)) {
   
     // cell is out of bounds.
     return DEFAULT_VALUE;
     
-  } else if (z-DETECTION_UNCERTAINTY/2 <= r <= z+DETECTION_UNCERTAINTY/2) {
+  } else if (z-AVG_OBJECT_DEPTH/2 <= r <= z+AVG_OBJECT_DEPTH/2) {
 
     return OCCUPIED_CELL_VALUE;
   } else {    
@@ -127,17 +132,11 @@ Sensormodel(x,y,xi,yi,z) {
 }
 \end{lstlisting}
 
-
-\subsubsection{data udledet udfra robottens placering}
-
-% forbedring hvor vi tager højde for robotten
-
-
 \subsubsection{Gaussisk sensor model}
 
 % forklaring af gaussisk støj (central limit theorem)
 % tilfældige fejl vil tilnærme sig en gausssisk kurve.
-
+I modellen beskrevet i det forgående afsnit, 
 
 
 
@@ -145,6 +144,12 @@ Sensormodel(x,y,xi,yi,z) {
 % fejl i sensor er ikke nødvendigvis 'tilfældige'
 
 \subsection{Generel udgave af sensor modelllen}
+
+% objekter kan placeres i alle vinkler
+
+\subsubsection{Generel model med gaussisk støj}
+
+% gaussisk støj i 2-d
 
 
 \subsection{tilpasset sensor model}
@@ -154,15 +159,15 @@ Sensormodel(x,y,xi,yi,z) {
 
 \subsection{sensor model baseret på målinger}
 
+% en generel sensormodel som benytter en sandsynlighedsdistribution som vi selv har målt.
 
 
+\subsection{data udledet udfra robottens placering}
+
+% forbedring hvor vi tager højde for robotten
 
 
-
-
-\subsection{Inverse Sensor Model}
-
-\subsubsection{Forward Sensor Model	}
+\section{Forward Sensor Model	}
 
 
 
