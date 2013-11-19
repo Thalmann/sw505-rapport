@@ -1,4 +1,4 @@
-\section{Introduktion til mapping}
+\section{Introduktion til mapping}\label{mapping}
 Behovet for at fremskaffe et kort over en robots omgivelser vil i den ene eller anden forstand altid være påkrævet før robotten er i stand til at interagere med det miljø den er placeret i.
 Det kan f.eks. være et stort udendørs areal man ønsker at bygge et kort over, eller f.eks. robottens eget syn på den verden hvori den bevæger sig.
 
@@ -35,7 +35,11 @@ mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
 
 
+<<<<<<< HEAD:analyse/mapping.tex
+\section{Occupancy Grids}\label{mapping:occupancy_grid}
+=======
 \subsection{Occupancy Grids}
+>>>>>>> 0f5cf81b686b5ef5b35270af5e82e3eb245ed5f0:indhold/mapping.tex
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via et kamera. \cite[s.~224]{probabilisticRobotics}
 
@@ -84,7 +88,8 @@ I \cref{map:occupancy_grid_sum} har hver $\mathbf{m}_i$ en værdi som beskriver 
 Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{P}(\mathbf{m}i) = 0$, for at kunne beskrive den enkelte celle.
 \thilemann{Ved ikke om det er tilstrækkelig beskrivelse for at kunne sammenligne occupancy grid med particle filters og om der evt. skal indføres mere notation og måske selve occupancy grid algoritmen som angivet i \citet{probabilisticRobotics} kapitel 9.2}
 
-\subsection{Particle Filters}
+\section{Particle Filters}\label{mapping:particle_filter}
+
 
 \subsection{Sammenligning}
 
