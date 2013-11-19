@@ -90,7 +90,7 @@ Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{
 
 \section{Sensor Models}
 
-\subsection{Vertical og Horizontal Sensormodel}
+\subsection{Vertikal og horizontal sensor model}
 
 Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser.
 Kan vi konstruere en forholdsvis simpel basal sensormodel.
@@ -103,8 +103,6 @@ $$l_{res} = \begin{cases}
 	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 	l_{free} &\text{ellers}  
 \end{cases}$$
-
-
 
 Modellen vil se således ud i pseudokode.
 
@@ -128,6 +126,38 @@ Sensormodel(x,y,xi,yi,z) {
   }
 }
 \end{lstlisting}
+
+
+\subsubsection{data udledet udfra robottens placering}
+
+% forbedring hvor vi tager højde for robotten
+
+
+\subsubsection{Gaussisk sensor model}
+
+% forklaring af gaussisk støj (central limit theorem)
+% tilfældige fejl vil tilnærme sig en gausssisk kurve.
+
+
+
+
+
+% fejl i sensor er ikke nødvendigvis 'tilfældige'
+
+\subsection{Generel udgave af sensor modelllen}
+
+
+\subsection{tilpasset sensor model}
+
+
+% overfitting
+
+\subsection{sensor model baseret på målinger}
+
+
+
+
+
 
 
 \subsection{Inverse Sensor Model}
