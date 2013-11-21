@@ -1,4 +1,4 @@
-\section{Introduktion til mapping}\label{mapping}
+\section{Introduktion til mapping}
 Behovet for at fremskaffe et kort over en robots omgivelser vil i den ene eller anden forstand altid være påkrævet før robotten er i stand til at interagere med det miljø den er placeret i.
 Det kan f.eks. være et stort udendørs areal man ønsker at bygge et kort over, eller f.eks. robottens eget syn på den verden hvori den bevæger sig.
 
@@ -35,11 +35,7 @@ mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
 
 
-<<<<<<< HEAD:analyse/mapping.tex
-\section{Occupancy Grids}\label{mapping:occupancy_grid}
-=======
 \subsection{Occupancy Grids}
->>>>>>> 0f5cf81b686b5ef5b35270af5e82e3eb245ed5f0:indhold/mapping.tex
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via et kamera. \cite[s.~224]{probabilisticRobotics}
 
@@ -88,8 +84,7 @@ I \cref{map:occupancy_grid_sum} har hver $\mathbf{m}_i$ en værdi som beskriver 
 Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{P}(\mathbf{m}i) = 0$, for at kunne beskrive den enkelte celle.
 \thilemann{Ved ikke om det er tilstrækkelig beskrivelse for at kunne sammenligne occupancy grid med particle filters og om der evt. skal indføres mere notation og måske selve occupancy grid algoritmen som angivet i \citet{probabilisticRobotics} kapitel 9.2}
 
-\section{Particle Filters}\label{mapping:particle_filter}
-
+\subsection{Particle Filters}
 
 \subsection{Sammenligning}
 
@@ -103,7 +98,7 @@ Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områ
 Kan vi konstruere en forholdsvis simpel basal sensormodel.
 Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
 
-$$r_{actual} = abs(x_{cell} - x_{robot} + y_{cell} - y_{robot})$$
+$$r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid$$
 
 Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
 
@@ -141,14 +136,49 @@ Sensormodel(x,y,xi,yi,z) {
 
 % forklaring af gaussisk støj (central limit theorem)
 % tilfældige fejl vil tilnærme sig en gausssisk kurve.
-I modellen beskrevet i det forgående afsnit, 
+I modellen beskrevet i det forgående afsnit, antog vi at en celle
+med afstanden $\frac{\alpha}{2}$ fra robottens måling på $z_t$ havde
+samme sandsynlighed som en celle med afstanden 0 fra $z_t$.
+
+Hvis vi antager, at de celler som ligger tættere på robottens måling,
+har en større sandsynlighed for at være \emph{occupied}. 
+Så kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for 
+cellen i $z_t$ til værdien $l_{free}$ for cellen på positionen $z_t \pm \frac{\alpha}{2}$. 
+
+Da summen af uafhængige fejlmålinger, ifølge \emph{central limit theorem} vil tilnærme sig
+den gaussiske normalfordeling. \cite[p. 223]{ArtificialIntelligence}
+Vil det være en god approximation for robottens måleusikkerhed.
+
+
+Vi kan anvende en passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{6}\big)^2)$ 
 
 
 
 
-% fejl i sensor er ikke nødvendigvis 'tilfældige'
+$$\mathcal{N}\bigg(z_t,\bigg(\frac{\alpha}{6}\bigg)^2\bigg) = 
+\frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}$$
 
-\subsection{Generel udgave af sensor modelllen}
+Den nye tildeling af sandsynlighed til cellen vil nu se således ud.
+
+$$l_{res} = \begin{cases} 
+	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
+	
+	
+	\eta \int_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(r_{actual} - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}r
+		&\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
+
+	l_{free} &\text{ellers}	
+\end{cases}$$
+Hvor $\rho$ er en passende konstant og $\eta$ er en normaliseringskonstant.
+
+
+
+
+
+
+
+
+\subsection{Generel udgave af sensor modellen}
 
 % objekter kan placeres i alle vinkler
 
@@ -164,6 +194,7 @@ I modellen beskrevet i det forgående afsnit,
 
 \subsection{sensor model baseret på målinger}
 
+% fejl i sensor er ikke nødvendigvis 'tilfældige' eller uafhængige
 % en generel sensormodel som benytter en sandsynlighedsdistribution som vi selv har målt.
 
 
