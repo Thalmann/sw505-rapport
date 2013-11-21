@@ -1,0 +1,20 @@
+% !TeX spellcheck = da_DK
+Formålet med \textit{occupancy grid} algoritmen er at beregne	et nyt kort ud fra et kort og en samling data:
+
+\[ p(m \mid z_{1:t}, x_{1:t}) \]
+
+hvor m er et kort, $ z_{1:t} $ er mængden af målinger op til tiden t og $ x_{1:t} $ er robottons rute i form af en følge af \textit{pose}.
+
+Kortet er inddelt i et finit antal celler.
+Hver celle kan findes ved $ m_i $ hvor i er cellens indeks. 
+Hele kortet kan derfor betegnes
+
+\[  m = \sum_{i}^{} m_i \]
+
+Hver celle er tilknyttet en binær værdi der betegner hvorvidt cellen er \textit{occupied} eller \textit{free}.
+Værdien 1 betegner \textit{occupied} mens 0 betegner \textit{free}.
+
+For at begrænse mængden af celler der skal beregnes ved en opdatering af et occupancy grid nedbrydes problemet til en mængde delproblemer af formen
+
+\[ p(m_i \mid z_{1:t}, x_{1:t}) \]
+
