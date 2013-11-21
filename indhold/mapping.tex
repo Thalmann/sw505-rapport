@@ -22,6 +22,7 @@ $z_t$ er således målingsdata til tiden \textit{t}.
 Notationen
 
 $z_{t_1:t_2} = z_{t_1}, z_{t_1}+1, z_{t_1}+2, \dots , z_{t_2}$
+\mikael{Der er noget galt her, er ikke helt hundrede på formålet, så har ikke lige ændret det}
 
 betegner alle målinger fra tiden \textit{$ t_1 $} til tiden \textit{$ t_2 $}
 \item \textbf{Kontrol data} indeholder information om ændring af robottens tilstand. 
@@ -30,6 +31,7 @@ $u_t$ betegner ændringen af robottens tilstand i intervallet fra \textit{t-1} t
 Igen betegner notation
 
 $u_{t_1:t_2} = u_{t_1}, u_{t_1}+1, u_{t_1}+2, \dots , u_{t_2}$
+\mikael{Samme som kommentaren ovenover}
 
 mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
@@ -118,9 +120,11 @@ På den måde samles partiklerne omkring de tilstande som er de mest sandsynlige
 	\end{subfigure}
 \caption{Illustration af et partikel filter der benytter re-sampling til at opdatere vægtede partikler. 
 På \cref{map:particles1} ses en mulig mængde partikler genereret ud fra et flys placering.
-\Cref{map:particles2} viser opdatering af partikler efter flyet har flyttet sig, hvor tilstanden findes ud fra flyets afstand til jorden (med en vis måleusikkerhed).}
+\Cref{map:particles2} viser opdatering af partikler efter flyet har flyttet sig, hvor tilstanden findes ud fra flyets afstand til jorden (med en vis måleusikkerhed).
+\mikael{De rigtige figurer mangler her}}
 \label{map:particles}
 \end{figure}
+
 
 \subsection{Sammenligning}
 
