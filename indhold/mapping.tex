@@ -22,7 +22,6 @@ $z_t$ er således målingsdata til tiden \textit{t}.
 Notationen
 
 $z_{t_1:t_2} = z_{t_1}, z_{t_1}+1, z_{t_1}+2, \dots , z_{t_2}$
-\mikael{Der er noget galt her, er ikke helt hundrede på formålet, så har ikke lige ændret det}
 
 betegner alle målinger fra tiden \textit{$ t_1 $} til tiden \textit{$ t_2 $}
 \item \textbf{Kontrol data} indeholder information om ændring af robottens tilstand. 
@@ -31,7 +30,6 @@ $u_t$ betegner ændringen af robottens tilstand i intervallet fra \textit{t-1} t
 Igen betegner notation
 
 $u_{t_1:t_2} = u_{t_1}, u_{t_1}+1, u_{t_1}+2, \dots , u_{t_2}$
-\mikael{Samme som kommentaren ovenover}
 
 mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_2 $}.
 \end{itemize}
@@ -87,16 +85,16 @@ Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{
 \thilemann{Ved ikke om det er tilstrækkelig beskrivelse for at kunne sammenligne occupancy grid med particle filters og om der evt. skal indføres mere notation og måske selve occupancy grid algoritmen som angivet i \citet{probabilisticRobotics} kapitel 9.2}
 
 \subsection{Particle Filters}\label{mapping:particle_filter}
-Et partikel filter er en anden tilgang (end den beskrevet i \cref{mapping:occupancy_grid}) der benyttes til at finde posterior af en given verden. 
+Et partikel filter er en anden tilgang (end den beskrevet i \cref{mapping:occupancy_grid}, \nameref{mapping:occupancy_grid}) der benyttes til at finde posterior af en given verden. 
 Den adskiller sig væsentligt fra occupancy grids, da den kræver et kort med nogle på forhånd givne fikspunkter for at beregne den mest sandsynlige posterior (for en robot kan det være dens position på kortet).
 
 \subsubsection{Overblik}
-En partikel kan karakteriseres som en tilladelig tilstand ud fra en given kontekst, hvor en tilstand f.eks. kan være en robots position, hastighed og retning.
+En partikel kan karakteriseres som en tilladelig tilstand ud fra en given kontekst, hvor en tilstand f.eks. kan være en robots position og retning.
 For at en tilstand kan være tilladt, kræves det at dens attributter ligger indenfor mulige værdier -- for en robot der trackes på et 2D plan kan retning således ikke være ''op''.
 
-Til at begynde med kræves der en mængde tilladelige partikler, genereret tilfældigt over hele kortet.
+Til at begynde med kræves der en mængde tilladelige partikler, genereret tilfældigt over hele kortet, hvor hver enkelt f.eks. kan svare til følgende vektor $[\mathit{position}, \mathit{retning}]$, hvor hver attribut er en fysisk mulig placering på kortet.
 Da alle disse repræsenterer vores tilstand forskelligt, gives de en vægt for enten at fremme eller degradere den enkelte partikel, baseret på hvor meget den 
-minder om robottens målinger.
+minder om robottens målinger (til et bestemt fikspunkt).
 
 Essensen i partikel filtrering er at filtrere uønskede partikler fra, hvilket gøres ved at sample mængden af partikler ud fra deres vægt; en med lav vægt ''tages ud'' af mængden og plottes ind de steder hvor der i forvejen findes partikler med højere vægt.
 Dette fjerner dem vi ikke er interesseret i, da de ikke var i overensstemmelse med robottens målinger.
@@ -121,12 +119,31 @@ På den måde samles partiklerne omkring de tilstande som er de mest sandsynlige
 \caption{Illustration af et partikel filter der benytter re-sampling til at opdatere vægtede partikler. 
 På \cref{map:particles1} ses en mulig mængde partikler genereret ud fra et flys placering.
 \Cref{map:particles2} viser opdatering af partikler efter flyet har flyttet sig, hvor tilstanden findes ud fra flyets afstand til jorden (med en vis måleusikkerhed).
-\mikael{De rigtige figurer mangler her}}
+\thilemann{skal lige have lavet de to billeder...}}
 \label{map:particles}
 \end{figure}
 
-
 \subsection{Sammenligning}
+\begin{itemize}
+
+% Lidt ideer til hvad man kan sammenligne
+\item occupancy grids benyttes til mapping (lave et map)
+	\begin{itemize}
+	\item vedligeholder et stokastisk estimat af tilstanden for hver celle
+	\item kompleksiteten er afhængig af antal celler (linær)
+	\item nem at implementere
+	\item bla bla bla
+	\end{itemize}
+	
+\item particle filter benyttes til localization
+	\begin{itemize}
+	\item kræver et kort (har vi ikke)
+	\item tidskompleksiteten er høj hvis der trackes mange dimensioner
+	\item let at implementere (få linjer kode)
+	\item baserer sig på fikspunkter i kortet
+	\end{itemize}
+
+\end{itemize}
 
 
 
