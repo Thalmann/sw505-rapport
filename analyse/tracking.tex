@@ -22,6 +22,13 @@ Farver repræsenteres ved tre værdier; rød, grøn og blå (også kaldet RGB), 
 Ved at betragte de tre farver som hver sin dimension i et tredimensionelt rum kan farver repræsenteres som vektorer.
 Hermed bliver det muligt at tale om forskellen på to farver som \textit{afstanden mellem to farver}.
 
+\begin{figure}
+\centering
+\input{./analyse/fig_3dcolor}
+\caption{To farver repræsenteret i et tredimensionelt rum}
+\label{tracking:colorspace}
+\end{figure}
+
 På \cref{tracking:colorspace} ses et eksempel på afstanden mellem to farver.
 Her er farverne $C_1$ og $C_2$ illustreret med vektorer.
 Forskellen på de to farver udtrykkes ved længden af differencen mellem de to.
@@ -34,31 +41,33 @@ Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af
 Der indføres derfor en konstant $\rho$ der definerer et maksimum for hvor langt to farver må være fra hinanden før de ikke længere er interssante.
 I \cref{tracking:adjust} beskrives bestemmelsen af denne konstant.
 Med $\rho$ i mente kan der udregnes en vægt, der bestemmer hvor interessant en farve er i forhold til en anden farve.
-Lad $C_a$ og $C_b$ være to farver, da har vi
-\[ w_{C_aC_b} = \left\{ 
+Lad $C_a$ og $C_b$ være to farver, da har vi:
+\begin{equation}
+w_{C_aC_b} = \left\{ 
   \begin{array}{r l}
         0 & \quad \text{hvis $dist_{C_aC_b} > \rho$} \\
        1 - \frac{dist_{C_aC_b}}{\rho} & \quad \text{hvis $dist_{C_aC_b} \leq \rho$}
-  \end{array} \right.\]
-hvor $w_{C_aC_b}$ udtrykker vægten af interesse for $C_b$ i forhold til $C_a$.
+  \end{array} \right.
+\end{equation}
+Her udtrykker $w_{C_aC_b}$ vægten af interesse for $C_b$ i forhold til $C_a$.
+Det følger desuden af ovenstående, at $w_{C_aC_b} \in [0;1]$ for ethvert par af farver.
+
 Ved at undersøge alle pixels i et billede fra kinect'en ud fra en bestemt farve kan vægten af alle pixels bestemmes.
-Alle pixels med vægt større end 0 udvælges herefter som interessante.
+Vægten af en pixel beskriver hvor interessant den er.
+Således er pixels med vægt 0 ikke interessante.
+De resterende pixels betegnes herefter som \emph{interessante pixels}.
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
-\begin{figure}
-\centering
-\input{./analyse/fig_3dcolor}
-\caption{To farver repræsenteret i et tredimensionelt rum}
-\label{tracking:colorspace}
-\end{figure}
+\subsection{Forbedringer}
+%Introduktion til de følgende underafsnit
 
-\subsection{Filtrering af støj}
+\subsubsection{Filtrering af støj}
 %Beskrivelse af implementationen af mean-filter
 
-\subsection{Farve-afstand}
+\subsubsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
 
-\subsection{Afgrænset område}
+\subsubsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
 
 \subsection{Justering}\label{tracking:adjust}
