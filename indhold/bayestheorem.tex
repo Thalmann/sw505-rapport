@@ -61,10 +61,37 @@ Hvor $P(h \mid e)$ er den \emph{posterior} sandsynlighed, $P(e \mid h)$ er \emph
 
 
 
-\subsection{Binary Bayes filters}
+\subsection{Binære Bayes filtre med statisk tilstand}
+I tilfælde hvor tilstanden er statisk, for eksempel en verden uden bevægelige objekter som andre robotter eller personer.
+Her kan en \textit{belief} på en given statisk tilstand beskrives som:
+\begin{equation}
+bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
+\end{equation}
 
+Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
+Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
+Bemærk desuden at kontrol data $u_{1:t}$ er overflødig, da lokationen til enhver tid er kendt.
 
 \subsubsection{Log Odds}
+For at overkomme eventuelle afrundings-unøjagtigheder, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
 
+\begin{equation}
+l(x) = \log \frac{p(x)}{1 - p(x)}
+\end{equation}
 
+For igen at få vores \textit{belief} tilbage ud fra en \textit{log odds}, benyttes følgende ligning:
+\begin{equation}
+bel_t(x) = 1 - \frac{1}{1 + exp\{l_t\}}
+\end{equation}
 
+\subsubsection{Opdateringsalgoritmen}
+Opdateringsalgoritmen tager \textit{log odds} for en \textit{posterior belief} for en celle samt en ny sensor-måling, hvor ud fra der returneres en ny belief med \textit{log odds} af sandsynligheden for om hvorvidt cellen er optaget.
+Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
+
+\begin{algorithm}[h]
+\textbf{BinaryBayesFilter($l_{t-1}, z_t$)} \\
+\Indp $l_t = l_{t-1} + \log \frac{p(x \mid z_t)}{1-p(x \mid z_t)} - \log \frac{p(x)}{1-p(x)}$ \\
+\Return{$l_t$}
+\caption{Binært Bayes filter algoritme}
+\label{alg:binaerbayesfilter}
+\end{algorithm}
