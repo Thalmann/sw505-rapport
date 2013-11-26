@@ -62,18 +62,18 @@ De resterende pixels betegnes herefter som \emph{interessante pixels}.
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
 \subsection{Forbedringer}
-For at teste implementationen af ovenstående blev det forsøgt at lokalisere forskellige farver for varienrende $\rho$-værdier.
+For at teste implementationen af ovenstående blev det forsøgt at lokalisere forskellige farver for varierende $\rho$-værdier.
 Af dette fremgik det tydeligt at metoden var effektiv til genkendelse af farver.
 Der blev dog ved testen introduceret to problemstillinger:
 \begin{enumerate}
 \item Dele af billedet indeholdt \emph{Farve-støj}.
 Ved farvestøj forstås pixels der ligger i tæt farve-afstand til den søgte farve, men langt fra det eftersøgte objekt.
-\item Funktionens opdaterings hastighed var ikke tilfredsstillinde (\mikkel{Indsæt fps}).
+\item Funktionens opdaterings hastighed var ikke tilfredsstillinde (0-3 billeder i sekundet).
 Omend intet krav var stillet til opdaterings hastigheden er det dog nødvendigt til enhver tid at kunne beskrive robottens lokation.
-Ved lave opdaterings hastigheder bliver ændringerne i robottens lokation for høje (robotten flytter sig op til \mikkel{Indsæt tal} cm mellem to billeder).
+Ved lave opdaterings hastigheder bliver ændringerne i robottens lokation for høje (robotten flytter sig op til 30 cm mellem to billeder).
 \end{enumerate}
 
-\mikkel{Indsæt evt. billede af tracking}
+\mikkel{Indsæt evt. sort/hvid billede af tracking}
 
 \subsubsection{Filtrering af støj}
 %Beskrivelse af implementationen af mean-filter
