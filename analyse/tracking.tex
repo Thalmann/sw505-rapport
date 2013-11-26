@@ -103,12 +103,19 @@ Herefter anses støjen som fjernet.
 
 \subsubsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
+Som løsning på problemet med lys og skygge foretages en løbende opdatering af den farve der søges efter.
+Dette gøres ved, for hver opdatering, at finde den højeste vægt (efter filtrering) og dermed den farve der er tættest på den søgte farve.
+Denne farve anvendes efterfølgende som den søgte farve.
+På denne måde opdateres den søgte farve løbende og tilpasser sig dermed de forskellige lys/skygge forhold.
 
 \subsubsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
 
 \subsection{Justering}\label{tracking:adjust}
 %Beskrivelse af diverse thresholds og hvilke værdier "der fungerer"
+%
+%%Bemærk at implementationen af farve-afstand og afgrænset område forudsætter 'høj' fps
+%
 %Distance threshold: \rho
 %Neighbour threshold: \sigma
 %
