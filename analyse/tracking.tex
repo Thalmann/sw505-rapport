@@ -58,10 +58,22 @@ Ved at undersøge alle pixels i et billede fra kinect'en ud fra en bestemt farve
 Vægten af en pixel beskriver hvor interessant den er.
 Således er pixels med vægt 0 ikke interessante.
 De resterende pixels betegnes herefter som \emph{interessante pixels}.
+
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
 \subsection{Forbedringer}
-%Introduktion til de følgende underafsnit
+For at teste implementationen af ovenstående blev det forsøgt at lokalisere forskellige farver for varienrende $\rho$-værdier.
+Af dette fremgik det tydeligt at metoden var effektiv til genkendelse af farver.
+Der blev dog ved testen introduceret to problemstillinger:
+\begin{enumerate}
+\item Dele af billedet indeholdt \emph{Farve-støj}.
+Ved farvestøj forstås pixels der ligger i tæt farve-afstand til den søgte farve, men langt fra det eftersøgte objekt.
+\item Funktionens opdaterings hastighed var ikke tilfredsstillinde (\mikkel{Indsæt fps}).
+Omend intet krav var stillet til opdaterings hastigheden er det dog nødvendigt til enhver tid at kunne beskrive robottens lokation.
+Ved lave opdaterings hastigheder bliver ændringerne i robottens lokation for høje (robotten flytter sig op til \mikkel{Indsæt tal} cm mellem to billeder).
+\end{enumerate}
+
+\mikkel{Indsæt evt. billede af tracking}
 
 \subsubsection{Filtrering af støj}
 %Beskrivelse af implementationen af mean-filter
