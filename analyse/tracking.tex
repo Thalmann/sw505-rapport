@@ -68,7 +68,7 @@ For at teste implementationen af ovenstående blev det forsøgt at lokalisere fo
 Af dette fremgik det tydeligt at metoden var effektiv til genkendelse af farver.
 Der blev dog ved testen introduceret tre problemstillinger:
 \begin{enumerate}
-\item Dele af billedet indeholdt \emph{Farve-støj}.
+\item Dele af billedet indeholdt \emph{farve-støj}.
 Ved farvestøj forstås pixels der ligger i tæt farve-afstand til den søgte farve, men langt fra det eftersøgte objekt.
 \item Farveændringer som følge af lys/skygge.
 I takt med at robotten bevæger sig vil lys falde forskelligt på de farvede overflade.
@@ -84,6 +84,22 @@ I \cref{tracking:adjust} beskrives resultatet af indførelsen af disse metoder.
 
 \subsubsection{Filtrering af støj}
 %Beskrivelse af implementationen af mean-filter
+Den beskrevne \emph{farve-støj} der opstår i visse billeder fjernes ved at anvende en variation af et 3x3 median-filter\cite{medianfilter}.
+I filteret betragtes alle værdier som binære (0 eller ikke 0).
+Midten af boksen erstattes af 0 hvis kun få naboer ikke har værdien 0.
+Variablen $\sigma$ indføres her til at beskrive ''få naboer``.
+Lad $w_{x,y}$ beskrive værdien vægten af den pixel i et billede der har koordinat-sæt $x,y$ og $N_{x,y}$ beskrive de \emph{højst} 8 nabo-vægte til dette koordinat-sæt, da kan filteret beskrives således:
+\begin{equation}
+w_{x,y}' = \left\{ 
+  \begin{array}{r l}
+        0 & \quad \text{hvis $|V_{x,y}| < \sigma$} \\
+        w_{x,y} & \quad \text{hvis $|V_{x,y}| \geq \sigma$}
+  \end{array} \right.
+\end{equation}
+$$\text{hvor } V_{x,y} = \{ w \in N_{x,y} \mid w > 0 \}$$
+Ved at anvende ovenstående filter på alle koordinat-sæt fjernes noget af den uønskede farve-støj.
+Filteret påføres gentagne gange, indtil ingen vægte opdateres.
+Herefter anses støjen som fjernet.
 
 \subsubsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
