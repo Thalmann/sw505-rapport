@@ -62,8 +62,8 @@ Hvor $P(h \mid e)$ er den \emph{posterior} sandsynlighed, $P(e \mid h)$ er \emph
 
 
 \subsection{Binære Bayes filtre med statisk tilstand}
-I tilfælde hvor tilstanden er statisk, for eksempel en verden uden bevægelige objekter som andre robotter eller personer.
-Her kan en \textit{belief} på en given statisk tilstand beskrives som:
+I tilfælde hvor tilstanden er statisk, kan der anvendes binære Bayes filtre.
+Her kan en \textit{belief} på en given tilstand $x$ beskrives som:
 \begin{equation}
 bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
 \end{equation}
@@ -85,7 +85,7 @@ bel_t(x) = 1 - \frac{1}{1 + exp\{l_t\}}
 \end{equation}
 
 \subsubsection{Opdateringsalgoritmen}
-Opdateringsalgoritmen tager \textit{log odds} for en \textit{posterior belief} for en celle samt en ny sensor-måling, hvor ud fra der returneres en ny belief med \textit{log odds} af sandsynligheden for om hvorvidt cellen er optaget.
+Opdateringsalgoritmen tager \textit{log odds} for en \textit{posterior belief} samt en ny sensor-måling, hvor ud fra der returneres en \textit{log odds} for en ny \textit{belief}.
 Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
 
 \begin{algorithm}[h]
