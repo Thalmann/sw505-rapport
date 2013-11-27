@@ -24,7 +24,7 @@ For at begrænse mængden af celler der skal beregnes ved en opdatering af et oc
 
 Da der nu er et problem af denne type for hver celle kan man nøjes med kun at opdatere de celler der er ny information om.
 
-Som i det originale binære filter \stefan{reference til binært filter} benyttes log odds repræsentationen til at udtrykke om en celle er optaget
+Som i det originale binære filter (se evt. \cref{bayes_binaerfiltre}) benyttes log odds repræsentationen til at udtrykke om en celle er optaget
 
 \[ l_{t,i} = log{ \frac{p(m_i \mid z_{1:t}, x_{1:t})}{1 - p(m_i \mid z_{1:t}, x_{1:t})}} \]
 
@@ -53,8 +53,6 @@ OccupancyGridMapping( \{$ l_{t-1,i} $ \}, $ x_t $, $ z_t $):
 \Return {$ l_{t,i} $}
 \caption{Occupancy grid opdateringsalgoritmen}\label{occupancygrid:alg}
 \end{algorithm}
-\stefan{inkonsistens? Dette er skrevet som pseudo, mens inverse er skrevet i en listing}
-\stefan{parametre i denne algoritme stemmer ikke overens med parametrene brugt i \cref{mapping:sensormodel}}
 
 
 
