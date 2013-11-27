@@ -42,13 +42,13 @@ Værdien $ l_0 $ er den a priori værdi for om cellen er optaget repræsenteret 
 \LinesNumbered
 OccupancyGridMapping( \{$ l_{t-1,i} $ \}, $ x_t $, $ z_t $):
 
-\ForAll{cells in $ m_i $}
+\ForAll{cells $ m_i $}
 {
-\eIf{$ m_i $ is in perceptual field of $ z_t $ \;}
+\eIf{$ m_i $ is in perceptual field of $ z_t $ \\}
 %then
-{ $ l_{t,i} = l_{t-1,i} $ + \textbf{inverse\_sensor\_model} $( m_i, x_t, z_t ) - l_0$\; }
+{ $ l_{t,i} = l_{t-1,i} $ + \textbf{inverse\_sensor\_model} $( m_i, x_t, z_t ) - l_0$\\ }
 %else
-{ $ l_{t,i} = l_{t-1,i}  $\; }
+{ $ l_{t,i} = l_{t-1,i}  $\\ }
 }
 \Return {$ l_{t,i} $}
 \caption{Occupancy grid opdateringsalgoritmen}\label{occupancygrid:alg}
