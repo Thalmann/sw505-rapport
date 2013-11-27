@@ -151,10 +151,10 @@ På \cref{map:particles1} ses en mulig mængde partikler genereret ud fra et fly
 
 % generelt omkring inverse sensor modeller.
 
-\subsection{Vertikal og horizontal sensor model}
-
-Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser.
-Kan vi konstruere en forholdsvis simpel basal sensormodel.
+\subsection{Vertikal og horisontal sensor model}
+\stefan{kildehenvisning}
+Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser,
+kan vi konstruere en forholdsvis simpel basal sensormodel.
 Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
 
 $$r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid$$
@@ -170,7 +170,7 @@ $$l_{res} = \begin{cases}
 Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
 Modellen vil se således ud beskrevet i pseudokode.
 
-\begin{lstlisting}[style=c, caption={Basal Sensor Model}, breaklines=true]
+\begin{lstlisting}[style=c, caption={Basal Sensor Model}, breaklines=true, label=mapping:sensormodel]
 
 Sensormodel(x,y,xi,yi,z) {
 
