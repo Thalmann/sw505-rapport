@@ -1,9 +1,13 @@
 % !TeX spellcheck = da_DK
+\section{Occupancy Grid algoritmen}
+Dette afsnit vil gennemgå algoritmen der skal opdatere et occupancy grid.
+Algoritmen er taget fra \cite[p.~xxx]{probabilisticRobotics}
+\stefan{indsæt sidehenvisning fra bogen til 9.2}
 Formålet med \textit{occupancy grid} algoritmen er at beregne	et nyt kort ud fra et kort og en samling data:
 
 \[ p(m \mid z_{1:t}, x_{1:t}) \]
 
-hvor m er et kort, $ z_{1:t} $ er mængden af målinger op til tiden t og $ x_{1:t} $ er robottons rute i form af en følge af \textit{pose}.
+hvor m er et kort, $ z_{1:t} $ er mængden af målinger op til tiden t og $ x_{1:t} $ er robottons rute i form af en følge af \textit{poses}.
 
 Kortet er inddelt i et finit antal celler.
 Hver celle kan findes ved $ m_i $ hvor i er cellens indeks. 
@@ -17,4 +21,41 @@ Værdien 1 betegner \textit{occupied} mens 0 betegner \textit{free}.
 For at begrænse mængden af celler der skal beregnes ved en opdatering af et occupancy grid nedbrydes problemet til en mængde delproblemer af formen
 
 \[ p(m_i \mid z_{1:t}, x_{1:t}) \]
+
+Da der nu er et problem af denne type for hver celle kan man nøjes med kun at opdatere de celler der er ny information om.
+
+Som i det originale binære filter \stefan{reference til binært filter} benyttes log odds repræsentationen til at udtrykke om en celle er optaget
+
+\[ l_{t,i} = log{ \frac{p(m_i \mid z_{1:t}, x_{1:t})}{1 - p(m_i \mid z_{1:t}, x_{1:t})}} \]
+
+Sandsynligheden findes ud fra log odds repræsentationen ved
+
+\[ p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} } \]
+
+\Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler der er relevante for en aktuel sensormåling. 
+Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}. 
+Værdien $ l_0 $ er den a priori værdi for om cellen er optaget repræsenteret som log odds
+
+\[ l_0 =  log \frac{p(m_i = 1)}{p(m_i = 0)} = log \frac{p(m_i)}{1- p(m_i)} \]
+
+\begin{algorithm}[H]
+\LinesNumbered
+OccupancyGridMapping( \{$ l_{t-1,i} $ \}, $ x_t $, $ z_t $):
+
+\ForAll{cells in $ m_i $}
+{
+\eIf{$ m_i $ is in perceptual field of $ z_t $ \;}
+%then
+{ $ l_{t,i} = l_{t-1,i} $ + \textbf{inverse\_sensor\_model} $( m_i, x_t, z_t ) - l_0$\; }
+%else
+{ $ l_{t,i} = l_{t-1,i}  $\; }
+}
+\Return {$ l_{t,i} $}
+\caption{Occupancy grid opdateringsalgoritmen}\label{occupancygrid:alg}
+\end{algorithm}
+\stefan{inkonsistens? Dette er skrevet som pseudo, mens inverse er skrevet i en listing}
+\stefan{parametre i denne algoritme stemmer ikke overens med parametrene brugt i \cref{mapping:sensormodel}}
+
+
+
 
