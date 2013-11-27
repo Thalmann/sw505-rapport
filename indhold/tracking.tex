@@ -3,6 +3,7 @@
 Til lokalisering af robotten anvendes (som nævnt i \cref{}) en \kinect.
 Denne er udstyret med et farvekamera (jvf. \cref{kinect:farvekamera}) der vil blive anvendt til at bestemme robottens placering.
 Ved at udstyre robotten med to mærkninger i klare farver vil det på billeder fra kinect'en være muligt at lokalisere robotten.
+
 I det følgende beskrives den anvendte metode til lokalisering af robotten.
 Først beskrives den overordnede metode, hvorefter forbedringer af metoden præsenteres.
 
@@ -16,10 +17,10 @@ Det er altså målet at finde de dele af et enkelt billede der matcher bestemte 
 \paragraph{Match af farver}
 For at vurdere om to farver matcher hinanden må det først gøres klart at det ikke kan forventes at matche en farve eksakt.
 Til dette spiller faktorer som lys og skygge for stor en rolle.
-Istedet tages der udgangspunkt i en søgt farve og ud fra denne ledes der efter alle \textit{nære} farver.
+Istedet tages der udgangspunkt i en søgt farve, og ud fra denne ledes der efter alle \textit{nære} farver.
 Til dette formål betragtes den farve-repræsentation der arbejdes med.
 Farver repræsenteres ved tre værdier; rød, grøn og blå (også kaldet RGB), der angiver alle de mulige farver for en pixel i et billede.
-Ved at betragte de tre farver som hver sin dimension i et tredimensionelt rum kan farver repræsenteres som vektorer.
+Ved at betragte de tre farver som hver sin dimension i et tredimensionelt rum, kan farver repræsenteres som vektorer.
 Hermed bliver det muligt at tale om forskellen på to farver som \textit{afstanden mellem to farver}.
 
 \begin{figure}
@@ -88,7 +89,7 @@ Den beskrevne \emph{farve-støj} der opstår i visse billeder fjernes ved at anv
 I filteret betragtes alle værdier som binære (0 eller ikke 0).
 Midten af boksen erstattes af 0 hvis kun få naboer ikke har værdien 0.
 Variablen $\sigma$ indføres her til at beskrive ''få naboer``.
-Lad $w_{x,y}$ beskrive værdien vægten af den pixel i et billede der har koordinat-sæt $x,y$ og $N_{x,y}$ beskrive de \emph{højst} 8 nabo-vægte til dette koordinat-sæt, da kan filteret beskrives således:
+Lad $w_{x,y}$ beskrive vægten af den pixel i et billede der har koordinat-sæt $x,y$ og $N_{x,y}$ beskrive de \emph{højst} 8 nabo-vægte til dette koordinat-sæt, da kan filteret beskrives således:
 \begin{equation}\label{tracking:eq:filter}
 w_{x,y}' = \left\{ 
   \begin{array}{r l}
@@ -110,14 +111,14 @@ På denne måde opdateres den søgte farve løbende og tilpasser sig dermed de f
 
 \subsubsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
-En simpel løsning til at løse et problem hurtigere er at reducere problemets størrelse.
+En simpel løsning på at optimere tiden det tager at afsøge billedet, er ved at reducere problemets størrelse.
 Som et led i lokaliseringen bestemmes den mindste firkant der spændes over alle interessant pixels.
 Ved næste opdatering tages der udgangspunkt i at robotten ikke har bevæget sig meget.
-Problemet kan derfor reduceres til kun at løse samme problem for et mindre billede.
+Problemet kan derfor reduceres til kun at løse samme problem, men for et mindre billede.
 Omend robotten ikke bevæger sig meget, er det naturligvis nødvendigt at opfange den lille ændring der måtte være.
 Derfor skal ovennævnte firkant udvides til at spænde over robottens opdaterede position.
 
-På denne måde reduceres problemet og det kan derfor løses hurtigere.
+På denne måde reduceres problemet, og det kan derfor løses hurtigere.
 Bemærk at der i denne løsningsmetode tages udgangspunkt i at robotten bevæger sig korte afstande mellem opdateringer.
 Da den ønskede effekt af at indføre denne metode er hurtigere opdateringer af robottens lokation, vil afstanden robotten kan bevæge sig mellem opdateringer også reduceres.
 Der indføres her endnu en variabel $\omega$, der skal beskrive i hvilken grad problemet kan reduceres.
@@ -140,6 +141,13 @@ R^{n'} = \left\{
 \end{equation}
 Herved er det reducerede problems størrelse beskrevet, med udgangspunkt i det forrige problems løsning.
 }
+
+\begin{figure}
+\centering
+\input{./indhold/fig_trackingreduction}
+\caption{Søgning efter robotten begrænset til $\omega$ nærmeste pixels.}
+\label{tracking:reduction}
+\end{figure}
 
 \subsection{Justering}\label{tracking:adjust}
 %Beskrivelse af diverse thresholds og hvilke værdier "der fungerer"
