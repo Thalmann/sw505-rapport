@@ -110,6 +110,36 @@ På denne måde opdateres den søgte farve løbende og tilpasser sig dermed de f
 
 \subsubsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
+En simpel løsning til at løse et problem hurtigere er at reducere problemets størrelse.
+Som et led i lokaliseringen bestemmes den mindste firkant der spændes over alle interessant pixels.
+Ved næste opdatering tages der udgangspunkt i at robotten ikke har bevæget sig meget.
+Problemet kan derfor reduceres til kun at løse samme problem for et mindre billede.
+Omend robotten ikke bevæger sig meget, er det naturligvis nødvendigt at opfange den lille ændring der måtte være.
+Derfor skal ovennævnte firkant udvides til at spænde over robottens opdaterede position.
+
+På denne måde reduceres problemet og det kan derfor løses hurtigere.
+Bemærk at der i denne løsningsmetode tages udgangspunkt i at robotten bevæger sig korte afstande mellem opdateringer.
+Da den ønskede effekt af at indføre denne metode er hurtigere opdateringer af robottens lokation, vil afstanden robotten kan bevæge sig mellem opdateringer også reduceres.
+Der indføres her endnu en variabel $\omega$, der skal beskrive i hvilken grad problemet kan reduceres.
+Reduceres problemet ikke tilstrækkeligt, vil robotten stadig bevæge sig for store afstande i mellem opdateringer.
+Reduceres problemet derimod for meget, vil det reducerede problem ikke være af tilstrækkelig størrelse til at opfange ændringerne i robottens position.
+Herunder følger en beskrivelse af indførelsen af $\omega$:
+
+Lad $R^n$ være den firkant der spænder over alle interessante vægte i løsningen af et problem.
+Denne defineres ved to diagonalt modsatte punkter:
+{
+\newcommand{\cvec}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
+
+$$R^n = \left\{\cvec{x_1}{y_1}, \cvec{x_2}{y_2}\right\} \mid x_1 \leq x_2 , y_1 \leq y_2$$
+Ud fra denne definition kan det reducere problems størrelse $R^{n'}$ nu defineres:
+\begin{equation}
+R^{n'} = \left\{
+	\cvec{R^n_{x_1}-\omega}{R^n_{y_1}-\omega},
+	\cvec{R^n_{x_2}+\omega}{R^n_{y_2}+\omega}
+\right\}
+\end{equation}
+Herved er det reducerede problems størrelse beskrevet, med udgangspunkt i det forrige problems løsning.
+}
 
 \subsection{Justering}\label{tracking:adjust}
 %Beskrivelse af diverse thresholds og hvilke værdier "der fungerer"
@@ -118,6 +148,7 @@ På denne måde opdateres den søgte farve løbende og tilpasser sig dermed de f
 %
 %Distance threshold: \rho
 %Neighbour threshold: \sigma
+%Inflation 'threshold': \omega
 %
 %640x480 - NoBounds
 %3-4fps, 5-10cm
