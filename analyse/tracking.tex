@@ -143,6 +143,23 @@ Herved er det reducerede problems størrelse beskrevet, med udgangspunkt i det f
 
 \subsection{Justering}\label{tracking:adjust}
 %Beskrivelse af diverse thresholds og hvilke værdier "der fungerer"
+Af de forrige afsnit fås tre variable, der søges justeret således at de løser de beskrevne problemer tilfredsstillende.
+Herunder listes de tre variable, samt en beskrivelse af deres betydning og endelig justering.
+
+Bemærk at de værdier der tildeles de tre variable \emph{ikke} er uafhængige.
+Ændringer i $\omega$ har således betydning for opdaterings hastigheden, hvilken igen har betydning for $\rho$.
+Ligeledes har $\rho$ betydning for hvor hvilke pixels der er interessante samt i hvor høj grad der findes støj i de udregnede vægte, hvilket har betydning for $\sigma$ etc.
+
+Værdierne er derfor justeret i takt med at de forskellige løsninger er implementeret og det er dermed de endelige værdier der er listet herunder.
+
+\begin{description}
+\item[Farve afstand (${\boldsymbol{\rho}}$)]
+
+\item[Filter \textit{naboer} ($\boldsymbol{\sigma}$)]
+
+\item[Problem reduktion ($\boldsymbol{\omega}$)]
+
+\end{description}
 %
 %%Bemærk at implementationen af farve-afstand og afgrænset område forudsætter 'høj' fps
 %
@@ -162,4 +179,3 @@ Herved er det reducerede problems størrelse beskrevet, med udgangspunkt i det f
 %1280x960 - Bounded
 %12fps, <1cm
 %
-\mikkel{Resultater af colortracking-test}
