@@ -61,10 +61,46 @@ Hvor $P(h \mid e)$ er den \emph{posterior} sandsynlighed, $P(e \mid h)$ er \emph
 
 
 
-\subsection{Binary Bayes filters}
+\subsection{Binære Bayes filtre med statisk tilstand}
+I tilfælde hvor tilstanden er statisk, altså hvor verden ikke ændrer sig over tid, kan der anvendes binære Bayes filtre.
+Her kan en \textit{belief} på en given tilstand $x$ beskrives som:
+\begin{equation}
+bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
+\end{equation}
 
+Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
+Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
+Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert tidspunkt $t$, da verden er statisk.
 
 \subsubsection{Log Odds}
+For at overkomme eventuelle afrundings-unøjagtigheder, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
+
+Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$:
+
+\begin{equation}
+\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}
+\end{equation}
+
+Log oddset er logaritmen til forholdet mellem de to sandsynligheder:
+
+\begin{equation}
+l(x) := \log \frac{p(x)}{1 - p(x)}
+\end{equation}
+
+\subsubsection{Opdaterings-algoritmen}
+Opdaterings-algoritmen tager \textit{log odds} for en \textit{posterior belief} for en celle $l_{t-1}$, samt en ny sensor-måling $z_t$, hvor ud fra der returneres en \textit{log odds} for en ny \textit{belief} $l_t$ for cellen.
+Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
+
+\begin{algorithm}[h]
+\textbf{BinaryBayesFilter($l_{t-1}, z_t$)} \\
+\Indp $l_t = l_{t-1} + \log \frac{p(x \mid z_t)}{1-p(x \mid z_t)} - \log \frac{p(x)}{1-p(x)}$ \\
+\Return{$l_t$}
+\caption{Binært Bayes filter algoritme}
+\label{alg:binaerbayesfilter}
+\end{algorithm}
 
 
-
+For at få vores \textit{belief} $bel_t(x)$ tilbage ud fra en \textit{log odds} $l_t$, benyttes følgende ligning:
+\begin{equation}
+bel_t(x) = 1 - \frac{1}{1 + exp\{l_t\}}
+\end{equation}
