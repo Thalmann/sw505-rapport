@@ -6,7 +6,7 @@ Ved at udstyre robotten med to mærkninger i klare farver vil det på billeder f
 I det følgende beskrives den anvendte metode til lokalisering af robotten.
 Først beskrives den overordnede metode, hvorefter forbedringer af metoden præsenteres.
 
-\subsection{Farveforskel}
+\subsection{Farveforskel}\label{tracking:colordiff}
 %Beskrivelse af den metode der anvendes til at beskrive forskellen mellem farver
 Lokalisering af robotten foretages som udgangspunkt ud fra \'et billede.
 Det vil sige, at systemet skal være i stand til at lokalisere robotten ud fra \'et billede alene.
@@ -36,7 +36,7 @@ Altså har vi, for to farver $C_a$ og $C_b$, følgende afstand:
 \begin{equation}
 dist_{C_aC_b} = |C_a - C_b|
 \end{equation}
-Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2}$ (forskellen på hvid og sort).
+Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2} \approx 442$ (forskellen på hvid og sort).
 
 \paragraph{Maksimal afstand}
 Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af hinanden.
@@ -63,7 +63,7 @@ De resterende pixels betegnes herefter som \emph{interessante pixels}.
 
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
-\subsection{Forbedringer}
+\subsection{Forbedringer}\label{tracking:improvements}
 For at teste implementationen af ovenstående blev det forsøgt at lokalisere forskellige farver for varierende $\rho$-værdier.
 Af dette fremgik det tydeligt at metoden var effektiv til genkendelse af farver.
 Der blev dog ved testen introduceret tre problemstillinger:
@@ -89,7 +89,7 @@ I filteret betragtes alle værdier som binære (0 eller ikke 0).
 Midten af boksen erstattes af 0 hvis kun få naboer ikke har værdien 0.
 Variablen $\sigma$ indføres her til at beskrive ''få naboer``.
 Lad $w_{x,y}$ beskrive værdien vægten af den pixel i et billede der har koordinat-sæt $x,y$ og $N_{x,y}$ beskrive de \emph{højst} 8 nabo-vægte til dette koordinat-sæt, da kan filteret beskrives således:
-\begin{equation}
+\begin{equation}\label{tracking:eq:filter}
 w_{x,y}' = \left\{ 
   \begin{array}{r l}
         0 & \quad \text{hvis $|V_{x,y}| < \sigma$} \\
@@ -132,7 +132,7 @@ Denne defineres ved to diagonalt modsatte punkter:
 
 $$R^n = \left\{\cvec{x_1}{y_1}, \cvec{x_2}{y_2}\right\} \mid x_1 \leq x_2 , y_1 \leq y_2$$
 Ud fra denne definition kan det reducere problems størrelse $R^{n'}$ nu defineres:
-\begin{equation}
+\begin{equation}\label{tracking:eq:inflate}
 R^{n'} = \left\{
 	\cvec{R^n_{x_1}-\omega}{R^n_{y_1}-\omega},
 	\cvec{R^n_{x_2}+\omega}{R^n_{y_2}+\omega}
@@ -154,12 +154,65 @@ Værdierne er derfor justeret i takt med at de forskellige løsninger er impleme
 
 \begin{description}
 \item[Farve afstand (${\boldsymbol{\rho}}$)]
+Som nævnt i \cref{tracking:colordiff} er den maksimale afstand mellem to farver 442 (forskellen på sort og hvid).
+Den minimale afstand mellem to farver er 0, hvilket er tilfældet for to ens farver.
+Altså skal $\rho$ bestemmes mellem disse to.
+For den maksimale afstand betragtes alle pixels som interessante, mens det for den minimale kun vil være pixels med den eksakte farve der søges efter.
+Da interessante pixels skal have en farve der er \emph{tæt på} den søgte vil $\rho$ have en værdi tættere på 0.
+Det er ved forsøg bestemt at:
+$$\rho = 50$$
+Altså er farver med afstand større end 50 \emph{ikke} interessante.
+%441,672955930063709849498817084
 
 \item[Filter \textit{naboer} ($\boldsymbol{\sigma}$)]
+I \cref{tracking:improvements} blev det beskrevet at $\sigma$ højst kan være 8, da en pixel har 8 \emph{naboer}.
+Vælges $\sigma = 8$ fremgår det af \cref{tracking:eq:filter} at et sådant filter vil fjerne alt information i billedet.
+Vælges derimod $\sigma = 0$ (som er minimum værdi for $\sigma$) vil filteret ingen effekt have.
+Det er ved forsøg bestemt at:
+$$\sigma = 4$$
+Altså fjernes alle vægte der har under 4 interessante nabo-pixels, ved filtrering.
 
 \item[Problem reduktion ($\boldsymbol{\omega}$)]
-
+Den kraftigste reduktion af problemets størrelse, uden reduktion af $R^n$, vil være $\omega = 0$ (se \cref{tracking:eq:inflate}) der angiver der kun skal søges i den forrige løsnings område, og altså at robotten ikke har flyttet sig.
+Dette betyder reelt, at det må gælde at $\omega > 0$.
+Der er imidlertid ingen øvre grænse for $\omega$, omend det følger naturligt at jo kraftigere en reduktion der kan foretaget, des hurtigere en opdatering kan der ske.
+Det er ved forsøg bestemt at:
+$$\omega = 5$$
+Altså vil firkanten der indkapslede det forrige resultat udvides med 5 pixels i alle fire retninger.
+Igennem forsøg fremgik det tydeligt at reduktionen i størrelse have en kraftig effekt på opdaterings hastigheden.
+Derved kunne $\omega$ sættes lavt og en hurtig opdaterings hastighed kunne opnås.
+I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedredes som følge af $\omega = 5$.
 \end{description}
+
+\subsection{Opdaterings hastighed}\label{tracking:updatespeed}
+Farvebilleder fra kinect'en kan indsamles på to forskellige måder:
+\begin{itemize}
+\item I opløsningen 640x480 ved 30 billeder i sekundet
+\item I opløsningen 1280x960 ved 15 billeder i sekundet
+\end{itemize}
+
+I tabellen herunder præsenteres den opdaterings hastighed der blev opnået i farvesøgning, både med og uden reduktion af problemets størrelse.
+Målingerne herunder er kun \emph{optrentlige}.
+
+{
+\newcommand{\mr}[1]{\multirow{2}{*}{#1}}
+\newcommand{\ce}[1]{\multicolumn{1}{c|}{#1}}
+
+\begin{center}
+\begin{tabular}{| l | r | r |}
+\hline
+& \ce{Opdateringer} & \ce{Bevægelse}\\
+& \ce{pr. sekund} & \ce{pr. opdatering}\\\hline
+640x480&\mr{$2-3$}&\mr{$5-10$cm}\\
+Ingen reduktion&&\\\hline
+640x480&\mr{$29-30$}&\mr{$<1$cm}\\
+Med reduktion&&\\\hline
+1280x960&\mr{$<1$}&\mr{$20-30$cm}\\
+Ingen reduktion&&\\\hline
+1280x960&\mr{$12-13$}&\mr{$<1$cm}\\
+Med reduktion&&\\\hline
+\end{tabular}
+\end{center}}
 %
 %%Bemærk at implementationen af farve-afstand og afgrænset område forudsætter 'høj' fps
 %
