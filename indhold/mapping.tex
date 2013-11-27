@@ -172,7 +172,7 @@ Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
 Modellen vil se således ud beskrevet i pseudokode:
 
 \begin{algorithm}[H]
-\textbf{BinaryBayesFilter($i, x_t, z_t$)} \\
+\textbf{InversSensorModel($i, x_t, z_t$)} \\
 Let $x_i,y_i$ be the center-of-mass of $m_i$ \\
 $r = |x_i - x + y_i - y|$ \\
 \If{$r > min(z_{max}, z_t + \frac{\alpha}{2}$)}{
