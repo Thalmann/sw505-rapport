@@ -169,28 +169,24 @@ $$l_{res} = \begin{cases}
 \end{cases}$$
 
 Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
-Modellen vil se således ud beskrevet i pseudokode.
+Modellen vil se således ud beskrevet i pseudokode:
 
-\begin{lstlisting}[style=c, caption={Basal Sensor Model}, breaklines=true, label=mapping:sensormodel]
-
-Sensormodel(x,y,xi,yi,z) {
-
-  r = abs(xi - x + yi - y);  
-  
-  if(r > min(MAXIMUM_SENSOR_RANGE, z+AVG_OBJECT_DEPTH/2)) {
-  
-    // cell is out of bounds.
-    return DEFAULT_VALUE;
-    
-  } else if (z-AVG_OBJECT_DEPTH/2 <= r <= z+AVG_OBJECT_DEPTH/2) {
-
-    return OCCUPIED_CELL_VALUE;
-  } else {    
-    
-  	return FREE_CELL_VALUE;
-  }
+\begin{algorithm}[H]
+\textbf{InversSensorModel($i, x_t, z_t$)} \\
+Let $x_i,y_i$ be the center-of-mass of $m_i$ \\
+$r = |x_i - x + y_i - y|$ \\
+\If{$r > min(z_{max}, z_t + \frac{\alpha}{2}$)}{
+	\Return{$l_0$}
 }
-\end{lstlisting}
+\ElseIf{$z_t - \frac{\alpha}{2} \le r \le z + \frac{\alpha}{2}$}{
+	\Return{$l_{occ}$}
+}
+\Else{
+	\Return{$l_{free}$}
+}
+\caption{Invers sensor model algoritme}
+\label{alg:inversesensormodel}
+\end{algorithm}
 
 \subsubsection{Gaussisk sensor model}
 
