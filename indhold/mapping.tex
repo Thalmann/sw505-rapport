@@ -107,26 +107,25 @@ På den måde samles partiklerne omkring de tilstande som er de mest sandsynlige
 \centering
 	\begin{subfigure}[b]{.45\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{verden/oppefra}
+	\includegraphics[width=\textwidth]{particles1.png}
 	\caption{Initierende tilstand af partikler}
 	\label{map:particles1}
-	\end{subfigure}
+	\end{subfigure}\hspace{1em}
 	\begin{subfigure}[b]{.45\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{verden/occupancy_grid_verden}
+	\includegraphics[width=\textwidth]{particles2.png}
 	\caption{Vægtede partikler efter sampling}
 	\label{map:particles2}
 	\end{subfigure}
 \caption{Illustration af et partikel filter der benytter re-sampling til at opdatere vægtede partikler. 
 På \cref{map:particles1} ses en mulig mængde partikler genereret ud fra et flys placering.
-\Cref{map:particles2} viser opdatering af partikler efter flyet har flyttet sig, hvor tilstanden findes ud fra flyets afstand til jorden (med en vis måleusikkerhed).
-\thilemann{skal lige have lavet de to billeder...}}
+\Cref{map:particles2} viser opdatering af partikler efter flyet har flyttet sig, hvor tilstanden findes ud fra flyets afstand til jorden (med en vis måleusikkerhed).}
 \label{map:particles}
 \end{figure}
 
 \subsection{Sammenligning}
+\thilemann{Forslag til sammenligning}
 \begin{itemize}
-
 % Lidt ideer til hvad man kan sammenligne
 \item occupancy grids benyttes til mapping (lave et map)
 	\begin{itemize}
