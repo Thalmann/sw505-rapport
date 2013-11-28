@@ -139,7 +139,7 @@ R^{n'} = \left\{
 	\cvec{R^n_{x_2}+\omega}{R^n_{y_2}+\omega}
 \right\}
 \end{equation}
-Herved er det reducerede problems størrelse beskrevet, med udgangspunkt i det forrige problems løsning.
+Herved er det reducerede problems størrelse, beskrevet med udgangspunkt i det forrige problems løsning som illustreret på \cref{tracking:reduction}.
 }
 
 \begin{figure}
@@ -154,11 +154,11 @@ Herved er det reducerede problems størrelse beskrevet, med udgangspunkt i det f
 Af de forrige afsnit fås tre variable, der søges justeret således at de løser de beskrevne problemer tilfredsstillende.
 Herunder listes de tre variable, samt en beskrivelse af deres betydning og endelig justering.
 
-Bemærk at de værdier der tildeles de tre variable \emph{ikke} er uafhængige.
+Bemærk at værdierne der tildeles variablerne \emph{ikke} er uafhængige.
 Ændringer i $\omega$ har således betydning for opdaterings hastigheden, hvilken igen har betydning for $\rho$.
 Ligeledes har $\rho$ betydning for hvor hvilke pixels der er interessante samt i hvor høj grad der findes støj i de udregnede vægte, hvilket har betydning for $\sigma$ etc.
 
-Værdierne er derfor justeret i takt med at de forskellige løsninger er implementeret og det er dermed de endelige værdier der er listet herunder.
+Værdierne er derfor justeret i takt med at de forskellige løsninger er implementeret, hvorfor de endelige værdier kan ses herunder.
 
 \begin{description}
 \item[Farve afstand (${\boldsymbol{\rho}}$)]
@@ -166,10 +166,10 @@ Som nævnt i \cref{tracking:colordiff} er den maksimale afstand mellem to farver
 Den minimale afstand mellem to farver er 0, hvilket er tilfældet for to ens farver.
 Altså skal $\rho$ bestemmes mellem disse to.
 For den maksimale afstand betragtes alle pixels som interessante, mens det for den minimale kun vil være pixels med den eksakte farve der søges efter.
-Da interessante pixels skal have en farve der er \emph{tæt på} den søgte vil $\rho$ have en værdi tættere på 0.
+Da interessante pixels skal have en farve der er \emph{tæt på} den søgte, vil $\rho$ have en værdi tættere på 0.
 Det er ved forsøg bestemt at:
 $$\rho = 50$$
-Altså er farver med afstand større end 50 \emph{ikke} interessante.
+Hvilket angiver at farver med afstand større end 50 \emph{ikke} er interessante at betragte i løsningen.
 %441,672955930063709849498817084
 
 \item[Filter \textit{naboer} ($\boldsymbol{\sigma}$)]
@@ -178,16 +178,16 @@ Vælges $\sigma = 8$ fremgår det af \cref{tracking:eq:filter} at et sådant fil
 Vælges derimod $\sigma = 0$ (som er minimum værdi for $\sigma$) vil filteret ingen effekt have.
 Det er ved forsøg bestemt at:
 $$\sigma = 4$$
-Altså fjernes alle vægte der har under 4 interessante nabo-pixels, ved filtrering.
+Som fjerner alle vægte med færre end 4 interessante nabo-pixels.
 
 \item[Problem reduktion ($\boldsymbol{\omega}$)]
 Den kraftigste reduktion af problemets størrelse, uden reduktion af $R^n$, vil være $\omega = 0$ (se \cref{tracking:eq:inflate}) der angiver der kun skal søges i den forrige løsnings område, og altså at robotten ikke har flyttet sig.
-Dette betyder reelt, at det må gælde at $\omega > 0$.
-Der er imidlertid ingen øvre grænse for $\omega$, omend det følger naturligt at jo kraftigere en reduktion der kan foretaget, des hurtigere en opdatering kan der ske.
+Dette betyder reelt at det må gælde at $\omega > 0$.
+Der er imidlertid ingen øvre grænse for $\omega$, omend det følger naturligt at jo kraftigere en reduktion der foretages, des hurtigere kan en opdatering ske.
 Det er ved forsøg bestemt at:
 $$\omega = 5$$
-Altså vil firkanten der indkapslede det forrige resultat udvides med 5 pixels i alle fire retninger.
-Igennem forsøg fremgik det tydeligt at reduktionen i størrelse have en kraftig effekt på opdaterings hastigheden.
+Altså vil firkanten der indkapslede det forrige resultat udvides med 5 pixels i alle fire retninger (\cref{tracking:reduction}).
+Igennem forsøg fremgik det tydeligt at reduktionen i størrelse har en kraftig effekt på opdaterings hastigheden.
 Derved kunne $\omega$ sættes lavt og en hurtig opdaterings hastighed kunne opnås.
 I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedredes som følge af $\omega = 5$.
 \end{description}
