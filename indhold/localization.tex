@@ -47,8 +47,8 @@ Robottens centrum, og derved lokation, vil være i præcist én pixel.
 For at robotten skal kunne bruge denne til at navigere i den virkelige verden, er det nødvendigt at omregne pixel(-koordinat) til reelt koordinat.
 
 Den overordnede idé er at bruge reglen om ensvinklede trekanter, da det der gås ud fra, er situationen som kan ses i \cref{fig:kameratrekant}.
-Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinect'en er det 57\dg i bredden og 43\dg i højden.
-$d$ er afstand mellem kamera og den overflade der skal bruges.
+Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinect'en er det $57^\circ$ i bredden og $43^\circ$ i højden.
+$v$ er blot med for at vise at der er tale om ensvinklede trekanter.
 $x_1$ er størrelse af den givne dimension for det billede der dannes af Kinect'en.
 $x_2$ er tilsvarende $x_1$, blot den reelle størrelse af det billede der gives.
 
@@ -60,15 +60,13 @@ $x_2$ er tilsvarende $x_1$, blot den reelle størrelse af det billede der gives.
 \coordinate (A) at (0,0);
 \coordinate (B) at (2,6);
 \coordinate (C) at (4,0);
-\coordinate (mAC) at (2,0);
 \coordinate (A2) at (1,3);
 \coordinate (C2) at (3,3);
 
-\draw [dashed] (mAC) -- (B) node [midway,left,yshift=-1cm] {$d$};
-\draw (A) -- (B);
-\draw (B) -- (C);
+\draw [dashed] (A) -- (B);
+\draw [dashed] (B) -- (C);
 \draw (A) -- (C) node [midway,below] {$x_2$};
-\draw (A2) -- (C2) node [midway,below,xshift=0.3cm] {$x_1$};
+\draw (A2) -- (C2) node [midway,below] {$x_1$};
 \draw ($(B) + (-110:0.55)$) arc (-110:-70:0.55) node [right] {$v$};
 \end{tikzpicture}
 \caption{Situationen med alle de kendte variable}
@@ -97,7 +95,10 @@ Så derved får vi vores koordinat $k = f \cdot p$.
 \coordinate (A2) at (0,3);
 \coordinate (C2) at (1,3);
 \coordinate (mAC) at (1.25,0);
+\coordinate (oldA) at (-2,0);
 
+\draw [dashed,color=gray] (oldA) -- (B);
+\draw [dashed,color=gray] (oldA) -- (A);
 \draw [thick,dotted] (mAC) -- (B);
 \draw (A) -- (B);
 \draw (B) -- (C);
