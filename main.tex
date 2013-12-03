@@ -2,7 +2,6 @@
 
 \begin{document}
 \listoftodos[Todo liste]
-\pagenumbering{roman}
 %Front page
 \begin{titlepage}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -23,11 +22,16 @@
 
 \end{center}
 \end{titlepage}
+
+\pagenumbering{Roman}
+
 \clearpage
 
 \input{frontmatter/titelblad.tex}
 \anders{Er Udvilking af komplekse softwaresystemer den rigtige titel ?}
 \clearpage
+
+\setcounter{page}{4}
 
 \newcommand{\prefaceHeaderName}{Forord}
 \section*{\prefaceHeaderName}
