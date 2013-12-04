@@ -2,7 +2,6 @@
 
 \begin{document}
 \listoftodos[Todo liste]
-\pagenumbering{roman}
 %Front page
 \begin{titlepage}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -24,15 +23,18 @@
 \end{center}
 \end{titlepage}
 
+\pagenumbering{Roman}
+
 \clearpage
 
 \input{frontmatter/titelblad.tex}
-
+\anders{Er Udvilking af komplekse softwaresystemer den rigtige titel ?}
 \clearpage
+
+\setcounter{page}{4}
 
 \newcommand{\prefaceHeaderName}{Forord}
 \section*{\prefaceHeaderName}
-\addcontentsline{toc}{subsection}{\prefaceHeaderName}
 \input{frontmatter/forord.tex}
 
 \clearpage
@@ -61,14 +63,19 @@
 \input{indhold/sensorer}
 \chapter{Microsoft Kinect}
 \input{indhold/kinect}
-\chapter{Sprog}
+\chapter{Frameworks}
 \input{indhold/mindsqualls}
 \input{indhold/NXC}
+
+\clearpage
+\input{indhold/problemformulering}
+
 \part{Teori}
+\chapter{Notation og sandsynlighedsteori}
+\input{indhold/sandsynlighedsteori}
 \chapter{Mapping}
 \input{indhold/mapping}
-\chapter{Bayes sætning}
-\input{indhold/bayestheorem}
+\input{indhold/occalgorithm}
 \chapter{Lokalisering}
 \input{indhold/localization}
 

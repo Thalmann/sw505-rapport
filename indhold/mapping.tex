@@ -3,43 +3,14 @@ Behovet for at fremskaffe et kort over en robots omgivelser vil i den ene eller 
 Det kan f.eks. være et stort udendørs areal man ønsker at bygge et kort over, eller f.eks. robottens eget syn på den verden hvori den bevæger sig.
 
 Der findes flere afprøvede metoder indenfor robotteknik der gør det muligt for en robot at navigere og bygge kort over dens umiddelbare nærmeste omgivelser.
-Dette afsnit vil fokusere på to af disse, navnligt \textit{Occupancy Grid} og \textit{Particle Filters}, og give en overordnet beskrivelse der skal danne grundlag for valget af metode for den fortløbende udvikling af projektet.
-Afslutningsvis vil de to metoder blive sammenlignet for at belyse eventuelle fordele og ulemper ved begge.
-
-\subsection{Notation}
-Da det er ønskværdigt at kunne give en præcis beskrivelse af robottens positur dvs. dens position og retning, vil dette afsnit kort introducere den nødvendige notation, som foreslået af \citet[s.~16-21]{probabilisticRobotics}.
-
-\begin{itemize}
-\item \textbf{Tilstand} betegner den tilstand miljøet er i; altså, robottens positur, omkringliggende objekter som vægge, bygninger osv.. 
-Tilstand kan være \textit{dynamisk} (tilstanden kan ændre sig -- position af en person) og \textit{statisk} (tilstanden ændrer sig ikke -- position af en bygning).
-Tilstand beskrives af variablen $x$, som også indeholder information omkring robotten selv, f.eks. dens \textit{positur}, \textit{hastighed} og dens \textit{sensorer}.
-
-\item \textbf{Tilstand i tiden} $\mathbf{t}$ betegnes af variablen $x_t$ og beskriver den seneste \textit{kendte} tilstand. 
-Den forrige seneste måling angives med $x_{t-1}$ og målingen efter den seneste som $x_{t+1}$.
-
-\item \textbf{Målingsdata} indeholder information om robottens omgivelser til et bestemt tidspunkt. 
-$z_t$ er således målingsdata til tiden \textit{t}. 
-Notationen
-
-$z_{t_1:t_k} = z_{t_1}, z_{t_2}, z_{t_3}, \dots , z_{t_k}$
-
-betegner alle målinger fra tiden \textit{$ t_1 $} til tiden \textit{$ t_k $}
-\item \textbf{Kontrol data} indeholder information om ændring af robottens tilstand. 
-Kontrol data kan for eksempel være robottens hastighed, eller en aflæsning af en motors odometer der fortæller hvor mange omdrejninger hjulet har foretaget.
-$u_t$ betegner ændringen af robottens tilstand i intervallet fra \textit{t-1} til \textit{t}.
-Igen betegner notation
-
-$u_{t_1:t_k} = u_{t_1}, u_{t_2}, u_{t_3}, \dots , u_{t_k}$
-
-mængden af kontrol data fra \textit{$ t_1 $} til \textit{$ t_k $}.
-\end{itemize}
+Dette afsnit vil fokusere på \textit{Occupancy Grid}.
 
 
-\subsection{Occupancy Grids}\label{mapping:occupancy_grid}
+\section{Occupancy Grid}\label{mapping:occupancy_grid}
 Disse er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Da et \textit{occupancy grid map} går ud fra at robottens positur er kendt, kan disse med fordel overvejes til projektet, da dens lokation bestemmes eksternt via et kamera. \cite[s.~224]{probabilisticRobotics}
 
-\subsubsection{Overblik}
+\subsection{Overblik}
 Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær tilfældig variabel der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
 Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på den aktuelle tilstand endnu ikke er kendt.
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
@@ -64,93 +35,6 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:approx_occupancy_grid}
 \end{figure}
 
-\subsubsection{Occupancy Grid Mapping algoritme}
-Den primære grund til at benytte en occupancy grid algoritme er ønsket om at få et estimat af et kort baseret på nogle antagelser om tilstanden af det omkringliggende miljø. Altså,
-\\\\
-\begin{equation}
-\mathcal{P}(m \; | \; z_{1:t}, x_{1:t})
-\end{equation}
-\\\\
-Hvor $m$ angiver kortet, $z_{1:t}$ mængden af alle målinger indtil tiden $t$ og $x_{1:t}$ angiver mængden af positurer for robotten (mængden af positurer over stien den har kørt).
-Viden om robottens kontrol data(essentielt dens fysiske position i kortet) $u_{1:t}$, spiller her ingen rolle, da den i forvejen er kendt via Kinecten.\cite{probabilisticRobotics}
-
-På \cref{map:occupancy_grid} gives et eksempel på en inddeling af et kørselsmiljø i $x \times y$ celler, hvor hvert enkelt celle findes ud fra et indeks $i$, således alle celler (hele kortet) beskrives ved
-\\\\
-\begin{equation}\label{map:occupancy_grid_sum}
-m = \sum\limits_{i} \mathbf{m}_{i}
-\end{equation}
-\\\\
-I \cref{map:occupancy_grid_sum} har hver $\mathbf{m}_i$ en værdi som beskriver om cellen er fri eller ej.
-Herefter vil $\mathcal{P}(occupied) = 0$ således blive beskrevet som $\mathcal{P}(\mathbf{m}i) = 0$, for at kunne beskrive den enkelte celle.
-\thilemann{Ved ikke om det er tilstrækkelig beskrivelse for at kunne sammenligne occupancy grid med particle filters og om der evt. skal indføres mere notation og måske selve occupancy grid algoritmen som angivet i \citet{probabilisticRobotics} kapitel 9.2}
-
-\subsection{Particle Filters}\label{mapping:particle_filter}
-Et partikel filter er en anden tilgang (end den beskrevet i \cref{mapping:occupancy_grid}, \nameref{mapping:occupancy_grid}) der benyttes til at finde posterior af en given verden. 
-Den adskiller sig væsentligt fra occupancy grids, da den kræver et kort med nogle på forhånd givne fikspunkter for at beregne den mest sandsynlige posterior (for en robot kan det være dens position på kortet).
-
-\subsubsection{Overblik}
-En partikel kan karakteriseres som en tilladelig tilstand ud fra en given kontekst, hvor en tilstand f.eks. kan være en robots position og retning.
-For at en tilstand kan være tilladt, kræves det at dens attributter ligger indenfor mulige værdier -- for en robot der trackes på et 2D plan kan retning således ikke være ''op''.
-
-Til at begynde med kræves der en mængde tilladelige partikler, genereret tilfældigt over hele kortet, hvor hver enkelt f.eks. kan svare til følgende vektor $[\mathit{position}, \mathit{retning}]$, hvor hver attribut er en fysisk mulig placering på kortet.
-Da alle disse repræsenterer vores tilstand forskelligt, gives de en vægt for enten at fremme eller degradere den enkelte partikel, baseret på hvor meget den 
-minder om robottens målinger (til et bestemt fikspunkt).
-
-Essensen i partikel filtrering er at filtrere uønskede partikler fra, hvilket gøres ved at sample mængden af partikler ud fra deres vægt; en med lav vægt ''tages ud'' af mængden og plottes ind de steder hvor der i forvejen findes partikler med højere vægt.
-Dette fjerner dem vi ikke er interesseret i, da de ikke var i overensstemmelse med robottens målinger.
-Efter partiklerne er samplet, har de atter samme vægt, og samplingen gentages.
-
-På den måde samles partiklerne omkring de tilstande som er de mest sandsynlige posterior for robotten; dens aktuelle position kan dermed antages at være den tætteste mængde af partikler på kortet.
-
-\begin{figure}[h] % Illustration af particle filter
-\centering
-	\begin{subfigure}[b]{.45\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{verden/oppefra}
-	\caption{Initierende tilstand af partikler}
-	\label{map:particles1}
-	\end{subfigure}
-	\begin{subfigure}[b]{.45\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{verden/occupancy_grid_verden}
-	\caption{Vægtede partikler efter sampling}
-	\label{map:particles2}
-	\end{subfigure}
-\caption{Illustration af et partikel filter der benytter re-sampling til at opdatere vægtede partikler. 
-På \cref{map:particles1} ses en mulig mængde partikler genereret ud fra et flys placering.
-\Cref{map:particles2} viser opdatering af partikler efter flyet har flyttet sig, hvor tilstanden findes ud fra flyets afstand til jorden (med en vis måleusikkerhed).
-\thilemann{skal lige have lavet de to billeder...}}
-\label{map:particles}
-\end{figure}
-
-\subsection{Sammenligning}
-\begin{itemize}
-
-% Lidt ideer til hvad man kan sammenligne
-\item occupancy grids benyttes til mapping (lave et map)
-	\begin{itemize}
-	\item vedligeholder et stokastisk estimat af tilstanden for hver celle
-	\item kompleksiteten er afhængig af antal celler (linær)
-	\item nem at implementere
-	\item bla bla bla
-	\end{itemize}
-	
-\item particle filter benyttes til localization
-	\begin{itemize}
-	\item kræver et kort (har vi ikke)
-	\item tidskompleksiteten er høj hvis der trackes mange dimensioner
-	\item let at implementere (få linjer kode)
-	\item baserer sig på fikspunkter i kortet
-	\end{itemize}
-
-\end{itemize}
-
-
-
-\section{Inverse Sensor Modeller}
-
-% generelt omkring inverse sensor modeller.
-
 \subsection{Vertikal og horisontal sensor model}
 \stefan{kildehenvisning}
 Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser,
@@ -168,28 +52,24 @@ $$l_{res} = \begin{cases}
 \end{cases}$$
 
 Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
-Modellen vil se således ud beskrevet i pseudokode.
+Modellen vil se således ud beskrevet i pseudokode:
 
-\begin{lstlisting}[style=c, caption={Basal Sensor Model}, breaklines=true, label=mapping:sensormodel]
-
-Sensormodel(x,y,xi,yi,z) {
-
-  r = abs(xi - x + yi - y);  
-  
-  if(r > min(MAXIMUM_SENSOR_RANGE, z+AVG_OBJECT_DEPTH/2)) {
-  
-    // cell is out of bounds.
-    return DEFAULT_VALUE;
-    
-  } else if (z-AVG_OBJECT_DEPTH/2 <= r <= z+AVG_OBJECT_DEPTH/2) {
-
-    return OCCUPIED_CELL_VALUE;
-  } else {    
-    
-  	return FREE_CELL_VALUE;
-  }
+\begin{algorithm}[H]
+\textbf{InversSensorModel($i, x_t, z_t$)} \\
+Let $x_i,y_i$ be the center-of-mass of $m_i$ \\
+$r = |x_i - x + y_i - y|$ \\
+\If{$r > min(z_{max}, z_t + \frac{\alpha}{2}$)}{
+	\Return{$l_0$}
 }
-\end{lstlisting}
+\ElseIf{$z_t - \frac{\alpha}{2} \le r \le z + \frac{\alpha}{2}$}{
+	\Return{$l_{occ}$}
+}
+\Else{
+	\Return{$l_{free}$}
+}
+\caption{Invers sensor model algoritme}
+\label{alg:inversesensormodel}
+\end{algorithm}
 
 \subsubsection{Gaussisk sensor model}
 
@@ -232,40 +112,40 @@ Hvor $\rho$ er en passende konstant og $\eta$ er en normaliseringskonstant.
 
 
 
+\thilemann{Mangler der noget her?}
 
 
 
-
-
-\subsection{Generel udgave af sensor modellen}
-
-% objekter kan placeres i alle vinkler
-
-\subsubsection{Generel model med gaussisk støj}
-
-% gaussisk støj i 2-d
-
-
-\subsection{tilpasset sensor model}
-
-
-% overfitting
-
-\subsection{sensor model baseret på målinger}
-
-% fejl i sensor er ikke nødvendigvis 'tilfældige' eller uafhængige
-% en generel sensormodel som benytter en sandsynlighedsdistribution som vi selv har målt.
-
-
-\subsection{data udledet udfra robottens placering}
-
-% forbedring hvor vi tager højde for robotten
-
-
-\section{Forward Sensor Model	}
-
-
-
+%
+%\subsection{Generel udgave af sensor modellen}
+%
+%% objekter kan placeres i alle vinkler
+%
+%\subsubsection{Generel model med gaussisk støj}
+%
+%% gaussisk støj i 2-d
+%
+%
+%\subsection{tilpasset sensor model}
+%
+%
+%% overfitting
+%
+%\subsection{sensor model baseret på målinger}
+%
+%% fejl i sensor er ikke nødvendigvis 'tilfældige' eller uafhængige
+%% en generel sensormodel som benytter en sandsynlighedsdistribution som vi selv har målt.
+%
+%
+%\subsection{data udledet udfra robottens placering}
+%
+%% forbedring hvor vi tager højde for robotten
+%
+%
+%\section{Forward Sensor Model	}
+%
+%
+%
 
 
 

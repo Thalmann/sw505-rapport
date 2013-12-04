@@ -14,3 +14,16 @@
 % Degrees
 \newcommand{\degree}{\ensuremath{^\circ}}
 \newcommand{\dg}{\degree}
+
+\newcommand{\quoter}[1]%
+{
+  \par
+  \vspace{1.5em}
+  \addtolength{\leftskip}{1.5cm}
+  \addtolength{\rightskip}{1.5cm}
+  \textit{#1}
+  \addtolength{\leftskip}{-1.5cm}
+  \addtolength{\rightskip}{-1.5cm}
+  \vspace{1.5em}
+  \par
+}

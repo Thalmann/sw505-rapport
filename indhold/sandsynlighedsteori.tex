@@ -1,0 +1,101 @@
+\input{./indhold/notation}
+
+\section{Sandsynlighedsteori}
+Som beskrevet i \cref{sensorer} kan robottens viden omkring verdenen den bevæger sig i ikke være komplet pga. måleusikkerheder.\thilemann{Bør vi nævne at den dog kender sin position via kameraet?}
+På trods af dette er den nødt til at kunne reagere på den netop tilgængelige viden, hvorfor det er nødvendigt med metoder der gør det muligt at resonerer sig frem til et 'bedste' valg.
+Dette afsnit introducerer den nødvendige sandsynlighedsteori for at kunne beskrive hvad der gør sig gældende i en given verden, baseret på robottens observationer af netop denne.
+
+Sandsynlighedsteori omhandler hvordan viden har indflydelse på vores opfattelse af en given verden (\textit{belief}).
+I en proposition $\alpha$ måles vores opfattelse som en værdi mellem 0 og 1, hvor 0 betegner $\alpha$ som værende definitivt falsk, og 1 definitivt sand.
+Har $\alpha$ en værdi mellem 0 og 1 betegnes den således ikke til at være sand 'til en vis grad', men blot at vi ved at den er hverken sand eller falsk.
+\cite{ArtificialIntelligence}.
+
+\subsection{Semantik for sandsynlighed}
+\thilemann{Her skal der være en lille intro til nedenstående}
+
+% Muligvis unødvendig.
+%\subsubsection{Sandsynlighed som mål over mulige verdener}
+
+Et sandsynlighedsmål $\mu$ er en funktion fra en mængde verdener til mængden af positive reelle tal. 
+Hvis det gælder at $\Omega_1 \cap \Omega_2 = \{{}\}$, hvor $\Omega_1$ og $\Omega_2$ er mængder af verdener, har vi at:
+\begin{enumerate}
+\item $\mu(\Omega_1 \cup \Omega_2) = \mu(\Omega_1) + \mu(\Omega_2)$
+\item Hvis $\Omega$ er mængden af alle verdener vil $\mu(\Omega) = 1$ 
+\end{enumerate}
+
+Sandsynlighedsmålet kan udviddes til at dække sandsynligheden for enkelte verdener således at:
+$$\mu(\omega) = \mu(\{\omega\})$$
+
+Er propositioner hvor $P(\alpha)$ er målet af mængden af verdener og $\alpha$ er sand.
+Det vil sige at:
+$$P(\alpha) = \mu(\{\omega \mid \omega \models \alpha \})$$
+Her betyder notationen $\omega \models \alpha$ at propositionen $\alpha$ er sand i verdenen $\omega$.
+
+Notationen kan yderligere udvides til at dække \emph{stokastiske variabler}.
+En sandsynlighedsfordeling $P(X)$ over variablen $ X $, er en funktion fra
+domænet for $ X $ til mængden af positive reelle tal.
+Således at givet $x \in dom(X)$, vil $P(x)$ være sandsynligheden for at $X = x$.
+
+Denne notation kan også benyttes til at beskrive sandsynligheder af flere variabler.
+F.eks. er $P(X,Y)$ en sandsynlighedsfordeling over variablerne $ X $ og $ Y $, således at $P(X = x \wedge Y = y)$ (hvor $x \in dom(X)$ og $y \in dom(Y)$), har værdien $P(X = x \wedge Y = y)$.
+$X = x \wedge Y = y$ er en proposition og $ P $ er funktionen over propositioner. 
+
+\subsection{Betinget sandsynlighed}
+
+Målet af vores \textit{belief} på en given proposition $ h $ baseret på propositionen $ e $, kaldes den betingede sandsynlighed for $ h $ givet $ e $, og skrives $P(h \mid e)$.
+
+Alle en agents observationer om en verden kaldes dens \emph{bevis} og benævnes $ e $.
+
+\anders{Mangler der ikke noget omkring betinget sansynlighed? f.eks. kædereglen og udledning af bayes regel.}
+
+\subsubsection{Bayes Regel}
+
+$$P(h \mid e) = \frac{P(e \mid h) \times P(h)}{P(e)}$$
+Hvor $P(h \mid e)$ er den \emph{posterior} sandsynlighed, $P(e \mid h)$ er \emph{likelihood} og $P(h)$ er \emph{prior}. 
+
+
+\subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
+I tilfælde hvor tilstanden er statisk, altså hvor verden ikke ændrer sig over tid, kan der anvendes binære Bayes filtre.
+Her kan en \textit{belief} på en given tilstand $x$ beskrives som:
+\begin{equation}
+bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
+\end{equation}
+
+Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
+Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
+Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert tidspunkt $t$, da verden er statisk.
+
+\subsubsection{Log Odds}
+For at overkomme eventuelle afrundings-unøjagtigheder, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
+\anders{Log odds er for at undgå at beyes regel skal kører fast på sansynlighederne 1 eller 0}
+Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$:
+
+\begin{equation}
+\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}
+\end{equation}
+
+Log oddset er logaritmen til forholdet mellem de to sandsynligheder:
+
+\begin{equation}
+l(x) := \log \frac{p(x)}{1 - p(x)}
+\end{equation}
+
+\subsubsection{Opdaterings algoritme}
+\thilemann{Her beskrives celler med anden notation end den angivet i mapping. Bør det ikke være den samme?}
+Opdaterings-algoritmen tager \textit{log odds} for en \textit{posterior belief} $l_{t-1}$ for en celle, samt en ny sensor-måling $z_t$, hvor ud fra der returneres en \textit{log odds} for en ny \textit{belief} $l_t$ for cellen.
+\thilemann{Der står 'opdaterings-algoritmen' (bestemt ental), men synes ikke det står specielt klart hvad den opdaterer.}
+Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
+
+\begin{algorithm}[h]
+\textbf{BinaryBayesFilter($l_{t-1}, z_t$)} \\
+\Indp $l_t = l_{t-1} + \log \frac{p(x \mid z_t)}{1-p(x \mid z_t)} - \log \frac{p(x)}{1-p(x)}$ \\
+\Return{$l_t$}
+\caption{Binært Bayes filter algoritme}
+\label{alg:binaerbayesfilter}
+\end{algorithm}
+
+
+For at få vores \textit{belief} $bel_t(x)$ tilbage ud fra en \textit{log odds} $l_t$, benyttes følgende ligning:
+\begin{equation}
+bel_t(x) = 1 - \frac{1}{1 + exp\{l_t\}}
+\end{equation}
