@@ -47,6 +47,10 @@ Dette kaldes for den betingede sandsynlighed, og skrives $P(h \mid e)$, hvor $ e
 Det udtrykker troen på en given proposition $ h $ givet $ e $, som er vores prior.
 
 \subsubsection{Definition af betinget sandsynlighed}
+Lad $\mu_e$ være et sandsynlighedsmål.
+Hvis $\Omega$ er mængden af alle verdener, så kan $\mu_e(\Omega)$ siges at være lig 0.
+Derfor gælder det at $1 = \mu_e(\Omega) = \mu_e(\{ w : w \models e \}) + \mu_e(\{ w : w \not\models e \}) = c \times \mu(\{ w : w \models e\}) + 0 = c \times P(e)$, hvor $c = 1/P(e)$.
+\thilemann{forklaring af ovenstående og nedenstående udledning}
 
 \begin{align*}
 P(h \mid e) \quad = \quad & \mu_e(\{\omega \mid \omega \models h \})\\
