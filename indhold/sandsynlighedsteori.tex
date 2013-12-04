@@ -46,14 +46,19 @@ Vi er dog ikke kun interesseret i sandsynlighederne for hvad der er sket; vi øn
 Dette kaldes for den betingede sandsynlighed, og skrives $P(h \mid e)$, hvor $ e $ betegner en agents observationer om en verden, altså dens \textit{evidens}.
 Det udtrykker troen på en given proposition $ h $ givet $ e $, som er vores prior.
 
+\subsubsection{Definition af betinget sandsynlighed}
+
 \begin{align*}
 P(h \mid e) \quad = \quad & \mu_e(\{\omega \mid \omega \models h \})\\
 \quad = \quad & \mu_e(\{\omega \mid \omega \models h \wedge e \}) + \mu_e(\{\omega \mid \omega \models h \wedge \neg e \})\\
 \quad = \quad & \frac{\mu(\{\omega \mid \omega \models h \wedge e \})}{P(e)} + 0\\
-\quad = \quad & \frac{P(h \wedge e)}{P(e)}
+\quad = \quad & \frac{P(h \wedge e)}{P(e)}, \quad \textrm{hvor $P(e) > 0$.}
 \end{align*}
 
 \subsubsection{Kædereglen}
+Kædereglen benyttes til at beregne ethvert medlem af en fællesdistribution fra en mængde af stokastiske variabler vha. betingede sandsynligheder. 
+Givet en distribution af propositioner, kan kædereglen således benyttes til at finde skæringspunktet mellem to variabler, $\alpha_1$ og $\alpha_2$, hvor man ønsker at finde den ene givet den anden.\thilemann{review please...}
+
 \begin{align*}
 P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alpha_1) \quad \times\\
 & P(\alpha_1 \mid \alpha_1) \quad \times\\
@@ -62,10 +67,13 @@ P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alp
 & P(\alpha_n \mid \alpha_1 \wedge \dots \wedge \alpha_{n-1}) \quad \times\\
 = \quad &\prod_{i = 1}^{n} P(\alpha_i \mid \alpha_1 \wedge \dots \wedge \alpha_{i-1}),
 \end{align*}
+\begin{quotation}
+\textit{hvor højre-siden antages til at være nul, hvis ethvert medlem af produkterne er nul.}
+\end{quotation}
 
-\anders{Mangler der ikke noget omkring betinget sansynlighed? f.eks. kædereglen og udledning af bayes regel.}
+Kædereglen er især nyttig ved beregninger af baysiske netværk og ved brug af \textit{Bayes Regel} (\cref{sandsynlighed:bayes_regel}).
 
-\subsubsection{Bayes Regel}
+\subsubsection{Bayes Regel}\label{sandsynlighed:bayes_regel}
 
 $$P(h \mid e) = \frac{P(e \mid h) \times P(h)}{P(e)}$$
 Hvor $P(h \mid e)$ er den \emph{posterior} sandsynlighed, $P(e \mid h)$ er \emph{likelihood} og $P(h)$ er \emph{prior}. 
