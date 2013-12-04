@@ -41,10 +41,14 @@ F.eks. er $P(X,Y)$ en sandsynlighedsfordeling over variablerne $ X $ og $ Y $, s
 $X = x \wedge Y = y$ er en proposition og $ P $ er funktionen over propositioner. 
 
 \subsection{Betinget sandsynlighed}
+Vi er dog ikke kun interesseret i sandsynlighederne for hvad der er sket; vi ønsker også at være i stand til at sige noget om hvad der \textit{vil} ske, altså hvordan vi kan opdatere vores opfattelse af verden givet robotten har gjort nye observationer.
 
-Målet af vores \textit{belief} på en given proposition $ h $ baseret på propositionen $ e $, kaldes den betingede sandsynlighed for $ h $ givet $ e $, og skrives $P(h \mid e)$.
+Dette kaldes for den betingede sandsynlighed, og skrives $P(h \mid e)$, hvor $ e $ betegner en agents observationer om en verden, altså dens \textit{evidens}.
+Det udtrykker troen på en given proposition $ h $ givet $ e $, som er vores prior.
 
-Alle en agents observationer om en verden kaldes dens \emph{bevis} og benævnes $ e $.
+
+
+
 
 \anders{Mangler der ikke noget omkring betinget sansynlighed? f.eks. kædereglen og udledning af bayes regel.}
 
@@ -66,7 +70,7 @@ Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
 Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert tidspunkt $t$, da verden er statisk.
 
 \subsubsection{Log Odds}
-For at overkomme eventuelle afrundings-unøjagtigheder, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
+For at undgå......, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
 \anders{Log odds er for at undgå at beyes regel skal kører fast på sansynlighederne 1 eller 0}
 Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$:
 
