@@ -67,7 +67,7 @@ Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert
 
 \subsubsection{Log Odds}
 For at overkomme eventuelle afrundings-unøjagtigheder, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
-\anders{Log odds er for at undgå at beyes regel skal kører fast på sansynlighederne 1 eller 0}
+\anders{Log odds er for at undgå at beyes regel skal kører fast på sansynlighederne 1 eller 0}s
 Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$:
 
 \begin{equation}
@@ -82,7 +82,7 @@ l(x) := \log \frac{p(x)}{1 - p(x)}
 
 \subsubsection{Opdaterings algoritme}
 \thilemann{Her beskrives celler med anden notation end den angivet i mapping. Bør det ikke være den samme?}
-Opdaterings-algoritmen tager \textit{log odds} for en \textit{posterior belief} $l_{t-1}$ for en celle, samt en ny sensor-måling $z_t$, hvor ud fra der returneres en \textit{log odds} for en ny \textit{belief} $l_t$ for cellen.
+Opdaterings-algoritmen tager \textit{log odds} for en \textit{posterior belief} $l_{t-1}$ for en celle $m_i$, samt en ny sensor-måling $z_t$, hvor ud fra der returneres en \textit{log odds} for en ny \textit{belief} $l_t$ for $m_i$.
 \thilemann{Der står 'opdaterings-algoritmen' (bestemt ental), men synes ikke det står specielt klart hvad den opdaterer.}
 Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
 
