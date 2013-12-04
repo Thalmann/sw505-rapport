@@ -48,14 +48,25 @@
 \pagenumbering{arabic}
 
 \newcommand{\introductionHeaderName}{Introduktion}
-\section*{\introductionHeaderName}
-\addcontentsline{toc}{subsection}{\introductionHeaderName}
+\chapter*{\introductionHeaderName}
+\addcontentsline{toc}{chapter}{\introductionHeaderName}
 \input{frontmatter/introduktion.tex}
+
+\chapter*{Baggrund}
+\addcontentsline{toc}{chapter}{Baggrund}
+%insert file here
+
+\chapter*{Problemformulering}
+\addcontentsline{toc}{chapter}{Problemformulering}
+\input{indhold/problemformulering}
+
+\chapter*{Målsætning}
+\addcontentsline{toc}{chapter}{Målsætning}
+%insert file here
 
 \clearpage
 
 \part{Analyse}
-%Sets first chapter to one instead of zero
 
 \chapter{Platform}
 \input{indhold/platforme}
@@ -66,9 +77,8 @@
 \chapter{Frameworks}
 \input{indhold/mindsqualls}
 \input{indhold/NXC}
-
-\clearpage
-\input{indhold/problemformulering}
+\chapter{Lokaliseringsmetoder}
+\input{indhold/localization}
 
 \part{Teori}
 \chapter{Notation og sandsynlighedsteori}
@@ -77,7 +87,7 @@
 \input{indhold/mapping}
 \input{indhold/occalgorithm}
 \chapter{Lokalisering}
-\input{indhold/localization}
+\input{indhold/tracking.tex}
 
 \part{Design}
 \chapter{Robottens design}
@@ -85,9 +95,13 @@
 \input{indhold/gearing}
 \chapter{Forsøgsopstilling}
 \input{indhold/testmiljo}
-\part{Implementering}
+\chapter{Arkitektur}
+\chapter{Kommunikationsprotokol}
 
 \part{Konklusion}
+\chapter{Evaluering}
+\chapter{Opsummering}
+\chapter{Perspektivering}
 
 \appendix
 \part{Appendiks}
