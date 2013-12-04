@@ -8,16 +8,14 @@ Dette afsnit introducerer den nødvendige sandsynlighedsteori for at kunne beskr
 Sandsynlighedsteori omhandler hvordan viden har indflydelse på vores opfattelse af en given verden (\textit{belief}).
 I en proposition $\alpha$ måles vores opfattelse som en værdi mellem 0 og 1, hvor 0 betegner $\alpha$ som værende definitivt falsk, og 1 definitivt sand.
 Har $\alpha$ en værdi mellem 0 og 1 betegnes den således ikke til at være sand 'til en vis grad', men blot at vi ved at den er hverken sand eller falsk.
-\cite{ArtificialIntelligence}.
+Indholdet i dette afsnit er baseret på afsnit fra \cite{ArtificialIntelligence}.
 
 \subsection{Semantik for sandsynlighed}
-\thilemann{Her skal der være en lille intro til nedenstående}
-
-% Muligvis unødvendig.
-%\subsubsection{Sandsynlighed som mål over mulige verdener}
+I dette afsnit angives den semantik der i resten af rapporten vil blive benyttet til at beskrive sandsynligheder samt de områder indenfor sandsynlighedsteori der er relevante ift. at arbejde med en ukendt posterior givet en prior i sandsynlighedsbaseret robotteknik.
 
 Et sandsynlighedsmål $\mu$ er en funktion fra en mængde verdener til mængden af positive reelle tal. 
 Hvis det gælder at $\Omega_1 \cap \Omega_2 = \{{}\}$, hvor $\Omega_1$ og $\Omega_2$ er mængder af verdener, har vi at:
+
 \begin{enumerate}
 \item $\mu(\Omega_1 \cup \Omega_2) = \mu(\Omega_1) + \mu(\Omega_2)$
 \item Hvis $\Omega$ er mængden af alle verdener vil $\mu(\Omega) = 1$ 
@@ -40,45 +38,92 @@ Denne notation kan også benyttes til at beskrive sandsynligheder af flere varia
 F.eks. er $P(X,Y)$ en sandsynlighedsfordeling over variablerne $ X $ og $ Y $, således at $P(X = x \wedge Y = y)$ (hvor $x \in dom(X)$ og $y \in dom(Y)$), har værdien $P(X = x \wedge Y = y)$.
 $X = x \wedge Y = y$ er en proposition og $ P $ er funktionen over propositioner. 
 
+
 \subsection{Betinget sandsynlighed}
+Vi er dog ikke kun interesseret i sandsynlighederne for hvad der er sket; vi ønsker også at være i stand til at sige noget om hvad der \textit{vil} ske, altså hvordan vi kan opdatere vores opfattelse af verden givet robotten har gjort nye observationer.
 
-Målet af vores \textit{belief} på en given proposition $ h $ baseret på propositionen $ e $, kaldes den betingede sandsynlighed for $ h $ givet $ e $, og skrives $P(h \mid e)$.
+Dette kaldes for den betingede sandsynlighed, og skrives $P(h \mid e)$, hvor $ e $ betegner en agents observationer om en verden, altså dens \textit{evidens}.
+Det udtrykker troen på en given proposition $ h $ givet $ e $, som er vores prior.
 
-Alle en agents observationer om en verden kaldes dens \emph{bevis} og benævnes $ e $.
 
-\anders{Mangler der ikke noget omkring betinget sansynlighed? f.eks. kædereglen og udledning af bayes regel.}
+\subsubsection{Definition af betinget sandsynlighed}
+Lad $\mu_e$ være et sandsynlighedsmål.
+Hvis $\Omega$ er mængden af alle verdener, så kan $\mu_e(\Omega)$ siges at være lig 0.
+Derfor gælder det at $1 = \mu_e(\Omega) = \mu_e(\{ w : w \models e \}) + \mu_e(\{ w : w \not\models e \}) = c \times \mu(\{ w : w \models e\}) + 0 = c \times P(e)$, hvor $c = 1/P(e)$.
+\thilemann{Anders, kan du give en god forklaring af ovenstående og nedenstående formler?}
 
-\subsubsection{Bayes Regel}
+\begin{align*}
+P(h \mid e) \quad = \quad & \mu_e(\{\omega \mid \omega \models h \})\\
+\quad = \quad & \mu_e(\{\omega \mid \omega \models h \wedge e \}) + \mu_e(\{\omega \mid \omega \models h \wedge \neg e \})\\
+\quad = \quad & \frac{\mu(\{\omega \mid \omega \models h \wedge e \})}{P(e)} + 0\\
+\quad = \quad & \frac{P(h \wedge e)}{P(e)}, \quad \textrm{hvor $P(e) > 0$.}
+\end{align*}
 
-$$P(h \mid e) = \frac{P(e \mid h) \times P(h)}{P(e)}$$
-Hvor $P(h \mid e)$ er den \emph{posterior} sandsynlighed, $P(e \mid h)$ er \emph{likelihood} og $P(h)$ er \emph{prior}. 
+
+\subsubsection{Kædereglen}
+Kædereglen benyttes til at beregne ethvert medlem af en fællesdistribution fra en mængde af stokastiske variabler vha. betingede sandsynligheder. 
+Givet en distribution af propositioner, kan kædereglen således benyttes til at finde skæringspunktet mellem to variabler, $\alpha_1$ og $\alpha_2$, hvor man ønsker at finde den ene givet den anden.\thilemann{review please...}
+
+\begin{align*}
+P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alpha_1) \quad \times\\
+& P(\alpha_1 \mid \alpha_1) \quad \times\\
+& P(\alpha_3 \mid \alpha_1 \wedge \alpha_2) \quad \times\\
+& \vdots \\
+& P(\alpha_n \mid \alpha_1 \wedge \dots \wedge \alpha_{n-1}) \quad \times\\
+= \quad &\prod_{i = 1}^{n} P(\alpha_i \mid \alpha_1 \wedge \dots \wedge \alpha_{i-1}),
+\end{align*}
+\begin{quotation}
+\textit{hvor højre-siden antages til at være nul, hvis ethvert medlem af produkterne er nul.}
+\end{quotation}
+
+Kædereglen er især nyttig ved beregninger af bayesianske netværk og ved brug af \textit{Bayes Regel} (\cref{sandsynlighed:bayes_regel}).
+
+
+\subsubsection{Bayes Regel}\label{sandsynlighed:bayes_regel}
+Bayes Regel spiller en stor rolle i sandsynlighedsteori, da den siger hvordan vi kan beregne en ny posterior ud fra en kendt prior sandsynlighedsdistribution.
+Den er således defineret som:
+
+$$P(h \mid e) = \frac{\mathit{sandsynlighed} \times \mathit{prior})}{\mathit{normaliseringsfunktion}} = \frac{P(e \mid h) \times P(h)}{P(e)},$$
+
+\begin{quotation}
+\textit{hvor $P(h \mid e)$ er posterior sandsynlighed, $P(e \mid h)$ er sandsynligheden og $P(h)$ er prior.}
+\end{quotation}
+
+Leder vi Bayes Regel hen på robotteknik givet to variabler $X$ og $Z$, hvor $X$ er en celle f.eks. et occupancy grid (\cref{mapping:occupancy_grid}) og $Z$ er sensormålinger.
+Så kan den næste posterior (for en celle $X_i$) givet sensormålinger, findes ved:
+
+$$P(X_i \mid Z) = \frac{P(Z \mid X_i) \times P(X_i)}{P(Z)}$$
+
+Tælleren i Bayes Regel kan betegnes som en ikke-normaliseret sandsynlighedsdistribution, hvor nævneren er en normaliseringsfunktion, givet ved:
+
+$$P(Z) = \sum_{i}^{} P(Z \mid X_i) \times P(X_i),$$
+
+hvilket svarer til kædereglen benyttet på hver enkelt celle i grid'et.
 
 
 \subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
 I tilfælde hvor tilstanden er statisk, altså hvor verden ikke ændrer sig over tid, kan der anvendes binære Bayes filtre.
 Her kan en \textit{belief} på en given tilstand $x$ beskrives som:
-\begin{equation}
-bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
-\end{equation}
+
+$$bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})$$
 
 Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
 Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
 Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert tidspunkt $t$, da verden er statisk.
 
 \subsubsection{Log Odds}
-For at overkomme eventuelle afrundings-unøjagtigheder, indføres der en funktion \textit{log odds ratio}, der konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
-\anders{Log odds er for at undgå at beyes regel skal kører fast på sansynlighederne 1 eller 0}
+Er en metode der kan benyttes for at undgå at komponenterne i Bayes Regel enten bliver definitivt sande eller falske.
+I så fald vil det ikke være muligt at beregne ny posterior, da de enkelte komponenter ikke vil have nogen effekt.
+
+Der kan derfor indføres en funktion, \textit{log odds ratio}, som konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
 Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$:
 
-\begin{equation}
-\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}
-\end{equation}
-
+$$\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}$$
+\\
 Log oddset er logaritmen til forholdet mellem de to sandsynligheder:
 
-\begin{equation}
-l(x) := \log \frac{p(x)}{1 - p(x)}
-\end{equation}
+$$l(x) := \log \frac{p(x)}{1 - p(x)}$$
+\thilemann{Synes der mangler en smule beskrivelse her... Anders?}
 
 \subsubsection{Opdaterings algoritme}
 \thilemann{Her beskrives celler med anden notation end den angivet i mapping. Bør det ikke være den samme?}
@@ -96,6 +141,5 @@ Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
 
 
 For at få vores \textit{belief} $bel_t(x)$ tilbage ud fra en \textit{log odds} $l_t$, benyttes følgende ligning:
-\begin{equation}
-bel_t(x) = 1 - \frac{1}{1 + exp\{l_t\}}
-\end{equation}
+
+$$bel_t(x) = 1 - \frac{1}{1 + exp\{l_t\}}$$
