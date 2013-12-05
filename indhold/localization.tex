@@ -7,22 +7,22 @@ Til at finde positionen har vi overvejet flere forskellige metoder til lokaliser
 \item Billedgenkendelse
 \end{itemize}
 
-\subsection{Kinect }
-Microsofts Kinect benytter et RGB farvekamera samt en dybdesensor til at fortolke bevægelse som input i applikationer.
-Kinect er oprindeligt lavet til XBox 360, men findes også i en version til PC, med medfølgende SDK.
-En stor fordel ved at bruge Kinect er at den indeholder en dybdesensor der kan bruges til at lokalisere objekter i et rum.
-\thilemann{giver det mening at opsummere kinect her, når nu der findes et kæmpe afsnit om det?}
+\subsection{Dead reckoning}
+Dead Reckoning er en teknik til at finde sin position efter ens bevægelser uden eksterne sensorer.
+Robotten ved hvor den starter, og beregner sin nye position efter hvilken kommando den har udført.\cite{deadrec}
+
+Denne teknik er ikke det bedste valg i de situationer hvor man ønsker en meget præcis lokalisering af robotten, hvilket skyldes de usikkerheder for motorer og sensorer som man ofte arbejder med.
 
 \subsection{Wiimote}
 En anden sensor der kan bruges er Nintendos Wiimote. 
 Wiimote en optisk sensor til at lokalisere infrarødt lys fra den tilhørende sensor-bar.
 Ved hjælp af triangulering af det modtagne lys kan Wiimoten bestemme sin position. \cite{wiimote}
 
-\subsection{Dead reckoning}
-Dead Reckoning er en teknik til at finde sin position efter ens bevægelser uden eksterne sensorer.
-Robotten ved hvor den starter, og beregner sin nye position efter hvilken kommando den har udført.\cite{deadrec}
+\subsection{Kinect }
+Som nævnt i \cref{kinect:komponenter}, benytter Microsofts Kinect primært et RGB farvekamera samt en dybdesensor til at fortolke bevægelse som input i applikationer.
+Kinecten giver mange muligheder i forhold til dens anvendelse, da den indeholder komponenter som kan benyttes uafhængigt af hinanden. 
+Da det er forholdsvist let at tilgå komponenterne via det medfølgende SDK, og at det er rigtig godt dokumenteret samt mængden af sensorer tilgængelige, vil Kinecten være et godt valg, da den giver mulighed for at afteste flere typer af løsninger på lokaliseringsproblemet.
 
-Denne teknik er ikke det bedste valg i de situationer hvor man ønsker en meget præcis lokalisering af robotten, hvilket skyldes de usikkerheder for motorer og sensorer som man ofte arbejder med.
 
 \section{Valg af lokaliseringsmetode}
 Der blev foretaget en indledende test af de foreslåede lokaliseringsmetoder for at vælge hvilken der passede bedst til dette projekt.
