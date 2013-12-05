@@ -95,6 +95,9 @@ P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alp
 
 \cite[s. 227]{ArtificialIntelligence}
 
+Kædereglen er især nyttig ved beregninger af bayesianske netværk og ved brug af \textit{Bayes Regel} (\cref{sandsynlighed:bayes_regel}).
+
+
 \subsubsection{Bayes Regel}\label{sandsynlighed:bayes_regel}
 Bayes Regel spiller en stor rolle i sandsynlighedsteori, da den siger hvordan vi kan beregne en ny posterior ud fra en kendt prior sandsynlighedsdistribution.
 Den er således defineret som:
