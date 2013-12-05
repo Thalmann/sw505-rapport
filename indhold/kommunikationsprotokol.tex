@@ -3,14 +3,26 @@ Dette afsnit beskriver kommunikationen mellem NXT og PC.
 Afsnitet beskriver de beskeder der bliver snedt frem og tilbage og hvilken encoding der bliver brugt.
 
 \subsection{Besked typer}
-Dette afsnit er delt op i to under afsnit som beskriver de forskellige beskeder fra PC til NXT \cref{design:pctilnxt} og fra NXT til PC \cref{design:nxttilpc}.
-\subsubsection{PC til NXT}\label{design:pctilnxt}
+En besked består af:
+\begin{equation}
+<Encoding><Indhold>
+\end{equation}
+og bliver sendt fra PC'ens outbox til NXT'ens inbox og vice versa.
+Alle beskederne kan ses i \cref{design:protokol_tabel}.
+Første kolonne fortæller hvilken slags besked det er.
+Anden og tredje kolonne fortæller henholdsvis om det er PC'ens eller NXT'ens inbox eller outbox.
+Den sidste beskriver hvad der sker hvis man sender en besked med en sådan encoding.
+Nedenefor er de forskellige scenarier hvor beskederne fra tabellen bliver brugt.
+\subsubsection{Nuværende lokation}
+Denne situation forekommer når robotten skal bede om sin lokation fra PC'en.
+Dvs. robotten sender en besked der kun indeholder encodingen $0$.
+Derefter returner PC'en beskeden $52xxxxxxxyyyyyyyzzzzzzz$.
+Denne besked indeholder lokationen og dens vinkel hvor $x$'erne og $y$'erne repræsenterer lokationen og $z$ vinkelen.
+\subsubsection{Naviger til en ny lokation}
+\subsubsection{Nået frem til lokation}
+\subsubsection{Aflæs Sensordata}
 
-\subsubsection{NXT til PC}\label{design:nxttilpc}
-
-\begin{table}[h]
-\label{design:protokol_tabel}
-\caption{Overigt over de forskellige encodings og hvilke beskeder de indeholder.}
+\begin{figure}[h]
 \begin{longtable}{ c | c | c | p{0.6\textwidth}}
 Encoding & PC & NXT & Indhold\\
 \hline
@@ -22,6 +34,8 @@ Encoding & PC & NXT & Indhold\\
 51 & OUT & IN & Computeren beder om at få sensor data fra robotten \\
 52 & OUT & IN & Computeren sender robottens position til robotten \\
 \end{longtable}
-\end{table}
+\label{design:protokol_tabel}
+\caption{Overigt over de forskellige encodings og hvilke beskeder de indeholder.}
+\end{figure}
 
 \subsection{title}
