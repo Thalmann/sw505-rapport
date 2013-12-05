@@ -8,7 +8,7 @@ En besked består af:
 <Encoding><Indhold>
 \end{equation}
 og bliver sendt fra PC'ens outbox til NXT'ens inbox og vice versa.
-Beskedens indhold er ingen eller flere bytes.
+Beskedens encoding er en eller to bytes, indholdet består af ingen eller flere bytes.
 
 \subsection{Besked typer}
 Alle beskederne kan ses i \cref{design:protokol_tabel}.
@@ -18,11 +18,13 @@ Anden og tredje kolonne fortæller henholdsvis om beskeden gpr fra PC'ens eller 
 De to sidste beskriver hvad beskeden indeholder og gør.
 Nedenefor er de forskellige scenarier som beskederne fra tabellen bliver brugt.
 
+\renewcommand{\arraystretch}{1.8}
 \begin{figure}[H]
 \begin{longtable}{ c | c | c | p{0.4\textwidth} | c}
 Encoding & PC & NXT & Beskrivelse & Indhold\\
 \hline
 \hline
+\arraystretch
 0 & IN & OUT & Robotten forespørger om dens lokation & - \\
 1 & IN & OUT & Robotten er nået frem til dens lokation & - \\
 2 & IN & OUT & Robotten sender sensordata & $s1_x,s2_x,s1_y,s2_y$ \\
