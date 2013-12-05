@@ -8,11 +8,12 @@ En besked består af:
 <Encoding><Indhold>
 \end{equation}
 og bliver sendt fra PC'ens outbox til NXT'ens inbox og vice versa.
+Beskedens indhold er ingen eller flere bytes.
 Alle beskederne kan ses i \cref{design:protokol_tabel}.
 Første kolonne fortæller hvilken slags besked det er.
 Anden og tredje kolonne fortæller henholdsvis om det er PC'ens eller NXT'ens inbox eller outbox.
 Den sidste beskriver hvad der sker hvis man sender en besked med en sådan encoding.
-Nedenefor er de forskellige scenarier hvor beskederne fra tabellen bliver brugt.
+Nedenefor er de forskellige scenarier som beskederne fra tabellen bliver brugt.
 
 \begin{figure}[H]
 \begin{longtable}{ c | c | c | p{0.6\textwidth}}
@@ -33,12 +34,12 @@ Encoding & PC & NXT & Indhold\\
 \subsubsection{Nuværende lokation}
 Denne situation forekommer når robotten skal bede om sin lokation fra PC'en.
 Dvs. robotten sender en besked der kun indeholder encodingen $0$.
-Derefter returner PC'en beskeden $52xxxxxxxyyyyyyyzzzzzzz$.
-Denne besked indeholder lokationen og dens vinkel hvor $x$'erne og $y$'erne repræsenterer lokationen og $z$ vinkelen.
+Derefter returner PC'en beskeden $52xyz$.
+Denne besked indeholder lokationen og dens vinkel hvor $x$ og $y$ repræsenterer lokationen og $z$ vinkelen.
 
 \subsubsection{Naviger til en ny lokation}\label{design:protokol_navigertilny}
 Denne situation opstår når PC'en sender en besked der fortæller robotten hvor den skal køre hen.
-PC'ens besked har encoding $50xxxxxxxyyyyyyy$ hvor $50$ fortæller robotten at den nu modtager en lokation den skal navigere hen til.
+PC'ens besked har encoding $50xy$ hvor $50$ fortæller robotten at den nu modtager en lokation den skal navigere hen til.
 Det resterende er lokationen $x,y$.
 
 \subsubsection{Nået frem til lokation}
@@ -47,3 +48,7 @@ Så sender robotten en besked der kun indeholder encodingen $1$.
 Derefter sender PC'en til en ny lokation se i \cref{design:protokol_navigertilny}.
 
 \subsubsection{Aflæs Sensordata}
+Når PC'en beder om sensor data fra robotten, sender den en besked der kun indeholder $51$.
+Robotten foretager derefter snesormålinger og returnerer dem.
+Robottens besked til pc'en indeholder encoding og sensordata, $2s1s2s3s4$.
+Sensordata'erne består af en måling fra hver sensor før sensorerne roterer 90 grader og efter.
