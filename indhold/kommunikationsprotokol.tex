@@ -1,31 +1,34 @@
 \section{Kommunikationsprotokol}
 Dette afsnit beskriver kommunikationen mellem NXT og PC.
-Afsnitet beskriver de beskeder der bliver snedt frem og tilbage og hvilken encoding der bliver brugt.
+Afsnitet beskriver de beskeder der bliver sendt frem og tilbage og hvilken encoding der bliver brugt.
 
-\subsection{Besked typer}
+\subsection{Besked}
 En besked består af:
 \begin{equation}
 <Encoding><Indhold>
 \end{equation}
 og bliver sendt fra PC'ens outbox til NXT'ens inbox og vice versa.
 Beskedens indhold er ingen eller flere bytes.
+
+\subsection{Besked typer}
 Alle beskederne kan ses i \cref{design:protokol_tabel}.
+\\
 Første kolonne fortæller hvilken slags besked det er.
-Anden og tredje kolonne fortæller henholdsvis om det er PC'ens eller NXT'ens inbox eller outbox.
-Den sidste beskriver hvad der sker hvis man sender en besked med en sådan encoding.
+Anden og tredje kolonne fortæller henholdsvis om beskeden gpr fra PC'ens eller NXT'ens inbox eller outbox.
+De to sidste beskriver hvad beskeden indeholder og gør.
 Nedenefor er de forskellige scenarier som beskederne fra tabellen bliver brugt.
 
 \begin{figure}[H]
-\begin{longtable}{ c | c | c | p{0.6\textwidth}}
-Encoding & PC & NXT & Indhold\\
+\begin{longtable}{ c | c | c | p{0.4\textwidth} | c}
+Encoding & PC & NXT & Beskrivelse & Indhold\\
 \hline
 \hline
-0 & IN & OUT & Robotten forespørger om dens lokation \\
-1 & IN & OUT & Robotten er nået frem til dens lokation \\
-2 & IN & OUT & Robotten sender sensordata \\
-50 & OUT & IN & Computeren fortæller roboten at den skal bevæge sig til en position som sendes med\\
-51 & OUT & IN & Computeren beder om at få sensor data fra robotten \\
-52 & OUT & IN & Computeren sender robottens position til robotten \\
+0 & IN & OUT & Robotten forespørger om dens lokation & - \\
+1 & IN & OUT & Robotten er nået frem til dens lokation & - \\
+2 & IN & OUT & Robotten sender sensordata & $s1_x,s2_x,s1_y,s2_y$ \\
+50 & OUT & IN & Computeren fortæller roboten at den skal bevæge sig til en position som sendes med & $x,y$\\
+51 & OUT & IN & Computeren beder om at få sensor data fra robotten & - \\
+52 & OUT & IN & Computeren sender robottens position til robotten & $x,y,p$\\
 \end{longtable}
 \label{design:protokol_tabel}
 \caption{Overigt over de forskellige encodings og hvilke beskeder de indeholder.}
@@ -34,8 +37,8 @@ Encoding & PC & NXT & Indhold\\
 \subsubsection{Nuværende lokation}
 Denne situation forekommer når robotten skal bede om sin lokation fra PC'en.
 Dvs. robotten sender en besked der kun indeholder encodingen $0$.
-Derefter returner PC'en beskeden $52xyz$.
-Denne besked indeholder lokationen og dens vinkel hvor $x$ og $y$ repræsenterer lokationen og $z$ vinkelen.
+Derefter returner PC'en beskeden $52xyp$.
+Denne besked indeholder lokationen og dens vinkel hvor $x$ og $y$ repræsenterer lokationen og $p$ vinkelen.
 
 \subsubsection{Naviger til en ny lokation}\label{design:protokol_navigertilny}
 Denne situation opstår når PC'en sender en besked der fortæller robotten hvor den skal køre hen.
@@ -50,5 +53,5 @@ Derefter sender PC'en til en ny lokation se i \cref{design:protokol_navigertilny
 \subsubsection{Aflæs Sensordata}
 Når PC'en beder om sensor data fra robotten, sender den en besked der kun indeholder $51$.
 Robotten foretager derefter snesormålinger og returnerer dem.
-Robottens besked til pc'en indeholder encoding og sensordata, $2s1s2s3s4$.
+Robottens besked til pc'en indeholder encoding og sensordata, $2s1_x s2_x s1_y s2_y$.
 Sensordata'erne består af en måling fra hver sensor før sensorerne roterer 90 grader og efter.
