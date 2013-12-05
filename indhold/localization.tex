@@ -1,22 +1,22 @@
 \section{Lokalisering}
 Når robotten skal kortlægge sine omgivelser er det nødvendigt at vide hvor den befinder sig.
-Til at finde positionen har vi overvejet flere forskellige metoder.
+Til at finde positionen har vi overvejet flere forskellige metoder til lokalisering, f.eks. via:
 \begin{itemize}
-\item Kinect
-\item Dead reckoning
-\item Kamera ansigtsgenkendelse \thilemann{Er det ikke mere blob genkendelse via OpenCV der menes?}
+\item Microsoft Kinect vs. Nintendo Wiimote
+\item Dead reckoning (lokalisering uden ekstern 'hjælp')
+\item Billedgenkendelse
 \end{itemize}
 
 \subsection{Kinect }
-Microsofts Kinect benytter et rgb kamera samt en dybdesensor til at fortolke bevægelse som input i applikationer.
+Microsofts Kinect benytter et RGB farvekamera samt en dybdesensor til at fortolke bevægelse som input i applikationer.
 Kinect er oprindeligt lavet til XBox 360, men findes også i en version til PC, med medfølgende SDK.
 En stor fordel ved at bruge Kinect er at den indeholder en dybdesensor der kan bruges til at lokalisere objekter i et rum.
-
+\thilemann{giver det mening at opsummere kinect her, når nu der findes et kæmpe afsnit om det?}
 
 \subsection{Wiimote}
 En anden sensor der kan bruges er Nintendos Wiimote. 
-Wiimote en optisk sensor til at lokalisere infrarødt lys fra den tilhørende sensor bar.
-Ved hjælp af triangulering af det modtagne lys kan wiimoten bestemme sin position. \cite{wiimote}
+Wiimote en optisk sensor til at lokalisere infrarødt lys fra den tilhørende sensor-bar.
+Ved hjælp af triangulering af det modtagne lys kan Wiimoten bestemme sin position. \cite{wiimote}
 
 \subsection{Dead reckoning}
 Dead Reckoning er en teknik til at finde sin position efter ens bevægelser uden eksterne sensorer.
@@ -24,24 +24,22 @@ Robotten ved hvor den starter, og beregner sin nye position efter hvilken komman
 
 Denne teknik er ikke det bedste valg i de situationer hvor man ønsker en meget præcis lokalisering af robotten, hvilket skyldes de usikkerheder for motorer og sensorer som man ofte arbejder med.
 
-\subsection{Valg af lokaliseringsmetode}
-Der blev foretaget en indledende test af de tre foreslåede lokaliseringsmetoder for at vælge hvilken der passede bedst til dette projekt.
+\section{Valg af lokaliseringsmetode}
+Der blev foretaget en indledende test af de foreslåede lokaliseringsmetoder for at vælge hvilken der passede bedst til dette projekt.
 
 Dead reckoning muligheden blev hurtigt udelukket, da gruppen ville fokusere på kortlægningsopgaven og dead reckoning ville kræve en del mere arbejde end de andre lokaliseringsmetoder.
 
 Efter sammenligning af Kinect og Wiimote blev det besluttet at fokusere på Kinect af flere årsager.
-For det første havde vi adgang til en Kinect hvilket gjorde valget oplagt. 
-Også det medfølgende SDK gør det let at arbejde med.
-\thilemann{Her mangler lidt, f.eks. "For det andet..."?}
+For det første havde vi adgang til en Kinect hvilket gjorde valget oplagt og for det andet, gør det medfølgende SDK det let at arbejde med Kinecten.
 
-\clearpage
-\subsection{Omregning fra punkt i billede til reelt punkt}
+%\clearpage
+\section{Omregning fra punkt i billede til reelt punkt}
 Det billede der fås ind fra kameraet, består af en mængde pixels.
 Robottens centrum, og derved lokation, vil være i præcist én pixel.
 For at robotten skal kunne bruge denne til at navigere i den virkelige verden, er det nødvendigt at omregne pixel(-koordinat) til reelt koordinat.
 
-\subsubsection{Ensvinklede trekanter}
-Den overordnede idé er at bruge reglen om ensvinklede trekanter, da det der gås ud fra, er situationen som kan ses i \cref{fig:kameratrekant}.
+\subsection{Ensvinklede trekanter}
+Den overordnede idé er at bruge reglen om ensvinklede trekanter, da det passer på situationen som kan ses i \cref{fig:kameratrekant}.
 Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinect'en er det $57^\circ$ i bredden og $43^\circ$ i højden.
 $v$ er blot med for at vise at der er tale om ensvinklede trekanter.
 $x_1$ er størrelse af den givne dimension for det billede der dannes af Kinect'en.
@@ -74,10 +72,11 @@ $x_2$ er tilsvarende $x_1$, blot den reelle størrelse af det billede der gives.
 Som det kan ses i \cref{fig:udregningstrekant} er der tale om netop sådan en trekant for vores situation.
 Trekanten er halveret for at midten får koordinatet $(0,0)$, derved går en dimension fra $-\frac{1}{2}x$ til $+\frac{1}{2}x$.
 
+\subsection{Beregning}
 For at finde proportionalitetsfaktoren deles en vilkårlig side af den store trekant med den tilsvarende side fra den lille trekant.
 Her vil proportionalitetsfaktoren derved blive $f = \frac{\frac{1}{2}x_2}{\frac{1}{2}x_1}$.
 
-For at omregne et pixel $p$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
+For at omregne en pixel $p$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
 Så derved får vi vores reelle koordinat $k = f \cdot p$.
 For vores sitation er der 2 dimensioner; længde og bredde: \begin{equation*}
 (k_1,k_2) = (f \cdot p_1, f \cdot p_2)
@@ -111,3 +110,5 @@ For vores sitation er der 2 dimensioner; længde og bredde: \begin{equation*}
 \caption{Selve omregningen}
 \label{fig:udregningstrekant}
 \end{figure}
+
+\section{Opsummering}
