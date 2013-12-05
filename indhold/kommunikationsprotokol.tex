@@ -1,5 +1,27 @@
-\section{Kommunikationsprotokol mellem NXT og PC over bluetooth}
+\section{Kommunikationsprotokol}
 Dette afsnit beskriver kommunikationen mellem NXT og PC.
-\subsection{Typer}
+Afsnitet beskriver de beskeder der bliver snedt frem og tilbage og hvilken encoding der bliver brugt.
+
+\subsection{Besked typer}
+Dette afsnit er delt op i to under afsnit som beskriver de forskellige beskeder fra PC til NXT \cref{design:pctilnxt} og fra NXT til PC \cref{design:nxttilpc}.
+\subsubsection{PC til NXT}\label{design:pctilnxt}
+
+\subsubsection{NXT til PC}\label{design:nxttilpc}
+
+\begin{table}[h]
+\label{design:protokol_tabel}
+\caption{Overigt over de forskellige encodings og hvilke beskeder de indeholder.}
+\begin{longtable}{ c | c | c | p{0.6\textwidth}}
+Encoding & PC & NXT & Indhold\\
+\hline
+\hline
+0 & IN & OUT & Robotten forespørger om dens lokation \\
+1 & IN & OUT & Robotten er nået frem til dens lokation \\
+2 & IN & OUT & Robotten sender sensordata \\
+50 & OUT & IN & Computeren fortæller roboten at den skal bevæge sig til en position som sendes med\\
+51 & OUT & IN & Computeren beder om at få sensor data fra robotten \\
+52 & OUT & IN & Computeren sender robottens position til robotten \\
+\end{longtable}
+\end{table}
 
 \subsection{title}
