@@ -13,19 +13,8 @@ Første kolonne fortæller hvilken slags besked det er.
 Anden og tredje kolonne fortæller henholdsvis om det er PC'ens eller NXT'ens inbox eller outbox.
 Den sidste beskriver hvad der sker hvis man sender en besked med en sådan encoding.
 Nedenefor er de forskellige scenarier hvor beskederne fra tabellen bliver brugt.
-\subsubsection{Nuværende lokation}
-Denne situation forekommer når robotten skal bede om sin lokation fra PC'en.
-Dvs. robotten sender en besked der kun indeholder encodingen $0$.
-Derefter returner PC'en beskeden $52xxxxxxxyyyyyyyzzzzzzz$.
-Denne besked indeholder lokationen og dens vinkel hvor $x$'erne og $y$'erne repræsenterer lokationen og $z$ vinkelen.
-\subsubsection{Naviger til en ny lokation}
-Denne situation opstår når PC'en sender en besked der fortæller robotten hvor den skal køre hen.
-PC'ens besked har encoding $50xxxxxxxyyyyyyy$ hvor $50$ fortæller robotten at den nu modtager en lokation den skal navigere hen til.
-Det resterende er lokationen $x,y$.
-\subsubsection{Nået frem til lokation}
-\subsubsection{Aflæs Sensordata}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{longtable}{ c | c | c | p{0.6\textwidth}}
 Encoding & PC & NXT & Indhold\\
 \hline
@@ -40,5 +29,22 @@ Encoding & PC & NXT & Indhold\\
 \label{design:protokol_tabel}
 \caption{Overigt over de forskellige encodings og hvilke beskeder de indeholder.}
 \end{figure}
+
+\subsubsection{Nuværende lokation}
+Denne situation forekommer når robotten skal bede om sin lokation fra PC'en.
+Dvs. robotten sender en besked der kun indeholder encodingen $0$.
+Derefter returner PC'en beskeden $52xxxxxxxyyyyyyyzzzzzzz$.
+Denne besked indeholder lokationen og dens vinkel hvor $x$'erne og $y$'erne repræsenterer lokationen og $z$ vinkelen.
+
+\subsubsection{Naviger til en ny lokation}
+Denne situation opstår når PC'en sender en besked der fortæller robotten hvor den skal køre hen.
+PC'ens besked har encoding $50xxxxxxxyyyyyyy$ hvor $50$ fortæller robotten at den nu modtager en lokation den skal navigere hen til.
+Det resterende er lokationen $x,y$.
+
+\subsubsection{Nået frem til lokation}
+
+\subsubsection{Aflæs Sensordata}
+
+
 
 \subsection{title}
