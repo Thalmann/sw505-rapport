@@ -25,15 +25,26 @@ Da det er forholdsvist let at tilgå komponenterne via det medfølgende SDK, og 
 
 
 \section{Valg af lokaliseringsmetode}
+\thilemann{vær venligst kritisk overfor nedenstående tekst i dette afsnit når der laves review...}
 Der blev foretaget en indledende test af de foreslåede lokaliseringsmetoder for at vælge hvilken der passede bedst til dette projekt.
 
-Dead reckoning muligheden blev hurtigt udelukket, da gruppen ville fokusere på kortlægningsopgaven og dead reckoning ville kræve en del mere arbejde end de andre lokaliseringsmetoder.
+Dead reckoning muligheden blev hurtigt udelukket, da gruppen ville fokusere på kortlægningsopgaven.
+Dead reckoning ville også kræve en del mere arbejde ift. implementering end de andre lokaliseringsmetoder, da den vil introducere mange usikkerheder som ikke eksisterer i de andre metoder (da de andre flytter usikkerhederne fra robotten til eksterne sensorer).
 
-Efter sammenligning af Kinect og Wiimote blev det besluttet at fokusere på Kinect af flere årsager.
-For det første havde vi adgang til en Kinect hvilket gjorde valget oplagt og for det andet, gør det medfølgende SDK det let at arbejde med Kinecten.
+Efter sammenligning af Kinect og Wiimote blev det besluttet at fokusere på Kinect; primært pga. de flere muligheder den giver med hensyn til implementering, men også det faktum at den var tilgængelig via universitetet.
+
+Til at begynde med blev alle Kinectens muligheder undersøgt, og strategien på daværende tidspunkt var at benytte dens farvekamera sammen med de infrarøde sensorer (til dybdemålinger). 
+Dette introducerede imidlertid en del usikkerheder til hvor og hvordan Kinecten skulle placeres i forhold til kørselsmiljøet for at oversætte Kinectens koordinater til reelle koordinater gældende i selve kørselsmiljøet.
+En simplificering af opsætningen, med Kinecten monteret i en loftsplade med syn vinkelret ned på kørselsmiljøet, gjorde imidlertid Kinectens mange sensorer unødvendige da det via simple beregner således ville gøre det muligt at finde de korrekte koordinater.
+Beregningen af de reelle koordinater er beskrevet i \cref{lokalisering:punktomregning}.
+
+Ovenstående simplificering gør det muligt at fokusere mere på kortlægning af robottens kørselsmiljø og dermed fjerne fokus fra at lokalisere robotten.
+Ved test er det derfor valgt at fokusere på lokalisere robotten via identificering af farver på robotten frem for f.eks. at benytte OpenCV til \textit{blob-genkendelse}\footnote{Et \textit{blob} betegner området af et billede som genkendes ud fra dets karakteristikker.} eller \textit{background substraction}\footnote{Ved background substraction trækkes et statisk billede af kørselsmiljøet fra selve videoen, for at fremhæve dets forskelle.}.
+De to omtalte metoder har været i brug, men da resultaterne fra farvesporing var overlegne, vil det fremover være metoden der fokuseres på.
+
 
 %\clearpage
-\section{Omregning fra punkt i billede til reelt punkt}
+\section{Omregning fra punkt i billede til reelt punkt}\label{lokalisering:punktomregning}
 Det billede der fås ind fra kameraet, består af en mængde pixels.
 Robottens centrum, og derved lokation, vil være i præcist én pixel.
 For at robotten skal kunne bruge denne til at navigere i den virkelige verden, er det nødvendigt at omregne pixel(-koordinat) til reelt koordinat.
