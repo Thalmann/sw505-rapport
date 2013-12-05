@@ -36,15 +36,14 @@ Dvs. robotten sender en besked der kun indeholder encodingen $0$.
 Derefter returner PC'en beskeden $52xxxxxxxyyyyyyyzzzzzzz$.
 Denne besked indeholder lokationen og dens vinkel hvor $x$'erne og $y$'erne repræsenterer lokationen og $z$ vinkelen.
 
-\subsubsection{Naviger til en ny lokation}
+\subsubsection{Naviger til en ny lokation}\label{design:protokol_navigertilny}
 Denne situation opstår når PC'en sender en besked der fortæller robotten hvor den skal køre hen.
 PC'ens besked har encoding $50xxxxxxxyyyyyyy$ hvor $50$ fortæller robotten at den nu modtager en lokation den skal navigere hen til.
 Det resterende er lokationen $x,y$.
 
 \subsubsection{Nået frem til lokation}
+Denne situation forekommer når robotten er nået frem til den ønskede lokation.
+Så sender robotten en besked der kun indeholder encodingen $1$.
+Derefter sender PC'en til en ny lokation se i \cref{design:protokol_navigertilny}.
 
 \subsubsection{Aflæs Sensordata}
-
-
-
-\subsection{title}
