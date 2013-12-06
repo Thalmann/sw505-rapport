@@ -1,8 +1,7 @@
 \section{Lokalisering af robot}
-\mikkel{Hvor gør vi opmærksom på at vi vil anvende en kinect?}
-Til lokalisering af robotten anvendes (som nævnt i \cref{}) en \kinect.
+Til lokalisering af robotten anvendes (som nævnt i \cref{lokalisering:valg}) en \kinect.
 Denne er udstyret med et farvekamera (jvf. \cref{kinect:farvekamera}) der vil blive anvendt til at bestemme robottens placering.
-Ved at udstyre robotten med to mærkninger i klare farver vil det på billeder fra kinect'en være muligt at lokalisere robotten.
+Ved at udstyre robotten med to mærkninger i klare farver vil det på billeder fra den være muligt at lokalisere robotten.
 
 I det følgende beskrives den anvendte metode til lokalisering af robotten.
 Først beskrives den overordnede metode, hvorefter forbedringer af metoden præsenteres.
@@ -72,12 +71,12 @@ Der blev dog ved testen introduceret tre problemstillinger:
 \item Dele af billedet indeholdt \emph{farve-støj}.
 Ved farvestøj forstås pixels der ligger i tæt farve-afstand til den søgte farve, men langt fra det eftersøgte objekt.
 \item Farveændringer som følge af lys/skygge.
-I takt med at robotten bevæger sig vil lys falde forskelligt på de farvede overflade.
+I takt med at robotten bevæger sig vil lys falde forskelligt på de farvede overflader.
 Dette betyder at farven opfanget af kameraet ikke længere matcher den søgte farve godt.
 Ofte kan robotten ikke spores hvis belysningen ændres for meget.
-\item Funktionens opdaterings hastighed var ikke tilfredsstillinde (0-3 billeder i sekundet).
-Omend intet krav var stillet til opdaterings hastigheden er det dog nødvendigt til enhver tid at kunne beskrive robottens lokation.
-Ved lave opdaterings hastigheder bliver ændringerne i robottens lokation for høje (robotten flytter sig op til 30 cm mellem to billeder).
+\item Funktionens opdateringshastighed var ikke tilfredsstillende (0-3 billeder i sekundet).
+Omend intet krav var stillet til opdateringshastigheden er det dog nødvendigt til enhver tid at kunne beskrive robottens lokation.
+Ved lave opdateringshastigheder bliver ændringerne i robottens lokation for høje (robotten flytter sig op til 30 cm mellem to billeder).
 \end{enumerate}
 
 I det følgende beskrives de metoder der er anvendt til at løse ovenstående problemstillinger.
@@ -155,7 +154,7 @@ Af de forrige afsnit fås tre variable, der søges justeret således at de løse
 Herunder listes de tre variable, samt en beskrivelse af deres betydning og endelig justering.
 
 Bemærk at værdierne der tildeles variablerne \emph{ikke} er uafhængige.
-Ændringer i $\omega$ har således betydning for opdaterings hastigheden, hvilken igen har betydning for $\rho$.
+Ændringer i $\omega$ har således betydning for opdateringshastigheden, hvilken igen har betydning for $\rho$.
 Ligeledes har $\rho$ betydning for hvor hvilke pixels der er interessante samt i hvor høj grad der findes støj i de udregnede vægte, hvilket har betydning for $\sigma$ etc.
 
 Værdierne er derfor justeret i takt med at de forskellige løsninger er implementeret, hvorfor de endelige værdier kan ses herunder.
@@ -187,19 +186,19 @@ Der er imidlertid ingen øvre grænse for $\omega$, omend det følger naturligt 
 Det er ved forsøg bestemt at:
 $$\omega = 5$$
 Altså vil firkanten der indkapslede det forrige resultat udvides med 5 pixels i alle fire retninger (\cref{tracking:reduction}).
-Igennem forsøg fremgik det tydeligt at reduktionen i størrelse har en kraftig effekt på opdaterings hastigheden.
-Derved kunne $\omega$ sættes lavt og en hurtig opdaterings hastighed kunne opnås.
+Igennem forsøg fremgik det tydeligt at reduktionen i størrelse har en kraftig effekt på opdateringshastigheden.
+Derved kunne $\omega$ sættes lavt og en hurtig opdateringshastighed kunne opnås.
 I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedredes som følge af $\omega = 5$.
 \end{description}
 
-\subsection{Opdaterings hastighed}\label{tracking:updatespeed}
+\subsection{Opdateringshastighed}\label{tracking:updatespeed}
 Farvebilleder fra kinect'en kan indsamles på to forskellige måder:
 \begin{itemize}
 \item I opløsningen 640x480 ved 30 billeder i sekundet
 \item I opløsningen 1280x960 ved 15 billeder i sekundet
 \end{itemize}
 
-I tabellen herunder præsenteres den opdaterings hastighed der blev opnået i farvesøgning, både med og uden reduktion af problemets størrelse.
+I tabellen herunder præsenteres den opdateringshastighed der blev opnået i farvesøgning, både med og uden reduktion af problemets størrelse.
 Målingerne herunder er kun \emph{optrentlige}.
 
 {
