@@ -37,6 +37,7 @@ Til at begynde med blev alle Kinectens muligheder undersøgt, og strategien på 
 Dette introducerede imidlertid en del usikkerheder til hvor og hvordan Kinecten skulle placeres i forhold til kørselsmiljøet for at oversætte Kinectens koordinater til reelle koordinater gældende i selve kørselsmiljøet.
 En simplificering af opsætningen, med Kinecten monteret i en loftsplade med syn vinkelret ned på kørselsmiljøet, gjorde imidlertid Kinectens mange sensorer unødvendige da det via simple beregner således ville gøre det muligt at finde de korrekte koordinater.
 Beregningen af de reelle koordinater er beskrevet i \cref{lokalisering:punktomregning}.
+\mikael{Det var ikke så meget testmiljøet der gjorde sensorerne overflødige, som det var det at det ikke virkede så godt (for lidt forskelle mellem robot og gulv dybde)}
 
 Ovenstående simplificering gør det muligt at fokusere mere på kortlægning af robottens kørselsmiljø og dermed fjerne fokus fra at lokalisere robotten.
 Ved test er det derfor valgt at fokusere på lokalisere robotten via identificering af farver på robotten frem for f.eks. at benytte OpenCV til \textit{blob-genkendelse}\footnote{Et \textit{blob} betegner området af et billede som genkendes ud fra dets karakteristikker.} eller \textit{background substraction}\footnote{Ved background substraction trækkes et statisk billede af kørselsmiljøet fra selve videoen, for at fremhæve dets forskelle.}.
