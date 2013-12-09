@@ -95,7 +95,20 @@ P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alp
 
 \cite[s. 227]{ArtificialIntelligence}
 
-\subsubsection{Bayes Regel}
+\subsubsection{test}
+\begin{proof}[main theorem]
+\begin{equation}
+a=bc
+\end{equation}
+\begin{equation}
+d=qe \qedhere
+\end{equation}
+\begin{equation}
+z=\frac{a}{d}
+\end{equation}
+\end{proof}
+
+\subsubsection{Bayes Regel2}
 
 Bayes regel specificre hvordan 'troen' på en proposition kan opdateres udfra ny evidens.
 Den nye tro på hypotesen $h$ baseret på baggrundsviden $k$ og den nye evidens $e$ er givet ved $P(h \mid k \wedge e)$.
@@ -119,6 +132,28 @@ Skal man bruge den posterior sandsynlighed for hypotesen $h$ kan nævneren bereg
 	&= \sum_{h \in H}P(e \mid h \wedge k) \times P(h \mid k)
 \end{align}
 \cite[s. 229]{ArtificialIntelligence}
+
+\subsubsection{Bayes Regel}\label{sandsynlighed:bayes_regel}
+Bayes Regel spiller en stor rolle i sandsynlighedsteori, da den siger hvordan vi kan beregne en ny posterior ud fra en kendt prior sandsynlighedsdistribution.
+Den er således defineret som:
+
+$$P(h \mid e) = \frac{\mathit{sandsynlighed} \times \mathit{prior})}{\mathit{normaliseringsfunktion}} = \frac{P(e \mid h) \times P(h)}{P(e)},$$
+
+\begin{quotation}
+\textit{hvor $P(h \mid e)$ er posterior sandsynlighed, $P(e \mid h)$ er sandsynligheden og $P(h)$ er prior.}
+\end{quotation}
+
+Leder vi Bayes Regel hen på robotteknik givet to variabler $X$ og $Z$, hvor $X$ er en celle f.eks. et occupancy grid (\cref{mapping:occupancy_grid}) og $Z$ er sensormålinger.
+Så kan den næste posterior (for en celle $X_i$) givet sensormålinger, findes ved:
+
+$$P(X_i \mid Z) = \frac{P(Z \mid X_i) \times P(X_i)}{P(Z)}$$
+
+Tælleren i Bayes Regel kan betegnes som en ikke-normaliseret sandsynlighedsdistribution, hvor nævneren er en normaliseringsfunktion, givet ved:
+
+$$P(Z) = \sum_{i}^{} P(Z \mid X_i) \times P(X_i),$$
+
+hvilket svarer til kædereglen benyttet på hver enkelt celle i grid'et.
+
 
 \subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
 I tilfælde hvor tilstanden er statisk, altså hvor verden ikke ændrer sig over tid, kan der anvendes binære Bayes filtre.
