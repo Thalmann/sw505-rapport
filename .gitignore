@@ -14,7 +14,6 @@ tmp*
 *.lof
 *.lot
 main.pdf
-tmp.pdf
 *.out
 *.gz
 *.dvi
