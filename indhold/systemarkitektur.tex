@@ -29,11 +29,14 @@ Dets formål er at samle de komponenter som i systemet kan benyttes af alle lag.
 Derfor holder det også en reference til namespacet \textbf{NKH.MindSqualls} for at kunne tilgå den del af MindSqualls (\cref{mindsqualls}) som indeholder kommunikationen til NXT-enheden.
 
 \subsubsection{CommonLib.DTOs}
-
+Dette namespace indeholder alle \textit{Data Transferring Objects} som har til opgave at sende data mellem de forskellige lag.
 
 \subsubsection{CommonLib.NXTPostMan}
+Som navnet på namespacet antyder, så er formålet med \textbf{CommonLib.NXTPostMan} at sende beskeder frem og tilbage mellem PC og robotten; hvilket gør det ansvarlig for al kommunikation imellem de to som der beskrives i detaljer i \cref{kommunikation}.
 
 \subsubsection{CommonLib.Interfaces}
+Definerer en række interfaces som implementeres af de respektive DTO'er.
+Dette minimerer koblingen af koden og gør dem samtidig mere modulær, da komponenter nemt kan udskiftes.
 
 \subsection{NKH.MindSqualls}\label{arkitektur:mindsqualls}
 
