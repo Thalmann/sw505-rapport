@@ -1,0 +1,24 @@
+
+Robot vil vide hvor den er:
+\begin{enumerate}
+\item Robot lægger besked OUTGOING\_WHERE\_AM\_I i outbox
+\item Robotten går i gang med kontinuerligt at checke sin inbox efter beskeden INCOMING\_GET\_POS
+\begin{enumerate}
+\item Hvis beskeden er der:\\
+Opdater robottens pose med den der ligger i inbox
+\item Ellers:\\
+Check efter besked
+\end{enumerate}
+\item RobotInterface beder kontinuerligt Postman om at checke inbox (Robottens outbox)
+\begin{enumerate}
+\item Hvis der er besked og denne er RobotRequestsLocation:\\
+Bed LocationControl om robottens pose
+\item Hvis der er besked og den ikke er RobotRequestsLocation:\\
+Udfør den anden handling
+\item Ellers:\\
+Check efter besked
+\end{enumerate}
+\item LocationControl beder RobotLocation i TrackingServices om robottens pose
+\item RobotInterface beder Postman om at lægge robottens pose i outbox (Robottens inbox)
+\item Der var besked i robottens inbox
+\end{enumerate}
