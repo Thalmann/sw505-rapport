@@ -1,3 +1,4 @@
+% ### NOTER ###
 %Robot vil vide hvor den er:
 %\begin{enumerate}
 %\item Robot lægger besked OUTGOING\_WHERE\_AM\_I i outbox
@@ -22,7 +23,6 @@
 %\item Der var besked i robottens inbox
 %\end{enumerate}
 
-\section{Flow}
 For at vise hvordan arkitekturen benyttes, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen, ikke mindst kommunikationen mellem robot og PC.
 
 \subsection{Eksempel: Robotten anmoder om sin positur}
@@ -93,7 +93,7 @@ private void listener()
 
 I \cref{listener:checkformessages} i \cref{lst:listener} kontrolleres det om der findes besked i \lstinline[style=csharp]!PC_INBOX! af de indgående besked-typer:
 
-\begin{lstlisting}[style=csharpsmall,label=lst:checkformessages]
+\begin{lstlisting}[style=csharpsmall,label=lst:checkformessages,caption=checkForMessages() i RobotInterface]
 private bool checkForMessages()
 {
     return postman.HasMessageArrived(NXTMessageType.RobotRequestsLocation)
@@ -115,34 +115,37 @@ public NXTMessage RetrieveMessage()
 }
 \end{lstlisting}
 
-Når beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation! findes i \lstinline[style=csharp]!PC_INBOX! udføres den pågældende metode \lstinline[style=csharp]!RobotRequestLocation()!.
+Når beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation! findes i \lstinline[style=csharp]!PC_INBOX! udføres den pågældende metode \lstinline[style=csharp]!RobotRequestLocation()!:
 
-%\begin{lstlisting}[style=csharpsmall,label=lst:robotrequestslocation,caption=RobotRequestsLocation() i RobotInterface]
-%private void RobotRequestLocation()
-%{
-%    IPose pose = locCon.RobotPose;
-%    string encodedMsg = NXTEncoder.Encode(pose);
-%    byte[] byteEncMsg = NXTEncoder.ByteEncode(pose);
-%    NXTMessage outMsg = new NXTMessage(NXTMessageType.SendPostion,
-%        encodedMsg, byteEncMsg);
-%    postman.SendMessage(outMsg);
-%}
-%\end{lstlisting}
-
-\subsubsection{RobotInterface aflæser positur i LocationControl}
-RobotInterface får den senest opdateret positur ved at aflæse en property på \lstinline[style=csharp]!LocationControl!:
-
-\begin{lstlisting}[style=csharpsmall]
-IPose pose = locCon.RobotPose;
+\begin{lstlisting}[style=csharpsmall,label=lst:robotrequestslocation,caption=RobotRequestsLocation() i RobotInterface]
+private void RobotRequestLocation()
+{
+    IPose pose = locCon.RobotPose; (*\label{robotrequestslocation:pose}*)
+    string encodedMsg = NXTEncoder.Encode(pose);
+    NXTMessage outMsg = new NXTMessage(NXTMessageType.SendPostion, encodedMsg);
+    postman.SendMessage(outMsg); (*\label{robotrequestslocation:send}*)
+}
 \end{lstlisting}
 
+\subsubsection{RobotInterface aflæser positur i LocationControl}
+RobotInterface får den senest opdateret positur ved at aflæse en property på \lstinline[style=csharp]!LocationControl!.
+Dette kan ses i \cref{robotrequestslocation:pose} i \cref{lst:robotrequestslocation}.
+
 \subsubsection{LocationControl aflæser positur i TrackingServices}
-LocationControl får den senest opdateret positur ved at aflæse en property i \lstinline[style=csharp]!TrackingServices!
+LocationControl får den senest opdateret positur ved at aflæse en property i \lstinline[style=csharp]!TrackingServices!.
 \lstinline[style=csharp]!TrackingServices! opdaterer sin nuværende viden om robottens positur løbende, ved kontinuerligt at beregne en ny ud fra Kinect'ens billede.
 
 \subsubsection{RobotInterface bruger Postman til at sende positur}
 RobotInterface har nu det seneste data om robottens positur.
-Den bruger så \lstinline[style=csharp]!NXTPostman! til at lægge beskeden af type \lstinline[style=csharp]!NXTMessageType.SendPosition! i \lstinline[style=csharp]!PC_OUTBOX!, som er robottens \lstinline[style=c]!INBOX!.
+Den bruger så \lstinline[style=csharp]!NXTPostman! (se \cref{robotrequestslocation:send} i \cref{lst:robotrequestslocation}) til at lægge beskeden af type \lstinline[style=csharp]!NXTMessageType.SendPosition! i \lstinline[style=csharp]!PC_OUTBOX!, som er robottens \lstinline[style=c]!INBOX!:
+
+\begin{lstlisting}[style=csharpsmall,label=lst:sendmessage,caption=SendMessage i NXTPostman]
+public void SendMessage(NXTMessage msg)
+{
+    string toSendMessage = String.Format("{0}{1}", (byte)msg.MessageType, msg.EncodedMsg);
+    CommunicationBrick.CommLink.MessageWrite(PC_OUTBOX, toSendMessage);
+}
+\end{lstlisting}
 
 \subsubsection{Robotten modtager svar indeholdende den ny positur}
 Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX! har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur, som er kroppen af if-sætningen i \cref{whereami_request:if} i \cref{lst:whereami_request}.
