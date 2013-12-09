@@ -72,8 +72,7 @@ while(true) {
 
 \subsubsection{RobotInterface afventer besked fra robotten}
 Håndtering af robottens beskeder/anmodninger sker i \lstinline[style=csharp]!RobotInterface!.
-Her kører en seperat tråd med funktionen \lstinline[style=csharp]!listener()!, som sættes i gang når PC programmet startes.
-Her håndteres blandt andet beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation!, som hentes fra \lstinline[style=csharp]!NXTPostman! ved kontinuerligt at checke efter nye beskeder.
+Her kører en seperat tråd med funktionen \lstinline[style=csharp]!listener()!:
 
 \begin{lstlisting}[style=csharpsmall,label=lst:listener,caption=listener() i RobotInterface]
 private void listener()
@@ -82,14 +81,22 @@ private void listener()
     {
         if (checkForMessages()) (*\label{listener:checkformessages}*)
         {
-            NXTMessage msg = postman.RetrieveMessage();
+            NXTMessage msg = postman.RetrieveMessage(); (*\label{listener:retrievemessage}*)
 
-            switch (msg.MessageType) {...}
+            switch (msg.MessageType)
+            {
+                case (NXTMessageType.RobotRequestsLocation):
+                    RobotRequestLocation(); (*\label{listener:case}*)
+                    break;
+                //other cases
+            }
         }
         Thread.Sleep(THREAD_SLEEP_INTERVAL_IN_MILLISECONDS);
     }
 }
 \end{lstlisting}
+
+Tråden med \lstinline[style=csharp]!listener()! sættes i gang når PC programmet startes.
 
 I \cref{listener:checkformessages} i \cref{lst:listener} kontrolleres det om der findes besked i \lstinline[style=csharp]!PC_INBOX! af de indgående besked-typer:
 
@@ -101,7 +108,7 @@ private bool checkForMessages()
 }
 \end{lstlisting}
 
-Hvis der findes besked, hentes denne via \lstinline[style=csharp]!retrieveMessage()! i \lstinline[style=csharp]!NXTPostman!, som bruger Bluetooth-forbindelsen til at kontrollere for nye beskeder på i robottens \lstinline[style=c]!OUTBOX!:
+Hvis der findes besked, hentes denne via \lstinline[style=csharp]!RetrieveMessage()! i \lstinline[style=csharp]!NXTPostman! (se \cref{listener:retrievemessage} i \cref{lst:listener}), som bruger Bluetooth-forbindelsen i \lstinline[style=csharp]!CommLink! til at checke efter nye beskeder på i robottens \lstinline[style=c]!OUTBOX!:
 
 \begin{lstlisting}[style=csharpsmall,label=lst:postman,caption=NXTPostman henter besked fra robot]
 public NXTMessage RetrieveMessage()
@@ -115,7 +122,7 @@ public NXTMessage RetrieveMessage()
 }
 \end{lstlisting}
 
-Når beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation! findes i \lstinline[style=csharp]!PC_INBOX! udføres den pågældende metode \lstinline[style=csharp]!RobotRequestLocation()!:
+Når beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation! findes i \lstinline[style=csharp]!PC_INBOX! (se \cref{listener:case} i \cref{lst:listener}) udføres den pågældende metode \lstinline[style=csharp]!RobotRequestLocation()!:
 
 \begin{lstlisting}[style=csharpsmall,label=lst:robotrequestslocation,caption=RobotRequestsLocation() i RobotInterface]
 private void RobotRequestLocation()
@@ -137,7 +144,7 @@ LocationControl får den senest opdateret positur ved at aflæse en property i \
 
 \subsubsection{RobotInterface bruger Postman til at sende positur}
 RobotInterface har nu det seneste data om robottens positur.
-Den bruger så \lstinline[style=csharp]!NXTPostman! (se \cref{robotrequestslocation:send} i \cref{lst:robotrequestslocation}) til at lægge beskeden af type \lstinline[style=csharp]!NXTMessageType.SendPosition! i \lstinline[style=csharp]!PC_OUTBOX!, som er robottens \lstinline[style=c]!INBOX!:
+Den bruger så \lstinline[style=csharp]!NXTPostman! (se \cref{robotrequestslocation:send} i \cref{lst:robotrequestslocation}) til at lægge beskeden (først encodes beskeden jf. \cref{protokol:positur}) af type \lstinline[style=csharp]!NXTMessageType.SendPosition! i \lstinline[style=csharp]!PC_OUTBOX!, som er robottens \lstinline[style=c]!INBOX!:
 
 \begin{lstlisting}[style=csharpsmall,label=lst:sendmessage,caption=SendMessage i NXTPostman]
 public void SendMessage(NXTMessage msg)
@@ -148,4 +155,4 @@ public void SendMessage(NXTMessage msg)
 \end{lstlisting}
 
 \subsubsection{Robotten modtager svar indeholdende den ny positur}
-Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX! har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur, som er kroppen af if-sætningen i \cref{whereami_request:if} i \cref{lst:whereami_request}.
+Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX! har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur, som er kroppen af if-sætningen i \cref{whereami_request:if} i \cref{lst:whereami_request} (ikke vist).
