@@ -1,0 +1,52 @@
+\section{System arkitektur}\label{arkitektur}
+Til dette projekt er det besluttet at bygge systemet efter en lag-delt struktur.
+Denne beslutning er taget for at for at overkomme kompleksiteten af systemet; altså, for at give hvert gruppemedlem bedre overblik over koden, men også for at skabe nogle generelle retningslinjer for placering at dets komponenter.
+
+I de efterfølgende afsnit, vil arkitekturen (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
+Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål samt hvordan lagene interagerer med hinanden.
+Som det også ses på figurene, er det kun de ydre associationer der er angivet for at simplificere beskrivelsen af systemet.
+
+\subsection{SystemInterface}\label{arkitektur:systeminterface}
+\subsubsection{GUI.exe}
+\subsubsection{RobotInterface}
+\subsubsection{ConsoleUI.exe}
+\thilemann{Hvad med denne??}
+
+\subsection{Control.dll}\label{arkitektur:control}
+\subsubsection{DisplayControl}
+\subsubsection{LocationControl}
+\subsubsection{MappingControl}
+
+
+\subsection{Services.dll}\label{arkitektur:services}
+\subsubsection{RobotServices}
+\subsubsection{RouteService}
+\subsubsection{KinectServices}
+\subsubsection{TrackingServices}
+
+
+\subsection{Data.dll}\label{arkitektur:data}
+
+
+\subsection{CommonLib.dll}\label{arkitektur:commonlib}
+\subsubsection{DTOs}
+\subsubsection{NXTPostMan}
+\subsubsection{Interfaces}
+
+\subsection{NKH.MindSqualls}\label{arkitektur:mindsqualls}
+
+
+\thilemann{Overvej om de to figurer bliver for utydelige - skal de sættes op anerledes?}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{./graphics/systemarkitektur_1}
+\caption{Lagene i systemarkitekturen med deres ydre associationer. Associationerne til højre fører alle til \textbf{CommonLib.dll}, som ses på \cref{arkitektur:klassediagram:2}.}
+\label{arkitektur:klassediagram:1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{./graphics/systemarkitektur_2}
+\caption{Viser namespacet \textbf{CommonLib.dll} (uden interne associationer) som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \textbf{CommonLib.dll}, der indeholder de elementer som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
+\label{arkitektur:klassediagram:2}
+\end{figure}
