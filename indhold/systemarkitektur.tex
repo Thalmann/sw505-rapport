@@ -39,7 +39,8 @@ Definerer en række interfaces som implementeres af de respektive DTO'er.
 Dette minimerer koblingen af koden og gør dem samtidig mere modulær, da komponenter nemt kan udskiftes.
 
 \subsection{NKH.MindSqualls}\label{arkitektur:mindsqualls}
-
+Dette er koden fra MindSqualls frameworket (beskrevet i \cref{mindsqualls}).
+Det er dog ikke alle komponenter i frameworket der benyttes; det benyttes primært til at etablere kommunikation mellem NXT-enheden og PC samt exceptions, hvilket implementeres gennem \textit{PostMan} klassen.
 
 \subsection{SystemInterface}\label{arkitektur:systeminterface}
 Det er fra \textbf{SystemInterface} namespacet at 
@@ -52,14 +53,19 @@ Det er fra \textbf{SystemInterface} namespacet at
 \thilemann{Hvad med denne??}
 
 \subsection{Control.dll}\label{arkitektur:control}
-
+Denne komponent i arkitekturen er ansvarlig for kontrol af robotten samt opdatering af data.
+Kald hertil stammer fra \textbf{SystemInterface} der anmoder om en action, som dette namespace så reagerer på ved at benytte \textbf{Services} namespacet.
 
 \subsubsection{Control.DisplayControl}
+Er en klasse som henter en videostrøm fra farvekameraet på en Microsoft Kinect.
 
 \subsubsection{Control.LocationControl}
+Denne klasse opdaterer lokationen af robotten.
+Den indeholder således også information om robottens omgivelser og robotten selv; bl.a. en vector for robottens forreste lokation og ligeledes en for den bagerste samt hvilke farver der trackes på den.
 
 \subsubsection{Control.MappingControl}
-
+Al kontrol af robotten på kortet (occupancy grid) foregår gennem denne klasse.
+Den indeholder således metoder til at sende robotten til et nyt koordinat, opdatere kortet og hente nye sensormålinger.
 
 \subsection{Services.dll}\label{arkitektur:services}
 
@@ -72,6 +78,8 @@ Det er fra \textbf{SystemInterface} namespacet at
 
 \subsubsection{Services.TrackingServices}
 
+\subsubsection{MindSqualls}
+\thilemann{Bruges dette namespace stadig? Er det ikke blevet erstattet af PostMan?}
 
 \subsection{Data.dll}\label{arkitektur:data}
 
