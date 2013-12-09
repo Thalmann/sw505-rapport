@@ -23,20 +23,33 @@
 %\end{enumerate}
 
 \section{Flow}
-For at vise hvordan arkitekturen benyttes, og samtidig vise kommunikationen mellem robot og PC, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen.
+For at vise hvordan arkitekturen benyttes, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen, ikke mindst kommunikationen mellem robot og PC.
 
-\subsection{Eksempel: Robotten vil vide hvor den er}
-Det overordnede flow kan ses i tilstand-sekvens-diagrammet i \cref{flow:ssd}, dog skal det bemærkes at en vis del af det egentlige data flow er abstraheret væk.
-Den egentlige data flow vil blive beskrevet herefter, med kode-eksempler.
+\subsection{Eksempel: Robotten anmoder om sin positur}
+Når robotten har brug for at kende dens positur, hvis den for eksempel er i gang med at navigere til et punkt, sker der kald i gennem samtlige lag.
+Den overordnede procedure er som følgende:
+\begin{enumerate}
+\item{Robotten sender anmodning om sin positur}
+\item{RobotInterface afventer besked fra robotten}
+\begin{enumerate}
+\item{Hvis der er svar, udføres noget handling}
+\item{Ellers fortsættes der med at lytte efter beskeder}
+\end{enumerate}
+\item{RobotInterface aflæser positur i LocationControl}
+\item{LocationControl aflæser positur i TrackingServices}
+\item{RobotInterface bruger Postman til at sende positur}
+\item{Robotten modtager svar indeholdende den ny positur}
+\end{enumerate}
+Det overordnede flow kan ses i tilstand-sekvens-diagrammet i \cref{flow:ssd}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{arkitektur/ssd}
-\caption{Tilstand-sekvens-diagram}
+\caption{Tilstand-sekvens-diagram for robottens anmodning om positur}
 \label{flow:ssd}
 \end{figure}
 
-\subsubsection{Robotten sender anmodningen}
+\subsubsection{Robotten sender anmodning om sin positur}
 Det første der sker er at robotten lægger beskeden \lstinline[style=c]!OUTGOING_WHERE_AM_I! i \lstinline[style=c]!OUTBOX!:
 
 \begin{lstlisting}[style=csmall,label=lst:whereami_request,caption=Robotten sender anmodning om positur]
@@ -44,8 +57,7 @@ string msg = NumToStr(OUTGOING_WHERE_AM_I);
 SendMessage(OUTBOX, msg);
 \end{lstlisting}
 
-\subsubsection{Robotten venter på svar}
-Robotten går i gang med kontinuerligt at checke \lstinline[style=c]!INBOX! indtil beskeden med typen \lstinline[style=c]!INCOMING_GET_POS! er at finde:
+Herefter går robotten i gang med kontinuerligt at checke \lstinline[style=c]!INBOX! indtil beskeden med typen \lstinline[style=c]!INCOMING_GET_POS! er at finde:
 
 \begin{lstlisting}[style=csmall,label=lst:whereami_response,caption=Robotten venter på svar]
 while(true) {
@@ -53,12 +65,12 @@ while(true) {
    if (StrLen(in) > 0) {
       cmd = SubStr(in, 0, 2);
       cmdType = StrToNum(cmd);
-      if (cmdType == INCOMING_GET_POS) {...}
+      if (cmdType == INCOMING_GET_POS) {...} (*\label{whereami_request:if}*)
    }
 }
 \end{lstlisting}
 
-\subsubsection{RobotInterface venter på besked fra robotten}
+\subsubsection{RobotInterface afventer besked fra robotten}
 Håndtering af robottens beskeder/anmodninger sker i \lstinline[style=csharp]!RobotInterface!.
 Her kører en seperat tråd med funktionen \lstinline[style=csharp]!listener()!, som sættes i gang når PC programmet startes.
 Her håndteres blandt andet beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation!, som hentes fra \lstinline[style=csharp]!NXTPostman! ved kontinuerligt at checke efter nye beskeder.
@@ -68,7 +80,7 @@ private void listener()
 {
     while (RUNNING)
     {
-        if (checkForMessages()) (*\label{listener:checkformessages}*) 
+        if (checkForMessages()) (*\label{listener:checkformessages}*)
         {
             NXTMessage msg = postman.RetrieveMessage();
 
@@ -117,31 +129,20 @@ Når beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation! fin
 %}
 %\end{lstlisting}
 
-\subsubsection{RobotInterface henter positur i LocationControl}
-RobotInterface får den senest opdateret positur ved at aflæse en property på \lstinline[style=csharp]!LocationControl!.
+\subsubsection{RobotInterface aflæser positur i LocationControl}
+RobotInterface får den senest opdateret positur ved at aflæse en property på \lstinline[style=csharp]!LocationControl!:
 
-\subsubsection{LocationControl henter positur i TrackingServices}
-LocationControl får den senest opdateret positur ved at aflæse en property i \lstinline[style=csharp]!TrackingServices!.
+\begin{lstlisting}[style=csharpsmall]
+IPose pose = locCon.RobotPose;
+\end{lstlisting}
+
+\subsubsection{LocationControl aflæser positur i TrackingServices}
+LocationControl får den senest opdateret positur ved at aflæse en property i \lstinline[style=csharp]!TrackingServices!
 \lstinline[style=csharp]!TrackingServices! opdaterer sin nuværende viden om robottens positur løbende, ved kontinuerligt at beregne en ny ud fra Kinect'ens billede.
 
-\subsubsection{RobotInterface får NXTPostman til at sende posituren}
+\subsubsection{RobotInterface bruger Postman til at sende positur}
 RobotInterface har nu det seneste data om robottens positur.
 Den bruger så \lstinline[style=csharp]!NXTPostman! til at lægge beskeden af type \lstinline[style=csharp]!NXTMessageType.SendPosition! i \lstinline[style=csharp]!PC_OUTBOX!, som er robottens \lstinline[style=c]!INBOX!.
 
-\subsubsection{Robotten modtager beskeden}
-Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX! har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur:
-
-\begin{lstlisting}[style=csmall,label=lst:updatepose,caption=Robotten opdaterer sin positur ud fra den modtaget fra PC]
-if (cmdType == INCOMING_GET_POS) {
-   string x = SubStr(in, 2, 7);
-   string y = SubStr(in, 9, 7);
-   string angle = SubStr(in, 16, 7);
-
-   Pose po;
-   po.p.x = StrToNum(x);
-   po.p.y = StrToNum(y);
-   po.angle = StrToNum(angle);
-
-   return po;
-}
-\end{lstlisting}
+\subsubsection{Robotten modtager svar indeholdende den ny positur}
+Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX! har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur, som er kroppen af if-sætningen i \cref{whereami_request:if} i \cref{lst:whereami_request}.

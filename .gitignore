@@ -13,7 +13,8 @@ tmp*
 *.tdo
 *.lof
 *.lot
-*.pdf
+main.pdf
+tmp.pdf
 *.out
 *.gz
 *.dvi
