@@ -161,10 +161,10 @@ $$bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}$$ \\
 
 \subsubsection{Udledning af opdateringsalgoritmen}
 Ved at benytte os af bayes regel kan vi beskrive sandsynligheden for $x$ udfra sensormålinger $z$.
-\begin{align}
+\begin{align*}
 	P(x \mid z_{1:t}) &= \frac{P(z_t \mid x, z_{1:t-1}) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})} \\
 	&= \frac{P(z_t \mid x) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})}
-\end{align}
+\end{align*}
 Vi kan nu anvende Bayes regel på modellen for sensor målinger $P(z_t \mid x)$.
 $$P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}$$
 Hvilket vi indsætter og får.
@@ -175,24 +175,20 @@ Vi har selvfølgelig samme type udtryk for den modsatte tilstand $\neg x$.
 $$P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}$$
 Ved at dividere de to kan vi eliminere nogle af de sandsynligheder som er svære at beregne.
 
-\begin{equation}
-\begin{split}
+\begin{align*}
 	\frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} 
 	&= \frac{P(x \mid z_t)}{P(\neg x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} \frac{P(\neg x)}{P(x)} \\
 	&= \frac{P(x \mid z_t)}{1-P(x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})} \frac{1-P(x)}{P(x)}
-\end{split}
-\end{equation}
+\end{align*}
 
 Vi beskriver log odds forholdet af vores \textit{belief} $bel_t(x)$ som $l_t(x)$. 
 Log oddset for vores \textit{belief} til tiden $t$ er givet ved at tage logaritmen til ligningen. 
 
-\begin{equation}
-\begin{split}
+\begin{align*}
 	l_t(x) &= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) 
 	+ log\Bigg(\frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})}\Bigg) + log\Bigg(\frac{1-P(x)}{P(x)}\Bigg) \\
 	&= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) - log\Bigg(\frac{P(x)}{1-P(x)}\Bigg) + l_{t-1} 
-\end{split}
-\end{equation}
+\end{align*}
 
 Her er $P(x)$ den \textit{prior} sandsynlighed for tilstanden $x$, og er med i alle opdateringer af
 sandsynligheden for $x$. Den \textit{prior} sandsynlighed er også med til at definere den oprindelige
