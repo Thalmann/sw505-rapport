@@ -175,20 +175,24 @@ Vi har selvfølgelig samme type udtryk for den modsatte tilstand $\neg x$.
 $$P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}$$
 Ved at dividere de to kan vi eliminere nogle af de sandsynligheder som er svære at beregne.
 
-\begin{align}
+\begin{equation}
+\begin{split}
 	\frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} 
 	&= \frac{P(x \mid z_t)}{P(\neg x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} \frac{P(\neg x)}{P(x)} \\
 	&= \frac{P(x \mid z_t)}{1-P(x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})} \frac{1-P(x)}{P(x)}
-\end{align}
+\end{split}
+\end{equation}
 
 Vi beskriver log odds forholdet af vores \textit{belief} $bel_t(x)$ som $l_t(x)$. 
 Log oddset for vores \textit{belief} til tiden $t$ er givet ved at tage logaritmen til ligningen. 
 
-\begin{align}
+\begin{equation}
+\begin{split}
 	l_t(x) &= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) 
 	+ log\Bigg(\frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})}\Bigg) + log\Bigg(\frac{1-P(x)}{P(x)}\Bigg) \\
 	&= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) - log\Bigg(\frac{P(x)}{1-P(x)}\Bigg) + l_{t-1} 
-\end{align}
+\end{split}
+\end{equation}
 
 Her er $P(x)$ den \textit{prior} sandsynlighed for tilstanden $x$, og er med i alle opdateringer af
 sandsynligheden for $x$. Den \textit{prior} sandsynlighed er også med til at definere den oprindelige
