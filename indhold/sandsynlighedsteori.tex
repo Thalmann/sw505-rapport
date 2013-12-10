@@ -103,10 +103,10 @@ Den nye tro på hypotesen $h$ baseret på baggrundsviden $k$ og den nye evidens 
 
 Bayes regel er en direkte konsekvens af definitionen for betingede sandsynligheder og kædereglen således at. 
 
-\begin{align}
+\begin{align*}
 P(h \wedge e \mid k) &= P(h \mid e \wedge k) \times P(e \mid k) \\
 &= P(e \mid h \wedge k) \times P(h \mid k)
-\end{align}
+\end{align*}
 
 $$P(h \mid e \wedge k) = \frac{P(e \mid h \wedge k) \times P(h \mid k)}{P(e \mid k)}$$
 Hvilket ofte skrives med baggrundsviden implicit således.
@@ -115,10 +115,10 @@ $P(h)$ og $P(e \mid h)$ kaldes henholdsvis hypotesens prior og likelihood.
 Bayes regel viser at hypotesens posterior sandsynlighed er proportionel til dens likelihood multipliceret med dens prior.
 Hvis man skal sammenligne sandsynligheder for forskellige hypoteser, vil det være tilstrækkeligt at beregne tælleren i bayes regel.
 Skal man bruge den posterior sandsynlighed for hypotesen $h$ kan nævneren beregnes ved at summere over mængden $H$ af hypoteser.
-\begin{align}
+\begin{align*}
 	P(e \mid k) &= \sum_{h \in H} P(e \wedge h \mid k) \\
 	&= \sum_{h \in H}P(e \mid h \wedge k) \times P(h \mid k)
-\end{align}
+\end{align*}
 \cite[s. 229]{ArtificialIntelligence}
 
 \subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
