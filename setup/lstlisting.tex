@@ -27,12 +27,19 @@
 	stepnumber=1,
 	numbersep=9pt,	
 	captionpos=b,
-	escapeinside={(*}{*)}
+	escapeinside={(*}{*)},
+	breaklines=true
 }
 
 \lstdefinestyle{c}
 {
 	style=standard
+}
+
+\lstdefinestyle{csmall}
+{
+	style=c,
+	basicstyle=\ttfamily\footnotesize
 }
 
 \lstdefinestyle{csharp}
