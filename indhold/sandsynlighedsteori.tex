@@ -39,7 +39,8 @@ Denne notation kan også benyttes til at beskrive sandsynligheder af flere varia
 F.eks. er $P(X,Y)$ en sandsynlighedsfordeling over variablerne $ X $ og $ Y $, 
 således at $P(X = x, Y = y)$, hvor $x \in dom(X)$ og $y \in dom(Y)$, 
 har værdien $P(X = x \wedge Y = y)$, hvor
-$X = x \wedge Y = y$ er en proposition og $ P $ er funktionen over propositioner. \cite[s. 221-222]{ArtificialIntelligence}
+$X = x \wedge Y = y$ er en proposition og $ P $ er funktionen over propositioner. \\ \\
+\cite[s. 221-222]{ArtificialIntelligence}
 
 \subsection{Betinget sandsynlighed}
 
@@ -71,7 +72,7 @@ P(h \mid e) \quad = \quad & \mu_e(\{\omega \mid \omega \models h \})\\
 \quad = \quad & \frac{P(h \wedge e)}{P(e)}, \quad \textrm{hvor $P(e) > 0$.}
 \end{align*}
 
-Denne definition gør det således muligt at dekomponere en konjunktion til et produkt af betingede sandsynligheder.
+Denne definition gør det således muligt at dekomponere en konjunktion til et produkt af betingede sandsynligheder. \\ \\
 \cite[s. 226-227]{ArtificialIntelligence}
 
 \subsubsection{Kædereglen}
@@ -128,17 +129,20 @@ $$bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})$$
 
 Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
 Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
-Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert tidspunkt $t$, da verden er statisk.
+Bemærk desuden at $x$ altid er den samme, og der ikke findes en $x$ for ethvert tidspunkt $t$, da verden er statisk. \\ \\
+\cite[s. 94]{probabilisticRobotics}
 
 \subsubsection{Log Odds}
 Er en metode der kan benyttes for at undgå at komponenterne i Bayes Regel enten bliver definitivt sande eller falske.
 I så fald vil det ikke være muligt at beregne ny posterior, da de enkelte komponenter ikke vil have nogen effekt.
 
-Der kan derfor indføres en funktion, \textit{log odds ratio}, som konverterer sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
-Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$:\cite{probabilisticRobotics}
+Der kan derfor indføres en funktion, \textit{log odds ratio}, som mapper sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
+Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$: 
 
-$$\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}$$
-\\
+$$\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}$$ 
+
+\cite[s. 94]{probabilisticRobotics} \\
+
 Log oddset er logaritmen til forholdet mellem de to sandsynligheder:
 
 $$l(x) = \log \frac{p(x)}{1 - p(x)}$$
@@ -147,14 +151,53 @@ Effekten ved at beregne forholdet mellem $x$ og $\neg x$ er den afbildning der f
 Sagt anderledes, så svarer en sandsynlighed på 50\% til 0dB, hvor symmetrien imellem dem afspejles ved med negative værdier, f.eks. er 99\% ca. 20dB, hvor 1\% svarer ca. til -20dB.
 
 En anden umiddelbar fordel er at forskellene bliver forstærket hvor de betyder mest.
-Oversætter vi værdierne 50.00\% og 50.01\% får vi henholdsvis 0dB og 0.0017dB, hvorimod 99.98\% og 99.99\% bliver til 37dB og 40dB.\cite{logodds}
+Oversætter vi værdierne 50.00\% og 50.01\% får vi henholdsvis 0dB og 0.0017dB, hvorimod 99.98\% og 99.99\% bliver til 37dB og 40dB. \\ \\
+\cite[s. 2]{logodds} \\
 
-Ønsker vi at regne tilbage fra log odds ($l_x$), kan vi benytte følgende ligning:
+Ønsker vi at genskabe vores \textit{belief} udfra log odds ($l_x$), kan vi benytte følgende ligning:
 
-$$bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}$$
+$$bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}$$ \\
+\cite[s. 95]{probabilisticRobotics} 
 
-Her genskaber vi vores oprindelige \textit{belief}, $bel_t(x)$, ved at gange \textit{belief} over på den anden side af lighedstegnet og derefter tage exponentialfunktionen af log odds ($l_x$).
+\subsubsection{Udledning af opdateringsalgoritmen}
+Ved at benytte os af bayes regel kan vi beskrive sandsynligheden for $x$ udfra sensormålinger $z$.
+\begin{align}
+	P(x \mid z_{1:t}) &= \frac{P(z_t \mid x, z_{1:t-1}) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})} \\
+	&= \frac{P(z_t \mid x) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})}
+\end{align}
+Vi kan nu anvende Bayes regel på modellen for sensor målinger $P(z_t \mid x)$.
+$$P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}$$
+Hvilket vi indsætter og får.
+$$P(x \mid z_{1:t}) = \frac{P(x \mid z_t) P(z_t) P(x \mid z_{1:t-1})}{P(x) P(z_t \mid z_{1:t-1})}$$ \\
+\cite[s. 95]{probabilisticRobotics} \\
 
+Vi har selvfølgelig samme type udtryk for den modsatte tilstand $\neg x$.
+$$P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}$$
+Ved at dividere de to kan vi eliminere nogle af de sandsynligheder som er svære at beregne.
+
+\begin{align}
+	\frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} 
+	&= \frac{P(x \mid z_t)}{P(\neg x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} \frac{P(\neg x)}{P(x)} \\
+	&= \frac{P(x \mid z_t)}{1-P(x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})} \frac{1-P(x)}{P(x)}
+\end{align}
+
+Vi beskriver log odds forholdet af vores \textit{belief} $bel_t(x)$ som $l_t(x)$. 
+Log oddset for vores \textit{belief} til tiden $t$ er givet ved at tage logaritmen til ligningen. 
+
+\begin{align}
+	l_t(x) &= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) 
+	+ log\Bigg(\frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})}\Bigg) + log\Bigg(\frac{1-P(x)}{P(x)}\Bigg) \\
+	&= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) - log\Bigg(\frac{P(x)}{1-P(x)}\Bigg) + l_{t-1} 
+\end{align}
+
+Her er $P(x)$ den \textit{prior} sandsynlighed for tilstanden $x$, og er med i alle opdateringer af
+sandsynligheden for $x$. Den \textit{prior} sandsynlighed er også med til at definere den oprindelige
+\textit{belief} før der tages højde for \textit{evidens} i form af sensormålinger.
+
+$$ l_0 = log\Bigg(\frac{P(x)}{1-P(x)}\Bigg)$$ 
+\cite[s. 96]{probabilisticRobotics} \\
+
+Dette giver os den endelige algoritme for det binære bayes filter.
 
 \subsubsection{Opdaterings af celle med Bayesiansk filter}
 Opdaterings-algoritmen tager \textit{log odds} for en \textit{posterior belief} $l_{t-1}$ for en celle, samt en ny sensor-måling $z_t$, hvor fra der returneres en \textit{log odds} for en ny \textit{belief}, $l_t$, for cellen.
@@ -168,5 +211,9 @@ Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
 \label{alg:binaerbayesfilter}
 \end{algorithm}
 
+Algoritmen tager prior ($l_{t-1}$) som lægges til sandsynligheden beregnet vha. log odds af sensormodellen, minus log odds for den negerede forskel 
+af sandsynligheden for at en celle er optaget eller ej. \\ \\
+\cite[s. 94]{probabilisticRobotics}
 
-Algoritmen tager prior ($l_{t-1}$) som lægges til sandsynligheden beregnet vha. log odds af sensormodellen, minus log odds for den negerede forskel af sandsynligheden for at en celle er optaget eller ej.
+
+
