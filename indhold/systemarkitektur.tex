@@ -1,10 +1,10 @@
 \section{System arkitektur}\label{arkitektur}
 Til dette projekt er det besluttet at bygge systemet efter en lag-delt struktur.
-Denne beslutning er taget for at for at overkomme kompleksiteten af systemet; altså, for at give hvert gruppemedlem bedre overblik over koden, men også for at skabe nogle generelle retningslinjer for placering at dets komponenter.
+Denne beslutning er taget for at for at overkomme kompleksiteten af systemet; altså, for at give hvert gruppemedlem bedre overblik over koden, men også for at skabe nogle generelle retningslinjer for placering af dets komponenter.
 
-I de efterfølgende afsnit, vil arkitekturen (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
-Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål samt hvordan lagene interagerer med hinanden.
-Som det også ses på figurene, er det kun de ydre associationer der er angivet for at simplificere beskrivelsen af systemet.
+I de efterfølgende afsnit vil arkitekturen (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
+Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål, samt hvordan lagene interagerer med hinanden.
+Som det også ses på figurerne, er det kun de ydre associationer der er angivet for at simplificere beskrivelsen af systemet.
 Som det første beskrives \textbf{CommonLib.dll} i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
 Efterfølgende vil lagene blive beskrevet i en rækkefølge der følger kaldene internt i systemet.
 
@@ -41,7 +41,7 @@ Dette minimerer koblingen af koden og gør dem samtidig mere modulær, da kompon
 
 \subsection{NKH.MindSqualls}\label{arkitektur:mindsqualls}
 Dette er koden fra MindSqualls frameworket (beskrevet i \cref{mindsqualls}).
-Det er dog ikke alle komponenter i frameworket der benyttes; det benyttes primært til at etablere kommunikation mellem NXT-enheden og PC samt exceptions, hvilket implementeres gennem \textit{PostMan} klassen.
+Det er dog ikke alle komponenter i frameworket der benyttes; det benyttes primært til at etablere kommunikation mellem NXT-enheden og PC samt exceptions, hvilket implementeres gennem \lstinline[style=csharp]|PostMan| klassen.
 
 \subsection{SystemInterface}\label{arkitektur:systeminterface}
 Dette er 'indgangen' til systemet og er derfor også den komponent som er ansvarlig for alle ydre påvirkninger; det være sig f.eks. brugerinput eller andre systemer som ønsker at tilgå systemet.
@@ -52,7 +52,7 @@ Det er ansvarlig for at modtage og reagere på brugerens input.
 
 \subsubsection{SystemInterface.RobotInterface}
 Essensen i dette namespace er en tråd der konstant tjekker efter nye beskeder på NXT-enheden.
-Den benytter så henholdsvis \textit{LocationControl} og \textit{MappingControl} til at reagere på beskeder den finder, og anmoder dermed \textbf{Services} namespacet om at udføre den pågældende handling.
+Den benytter så henholdsvis \lstinline[style=csharp]|LocationControl| og \lstinline[style=csharp]|MappingControl| til at reagere på beskeder den finder, og anmoder dermed \textbf{Services} namespacet om at udføre den pågældende handling.
 
 \subsection{Control.dll}\label{arkitektur:control}
 Denne komponent i arkitekturen er ansvarlig for kontrol af robotten samt opdatering af data.
@@ -63,7 +63,7 @@ Er en klasse som henter en videostrøm fra farvekameraet på en Microsoft Kinect
 
 \subsubsection{Control.LocationControl}
 Denne klasse opdaterer lokationen af robotten.
-Den indeholder således også information om robottens omgivelser og robotten selv; bl.a. en vector for robottens forreste lokation og ligeledes en for den bagerste samt hvilke farver der trackes på den.
+Den indeholder således også information om robottens omgivelser og robotten selv.
 
 \subsubsection{Control.MappingControl}
 Al kontrol af robotten på kortet (occupancy grid) foregår gennem denne klasse.
@@ -77,8 +77,7 @@ Dette namespace benyttes når robotten skal kontrolleres.
 Det er således herigennem der sendes beskeder til robotten for at få den til at bevæge sig til en ny position og tage sensormålinger.
 
 \subsubsection{Services.RouteService}
-For at få robotten til at køre en rute på kortet benyttes \textbf{RouteService} namespacet, der består af en grafisk komponent der gør det muligt at klikke en rute ind på et occupancy grid samt en \textit{SchedulingService} der returnerer en \textit{kø} af de punkter som ruten består af.
-\thilemann{Mere tekst? Andet tekst?}
+For at få robotten til at køre en rute på kortet benyttes \textbf{RouteService} namespacet, der består af en grafisk komponent der gør det muligt at klikke en rute ind på et occupancy grid samt en \lstinline[style=csharp]|SchedulingService| der returnerer en kø af de punkter som ruten består af.
 
 \subsubsection{Services.KinectServices}
 Benyttes af \textbf{Control.DisplayControl} for at vise en videostrøm fra farvekameraet i Kinecten.
