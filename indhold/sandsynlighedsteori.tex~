@@ -8,7 +8,7 @@ Dette afsnit introducerer den nødvendige sandsynlighedsteori for at kunne beskr
 Sandsynlighedsteori omhandler hvordan viden har indflydelse på vores opfattelse af en given verden (\textit{belief}).
 I en proposition $\alpha$ måles vores opfattelse som en værdi mellem 0 og 1, hvor 0 betegner $\alpha$ som værende definitivt falsk, og 1 definitivt sand.
 Har $\alpha$ en værdi mellem 0 og 1 betegnes den således ikke til at være sand 'til en vis grad', men blot at vi ved at den er hverken sand eller falsk.
-Indholdet i dette afsnit er baseret på afsnit fra \cite{ArtificialIntelligence} og \cite{probabilisticRobotics}.
+Indholdet i dette afsnit er baseret på afsnit fra \cite{ArtificialIntelligence}.
 
 \subsection{Semantik for sandsynlighed}
 I dette afsnit angives den semantik der i resten af rapporten vil blive benyttet til at beskrive sandsynligheder 
@@ -98,15 +98,15 @@ P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alp
 
 \subsubsection{Bayes Regel}
 
-Bayes regel specificerer hvordan 'troen' på en proposition kan opdateres udfra ny evidens.
+Bayes regel specificre hvordan 'troen' på en proposition kan opdateres udfra ny evidens.
 Den nye tro på hypotesen $h$ baseret på baggrundsviden $k$ og den nye evidens $e$ er givet ved $P(h \mid k \wedge e)$.
 
 Bayes regel er en direkte konsekvens af definitionen for betingede sandsynligheder og kædereglen således at. 
 
-\begin{align*}
+\begin{align}
 P(h \wedge e \mid k) &= P(h \mid e \wedge k) \times P(e \mid k) \\
 &= P(e \mid h \wedge k) \times P(h \mid k)
-\end{align*}
+\end{align}
 
 $$P(h \mid e \wedge k) = \frac{P(e \mid h \wedge k) \times P(h \mid k)}{P(e \mid k)}$$
 Hvilket ofte skrives med baggrundsviden implicit således.
@@ -115,10 +115,10 @@ $P(h)$ og $P(e \mid h)$ kaldes henholdsvis hypotesens prior og likelihood.
 Bayes regel viser at hypotesens posterior sandsynlighed er proportionel til dens likelihood multipliceret med dens prior.
 Hvis man skal sammenligne sandsynligheder for forskellige hypoteser, vil det være tilstrækkeligt at beregne tælleren i bayes regel.
 Skal man bruge den posterior sandsynlighed for hypotesen $h$ kan nævneren beregnes ved at summere over mængden $H$ af hypoteser.
-\begin{align*}
+\begin{align}
 	P(e \mid k) &= \sum_{h \in H} P(e \wedge h \mid k) \\
 	&= \sum_{h \in H}P(e \mid h \wedge k) \times P(h \mid k)
-\end{align*}
+\end{align}
 \cite[s. 229]{ArtificialIntelligence}
 
 \subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
@@ -143,14 +143,12 @@ $$\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}$$
 
 \cite[s. 94]{probabilisticRobotics} \\
 
-Log oddset er logaritmen til forholdet mellem de to sandsynligheder: \cref{logoddsimg}
+Log oddset er logaritmen til forholdet mellem de to sandsynligheder:
 
 $$l(x) = \log \frac{p(x)}{1 - p(x)}$$
 
 \begin{figure}
 \centering \includegraphics[scale=.33]{LogOdds}
-\label{logoddsimg}
-\caption{Log odds mapning}
 \end{figure}
 
 Effekten ved at beregne forholdet mellem $x$ og $\neg x$ er den afbildning der fåes; værdierne tilordner sig efter samme skala som kendes fra decibel skalaen til måling af lydintensitet -- enhver forøgelse af 10dB giver en tifold forøgelse af den faktiske intensitet.
@@ -167,10 +165,10 @@ $$bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}$$ \\
 
 \subsubsection{Udledning af opdateringsalgoritmen}
 Ved at benytte os af bayes regel kan vi beskrive sandsynligheden for $x$ udfra sensormålinger $z$.
-\begin{align*}
+\begin{align}
 	P(x \mid z_{1:t}) &= \frac{P(z_t \mid x, z_{1:t-1}) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})} \\
 	&= \frac{P(z_t \mid x) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})}
-\end{align*}
+\end{align}
 Vi kan nu anvende Bayes regel på modellen for sensor målinger $P(z_t \mid x)$.
 $$P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}$$
 Hvilket vi indsætter og får.
@@ -181,20 +179,20 @@ Vi har selvfølgelig samme type udtryk for den modsatte tilstand $\neg x$.
 $$P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}$$
 Ved at dividere de to kan vi eliminere nogle af de sandsynligheder som er svære at beregne.
 
-\begin{align*}
+\begin{align}
 	\frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} 
 	&= \frac{P(x \mid z_t)}{P(\neg x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} \frac{P(\neg x)}{P(x)} \\
 	&= \frac{P(x \mid z_t)}{1-P(x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})} \frac{1-P(x)}{P(x)}
-\end{align*}
+\end{align}
 
 Vi beskriver log odds forholdet af vores \textit{belief} $bel_t(x)$ som $l_t(x)$. 
 Log oddset for vores \textit{belief} til tiden $t$ er givet ved at tage logaritmen til ligningen. 
 
-\begin{align*}
+\begin{align}
 	l_t(x) &= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) 
 	+ log\Bigg(\frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})}\Bigg) + log\Bigg(\frac{1-P(x)}{P(x)}\Bigg) \\
 	&= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) - log\Bigg(\frac{P(x)}{1-P(x)}\Bigg) + l_{t-1} 
-\end{align*}
+\end{align}
 
 Her er $P(x)$ den \textit{prior} sandsynlighed for tilstanden $x$, og er med i alle opdateringer af
 sandsynligheden for $x$. Den \textit{prior} sandsynlighed er også med til at definere den oprindelige
