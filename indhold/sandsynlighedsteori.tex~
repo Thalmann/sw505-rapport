@@ -147,6 +147,10 @@ Log oddset er logaritmen til forholdet mellem de to sandsynligheder:
 
 $$l(x) = \log \frac{p(x)}{1 - p(x)}$$
 
+\begin{figure}
+\centering \includegraphics[scale=.33]{LogOdds}
+\end{figure}
+
 Effekten ved at beregne forholdet mellem $x$ og $\neg x$ er den afbildning der fåes; værdierne tilordner sig efter samme skala som kendes fra decibel skalaen til måling af lydintensitet -- enhver forøgelse af 10dB giver en tifold forøgelse af den faktiske intensitet.
 Sagt anderledes, så svarer en sandsynlighed på 50\% til 0dB, hvor symmetrien imellem dem afspejles ved med negative værdier, f.eks. er 99\% ca. 20dB, hvor 1\% svarer ca. til -20dB.
 
@@ -212,8 +216,7 @@ Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
 \end{algorithm}
 
 Algoritmen tager prior ($l_{t-1}$) som lægges til sandsynligheden beregnet vha. log odds af sensormodellen, minus log odds for den negerede forskel 
-af sandsynligheden for at en celle er optaget eller ej. \\
-
+af sandsynligheden for at en celle er optaget eller ej. \\ \\
 \cite[s. 94]{probabilisticRobotics}
 
 
