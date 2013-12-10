@@ -1,7 +1,3 @@
-% !TeX spellcheck = da_DK
-
-Dette kapitel beskriver platformen og hvorfor den er valgt.
-
 \section{Lego Mindstorms NXT}\label{lego:mindstorms-nxt}
 I dette kapitel vil den valgte platform, \legoms, blive kort beskrevet med en begrundelse for dette valg.
 Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
@@ -9,7 +5,7 @@ Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
 \subsection{Hvad er Lego Mindstorms?}
 \legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter i \lego-klodser.
 
-Til at bygge disse robotter er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser
+Til at bygge disse robotter er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser.
 Ved brug af aktuatorerne kan robotten reagere på disse inputs.
 
 Ud over de originale \lego dele er der også tredjeparts forhandlere, som har et udbud af andre sensorer og aktuatorer. \thilemann{Enten bør denne linje fjernes, eller også skal vi skrive om sådanne sensorer?}
@@ -98,91 +94,28 @@ Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udski
 \subsubsection{Mange muligheder ift. styring}
 Her menes der både overordnet den måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
 NXT'en kan udstyres med brugerdefineret firmware, der giver utroligt mange muligheder (og dermed også fleksibilitet) ift. hvordan den kan styres.
-%Desuden kan der bruges et væld af programmeringssprog til at programmere NXT'en.
-I \cref{nxt_api} bliver mulighederne ift. API og mulige programmeringssprog beskrevet.
 
+I afsnittet herefter vil der blive argumenteret for valg af API, hvor API her skal forstås som måden hvorpå robotten skal styres.
 
-\section{Valg af NXT API}
-\label{nxt_api}
-\bruno{Skal skrives om - så det passer med hvad vi gør nu.}
+\section{Valg af NXT API}\label{nxt_api}
+Det system der skal laves er i virkeligheden et to-delt system.
+Den ene del, som er selve robotten og dens brug af sensorer og aktuatorer til at opfatte og bevæge sig i verden.
+Den anden del, noget software som er tungere i data og beregninger, navnligt til konstruktionen af kortet.
 
-I denne sektion bliver der argumenteret for valg af API.
-Først vil de forskellige afprøvede API'er blive kort præsenteret, hvorefter vores valg vil blive fremhævet.
+Der skal også være god kommunikation mellem de to, da software-delen skal kunne få robotten til at navigere rundt og indsamle data, så den derefter kan få denne data og beregne/opdatere sit kort.
 
-Overordnet set er der to muligheder når det kommer til valg af API; standard eller custom firmware.
-Forskellene på de to, og hvilke muligheder de giver for valg af sprog/API'er, vil blive uddybet her.
+\subsection{Overordnet valg}
+For at kunne overholde ovenstående, skal der kunne laves et to-delt stykke software, hvor den ene del kører på robotten og den anden del på en stærkere platform, i vores tilfælde en PC.
 
-\subsection{Standard firmware}
-Ens for alle API'er der benytter sig af standard firmware, er at de sender kommandoer til NXT'en for at styre robotten. \stefan{Er det sandt for alle standard firmware API'er? Også dem vi ikke har prøvet?}
-Dette gør det nemt at lave et bibliotek/interface til at styre NXT'en, hvilket også er derfor der er mange muligheder til valg af sprog.
+Der kunne også vælges et system, med et enkelt stykke software kun på robotten, dog er det vores vurdering at mængden af data og regnekraft ikke er god nok på NXT'en til denne slags system.
 
-Følgende NXT platforme som benytter sig af standard firmware er blevet undersøgt:
-\begin{itemize}
-\item{nxt-python}
-\item{Mindsqualls}
-\item{ROBOTC}
-\end{itemize}
+\subsection{NXC}
+Til det software der skal køres på robotten har vi valgt NXC, da det er simpelt og dækker alle behov.
+NXC-programmer skrives i et C-lignende sprog, hvorefter disse programmer kan sendes til NXT'en og køres direkte der på.
+Der er også stor mulighed for kommunikation mellem NXC-programmer og eksterne programmer.
 
-\paragraph{nxt-python} er et Python interface der gør det muligt at sende kommandoer direkte til NXT'en.
-For at bruge Bluetooth\textregistered{} til at kommunikere med NXT'en, skal der bruges et eksternt bibliotek. \cite{nxt-python}
-
-\paragraph{Mindsqualls} er et .NET bibliotek, der gør det muligt at programmere til NXT'en i Common Language Interface (CLI) sprog, som \csharp, \fsharp eller VB. \cite{mindsqualls}
-
-Yderlige kan der ved brug af Python Tools for Visual Studio (PTVS) udvides til at skrive programmer i et .NET Python sprog (som CPython eller IronPython). \cite{ptvs}
-
-\paragraph{ROBOTC} er et IDE hvori der skrives programmer i C til at kommunikere med NXT'en. \cite{robotc}
-
-\subsection{Custom firmware}
-\bruno{Det her skal skrives om -  vi bruger følgende firmware nu: "enhanced firmware" og man kan godt ligge programmer på NXT'en selvom der er standard firmware på.}
-Med custom firmware er det muligt at lægge programmer på NXT'en og køre dem direkte uden brug af en ekstern enhed.
-Da det er et større projekt at lave en firmware, er der også færre muligheder end ift. standard firmware. \stefan{Hvorfor lave en ny firmware hvis den har færre muligheder end den originale?}
-
-Der er blevet fundet to NXT platforme som benytter sig af custom firmware:
-\begin{itemize}
-\item{leJOS}
-\item{nxtOSEK}
-\end{itemize}
-
-\paragraph{leJOS} er en lille Java Virtual Machine (JVM), som benytter et API kaldet NXJ.
-leJOS firmware erstatter standard firmware'en på NXT'en, hvorefter det bliver muligt at lægge JAVA programmer ind og køre dem direkte på NXT'en. \cite{lejos}
-
-\paragraph{nxtOSEK} er baseret på leJOS' NXJ API, og gør det muligt at skrive C eller C++ programmer og køre dem direkte på NXT'en.
-Der er API'er til styring af NXT'en i både C og C++. \cite{nxtosek}
-
-\subsection{Valg af API}
-
-\subsubsection{Standard og custom firmware}
-Custom firmware, hvor der kan sendes og køres programmer direkte på NXT'en, har en fordel ift. at det ikke er nødvendigt at spilde tid på kommunikation med en ekstern enhed.
-Dette gør at der hurtigt kan aflæses input fra sensorer for at foretage beregninger på det registrerede data for at give en reaktion i form af en kommando til en motor.
-
-Ens for dem begge er at det stadig er muligt at sende kommandoer fra en ekstern enhed, hvilket giver mere regnekraft, hvis man eksempelvis foretager udregninger på en PC.
-
-Siden dette projekt ikke har behov for at den udviklede robot skal reagere hurtigt ift. sine omgivelser, er det ikke et krav at der skal køres programmer direkte på NXT'en.
-Dette gør det valg der skal foretages i forhold til valg af NXT platform er mere baseret på hvilket sprog projektgruppen foretrækker.
-\stefan{Jeg er i tvivl om argumentet med at programmer der kører på enheden kan reagere hurtigere - har vi en kilde på det?}
-
-\paragraph{Sprog}
-Eftersom der kan vælges mellem alle de præsenterede NXT platforme, er det et spørgsmål om smag og behag.\thilemann{I forhold til?}
-Alle de præsenterede sprog har fordele og ulemper, men ingen af dem gør det umuligt at løse problemet.
-
-Efter at have prøvet de forskellige muligheder, og opvejet fordele og ulemper, er valget faldet på Mindsqualls og en kombination af \csharp og \fsharp.
-
-
-Mindsqualls kan benyttes med alle .NET sprog og kan derfor udvikles i Visual Studio, som gruppen allerede er bekendte med. 
-Det giver også mulighed for at skrive i \csharp, hvilket gruppen allerede har en del erfaring med. 
-.NET platformen gør det også muligt at benytte andre .NET sprog til dele at programmet, og \fsharp kunne her være interessant ift. til at implementere algoritmer.
-\anders{Har vi brugt \fsharp til noget endnu ?}
-%\begin{table}
-%\begin{tabularx}{\textwidth}{|X|X|X|X|}
-%\hline
-%& \textbf{Sprog} & \textbf{Værktøjer} & \textbf{Firmware} \\ \hline
-%\textbf{nxt-python} & Python & Ingen & Standard \\ \hline
-%\textbf{Mindsqualls} & Alle CLI (.NET) sprog & Visual Studio & Standard \\ \hline
-%\textbf{Mindsqualls (PTVS)} & Python (.NET-version af Python som CPython eller IronPython) & Visual Studio + Python Tools for Visual Studio (PTVS) & Standard \\ \hline
-%\textbf{nxtOSEK} & C/C++ & Eclipse CDT + cygwin & Custom \\ \hline
-%\textbf{ROBOTC} & C & ROBOTC (IDE) & Standard \\
-%\hline
-%\end{tabularx}
-%\caption{Oversigt over de afprøvede API'er}
-%\label{nxt:oversigt_api}
-%\end{table}
+\subsection{MindSqualls}
+Til det software der skal køres på PC, altså det der skal sørge for selve opdateringen og beregningen af kort, har vi valgt \mindsqualls.
+\mindsqualls er et .NET bibliotek skrevet i \csharp, hvori det er muligt at kommunikere med en NXT, både ved at sende direkte kommandoer eller via abstraktion over NXTens aktuatorer/sensorer opfattet som objekter.
+Valget faldt på \mindsqualls da dette var simpelt og dækkede alle behov ift. kommunikation med NXT.
+Desuden har gruppen stor erfaring med \csharp og Visual Studio, hvilket også syntes som en stor fordel.
