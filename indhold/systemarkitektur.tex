@@ -9,6 +9,7 @@ Som det første beskrives \textbf{CommonLib.dll} i \cref{arkitektur:commonlib}, 
 Efterfølgende vil lagene blive beskrevet i en rækkefølge der følger kaldene internt i systemet.
 
 \thilemann{Overvej om de to figurer bliver for utydelige - skal de sættes op anerledes?}
+\thilemann{Måske burde vi henvise til de afsnit i rapporten som beskriver komponenterne?}
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{./graphics/systemarkitektur_1}
@@ -43,14 +44,15 @@ Dette er koden fra MindSqualls frameworket (beskrevet i \cref{mindsqualls}).
 Det er dog ikke alle komponenter i frameworket der benyttes; det benyttes primært til at etablere kommunikation mellem NXT-enheden og PC samt exceptions, hvilket implementeres gennem \textit{PostMan} klassen.
 
 \subsection{SystemInterface}\label{arkitektur:systeminterface}
-Det er fra \textbf{SystemInterface} namespacet at 
+Dette er 'indgangen' til systemet og er derfor også den komponent som er ansvarlig for alle ydre påvirkninger; det være sig f.eks. brugerinput eller andre systemer som ønsker at tilgå systemet.
 
 \subsubsection{SystemInterface.GUI.exe}
+Dette namespace indeholder de grafiske komponenter for systemet, og er derfor programmet der starter systemet.
+Det er ansvarlig for at modtage og reagere på brugerens input.
 
 \subsubsection{SystemInterface.RobotInterface}
-
-\subsubsection{SystemInterface.ConsoleUI.exe}
-\thilemann{Hvad med denne??}
+Essensen i dette namespace er en tråd der konstant tjekker efter nye beskeder på NXT-enheden.
+Den benytter så henholdsvis \textit{LocationControl} og \textit{MappingControl} til at reagere på beskeder den finder, og anmoder dermed \textbf{Services} namespacet om at udføre den pågældende handling.
 
 \subsection{Control.dll}\label{arkitektur:control}
 Denne komponent i arkitekturen er ansvarlig for kontrol af robotten samt opdatering af data.
@@ -68,21 +70,27 @@ Al kontrol af robotten på kortet (occupancy grid) foregår gennem denne klasse.
 Den indeholder således metoder til at sende robotten til et nyt koordinat, opdatere kortet og hente nye sensormålinger.
 
 \subsection{Services.dll}\label{arkitektur:services}
-
+Dette er det nederste lag i arkitekturen og benyttes af \textbf{Control} namespacet når en handling ønskes udført.
 
 \subsubsection{Services.RobotServices}
+Dette namespace benyttes når robotten skal kontrolleres.
+Det er således herigennem der sendes beskeder til robotten for at få den til at bevæge sig til en ny position og tage sensormålinger.
 
 \subsubsection{Services.RouteService}
+For at få robotten til at køre en rute på kortet benyttes \textbf{RouteService} namespacet, der består af en grafisk komponent der gør det muligt at klikke en rute ind på et occupancy grid samt en \textit{SchedulingService} der returnerer en \textit{kø} af de punkter som ruten består af.
+\thilemann{Mere tekst? Andet tekst?}
 
 \subsubsection{Services.KinectServices}
+Benyttes af \textbf{Control.DisplayControl} for at vise en videostrøm fra farvekameraet i Kinecten.
+Konverterer den returnerede videostrøm til en strøm af bitmaps som kan vises grafisk i \textbf{SystemInterface}.
 
 \subsubsection{Services.TrackingServices}
-
-\subsubsection{MindSqualls}
-\thilemann{Bruges dette namespace stadig? Er det ikke blevet erstattet af PostMan?}
+Denne service er ansvarlig for at holde styr på robottens lokation samt positur.
+Robotten kan således gennem \textbf{Control} benytte dette namespace når den ønsker en opdatering af sin positur.
 
 \subsection{Data.dll}\label{arkitektur:data}
-
+Dette assembly indeholder alle data objekter for occupancy grid samt sensormodellen.
+Alt data opdateres fra \textbf{Control} når robotten har taget en ny måling.
 
 
 
