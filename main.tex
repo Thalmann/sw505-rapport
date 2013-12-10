@@ -54,19 +54,16 @@
 
 \chapter*{Baggrund}
 \addcontentsline{toc}{chapter}{Baggrund}
-%insert file here
+\input{indhold/baggrund}
 
-\chapter*{Problemformulering}
-\addcontentsline{toc}{chapter}{Problemformulering}
+\chapter*{Problem}
+\addcontentsline{toc}{chapter}{Problem}
 \input{indhold/problemformulering}
-
-\chapter*{Målsætning}
-\addcontentsline{toc}{chapter}{Målsætning}
-%insert file here
 
 \clearpage
 
 \part{Valg af løsningsmetode}
+\input{indhold/indledning_valg_af_losning}
 
 \chapter{Platform}
 \input{indhold/platforme}
@@ -77,8 +74,13 @@
 \chapter{Frameworks}
 \input{indhold/mindsqualls}
 \input{indhold/NXC}
+\input{indhold/valg_af_frameworks}
 \chapter{Lokaliseringsmetoder}
 \input{indhold/localization}
+\chapter{Mapping}
+\input{indhold/mapping_occupancy_grid}
+\chapter{Opsummering}
+\input{indhold/opsummering_losningsmetode}
 
 \part{Teori}
 \chapter{Notation og sandsynlighedsteori}
@@ -96,10 +98,12 @@
 \chapter{Forsøgsopstilling}
 \input{indhold/testmiljo}
 \chapter{Arkitektur}
+\input{indhold/systemarkitektur}
 \section{Diagram}
-\section{Kommunikationsprotokol}
+\section{Kommunikationsprotokol}\label{kommunikation}
 \input{indhold/kommunikationsprotokol}
 \section{Flow + Kode - eksempel}
+\input{indhold/flow}
 
 \part{Konklusion}
 \chapter{Evaluering}

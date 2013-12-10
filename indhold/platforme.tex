@@ -1,5 +1,7 @@
 % !TeX spellcheck = da_DK
 
+Dette kapitel beskriver platformen og hvorfor den er valgt.
+
 \section{Lego Mindstorms NXT}\label{lego:mindstorms-nxt}
 I dette kapitel vil den valgte platform, \legoms, blive kort beskrevet med en begrundelse for dette valg.
 Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
@@ -102,6 +104,7 @@ I \cref{nxt_api} bliver mulighederne ift. API og mulige programmeringssprog besk
 
 \section{Valg af NXT API}
 \label{nxt_api}
+\bruno{Skal skrives om - så det passer med hvad vi gør nu.}
 
 I denne sektion bliver der argumenteret for valg af API.
 Først vil de forskellige afprøvede API'er blive kort præsenteret, hvorefter vores valg vil blive fremhævet.
@@ -121,7 +124,7 @@ Følgende NXT platforme som benytter sig af standard firmware er blevet undersø
 \end{itemize}
 
 \paragraph{nxt-python} er et Python interface der gør det muligt at sende kommandoer direkte til NXT'en.
-For at bruge Bluetooth\textregistered til at kommunikere med NXT'en, skal der bruges et eksternt bibliotek. \cite{nxt-python}
+For at bruge Bluetooth\textregistered{} til at kommunikere med NXT'en, skal der bruges et eksternt bibliotek. \cite{nxt-python}
 
 \paragraph{Mindsqualls} er et .NET bibliotek, der gør det muligt at programmere til NXT'en i Common Language Interface (CLI) sprog, som \csharp, \fsharp eller VB. \cite{mindsqualls}
 
@@ -130,6 +133,7 @@ Yderlige kan der ved brug af Python Tools for Visual Studio (PTVS) udvides til a
 \paragraph{ROBOTC} er et IDE hvori der skrives programmer i C til at kommunikere med NXT'en. \cite{robotc}
 
 \subsection{Custom firmware}
+\bruno{Det her skal skrives om -  vi bruger følgende firmware nu: "enhanced firmware" og man kan godt ligge programmer på NXT'en selvom der er standard firmware på.}
 Med custom firmware er det muligt at lægge programmer på NXT'en og køre dem direkte uden brug af en ekstern enhed.
 Da det er et større projekt at lave en firmware, er der også færre muligheder end ift. standard firmware. \stefan{Hvorfor lave en ny firmware hvis den har færre muligheder end den originale?}
 
