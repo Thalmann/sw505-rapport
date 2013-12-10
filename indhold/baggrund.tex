@@ -1,6 +1,20 @@
-Når en robot skal kortlægge et område er der to problemer, robottens lokation(1), på et kort(2) som den ikke kender endnu.
+Når en robot skal kortlægge et område er der to problemer. 
+Det første er at robotten ikke ved hvor den befinder sig, dvs. den har ikke nogen lokation.
+Det andet problem er at den ikke har et kort, fordi det er jo det den skal lave.
 Dette problem er beskrevet i \cref{SLAM}
-\section*{SLAM}\label{SLAM}
-SLAM(Simultaneous Localization And Mapping)
 
-\section*{Mapping med kendt lokation}
+\section*{SLAM}\label{SLAM}
+SLAM(Simultaneous Localization And Mapping) opstår når man skal kortlægge et område uden at kende robottens lokation.
+De to problemer er afhængige af hinanden fordi robotten skal vide hvor den er henne for at lave et og vice versa.
+Robotten bruger dens sensorer til at finde ud af hvad der er omkring.
+Den bruger så motorer til at bevæge sig og kan på den måde finde ud af hvor den er.
+Der er dog et problem, usikkerheden på sensorer og motor gør at robotten ikke nødvendigvis er der hvor den tror den er.
+Hvis der fx er en usikkerhed på 3 grader og vi forestiller os at motoren har kørt frem 3 gange - så har vi en usikkerhed på +- 9 grader, hvilket hurtigt løber.
+\\
+Da dette problem er ret komplekst at løse vil vi kigge på problemet hvor vi kender lokationen beskrevet i \cref{map_lok}
+
+\section*{Mapping med kendt lokation}\label{map_lok}
+Når vi kender lokationen bliver ovenstående problem mindre komplekst.
+Når robotten kender dens lokation skal den 'kun' kortlægge det ukendte område.
+Det fungerer ved at robotten bruger sensorerne til at finde ud af hvordan omgivelserne ser ud og så kender sin nøjagtige lokation vha. fx GPS.
+Det gør at der ikke opstår samme problem som beskrevet ovenover.
