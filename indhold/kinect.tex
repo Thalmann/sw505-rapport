@@ -20,9 +20,6 @@ Oprindeligt eksisterede der kun en Kinect til XBox, men i februar 2012 blev der 
 I dette projekt skal Kinecten benyttes til at bestemme en autonom robots placering i ukendte omgivelser. 
 Følgende afsnit giver en kort introduktion til Kinecten's egenskaber der skal danne grundlag for hvorfor Microsoft Kinect er valgt som løsningsmetode til lokaliseringsproblemet.\cite{kinectProgrammingGuide}
 
-- begrund valg af kinect
--- colortracking (kort)
-
 \subsection{Opbygning af Kinect}\label{kinect:komponenter}
 I denne rapport er det versionen Kinect for Windows der fokuseres på, da den giver bedst kompatibilitet med PC samt det faktum at den er tilgængelig gennem universitetet.
 
@@ -41,7 +38,7 @@ I denne rapport er det versionen Kinect for Windows der fokuseres på, da den gi
 \end{figure}
 
 Microsoft Kinect for Windows består af en mængde hardware som kan tilgås via det medfølgende SDK\footnote{Der findes også andre tredjeparts SDK'er til Microsoft Kinect, men som ikke er relevante ift. projektet, hvorfor de ikke nævnes.}.
-Følgende komponenters placering kan ses på \cref{kinect:opbygning}:
+Microsoft Kinect for Windows består af følgende komponenter:
 
 \begin{itemize}
 \item Farvekamera
@@ -52,6 +49,8 @@ Følgende komponenters placering kan ses på \cref{kinect:opbygning}:
 \item LED
 \item Accelerometer
 \end{itemize}
+
+Microsoft Kinect for Windows kan ses på \cref{kinect:opbygning} sammen med dens synlige komponenter som står listed ovenover.
 
 For at løse lokaliseringsproblemet er det valgt \textit{kun} at benytte Kinectens farvekamera, således der ses bort fra alle dens andre komponenter.
 Derfor bliver farvekameraet på Kinecten i følgende afsnit beskrevet detaljeret ift. dets specifikationer.
@@ -105,8 +104,32 @@ Konverteringen mellem disse koordinatsæt er beskrevet yderligere i \cref{lokali
 %Ifølge dokumentationen~\cite{kinectDocAccelerometer}, er det præcist ned til en grad, dog med en nøjagtighed der kan varierer med op til 3 grader i forhold til rumtemperaturen.
 %De skriver endvidere i dokumentationen at der kan kompensateres for denne unøjagtighed ved at sammenligne den vertikale måling (y-aksen i accelerometerets koordinatsystem) med den benyttede gulvplans dybdedata.
 
-\subsection{Hvorfor kinect}\label{kinect:argumentation}
-\thilemann{skriv her...}
+\subsection{Hvorfor Kinect}\label{kinect:argumentation}
+Microsoft Kinect giver generelt mange muligheder pga. alle dens sensorer samt brugervenlighed overfor udviklere.
+Dette har været vigtigt i forhold til at vælge at benytte en Kinect fremfor andre muligheder; f.eks. Nintendo's WiiMote eller et almindeligt webkamera.
+At vælge en af disse andre muligheder opfattes af gruppen som en begrænsning, da det vil gøre det svært at ændre krav og tilpasse løsningen løbende, hvis dette skulle blive nødvendigt.
+Derfor vil der fremadrettet udelukket fokuseres på at benytte en Microsoft Kinect til løsning af lokaliseringsproblemet.
+For at opsummere, så ser gruppen Kinecten's overordnede fordele som:
+
+\begin{itemize}
+\item Nem montering
+\item Nem tilslutning til PC
+\item Mange sensorer
+\item Gode udviklingsværktøjer
+\item Tilgængelig gennem universitetet
+\end{itemize}
+
+%Senere i rapporten præsenteres testmiljøet som robotten skal navigere rundt i (\cref{testmiljo:opsaetning}).
+%Den viste opsætning giver mulighed for at følge robotten fra en vertikal position ovenover testmiljøet, 
+
+Ovenstående fordele giver mange muligheder i forhold til hvordan Kinecten kan benyttes, men da der stræbes efter en simpel og pålidelig metode vil dette smitte af på den endelige løsning.
+Kinectens mange muligheder mht. tracking overvejes således ikke med mindre første løsning med kun at benytte farvekameraet ikke viser sig tilstrækkelig.
+
+For at løse lokaliseringsproblemet ved blot at benytte et farvekamera vil der blive fokuseret på at genkende unikke farver i billedet, for derved at kunne udregne robottens lokation.
+\thilemann{her mangler nok lidt mere argumentation/beskrivelse!}
+Hvordan \textit{colortracking} er implementeret i praksis, står detaljeret beskrevet i \cref{tracking}.
+
+\thilemann{Jeg kan ikke helt vurdere hvorvidt dele af dette afsnit er lidt en gentagelse af forrige afsnit, og om det i så fald gør noget?}
 
 \section{Kinect for Windows SDK}
 Til Kinecten findes der et officielt SDK\footnote{ Version 1.8, Udgivet 17 september, 2013~\cite{kinectSDK18}}, som åbner op for al funktionalitet i Kinecten med support fra Microsoft.
