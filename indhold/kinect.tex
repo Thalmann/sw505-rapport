@@ -2,33 +2,36 @@
 \bruno{Dette kapitel skal måske hedde farvekamera og så ende ud i at vi har valgt at bruge kinect fordi det er let at arbejde med}
  \section{Microsoft Kinect}\label{kinect}
 En Kinect er et Natural User Interface (NUI) udviklet til Microsoft's spillekonsol, Xbox.
-Den gør det muligt at interagere med sin konsol ved at bevæge kroppen og via talte kommandoer.
-Den første version der udkom i november 2010~\cite{kinectWiki} er oprindeligt udviklet med henblik på at lokke nye typer brugere til Xbox med det argument at det via naturlig (og aktiv) bevægelse er sjovere og mere virkelighedstro at spille.
-
-I februar 2012 blev der lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), der gør det muligt at udvikle både kommercielle og non-kommercielle applikationer til Kinect der kan køres på Windows platformen.
-Kort fortalt er Microsoft's Kinect mere end en input enhed gamere kan bruge for at gøre deres spiloplevelse mere virkelighedstro; af andre anvendelser kan f.eks. nævnes~\cite[s.~17]{kinectProgrammingGuide}:
+Dens primære formål er at gøre det muligt at interagere med sin konsol vha. bevægelse og talte kommandoer.
+Dog har den også mange andre anvendelsesområder, f.eks.:
+%Den første version der udkom i november 2010~\cite{kinectWiki} er oprindeligt udviklet med henblik på at lokke nye typer brugere til Xbox med det argument at det via naturlig (og aktiv) bevægelse er sjovere og mere virkelighedstro at spille.
+%
+%I februar 2012 blev der lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), der gør det muligt at udvikle både kommercielle og non-kommercielle applikationer til Kinect der kan køres på Windows platformen.
+%Kort fortalt er Microsoft's Kinect mere end en input enhed gamere kan bruge for at gøre deres spiloplevelse mere virkelighedstro; af andre anvendelser kan f.eks. nævnes~\cite[s.~17]{kinectProgrammingGuide}:
 
 \begin{itemize}
 \item Optagelse af video i real-tid
 \item Generere et dybde billede ved hjælp af kameraet og de to IR sensorer
-\item Sende talte kommandoer
 \item Vurdering af omgivelserne ved hjælp af lyd
 \end{itemize}
 
-I dette projekt skal Kinecten benyttes til at bestemme en autonom robots placering i ukendte omgivelser. 
-De nævnte egenskaber ved Kinecten kan benyttes til at løse dette problem.
-Derfor vil Kinecten, både med hensyn til hardware, men også til software blive nærmere beskrevet i de følgende afsnit.
+Oprindeligt eksisterede der kun en Kinect til XBox, men i februar 2012 blev der lanceret en ny type kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og ikke-kommercielle applikationer til Windows platformen.
 
+I dette projekt skal Kinecten benyttes til at bestemme en autonom robots placering i ukendte omgivelser. 
+Følgende afsnit giver en kort introduktion til Kinecten's egenskaber der skal danne grundlag for hvorfor Microsoft Kinect er valgt som løsningsmetode til lokaliseringsproblemet.\cite{kinectProgrammingGuide}
+
+- begrund valg af kinect
+-- colortracking (kort)
 
 \subsection{Opbygning af Kinect}\label{kinect:komponenter}
 I denne rapport er det versionen Kinect for Windows der fokuseres på, da den giver bedst kompatibilitet med PC samt det faktum at den er tilgængelig gennem universitetet.
 
-Dog kan det nævnes at forskellene mellem den og versionen til Xbox er meget små.
-Hardware mæssigt har Kinect for Windows den fordel at firmwaren indeholder en såkaldt Near Mode, hvilket gør det muligt at følge objekter indtil 40 cm fra enheden.
-Kinect for Xbox har ikke denne funktionalitet, og kan derfor kun følge objekter indtil 80 cm fra enheden, hvilket kan blive et problem i situationer hvor man ønsker at detektere små afstande via dybdebilleder.
-Kinect for Windows kan desuden også benyttes til kommercielle applikationer, hvor dens pendant er beregnet til hobbyister, generel udvikling og forskning~\cite[s.~16]{kinectProgrammingGuide}.
-
-For at Kinecten kan følge et objekt er Kinecten udstyret med et antal sensorer der nu vil blive beskrevet.
+%Dog kan det nævnes at forskellene mellem den og versionen til Xbox er meget små.
+%Hardware mæssigt har Kinect for Windows den fordel at firmwaren indeholder en såkaldt Near Mode, hvilket gør det muligt at følge objekter indtil 40 cm fra enheden.
+%Kinect for Xbox har ikke denne funktionalitet, og kan derfor kun følge objekter indtil 80 cm fra enheden, hvilket kan blive et problem i situationer hvor man ønsker at detektere små afstande via dybdebilleder.
+%Kinect for Windows kan desuden også benyttes til kommercielle applikationer, hvor dens pendant er beregnet til hobbyister, generel udvikling og forskning~\cite[s.~16]{kinectProgrammingGuide}.
+%
+%For at Kinecten kan følge et objekt er Kinecten udstyret med et antal sensorer der nu vil blive beskrevet.
 
 \begin{figure}
 \centering
@@ -37,9 +40,24 @@ For at Kinecten kan følge et objekt er Kinecten udstyret med et antal sensorer 
 \label{kinect:opbygning}
 \end{figure}
 
-\subsubsection{Farvekamera}\label{kinect:farvekamera}
+Microsoft Kinect for Windows består af en mængde hardware som kan tilgås via det medfølgende SDK\footnote{Der findes også andre tredjeparts SDK'er til Microsoft Kinect, men som ikke er relevante ift. projektet, hvorfor de ikke nævnes.}.
+Følgende komponenters placering kan ses på \cref{kinect:opbygning}:
+
+\begin{itemize}
+\item Farvekamera
+\item Infrarød (IR) sender
+\item IR dybde sensor
+\item Mikrofoner
+\item Motor til justering af vinklen
+\item LED
+\item Accelerometer
+\end{itemize}
+
+For at løse lokaliseringsproblemet er det valgt \textit{kun} at benytte Kinectens farvekamera, således der ses bort fra alle dens andre komponenter.
+Derfor bliver farvekameraet på Kinecten i følgende afsnit beskrevet detaljeret ift. dets specifikationer.
+
+\subsection{Farvekamera}\label{kinect:farvekamera}
 For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden (jvf. \cref{kinect:opbygning}).
-Et farvekamera kan være nyttigt i spil, hvor man ønsker at vise spilleren fysisk på skærmen eller hvis man benytter sin Kinect til gruppechat (som et webcam).
 Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet, hvis man ønsker en mere ”flydende” videostrøm~\cite{kinectForWindowsFeatures}.
 Kinecten har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket giver den et vertikalt synsfelt på $\pm 21.5$\degree, hvis den er placeret ift. 0\degree~vandret.
 Et visuelt billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
@@ -51,50 +69,53 @@ Et visuelt billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vin
 \label{kinect:vinkler}
 \end{figure}
 
-Disse parametre er interessante i forhold til det hvad Kinecten skal bruges til samt hvilket miljø hvori den skal bruges. Det er f.eks. vigtigt at kende dens betragningsvinkler, hvis den skal benyttes til at lokalisere objekter med, da placeringer af disse skal placeres ift. deres fysiske placering, og ikke kun i Kinectens koordinatsæt.
+Disse parametre er interessante i forhold til hvilket formål der søges opfyldt med kinecten samt miljøet hvori den skal bruges. 
+Det er f.eks. vigtigt at kende dens betragningsvinkler, hvis den skal benyttes til at lokalisere objekter med, da placeringer af disse skal placeres ift. deres fysiske placering, og ikke kun i Kinectens koordinatsæt.
+Konverteringen mellem disse koordinatsæt er beskrevet yderligere i \cref{lokalisering:punktomregning}.
 
-\subsubsection{Infrarød (IR) sender}
-Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender (\cref{kinect:opbygning}), som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
-Disse signaler bliver fanget af en anden sensor på Kinecten; nemlig den infrarøde dybde sensor.
+%\subsubsection{Infrarød (IR) sender}
+%Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender (\cref{kinect:opbygning}), som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
+%Disse signaler bliver fanget af en anden sensor på Kinecten; nemlig den infrarøde dybde sensor.
+%
+%\subsubsection{IR dybde sensor}
+%Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren (\cref{kinect:opbygning}), som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
+%
+%\subsubsection{Mikrofoner}
+%Kinecten er også i stand til at optage lyd via de indbyggede mikrofoner.
+%Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode til at bestemme afstand og retning fra f.eks. en person der taler.
+%Rækken af mikrofoner (se \cref{kinect:opbygning}) består af 4 stk. som er placeret på fronten af Kinecten.
+%En enkelt mikrofon sidder i venstre side mens de tre andre er placeret til højre, hvilket gør det muligt at triangulere lydsignaler for at bestemme retningen af lydkilden.
+%Flere mikrofoner gør det også muligt at lave ``noise-suppression'' ift. omgivelserne, hvis man benytter Kinect, mens man spiller, til at kommunikerer med sine med-/modspillere således at unødig støj filtreres fra~\cite[s.~15]{kinectProgrammingGuide}.
+%
+%\subsubsection{Motor til justering af vinklen}
+%For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på (jvf. \cref{kinect:opbygning}).
+%Den kan bevæge sig fra 0\degree~til 27\degree~ (op) og fra 0\degree~til -27\degree~(ned).
+%Denne funktionalitet er ideel hvis man ønsker at kalibrere Kinecten ift. dens fysiske placering og de omgivelser man ønsker at bruge den i.
+%Dog anbefaler Microsoft at man ikke benytter motoren kontinuert i sine programmer, da den ikke tåler vedvarende belastninger~\cite{kinectDocElevationAngle}.
+%
+%\subsubsection{LED}
+%Mellem kameraet og IR senderen er der placeret en status LED, der fortæller om driverne til Kinecten er indlæst korrekt eller ej.
+%Dette kan være nyttigt for udviklere, da det giver sikkerhed for at kommunikationen mellem PC og Kinect er ok~\cite[s.~15]{kinectProgrammingGuide}.
+%
+%\subsubsection{Accelerometer}
+%Kinect er også udstyret med et 3-akse accelerometer, som udvider den til andre anvendelsesområder end blot at følge (tracke) objekter og kropsbevægelser.
+%Det er konfigureret til at give målinger fra -2g til 2g (mere præcis ved langsomme bevægelser end hurtige)~\cite{kinectAccelerometer}.
+%Målingerne  er opbygget som en 3D vektor som peger mod tyngdekraften (gulv-planet), hvilket f.eks. gør det muligt at detektere om den er monteret korrekt (ovenpå eller under et fladskærms tv), således dens tilt kan korrigeres vha. den indbyggede motor.
+%En anden interessant anvendelsesmulighed er at accelerometeret kan benyttes til at give bedre 3D projektioner i Augmented Reality.
+%Ifølge dokumentationen~\cite{kinectDocAccelerometer}, er det præcist ned til en grad, dog med en nøjagtighed der kan varierer med op til 3 grader i forhold til rumtemperaturen.
+%De skriver endvidere i dokumentationen at der kan kompensateres for denne unøjagtighed ved at sammenligne den vertikale måling (y-aksen i accelerometerets koordinatsystem) med den benyttede gulvplans dybdedata.
 
-\subsubsection{IR dybde sensor}
-Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren (\cref{kinect:opbygning}), som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
-
-\subsubsection{Mikrofoner}
-Kinecten er også i stand til at optage lyd via de indbyggede mikrofoner.
-Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode til at bestemme afstand og retning fra f.eks. en person der taler.
-Rækken af mikrofoner (se \cref{kinect:opbygning}) består af 4 stk. som er placeret på fronten af Kinecten.
-En enkelt mikrofon sidder i venstre side mens de tre andre er placeret til højre, hvilket gør det muligt at triangulere lydsignaler for at bestemme retningen af lydkilden.
-Flere mikrofoner gør det også muligt at lave ``noise-suppression'' ift. omgivelserne, hvis man benytter Kinect, mens man spiller, til at kommunikerer med sine med-/modspillere således at unødig støj filtreres fra~\cite[s.~15]{kinectProgrammingGuide}.
-
-\subsubsection{Motor til justering af vinklen}
-For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på (jvf. \cref{kinect:opbygning}).
-Den kan bevæge sig fra 0\degree~til 27\degree~ (op) og fra 0\degree~til -27\degree~(ned).
-Denne funktionalitet er ideel hvis man ønsker at kalibrere Kinecten ift. dens fysiske placering og de omgivelser man ønsker at bruge den i.
-Dog anbefaler Microsoft at man ikke benytter motoren kontinuert i sine programmer, da den ikke tåler vedvarende belastninger~\cite{kinectDocElevationAngle}.
-
-\subsubsection{LED}
-Mellem kameraet og IR senderen er der placeret en status LED, der fortæller om driverne til Kinecten er indlæst korrekt eller ej.
-Dette kan være nyttigt for udviklere, da det giver sikkerhed for at kommunikationen mellem PC og Kinect er ok~\cite[s.~15]{kinectProgrammingGuide}.
-
-\subsubsection{Accelerometer}
-Kinect er også udstyret med et 3-akse accelerometer, som udvider den til andre anvendelsesområder end blot at følge (tracke) objekter og kropsbevægelser.
-Det er konfigureret til at give målinger fra -2g til 2g (mere præcis ved langsomme bevægelser end hurtige)~\cite{kinectAccelerometer}.
-Målingerne  er opbygget som en 3D vektor som peger mod tyngdekraften (gulv-planet), hvilket f.eks. gør det muligt at detektere om den er monteret korrekt (ovenpå eller under et fladskærms tv), således dens tilt kan korrigeres vha. den indbyggede motor.
-En anden interessant anvendelsesmulighed er at accelerometeret kan benyttes til at give bedre 3D projektioner i Augmented Reality.
-Ifølge dokumentationen~\cite{kinectDocAccelerometer}, er det præcist ned til en grad, dog med en nøjagtighed der kan varierer med op til 3 grader i forhold til rumtemperaturen.
-De skriver endvidere i dokumentationen at der kan kompensateres for denne unøjagtighed ved at sammenligne den vertikale måling (y-aksen i accelerometerets koordinatsystem) med den benyttede gulvplans dybdedata.
-
+\subsection{Hvorfor kinect}\label{kinect:argumentation}
+\thilemann{skriv her...}
 
 \section{Kinect for Windows SDK}
 Til Kinecten findes der et officielt SDK\footnote{ Version 1.8, Udgivet 17 september, 2013~\cite{kinectSDK18}}, som åbner op for al funktionalitet i Kinecten med support fra Microsoft.
 
 API'en er bygget op omkring en solid forståelse for menneskers bevægelser og karaktertræk således API'en kan fungere som et interface der kan genkende personers bevægelser, følge ansigter, genkende gestus og tale.
-Med Microsoft Kinect Toolkit installeret kan man endvidere få adgang til Kinect Fusion der gør det muligt at rekonstruere 3D objekter ud fra Kinectens kamera og dybdebilleder fra IR sensorerne.~\cite{kinectForWindowsFeatures}
-
+%Med Microsoft Kinect Toolkit installeret kan man endvidere få adgang til Kinect Fusion der gør det muligt at rekonstruere 3D objekter ud fra Kinectens kamera og dybdebilleder fra IR sensorerne.~\cite{kinectForWindowsFeatures}
 
 \subsection{Kinect API}\label{kinect:kinectapi}
-I dette afsnit vil der blive gennemgået eksempler der demonstrer den basale brug af Kinect API'en.
+De følgende afsnit vil fokusere på hvordan SDK'et benyttes for at tilgå Kinectens mest basale funktionalitet med fokus på hvordan billeddata hentes fra dets farvekamera.
 
 \subsubsection{Initialisering}
 For at initialisere Kinecten og få adgang til dens sensorer skal Kinecten initialiseres.
