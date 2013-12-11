@@ -18,7 +18,7 @@ Dog har den også mange andre anvendelsesområder, f.eks.:
 Oprindeligt eksisterede der kun en Kinect til XBox, men i februar 2012 blev der lanceret en ny type kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og ikke-kommercielle applikationer til Windows platformen.
 
 I dette projekt skal Kinecten benyttes til at bestemme en autonom robots placering i ukendte omgivelser. 
-Følgende afsnit giver en kort introduktion til Kinecten's egenskaber der skal danne grundlag for hvorfor Microsoft Kinect er valgt som løsningsmetode til lokaliseringsproblemet.\cite{kinectProgrammingGuide}
+Følgende afsnit giver en kort introduktion til Kinecten's egenskaber der skal danne grundlag for hvorfor Microsoft Kinect er valgt som løsningsmetode til at lokalisere robotten.\cite{kinectProgrammingGuide}
 
 \subsection{Opbygning af Kinect}\label{kinect:komponenter}
 I denne rapport er det versionen Kinect for Windows der fokuseres på, da den giver bedst kompatibilitet med PC samt det faktum at den er tilgængelig gennem universitetet.
@@ -52,14 +52,14 @@ Microsoft Kinect for Windows består af følgende komponenter:
 
 Microsoft Kinect for Windows kan ses på \cref{kinect:opbygning} sammen med dens synlige komponenter som står listed ovenover.
 
-For at løse lokaliseringsproblemet er det valgt \textit{kun} at benytte Kinectens farvekamera, således der ses bort fra alle dens andre komponenter.
-Derfor bliver farvekameraet på Kinecten i følgende afsnit beskrevet detaljeret ift. dets specifikationer.
+For at løse lokaliseringsproblemet benyttes Kinectens farvekamera, og der ses således bort fra alle dens andre komponenter.
+Derfor bliver farvekameraets specifikationer på Kinecten i følgende afsnit beskrevet detaljeret.
 
 \subsection{Farvekamera}\label{kinect:farvekamera}
 For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera som er placeret ca. i midten af enheden (jvf. \cref{kinect:opbygning}).
-Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet, hvis man ønsker en mere ”flydende” videostrøm~\cite{kinectForWindowsFeatures}.
+Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet~\cite{kinectForWindowsFeatures}.
 Kinecten har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket giver den et vertikalt synsfelt på $\pm 21.5$\degree, hvis den er placeret ift. 0\degree~vandret.
-Et visuelt billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
+Et billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
 
 \begin{figure}
 \centering
@@ -106,9 +106,6 @@ Konverteringen mellem disse koordinatsæt er beskrevet yderligere i \cref{lokali
 
 \subsection{Hvorfor Kinect}\label{kinect:argumentation}
 Microsoft Kinect giver generelt mange muligheder pga. alle dens sensorer samt brugervenlighed overfor udviklere.
-Dette har været vigtigt i forhold til at vælge at benytte en Kinect fremfor andre muligheder; f.eks. Nintendo's WiiMote eller et almindeligt webkamera.
-At vælge en af disse andre muligheder opfattes af gruppen som en begrænsning, da det vil gøre det svært at ændre krav og tilpasse løsningen løbende, hvis dette skulle blive nødvendigt.
-Derfor vil der fremadrettet udelukket fokuseres på at benytte en Microsoft Kinect til løsning af lokaliseringsproblemet.
 For at opsummere, så ser gruppen Kinecten's overordnede fordele som:
 
 \begin{itemize}
@@ -119,8 +116,6 @@ For at opsummere, så ser gruppen Kinecten's overordnede fordele som:
 \item Tilgængelig gennem universitetet
 \end{itemize}
 
-%Senere i rapporten præsenteres testmiljøet som robotten skal navigere rundt i (\cref{testmiljo:opsaetning}).
-%Den viste opsætning giver mulighed for at følge robotten fra en vertikal position ovenover testmiljøet, 
 
 Ovenstående fordele giver mange muligheder i forhold til hvordan Kinecten kan benyttes, men da der stræbes efter en simpel og pålidelig metode vil dette smitte af på den endelige løsning.
 Kinectens mange muligheder mht. tracking overvejes således ikke med mindre første løsning med kun at benytte farvekameraet ikke viser sig tilstrækkelig.
