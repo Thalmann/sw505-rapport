@@ -153,7 +153,9 @@ Skal man bruge den posterior sandsynlighed for hypotesen $h$ kan nævneren bereg
 I tilfælde hvor tilstanden er statisk, altså hvor verden ikke ændrer sig over tid, kan der anvendes binære Bayes filtre.
 Her kan en \textit{belief} på en given tilstand $x$ beskrives som:
 
-$$bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})$$
+\begin{equation}
+bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
+\end{equation}
 
 Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
 Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
@@ -167,13 +169,17 @@ I så fald vil det ikke være muligt at beregne ny posterior, da de enkelte komp
 Der kan derfor indføres en funktion, \textit{log odds ratio}, som mapper sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
 Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$: 
 
-$$\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}$$ 
+\begin{equation}
+\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}
+\end{equation} 
 
 \cite[s. 94]{probabilisticRobotics} \\
 
 Log oddset er logaritmen til forholdet mellem de to sandsynligheder: \cref{logoddsimg}
 
-$$l(x) = \log \frac{p(x)}{1 - p(x)}$$
+\begin{equation}
+l(x) = \log \frac{p(x)}{1 - p(x)}
+\end{equation}
 
 \begin{figure}
 \centering \includegraphics[scale=.33]{LogOdds}
