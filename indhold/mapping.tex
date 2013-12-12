@@ -39,11 +39,15 @@ r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid
 
 Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
 
-$$l_{res} = \begin{cases} 
+\begin{equation}
+\begin{split}
+l_{res} = \begin{cases} 
 	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 	l_{free} &\text{ellers}  
-\end{cases}$$
+\end{cases}
+\end{split}
+\end{equation}
 
 Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
 Modellen vil se således ud beskrevet i pseudokode:
