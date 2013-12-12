@@ -5,7 +5,9 @@ Algoritmen er taget fra \cite[p.~xxx]{probabilisticRobotics}
 \stefan{indsæt sidehenvisning fra bogen til 9.2}
 Formålet med \textit{occupancy grid} algoritmen er at beregne	et nyt kort ud fra et kort og en samling data:
 
-\[ p(m \mid z_{1:t}, x_{1:t}) \]
+\begin{equation}
+p(m \mid z_{1:t}, x_{1:t})
+\end{equation}
 
 hvor $m$ er et kort, $ z_{1:t} $ er mængden af målinger op til tiden $t$ og $ x_{1:t} $ er robottons rute i form af en følge af \textit{poses}.
 
@@ -13,24 +15,32 @@ Kortet er inddelt i et finit antal celler.
 Hver celle kan findes ved $ m_i $ hvor $i$ er cellens indeks. 
 Hele kortet kan derfor betegnes
 
-\[  m = \sum_{i}^{} m_i \]
+\begin{equation}
+m = \sum_{i}^{} m_i 
+\end{equation}
 
 Hver celle er tilknyttet en binær værdi der betegner hvorvidt cellen er \textit{occupied} eller \textit{free}.
 Værdien 1 betegner \textit{occupied} mens 0 betegner \textit{free}.
 
 For at begrænse mængden af celler der skal beregnes ved en opdatering af et occupancy grid nedbrydes problemet til en mængde delproblemer af formen
 
-\[ p(m_i \mid z_{1:t}, x_{1:t}) \]
+\begin{equation}
+p(m_i \mid z_{1:t}, x_{1:t})
+\end{equation} 
 
 Da der nu er et problem af denne type for hver celle kan man nøjes med kun at opdatere de celler der er ny information om.
 
 Som i det originale binære filter (se evt. \cref{bayes_binaerfiltre}) benyttes log odds repræsentationen til at udtrykke om en celle er optaget
 
-\[ l_{t,i} = log{ \frac{p(m_i \mid z_{1:t}, x_{1:t})}{1 - p(m_i \mid z_{1:t}, x_{1:t})}} \]
+\begin{equation}
+l_{t,i} = log{ \frac{p(m_i \mid z_{1:t}, x_{1:t})}{1 - p(m_i \mid z_{1:t}, x_{1:t})}} 
+\end{equation} 
 
 Sandsynligheden findes ud fra log odds repræsentationen ved
 
-\[ p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} } \]
+\begin{equation}
+p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} }
+\end{equation} 
 
 \Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler der er relevante for en aktuel sensormåling. 
 Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}. 

@@ -99,7 +99,8 @@ Vi kan anvende en passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{6
 
 Den nye tildeling af sandsynlighed til cellen vil nu se således ud.
 
-$$l_{res} = \begin{cases} 
+\begin{equation}
+l_{res} = \begin{cases} 
 	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	
 	
@@ -107,7 +108,9 @@ $$l_{res} = \begin{cases}
 		&\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 
 	l_{free} &\text{ellers}	
-\end{cases}$$
+\end{cases}
+\end{equation}
+\\
 Hvor $\rho$ er en passende konstant og $\eta$ er en normaliseringskonstant.
 
 
