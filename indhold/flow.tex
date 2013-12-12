@@ -110,7 +110,7 @@ private bool checkForMessages()
 
 Hvis der findes besked, hentes denne via \lstinline[style=csharp]!RetrieveMessage()! i \lstinline[style=csharp]!NXTPostman! (se \cref{listener:retrievemessage} i \cref{lst:listener}), som bruger Bluetooth-forbindelsen i \lstinline[style=csharp]!CommLink! til at checke efter nye beskeder på i robottens \lstinline[style=c]!OUTBOX!:
 
-\begin{lstlisting}[style=csharpsmall,label=lst:postman,caption=NXTPostman henter besked fra robot]
+\begin{lstlisting}[style=csharpsmall,label=lst:postman,caption=RetrieveMessage i NXTPostman]
 public NXTMessage RetrieveMessage()
 {
     try
