@@ -139,10 +139,14 @@ $P(h)$ og $P(e \mid h)$ kaldes henholdsvis hypotesens prior og likelihood.
 Bayes regel viser at hypotesens posterior sandsynlighed er proportionel til dens likelihood multipliceret med dens prior.
 Hvis man skal sammenligne sandsynligheder for forskellige hypoteser, vil det være tilstrækkeligt at beregne tælleren i bayes regel.
 Skal man bruge den posterior sandsynlighed for hypotesen $h$ kan nævneren beregnes ved at summere over mængden $H$ af hypoteser.
-\begin{align*}
+
+\begin{equation}
+\begin{split}
 	P(e \mid k) &= \sum_{h \in H} P(e \wedge h \mid k) \\
 	&= \sum_{h \in H}P(e \mid h \wedge k) \times P(h \mid k)
-\end{align*}
+\end{split}
+\end{equation}
+
 \cite[s. 229]{ArtificialIntelligence}
 
 \subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
