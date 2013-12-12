@@ -33,7 +33,9 @@ Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områ
 kan vi konstruere en forholdsvis simpel basal sensormodel.
 Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
 
-$$r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid$$
+\begin{equation}
+r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid
+\end{equation}
 
 Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
 
