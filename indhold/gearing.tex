@@ -73,20 +73,6 @@ Dette giver en gear ratio på $1:1.667$.
 Den samlede gear ratio for sensoren bliver derfor $1:40$, som beskriver at der for hver sensor omdrejning kræves 40 motor omdrejninger, hvilket er det samme som:
 $$\frac{24}{1} \cdot \frac{40}{24} = 40$$
 
-\subsubsection{Hjul}
-Motorene som styrer hjulsættet er ligesom sensoren også drevet af en gearing som gearer motorens omdrejninger ned, hvilket resulterer i to faktorer for kontrol af robotten:
-
-\begin{itemize}
-\item Højere præcision og mindskning af usikkerheder ved rotation af hjulene.
-\item Højere moment af motorene som driver hjulene, hvilket gør det muligt at kontrollere robotten ved lavere hastigheder samt kørsel på underlag med høj friktion.
-\end{itemize}
-
-Igen er tid ikke en faktor, så det er acceptabelt at robotten mister fart.
-Præcision af motorernes position er ikke af væsentlig faktor, da robottens lokationen bestemmes andetsteds og ikke vha. \textit{dead reckoning}.
-
-Gearingen for hjulene består hver især af to tandhjul; ét 40-tands og ét 24-tands.
-Derved er gearingen som i eksemplet i \cref{gearing:simpel_teori}: $$ \frac{40}{24} = 1 \frac{2}{3} $$
-
 \subsection{Test af gearing}\label{robot:gearing-test}
 Nu hvor den teoretiske gearing er fastlagt, vil der her blive udført en række forsøg for at afgøre præcisionen af motorerne med gearing; og evt. at fastlægge en faktisk gearing, hvis denne afviger fra den teoretiske.
 
