@@ -46,7 +46,9 @@ p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} }
 Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}. 
 Værdien $ l_0 $ er den a priori værdi for om cellen er optaget repræsenteret som log odds
 
-\[ l_0 =  log \frac{p(m_i = 1)}{p(m_i = 0)} = log \frac{p(m_i)}{1- p(m_i)} \]
+\begin{equation}
+  l_0 =  log \frac{p(m_i = 1)}{p(m_i = 0)} = log \frac{p(m_i)}{1- p(m_i)}
+\end{equation} 
 
 \begin{algorithm}[H]
 \LinesNumbered
