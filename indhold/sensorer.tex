@@ -56,6 +56,7 @@ Der er gennemført en mindre test af sensoren, for at finde ud af hvor nøjagtig
 Testen blev udført ved at lave en simpel konstruktion kun bestående af NXT og den ultrasoniske sensor.
 Konstruktionen blev placeret i en række afstande fra en væg, hvor sensoreren var placeret vandret, pegende direkte på væggen.
 Herefter blev sensoren aflæst, samtidig med at afstanden mellem væg og sensor blev målt med lineal.
+Den samme test blev udført 3 gange.
 
 \subsubsection{Resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
 
@@ -67,7 +68,7 @@ Generelt holder det som der bliver lovet, nemlig at der er en afvigelse på 3 cm
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{ultrasonicchart}
+\includegraphics[clip=true, trim = 0cm 2.5cm 0cm 2.5cm,width=\textwidth]{ultrasonicchart}
 \caption{Graf over forsøgsresultaterne fra testen af den ultrasoniske sensor}
 \label{sensor:ultrasonic_resultat_diagram}
 \end{figure}
@@ -99,7 +100,7 @@ De bedste resultater findes dog imellem 8cm og 56 cm.
 Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forventet 500, målt 527).
 
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{Infraredchart}
+\includegraphics[clip=true, trim=0cm 8cm 0cm 8cm,width=\textwidth]{Infraredchart}
 \caption{Graf over forsøgsresultaterne fra testen af den infrarøde sensor}
 \label{sensor:infrared_chart}
 \end{figure}
@@ -143,7 +144,7 @@ Ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager at
 Kigger vi på \cref{sensor:motor_sensor_diagram} kan vi se at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator på at det er bedre at benytte tacho-værdien.
 
 \begin{figure}
-\includegraphics{motor_diagram}
+\includegraphics[width=\textwidth]{motor_diagram}
 \caption{Afvigelser i test-resultaterne}
 \label{sensor:motor_sensor_diagram}
 \end{figure}
