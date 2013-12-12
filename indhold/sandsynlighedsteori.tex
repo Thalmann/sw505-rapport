@@ -2,7 +2,7 @@
 
 \section{Sandsynlighedsteori}
 Som beskrevet i \cref{sensorer} kan robottens viden omkring verdenen den bevæger sig i ikke være komplet pga. måleusikkerheder.\thilemann{Bør vi nævne at den dog kender sin position via kameraet?}
-På trods af dette er den nødt til at kunne reagere på den netop tilgængelige viden, hvorfor det er nødvendigt med metoder der gør det muligt at resonerer sig frem til et 'bedste' valg.
+På trods af dette er den nødt til at kunne reagere på den netop tilgængelige viden, hvorfor det er nødvendigt med metoder der gør det muligt at resonere sig frem til et 'bedste' valg.
 Dette afsnit introducerer den nødvendige sandsynlighedsteori for at kunne beskrive hvad der gør sig gældende i en given verden, baseret på robottens observationer af netop denne.
 
 Sandsynlighedsteori omhandler hvordan viden har indflydelse på vores opfattelse af en given verden (\textit{belief}).
@@ -23,10 +23,16 @@ Hvis det gælder at $\Omega_1 \cap \Omega_2 = \{{}\}$, hvor $\Omega_1$ og $\Omeg
 \end{enumerate}
 
 Sandsynlighedsmålet kan udviddes til at dække sandsynligheden for enkelte verdener således at:
-$$\mu(\omega) = \mu(\{\omega\})$$
+\begin{equation}
+\mu(\omega) = \mu(\{\omega\})
+\end{equation}
+
 
 Vi kan nu bruge målet til at beskrive sandsynligheden for en proposition således.
-$$P(\alpha) = \mu(\{\omega \mid \omega \models \alpha \})$$
+\begin{equation}
+P(\alpha) = \mu(\{\omega \mid \omega \models \alpha \})
+\end{equation}
+
 Her betyder notationen $\omega \models \alpha$ at propositionen $\alpha$ er sand i verdenen $\omega$.
 
 
@@ -65,12 +71,14 @@ hvilket betyder at $c = \frac{1}{P(e)}$.
 
 Den betingede sandsynlighed for $h$ givet evidens $e$ er målet $\mu_e$ på de verdener hvor $h$ er sand, dvs.
 
-\begin{align*}
+\begin{equation}
+\begin{split}
 P(h \mid e) \quad = \quad & \mu_e(\{\omega \mid \omega \models h \})\\
 \quad = \quad & \mu_e(\{\omega \mid \omega \models h \wedge e \}) + \mu_e(\{\omega \mid \omega \models h \wedge \neg e \})\\
 \quad = \quad & \frac{\mu(\{\omega \mid \omega \models h \wedge e \})}{P(e)} + 0\\
 \quad = \quad & \frac{P(h \wedge e)}{P(e)}, \quad \textrm{hvor $P(e) > 0$.}
-\end{align*}
+\end{split}
+\end{equation}
 
 Denne definition gør det således muligt at dekomponere en konjunktion til et produkt af betingede sandsynligheder. \\ \\
 \cite[s. 226-227]{ArtificialIntelligence}
@@ -82,14 +90,17 @@ Denne definition gør det således muligt at dekomponere en konjunktion til et p
 Betingede sandsynligheder kan bruges til at dekomponere konjunktioner.
 For vilkårlige propositioner $\alpha_1 \ldots \alpha_n$.
 
-\begin{align*}
+\begin{equation}
+\begin{split}
 P(\alpha_1 \wedge \alpha_2 \wedge \ldots \wedge \alpha_n) \quad = \quad & P(\alpha_1) \quad \times\\
 & P(\alpha_2 \mid \alpha_1) \quad \times\\
 & P(\alpha_3 \mid \alpha_1 \wedge \alpha_2) \quad \times\\
 & \vdots \\
 & P(\alpha_n \mid \alpha_1 \wedge \dots \wedge \alpha_{n-1}) \quad \times\\
 = \quad &\prod_{i = 1}^{n} P(\alpha_i \mid \alpha_1 \wedge \dots \wedge \alpha_{i-1}),
-\end{align*}
+\end{split}
+\end{equation}
+
 \begin{quotation}
 	\textit{hvor højre-siden antages til at være nul, hvis et vilkårligt produkt er nul.}
 \end{quotation}
@@ -103,29 +114,48 @@ Den nye tro på hypotesen $h$ baseret på baggrundsviden $k$ og den nye evidens 
 
 Bayes regel er en direkte konsekvens af definitionen for betingede sandsynligheder og kædereglen således at. 
 
-\begin{align*}
+\begin{equation}
+\begin{split}
 P(h \wedge e \mid k) &= P(h \mid e \wedge k) \times P(e \mid k) \\
 &= P(e \mid h \wedge k) \times P(h \mid k)
-\end{align*}
+\end{split}
+\end{equation}
 
-$$P(h \mid e \wedge k) = \frac{P(e \mid h \wedge k) \times P(h \mid k)}{P(e \mid k)}$$
+\begin{equation}
+\begin{split}
+P(h \mid e \wedge k) = \frac{P(e \mid h \wedge k) \times P(h \mid k)}{P(e \mid k)}
+\end{split}
+\end{equation}
+
 Hvilket ofte skrives med baggrundsviden implicit således.
-$$P(h \mid e) = \frac{P(e \mid h) \times P(h)}{P(e)}$$
+
+\begin{equation}
+\begin{split}
+P(h \mid e) = \frac{P(e \mid h) \times P(h)}{P(e)}
+\end{split}
+\end{equation}
+
 $P(h)$ og $P(e \mid h)$ kaldes henholdsvis hypotesens prior og likelihood.
 Bayes regel viser at hypotesens posterior sandsynlighed er proportionel til dens likelihood multipliceret med dens prior.
 Hvis man skal sammenligne sandsynligheder for forskellige hypoteser, vil det være tilstrækkeligt at beregne tælleren i bayes regel.
 Skal man bruge den posterior sandsynlighed for hypotesen $h$ kan nævneren beregnes ved at summere over mængden $H$ af hypoteser.
-\begin{align*}
+
+\begin{equation}
+\begin{split}
 	P(e \mid k) &= \sum_{h \in H} P(e \wedge h \mid k) \\
 	&= \sum_{h \in H}P(e \mid h \wedge k) \times P(h \mid k)
-\end{align*}
+\end{split}
+\end{equation}
+
 \cite[s. 229]{ArtificialIntelligence}
 
 \subsection{Binære Bayes filtre med statisk tilstand}\label{bayes_binaerfiltre}
 I tilfælde hvor tilstanden er statisk, altså hvor verden ikke ændrer sig over tid, kan der anvendes binære Bayes filtre.
 Her kan en \textit{belief} på en given tilstand $x$ beskrives som:
 
-$$bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})$$
+\begin{equation}
+bel_t(x) = p(x \mid z_{1:t},u_{1:t}) = p(x \mid z_{1:t})
+\end{equation}
 
 Hvor tilstanden $x$ er binær, dvs. enten sand ($x$) eller falsk ($\lnot x$).
 Derved har vi at $bel_t(\lnot x) = 1 - bel_t(x)$.
@@ -139,13 +169,17 @@ I så fald vil det ikke være muligt at beregne ny posterior, da de enkelte komp
 Der kan derfor indføres en funktion, \textit{log odds ratio}, som mapper sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
 Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$: 
 
-$$\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}$$ 
+\begin{equation}
+\frac{p(x)}{p(\lnot x)} = \frac{p(x)}{1 - p(x)}
+\end{equation} 
 
 \cite[s. 94]{probabilisticRobotics} \\
 
 Log oddset er logaritmen til forholdet mellem de to sandsynligheder: \cref{logoddsimg}
 
-$$l(x) = \log \frac{p(x)}{1 - p(x)}$$
+\begin{equation}
+l(x) = \log \frac{p(x)}{1 - p(x)}
+\end{equation}
 
 \begin{figure}
 \centering \includegraphics[scale=.33]{LogOdds}
@@ -162,45 +196,63 @@ Oversætter vi værdierne 50.00\% og 50.01\% får vi henholdsvis 0dB og 0.0017dB
 
 Ønsker vi at genskabe vores \textit{belief} udfra log odds ($l_x$), kan vi benytte følgende ligning:
 
-$$bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}$$ \\
+\begin{equation}
+bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}
+\end{equation}
+ \\
 \cite[s. 95]{probabilisticRobotics} 
 
 \subsubsection{Udledning af opdateringsalgoritmen}
 Ved at benytte os af bayes regel kan vi beskrive sandsynligheden for $x$ udfra sensormålinger $z$.
-\begin{align*}
+\begin{equation}
+\begin{split}
 	P(x \mid z_{1:t}) &= \frac{P(z_t \mid x, z_{1:t-1}) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})} \\
 	&= \frac{P(z_t \mid x) P(x \mid z_{1:t-1})}{P(z_t \mid z_{1:t-1})}
-\end{align*}
+\end{split}
+\end{equation}
 Vi kan nu anvende Bayes regel på modellen for sensor målinger $P(z_t \mid x)$.
-$$P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}$$
+\begin{equation}
+P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}
+\end{equation}
 Hvilket vi indsætter og får.
-$$P(x \mid z_{1:t}) = \frac{P(x \mid z_t) P(z_t) P(x \mid z_{1:t-1})}{P(x) P(z_t \mid z_{1:t-1})}$$ \\
+\begin{equation}
+P(x \mid z_{1:t}) = \frac{P(x \mid z_t) P(z_t) P(x \mid z_{1:t-1})}{P(x) P(z_t \mid z_{1:t-1})}
+\end{equation}
+ \\
 \cite[s. 95]{probabilisticRobotics} \\
 
 Vi har selvfølgelig samme type udtryk for den modsatte tilstand $\neg x$.
-$$P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}$$
+\begin{equation}
+P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}
+\end{equation}
 Ved at dividere de to kan vi eliminere nogle af de sandsynligheder som er svære at beregne.
 
-\begin{align*}
+\begin{equation}
+\begin{split}
 	\frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} 
 	&= \frac{P(x \mid z_t)}{P(\neg x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} \frac{P(\neg x)}{P(x)} \\
 	&= \frac{P(x \mid z_t)}{1-P(x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})} \frac{1-P(x)}{P(x)}
-\end{align*}
+\end{split}
+\end{equation}
 
 Vi beskriver log odds forholdet af vores \textit{belief} $bel_t(x)$ som $l_t(x)$. 
 Log oddset for vores \textit{belief} til tiden $t$ er givet ved at tage logaritmen til ligningen. 
 
-\begin{align*}
+\begin{equation}
+\begin{split}
 	l_t(x) &= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) 
 	+ log\Bigg(\frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})}\Bigg) + log\Bigg(\frac{1-P(x)}{P(x)}\Bigg) \\
 	&= log\Bigg(\frac{P(x \mid z_t)}{1-P(x \mid z_t)}\Bigg) - log\Bigg(\frac{P(x)}{1-P(x)}\Bigg) + l_{t-1} 
-\end{align*}
+\end{split}
+\end{equation}
 
 Her er $P(x)$ den \textit{prior} sandsynlighed for tilstanden $x$, og er med i alle opdateringer af
 sandsynligheden for $x$. Den \textit{prior} sandsynlighed er også med til at definere den oprindelige
 \textit{belief} før der tages højde for \textit{evidens} i form af sensormålinger.
 
-$$ l_0 = log\Bigg(\frac{P(x)}{1-P(x)}\Bigg)$$ 
+\begin{equation}
+ l_0 = log\Bigg(\frac{P(x)}{1-P(x)}\Bigg)
+ \end{equation}
 \cite[s. 96]{probabilisticRobotics} \\
 
 Dette giver os den endelige algoritme for det binære bayes filter.

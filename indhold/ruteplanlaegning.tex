@@ -1,0 +1,30 @@
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\newcommand{\gridsize}{10}
+\newcommand{\cellsize}{0.7}
+\newcommand{\dbox}[3][]{\node (robot) [block] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+\coordinate (bl) at (0,0);
+\coordinate (tr) at (\gridsize,\gridsize);
+
+\tikzstyle{block} = [draw, fill=green!30, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right]
+
+\foreach \x in {0,\cellsize,...,\gridsize}
+	\foreach \y in {0,\cellsize,...,\gridsize}
+		\draw [fill=yellow!30] ($(bl) + (\x,\y)$) rectangle ($(bl) + (\x + \cellsize, \y + \cellsize)$);
+		
+\dbox[d_1]{9}{9}
+\dbox{9}{10}
+\dbox{9}{11}
+\dbox{10}{9}
+\dbox[x]{10}{10}
+\dbox{10}{11}
+\dbox{11}{9}
+\dbox{11}{10}
+\dbox{11}{11}
+
+\end{tikzpicture}
+\end{figure}
