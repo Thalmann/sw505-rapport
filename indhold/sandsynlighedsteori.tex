@@ -205,7 +205,7 @@ $$ l_0 = log\Bigg(\frac{P(x)}{1-P(x)}\Bigg)$$
 
 Dette giver os den endelige algoritme for det binære bayes filter.
 
-\subsubsection{Opdaterings af celle med Bayesiansk filter}
+\subsubsection{Opdatering af celle med Bayesiansk filter}
 Opdaterings-algoritmen tager \textit{log odds} for en \textit{posterior belief} $l_{t-1}$ for en celle, samt en ny sensor-måling $z_t$, hvor fra der returneres en \textit{log odds} for en ny \textit{belief}, $l_t$, for cellen.
 Algoritmen, skrevet i pseudo-kode, kan ses i \cref{alg:binaerbayesfilter}.
 
