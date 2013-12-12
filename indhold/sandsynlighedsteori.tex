@@ -211,20 +211,29 @@ Ved at benytte os af bayes regel kan vi beskrive sandsynligheden for $x$ udfra s
 \end{split}
 \end{equation}
 Vi kan nu anvende Bayes regel på modellen for sensor målinger $P(z_t \mid x)$.
-$$P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}$$
+\begin{equation}
+P(z_t \mid x) = \frac{P(x \mid z_t) P(z_t)}{P(x)}
+\end{equation}
 Hvilket vi indsætter og får.
-$$P(x \mid z_{1:t}) = \frac{P(x \mid z_t) P(z_t) P(x \mid z_{1:t-1})}{P(x) P(z_t \mid z_{1:t-1})}$$ \\
+\begin{equation}
+P(x \mid z_{1:t}) = \frac{P(x \mid z_t) P(z_t) P(x \mid z_{1:t-1})}{P(x) P(z_t \mid z_{1:t-1})}
+\end{equation}
+ \\
 \cite[s. 95]{probabilisticRobotics} \\
 
 Vi har selvfølgelig samme type udtryk for den modsatte tilstand $\neg x$.
-$$P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}$$
+\begin{equation}
+P(\neg x \mid z_{1:t}) = \frac{P(\neg x \mid z_t) P(z_t) P(\neg x \mid z_{1:t-1})}{P(\neg x) P(z_t \mid z_{1:t-1})}
+\end{equation}
 Ved at dividere de to kan vi eliminere nogle af de sandsynligheder som er svære at beregne.
 
-\begin{align*}
+\begin{equation}
+\begin{split}
 	\frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} 
 	&= \frac{P(x \mid z_t)}{P(\neg x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{P(\neg x \mid z_{1:t-1})} \frac{P(\neg x)}{P(x)} \\
 	&= \frac{P(x \mid z_t)}{1-P(x \mid z_t)} \frac{P(x \mid z_{1:t-1})}{1-P(x \mid z_{1:t-1})} \frac{1-P(x)}{P(x)}
-\end{align*}
+\end{split}
+\end{equation}
 
 Vi beskriver log odds forholdet af vores \textit{belief} $bel_t(x)$ som $l_t(x)$. 
 Log oddset for vores \textit{belief} til tiden $t$ er givet ved at tage logaritmen til ligningen. 
