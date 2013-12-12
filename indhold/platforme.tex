@@ -99,17 +99,18 @@ I afsnittet herefter vil der blive argumenteret for valg af API, hvor API her sk
 \section{Valg af NXT API}\label{nxt_api}
 Den ideelle løsning ville være at vælge et system, hvor robotten styrer alt; både navigation og indsamling af sensor-målinger og selve kortlægningsdelen.
 Dog er der begrænset med plads til data på NXT'en (256 KB flash, 64 KB RAM), samtidig med at dens regnekraft heller ikke er så god (32-bit ARM7 microcontroller).
+Desuden siger problemformuleringen at robotten til enhver tid skal kende sin position.
+Da der er valgt Kinect til at løse dette problem er der nødt til at være en PC der bearbejder Kinectens billede og fortæller robotten hvor den er.
 
 Grundet disse begrænsninger og givet problemet der skal løses, ville der sagtens kunne laves et to-delt system.
 Den ene del bestående af selve robotten, som skal navigere sig rundt i verden og bruge sine sensorer til at opfatte verden omkring sig.
 Den anden del, som består af selve kortlægningen, kræver mere plads til data, samt større beregningskraft.
-\mikael{Der skal nævnes noget i forhold til valg af PC og Kinect-afhængighed}
 
 \subsubsection*{Overordnet valg}
 For at kunne overholde ovenstående, skal der kunne laves et to-delt stykke software, hvor den ene del kører på robotten og den anden del på en stærkere platform, i vores tilfælde en PC.
 
 Det der så skal vælges nu, er hvordan det software der skal køre på robotten skal laves, samt det software der skal køres på PC'en.
-Vigtigt er at det skal være muligt for den ene del at kommunikere med den anden, da der skal kunne sendes kommandoer til robotten fra PC'en, samt at PC'en skal kunne modtage sensor-input fra robottten.
+Vigtigt er at det skal være muligt for den ene del at kommunikere med den anden, da der skal kunne sendes kommandoer til robotten fra PC'en, samt at PC'en skal kunne modtage sensor-input fra robotten.
 
 \subsubsection*{NXC}
 Til det software der skal køres på robotten har vi valgt NXC, da det er simpelt og dækker alle behov.
