@@ -7,9 +7,6 @@ Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål, 
 Som det også ses på figurerne, er det kun de ydre associationer der er angivet for at simplificere beskrivelsen af systemet.
 Som det første beskrives \textbf{CommonLib.dll} i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
 Efterfølgende vil lagene blive beskrevet i en rækkefølge der følger kaldene internt i systemet.
-
-\thilemann{Overvej om de to figurer bliver for utydelige - skal de sættes op anerledes?}
-\thilemann{Måske burde vi henvise til de afsnit i rapporten som beskriver komponenterne?}
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{./graphics/systemarkitektur_1}
@@ -22,8 +19,8 @@ Efterfølgende vil lagene blive beskrevet i en rækkefølge der følger kaldene 
 \includegraphics[width=1\textwidth]{./graphics/systemarkitektur_2}
 \caption{Viser namespacet \textbf{CommonLib.dll} (uden interne associationer) som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \textbf{CommonLib.dll}, der indeholder de elementer som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
 \label{arkitektur:klassediagram:2}
+\bruno{Burde man ikke ksrive hvad man bruger i NKH.mindsqualls? not sure}
 \end{figure}
-
 \subsection{CommonLib.dll}\label{arkitektur:commonlib}
 Benyttes af alle lag i arkitekturen.
 Dets formål er at samle de komponenter som i systemet kan benyttes af alle lag.
