@@ -1,13 +1,13 @@
-\section{NXC}\label{nxc}
+\subsection{NXC}\label{nxc}
 Til at programmere robotten har vi valgt at benytte NXC, et programmeringssprog designet til NXT robotten. 
 Brugen af NXC til at styre robotten vil blive beskrevet her.\cite{NXC}
 Desuden bruges Enhanced Firmware, for at få adgang til trigonometriske funktioner som er nødvendige for projektet.\cite{enhanced_firmware}
 
-\subsection{NXC sproget}
+\subsubsection{NXC sproget}
 NXC har en syntax der minder meget om C syntax. 
 Udover de traditionelle programmeringskonstruktioner indeholder NXC en masse standardfunktioner til at interagere med robottens sensorer og motorer.
 
-\subsection{Sensorer og motorer}
+\subsubsection{Sensorer og motorer}
 NXC sproget indeholder funktioner til at styre sensorer og motorer tilsluttet NXT'en.
 Et eksempel på aktivering af en sensor og en motor kan ses i \cref{nxc:sensors}.
 \lstinline[style=c]!SetSensor! bruges først til at fortælle robotten at indgang 1 er en touch sensor. 
@@ -26,7 +26,7 @@ task main()
 }
 \end{lstlisting}
 
-\subsection{Tasks}
+\subsubsection{Tasks}
 Til at udnytte at NXT robotten understøtter multithreading findes der i NXC et \lstinline[style=c]!task! keyword.
 Et NXC program består af maksimalt 255 tasks, der hver har et unikt navn. 
 Der skal altid findes en \lstinline[style=c]!Main! task, da denne køres først.
@@ -95,7 +95,7 @@ task main()
 }
 \end{lstlisting}
 
-\subsection{Kommunikation med PC}
+\subsubsection{Kommunikation med PC}
 Da der skal indgå kommunikation med en Kinect sensor er det nødvendigt at kunne kommunikere med en PC fra NXT'en.
 Til kommunikation via bluetooth findes der på NXT et antal inboxe og outboxe. 
 Disse bruges til at sende og modtage beskeder.

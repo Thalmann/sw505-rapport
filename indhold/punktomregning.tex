@@ -7,8 +7,9 @@ For at robotten skal kunne bruge denne til at navigere i den virkelige verden, e
 Den overordnede idé er at bruge reglen om ensvinklede trekanter, da det passer på situationen som kan ses i \cref{fig:kameratrekant}.
 Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinect'en er det $57^\circ$ i bredden og $43^\circ$ i højden.
 $v$ er blot med for at vise at der er tale om ensvinklede trekanter.
-$x_1$ er størrelse af den givne dimension for det billede der dannes af Kinect'en.
-$x_2$ er tilsvarende $x_1$, blot den reelle størrelse af det billede der gives.
+$x_1$ er størrelsen af den givne dimension for det billede der dannes af Kinect'en.
+$x_2$ svarer til $x_1$, blot den reelle størrelse af det billede der gives.
+\mikael{Der er underlige sætninger her der skal skrives om}
 
 \begin{figure}[h]
 \centering
@@ -34,14 +35,14 @@ $x_2$ er tilsvarende $x_1$, blot den reelle størrelse af det billede der gives.
 \begin{description}
 \item[Sætning:]{Hvis alle vinkler i to trekanter er parvis lige store, er siderne parvis proportionale.}
 \end{description}
-Som det kan ses i \cref{fig:udregningstrekant} er der tale om netop sådan en trekant for vores situation.
-Trekanten er halveret for at midten får koordinatet $(0,0)$, derved går en dimension fra $-\frac{1}{2}x$ til $+\frac{1}{2}x$.
+Som det kan ses i \cref{fig:udregningstrekant} er der tale om netop sådan en trekant i vores situation.
+Der tegnes en højde i trekanten så midten i trekanten kan findes. Midten i trekanten får koordinatet $(0,0)$, derved går en dimension fra $-\frac{1}{2}x$ til $+\frac{1}{2}x$.
 
 \subsection{Beregning}
 For at finde proportionalitetsfaktoren deles en vilkårlig side af den store trekant med den tilsvarende side fra den lille trekant.
 Her vil proportionalitetsfaktoren derved blive $f = \frac{\frac{1}{2}x_2}{\frac{1}{2}x_1}$.
 
-For at omregne en pixel $p$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
+For at omregne et pixel-koordinat $p = (p_1, p_2)$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
 Så derved får vi vores reelle koordinat $k = f \cdot p$.
 For vores sitation er der 2 dimensioner; længde og bredde: \begin{equation*}
 (k_1,k_2) = (f \cdot p_1, f \cdot p_2)

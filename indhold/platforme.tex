@@ -1,8 +1,7 @@
-\section{Lego Mindstorms NXT}\label{lego:mindstorms-nxt}
 I dette kapitel vil den valgte platform, \legoms, blive kort beskrevet med en begrundelse for dette valg.
 Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
 
-\subsection{Hvad er Lego Mindstorms?}
+\section{Lego Mindstorms}\label{lego:mindstorms-nxt}
 \legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter i \lego-klodser.
 
 Til at bygge disse robotter er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser.
@@ -10,7 +9,7 @@ Ved brug af aktuatorerne kan robotten reagere på disse inputs.
 
 Ud over de originale \lego dele er der også tredjeparts forhandlere, som har et udbud af andre sensorer og aktuatorer. \thilemann{Enten bør denne linje fjernes, eller også skal vi skrive om sådanne sensorer?}
 
-\subsubsection{Hvad er NXT?}
+\subsection{NXT}
 Denne sektion er baseret på \cite{nxt}, hvilket omhandler NXT 2.0, som er den version der bruges i dette projekt.
 NXT Intelligent Brick (oftest kaldt blot 'NXT' eller 'brick') er hjernen i \legoms robotten.
 Det er den der står for at modtage og behandle input fra sensorer samt styre de monterede aktuatorer.
@@ -68,8 +67,8 @@ Strømkilde & 6 AA batteries\\
 \end{figure}
 
 
-\subsection{Hvorfor LEGO MINDSTORMS NXT?}
-Der er mange gode grunde til at vælge \legoms NXT.
+\subsection{Valg af \legoms}
+Der er mange gode grunde til at vælge \legoms.
 Her er givet fire overordnede punkter, der vil blive gennemgået efterfølgende:
 
 \begin{itemize}
@@ -99,7 +98,9 @@ I afsnittet herefter vil der blive argumenteret for valg af API, hvor API her sk
 
 \section{Valg af NXT API}\label{nxt_api}
 Den ideelle løsning ville være at vælge et system, hvor robotten styrer alt; både navigation og indsamling af sensor-målinger og selve kortlægningsdelen.
-Dog er der begrænset med plads til data på NXT'en (256 KB flash, 64 KB RAM), samtidig med at dens regnekraft heller ikke er så god (32-bit ARM7 microcontroller).
+Dog er der begrænset med plads til data på NXT'en (256 KB flash, 64 KB RAM), samtidig med at dens regnekraft heller ikke er så god (32-bit ARM7 microcontroller).\thilemann{Måske skulle der nævnes hvor langsom den er?}
+På grund af robottens hardwaremæssige begrænsninger og at problemformuleringen siger at robotten til enhver tid skal kende sin position, er det derfor nødvendigt at 'outsource' visse opgaver til en PC.
+Dette ses blandt andet ved at der benyttes en Microsoft Kinect til at lokalisere robotten, hvilket gør en PC påkrævet for at bearbejde billeddata fra Kinecten for netop at fortælle robotten dens faktiske position.
 
 Grundet disse begrænsninger og givet problemet der skal løses, ville der sagtens kunne laves et to-delt system.
 Den ene del bestående af selve robotten, som skal navigere sig rundt i verden og bruge sine sensorer til at opfatte verden omkring sig.
@@ -109,7 +110,7 @@ Den anden del, som består af selve kortlægningen, kræver mere plads til data,
 For at kunne overholde ovenstående, skal der kunne laves et to-delt stykke software, hvor den ene del kører på robotten og den anden del på en stærkere platform, i vores tilfælde en PC.
 
 Det der så skal vælges nu, er hvordan det software der skal køre på robotten skal laves, samt det software der skal køres på PC'en.
-Vigtigt er at det skal være muligt for den ene del at kommunikere med den anden, da der skal kunne sendes kommandoer til robotten fra PC'en, samt at PC'en skal kunne modtage sensor-input fra robottten.
+Vigtigt er at det skal være muligt for den ene del at kommunikere med den anden, da der skal kunne sendes kommandoer til robotten fra PC'en, samt at PC'en skal kunne modtage sensor-input fra robotten.
 
 \subsubsection*{NXC}
 Til det software der skal køres på robotten har vi valgt NXC, da det er simpelt og dækker alle behov.
@@ -122,5 +123,5 @@ Der vil blive gået mere i dybden med NXC i \cref{nxc}.
 Til det software der skal køres på PC, altså det der skal sørge for selve opdateringen og beregningen af kort, har vi valgt \mindsqualls.
 \mindsqualls er et .NET bibliotek skrevet i \csharp, hvori det er muligt at kommunikere med en NXT, både ved at sende direkte kommandoer eller via abstraktion over NXTens aktuatorer/sensorer opfattet som objekter.
 Valget faldt på \mindsqualls da dette var simpelt og dækkede alle behov ift. kommunikation med NXT.
-Desuden har gruppen stor erfaring med \csharp og Visual Studio, hvilket også syntes værende en stor fordel.
+Desuden har gruppen stor erfaring med \csharp og Visual Studio, hvilket også ses som værende en stor fordel.
 \mindsqualls vil blive uddybet i \cref{mindsqualls}.

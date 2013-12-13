@@ -1,8 +1,7 @@
-\section{Introduktion til Occupancy Grid}
 Til at kortlægge rummet robotten befinder sig i er der valgt at bruge \textit{occupancy grid}.
 Teorien bag denne algoritme vil blive beskrevet i dette afsnit
 
-\subsection{Overblik}
+\section{Overblik}
 Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær tilfældig variabel der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
 Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på den aktuelle tilstand endnu ikke er kendt.
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
@@ -27,21 +26,27 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:approx_occupancy_grid}
 \end{figure}
 
-\subsection{Vertikal og horisontal sensor model}
+\section{Vertikal og horisontal sensor model}
 \stefan{kildehenvisning}
 Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser,
 kan vi konstruere en forholdsvis simpel basal sensormodel.
 Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
 
-$$r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid$$
+\begin{equation}
+r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid
+\end{equation}
 
 Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
 
-$$l_{res} = \begin{cases} 
+\begin{equation}
+\begin{split}
+l_{res} = \begin{cases} 
 	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 	l_{free} &\text{ellers}  
-\end{cases}$$
+\end{cases}
+\end{split}
+\end{equation}
 
 Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
 Modellen vil se således ud beskrevet i pseudokode:
@@ -63,7 +68,7 @@ $r = |x_i - x + y_i - y|$ \\
 \label{alg:inversesensormodel}
 \end{algorithm}
 
-\subsubsection{Gaussisk sensor model}
+\subsection{Gaussisk sensor model}
 
 % forklaring af gaussisk støj (central limit theorem)
 % tilfældige fejl vil tilnærme sig en gausssisk kurve.
@@ -86,12 +91,15 @@ Vi kan anvende en passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{6
 
 
 
-$$\mathcal{N}\bigg(z_t,\bigg(\frac{\alpha}{6}\bigg)^2\bigg) = 
-\frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}$$
+\begin{equation}
+\mathcal{N}\bigg(z_t,\bigg(\frac{\alpha}{6}\bigg)^2\bigg) = 
+\frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}
+\end{equation}
 
 Den nye tildeling af sandsynlighed til cellen vil nu se således ud.
 
-$$l_{res} = \begin{cases} 
+\begin{equation}
+l_{res} = \begin{cases} 
 	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	
 	
@@ -99,7 +107,9 @@ $$l_{res} = \begin{cases}
 		&\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 
 	l_{free} &\text{ellers}	
-\end{cases}$$
+\end{cases}
+\end{equation}
+\\
 Hvor $\rho$ er en passende konstant og $\eta$ er en normaliseringskonstant.
 
 

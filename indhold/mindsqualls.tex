@@ -1,13 +1,15 @@
 % !TeX spellcheck = da_DK begrundelse for valget.
 
-Der skal benyttes et framework til at kommunikere med NXT enheden, så en computer og en NXT kan arbejde sammen om at løse problemet
+\section{Beskrivelse af API'er}
 
-\section{MindSqualls}\label{mindsqualls}
+I dette afsnit vil de API'er der er valgt i \cref{nxt_api} blive beskrevet.
+
+\subsection{MindSqualls}\label{mindsqualls}
 \mindsqualls er et .NET bibliotek til \legos NXT robotter.
 \mindsqualls tillader kommunikation med NXT enheder via. Bluetooth og USB og fungerer ved at sende og modtage beskeder over disse to teknologier.
 Biblioteket er skrevet i \csharp og kan dermed anvendes af alle de .NET kompatible sprog.
 
-\subsection{Kommunikation}
+\subsubsection{Kommunikation}
 Kommunikationen fra Mindsqualls til NXT enheden sker igennem klassen \lstinline!NxtCommunicationProtocol! som findes i en \lstinline!McNxtBrick!. 
 En \lstinline!McNxtBrick! er en abstraktion over hele NXT brick enheden. 
 Denne kan således også styre motorer og sensor direkte, men da dette projekt håndterer al kørsel og sensormåling på robotten er kun kommunikationsprotokollen nødvendig.
