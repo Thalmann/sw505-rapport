@@ -21,15 +21,21 @@ Dette kapitel handler om den udledede metode til at planlægge en rute for robot
 Den overordnede idé er at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation hvor der skal foretages en scanning.
 Der gås ud fra at robotten opererer indenfor et occupancy grid, derved vil der for destinationer og målinger blive brugt celler.
 
-\paragraph{En mulig destinationscelle} er en celle med høj sandsynlighed for at være ledig.
-Desuden skal et vist antal celler omkring den mulige celle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
+\subsubsection{Destinationscelle}\label{rute:destinationscelle}
+En mulig destinationscelle er en celle med høj sandsynlighed for at være ledig.
+Desuden skal et vist antal celler omkring den mulige destinationscelle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
+Yderlige skal der være en rute hen til destinationscellen, hvor der er nok ledige celler i hele ruten, så robotten kan være indenfor de celler.
 
-\paragraph{Kriterier for en god destination} afhænger af den \textit{information gain} som robotten potentielt ville få ved at scanne i destinationen.
-Dette afgøres af synsfeltet for cellen, dvs. de celler som robotten ville opdatere ved at scanne fra cellen.
-Da vi opererer i en vinkelret verden, vil synsfeltet for en given celle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen.
+\subsubsection{Synlig celle}\label{rute:synligcelle}
+De synlige celler for en destinationscelle, er de celler som vil blive opdateret ved en scanning fra destinationscellen.
+Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen (se \cref{rute:synsfelt});
+
+\subsubsection{Kriterier for en god destination}
+Dette afhænger af den \textit{information gain} som robotten potentielt ville få ved at scanne i destinationen.
+Dette afgøres af de synlige celler for destinationscellen.
 
 Hvor høj \textit{information gain} der opnås, skal bestemmes ud fra sandsynlighederne der er i forvejen, for cellerne i synsfeltet.
-Kort sagt er der bedst gain på en celle, hvor der er flest ikke-hidtil-scannede celler i synsfeltet.
+Kort sagt er der bedst \textit{information gain} på en celle, hvor der er flest ikke-hidtil-scannede celler i synsfeltet.
 
 \section{Beregning af næste målings-celle}
 Til at beregne den næste destination, hvor fra der skal foretages en måling, skal følgende bruges:
@@ -40,6 +46,7 @@ Til at beregne den næste destination, hvor fra der skal foretages en måling, s
 \item{$p(d) = \{ c \mid c \textnormal{ er en celle i synsfeltet for } d \}$}
 \end{itemize}
 Hvor $C$ er mængden af alle celler der er i occupancy grid'et, $D$ er alle mulige destinationsceller, $x$ er den celle hvori robotten er og $p(d)$ er alle celler i synsfeltet for en destinationscelle $d$.
+Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og synlige celler.
 
 \subsubsection{Beregning af \textit{information gain}}
 Første skridt er at beregne værdi for alle de mulige destinationsceller:
