@@ -1,13 +1,17 @@
 \section{Introduktion til Occupancy Grid}
-Til at kortlægge rummet robotten befinder sig i er der valgt at bruge \textit{occupancy grid}.
+Til at kortlægge rummet robotten befinder sig i har vi valgt at bruge \textit{occupancy grid}.
 Teorien bag denne algoritme vil blive beskrevet i dette afsnit
 
 \subsection{Overblik}
-Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær tilfældig variabel der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
+Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær \textit{stokastisk variabel } der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
 Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på den aktuelle tilstand endnu ikke er kendt.
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
 
 En simpel illustration af et occupancy grid map for det kørselsmiljø der er opstillet for vores robot kan ses på \cref{map:approx_occupancy_grid}.
+
+
+$$\int$$
+$$\bigints$$
 
 \begin{figure}[h] % Kørselsmiljø og et occupancy grid
 \centering
