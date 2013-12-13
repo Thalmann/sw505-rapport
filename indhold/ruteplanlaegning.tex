@@ -1,13 +1,46 @@
 
+\newcommand{\unkcell}[3][]{\node (robot) [draw,fill=yellow, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+\newcommand{\emptycell}[3][]{\node (robot) [draw,fill=green, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+\newcommand{\occcell}[3][]{\node (robot) [draw,fill=red, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+\newcommand{\scancell}[3][]{\node (robot) [draw,fill=orange, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+\newcommand{\destcell}[3][]{\node (robot) [draw,fill=blue, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+For at automatisere kortlægningen af et rum, er det nødvendigt at automatisere ruteplanlægningen.
+Dette kapitel handler om den udledede metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra nogle kriterier.
+
+\section{Overordnet beskrivelse}
+Den overordnede idé er at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation hvor der skal foretages en scanning.
+Der gås ud fra at robotten opererer indenfor et occupancy grid, derved vil der for destinationer og målinger blive brugt celler.
+
+\paragraph{En mulig destinationscelle} er en celle med høj sandsynlighed for at være ledig.
+Desuden skal et vist antal celler omkring den mulige celle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
+
+\paragraph{Kriterier for en god destination} afhænger af den information gain som robotten potentielt ville få ved at scanne i destinationen.
+Dette afgøres af synsfeltet for cellen, dvs. de celler som robotten ville opdatere ved at scanne fra cellen.
+Da vi opererer i en vinkelret verden, vil synsfeltet for en given celle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen.
+
+Hvor høj information gain der opnås, skal bestemmes ud fra sandsynlighederne der er i forvejen, for cellerne i synsfeltet.
+Kort sagt er der bedst gain på en celle, hvor der er flest ikke-hidtil-scannede celler i synsfeltet.
+
 \section{Teori}
 \begin{description}
-\item[$D$]{-- Mængden af mulige destinationer}
+\item[$C = \{ c \mid c \textnormal{ er en celle i grid'et } \}$]{}
+\item[$D = \{ c \mid c \textnormal{ er en destinationscelle}\}$]{}
 \item[$x$]{-- Robottens lokation}
-\item[$p(d)$]{-- Mængden af celler som er i synsfeltet for $d$}
+\item[$p(d) = \{ c \mid c \textnormal{ er en celle i synsfeltet for } d \}$]{}
 \end{description}
 
 \begin{equation}
-v(d) = \sum_{c \in p(d)} |0.5 - P(c)|
+v(d) = \sum_{s \in p(d)} |0.5 - P(s)|
 \end{equation}
 
 \begin{equation}
@@ -26,9 +59,15 @@ A = \{ \text{dist}(x,q) \mid q \in Q \}
 r =  q \mid \text{dist}(x,q) \in \min A
 \end{equation}
 
-\section{Illustration}
+\section{Algoritme}
+\begin{algorithm}
+\SetKwFunction{Fn}{GetNextScanDest}
+\Fn{$D$}{\\
+	
+}
+\end{algorithm}
 
-\newcommand{\dbox}[3][]{\node (robot) [block] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+\section{Illustration}
 
 \begin{figure}
 \centering
@@ -39,22 +78,21 @@ r =  q \mid \text{dist}(x,q) \in \min A
 \coordinate (bl) at (0,0);
 \coordinate (tr) at (\gridsize,\gridsize);
 
-\tikzstyle{block} = [draw, fill=green!30, text centered, rectangle,
-minimum height=\cellsize cm,minimum width=\cellsize cm, align=right]
-
 \foreach \x in {0,\cellsize,...,\gridsize}
 	\foreach \y in {0,\cellsize,...,\gridsize}
-		\draw [fill=yellow!30] ($(bl) + (\x,\y)$) rectangle ($(bl) + (\x + \cellsize, \y + \cellsize)$);
+		\draw [fill=yellow] ($(bl) + (\x,\y)$) rectangle ($(bl) + (\x + \cellsize, \y + \cellsize)$);
 		
-\dbox[d_1]{6}{6}
-\dbox[d_4]{6}{7}
-\dbox[d_7]{6}{8}
-\dbox[d_2]{7}{6}
-\dbox[x]{7}{7}
-\dbox[d_8]{7}{8}
-\dbox[d_3]{8}{6}
-\dbox[d_6]{8}{7}
-\dbox[d_9]{8}{8}
+\emptycell{6}{6}
+\emptycell{6}{7}
+\emptycell{6}{8}
+\emptycell{7}{6}
+\emptycell[x]{7}{7}
+\emptycell{7}{8}
+\emptycell{8}{6}
+\emptycell{8}{7}
+\emptycell{8}{8}
 
 \end{tikzpicture}
+\label{rute:udgangspunkt}
+\caption{Udgangspunkt}
 \end{figure}
