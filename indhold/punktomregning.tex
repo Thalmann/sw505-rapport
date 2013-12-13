@@ -2,14 +2,14 @@
 Det billede der fås ind fra kameraet, består af en mængde pixels.
 Robottens centrum, og derved lokation, vil være i præcist én pixel.
 For at robotten skal kunne bruge denne til at navigere i den virkelige verden, er det nødvendigt at omregne pixel(-koordinat) til reelt koordinat.
-\mikael{Det afsnit passer ikke rigtigt ind her}
 
 \subsection{Ensvinklede trekanter}
 Den overordnede idé er at bruge reglen om ensvinklede trekanter, da det passer på situationen som kan ses i \cref{fig:kameratrekant}.
 Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinect'en er det $57^\circ$ i bredden og $43^\circ$ i højden.
 $v$ er blot med for at vise at der er tale om ensvinklede trekanter.
-$x_1$ er størrelse af den givne dimension for det billede der dannes af Kinect'en.
-$x_2$ er tilsvarende $x_1$, blot den reelle størrelse af det billede der gives.
+$x_1$ er størrelsen af den givne dimension for det billede der dannes af Kinect'en.
+$x_2$ svarer til $x_1$, blot den reelle størrelse af det billede der gives.
+\mikael{Der er underlige sætninger her der skal skrives om}
 
 \begin{figure}[h]
 \centering
@@ -42,7 +42,7 @@ Trekanten er halveret for at midten får koordinatet $(0,0)$, derved går en dim
 For at finde proportionalitetsfaktoren deles en vilkårlig side af den store trekant med den tilsvarende side fra den lille trekant.
 Her vil proportionalitetsfaktoren derved blive $f = \frac{\frac{1}{2}x_2}{\frac{1}{2}x_1}$.
 
-For at omregne en pixel $p$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
+For at omregne et pixel-koordinat $p = (p_1, p_2)$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
 Så derved får vi vores reelle koordinat $k = f \cdot p$.
 For vores sitation er der 2 dimensioner; længde og bredde: \begin{equation*}
 (k_1,k_2) = (f \cdot p_1, f \cdot p_2)

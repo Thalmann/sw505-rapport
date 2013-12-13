@@ -11,11 +11,11 @@ Den bruger samtidig dens motorer til at bevæge sig, hvilket kan bruges til at g
 Der er dog et problem; usikkerheden på sensorer og motorer gør at robotten ikke nødvendigvis befinder sig hvor den faktisk tror den er.
 Samtidig kan der også være usikkerheder i de sensorer der benyttes, som fx. kompas, sonar og laser.
 
-Da dette problem er ret komplekst at løse, vil vi kigge på problemet med kortlægning, hvor lokationen er kendt, som beskrevet i det følgende afsnit.
+Da dette problem er ret komplekst at løse \cite[s.~514]{thrun2002particle}, vil vi kigge på problemet med kortlægning, hvor lokationen er kendt, som beskrevet i det følgende afsnit.
 
 \section*{Mapping med kendt lokation}\label{map_lok}
 Når vi kender lokationen bliver ovenstående problem mindre komplekst.
 I tilfælde hvor robotten kender sin lokation, skal den blot kortlægge det ukendte område.
 Kortlægningen fungerer ved at robotten bruger dens sensorer til at finde ud af hvordan omgivelserne ser ud, og finder så sin umiddelbare lokation vha. f.eks. GPS.
 
-Denne fremgangsmåde fjerner mange af de unøjagtigheder der opstår når der fokuseres på SLAM problemet, og simplificerer således processen for at finde robottens lokation.
+Denne fremgangsmåde fjerner mange af de reducere der opstår når der fokuseres på SLAM problemet, og simplificerer således processen for at finde robottens lokation.

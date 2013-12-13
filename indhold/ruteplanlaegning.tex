@@ -1,0 +1,60 @@
+
+\section{Teori}
+\begin{description}
+\item[$D$]{-- Mængden af mulige destinationer}
+\item[$x$]{-- Robottens lokation}
+\item[$p(d)$]{-- Mængden af celler som er i synsfeltet for $d$}
+\end{description}
+
+\begin{equation}
+v(d) = \sum_{c \in p(d)} |0.5 - P(c)|
+\end{equation}
+
+\begin{equation}
+V = \{ v(d) \mid d \in D \}
+\end{equation}
+
+\begin{equation}
+Q = \{ d \in D \mid v(d) \in \min V \}
+\end{equation}
+
+\begin{equation}
+A = \{ \text{dist}(x,q) \mid q \in Q \}
+\end{equation}
+
+\begin{equation}
+r =  q \mid \text{dist}(x,q) \in \min A
+\end{equation}
+
+\section{Illustration}
+
+\newcommand{\dbox}[3][]{\node (robot) [block] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[]
+\newcommand{\gridsize}{10}
+\newcommand{\cellsize}{0.7}
+
+\coordinate (bl) at (0,0);
+\coordinate (tr) at (\gridsize,\gridsize);
+
+\tikzstyle{block} = [draw, fill=green!30, text centered, rectangle,
+minimum height=\cellsize cm,minimum width=\cellsize cm, align=right]
+
+\foreach \x in {0,\cellsize,...,\gridsize}
+	\foreach \y in {0,\cellsize,...,\gridsize}
+		\draw [fill=yellow!30] ($(bl) + (\x,\y)$) rectangle ($(bl) + (\x + \cellsize, \y + \cellsize)$);
+		
+\dbox[d_1]{6}{6}
+\dbox[d_4]{6}{7}
+\dbox[d_7]{6}{8}
+\dbox[d_2]{7}{6}
+\dbox[x]{7}{7}
+\dbox[d_8]{7}{8}
+\dbox[d_3]{8}{6}
+\dbox[d_6]{8}{7}
+\dbox[d_9]{8}{8}
+
+\end{tikzpicture}
+\end{figure}

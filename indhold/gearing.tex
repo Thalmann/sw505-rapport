@@ -2,6 +2,7 @@
 I \cref{sensorer:motorer} fandt vi ud af at præcisionen på motorerne ikke var høj.
 Der var en afvigelse på op til 4\dg, imod den maksimale afvigelse på 1\dg ~nævnt i kravene i \cref{robot:design}.
 Dette faktum gav anledning til at udforske mulighederne for at geare motorene for at mindske denne præcision.
+\thilemann{Vi mindsker vel usikkerhederne og \textit{øger} præcisionen?}
 
 \subsection{Simpel Teori}\label{gearing:simpel_teori}
 Gearing kan foregå på to måder; geare op eller geare ned.
@@ -9,8 +10,12 @@ Det tandhjul der er knyttet direkte til motoren kalder vi fører-tandhjulet og d
 
 \subsubsection{Nedgearing}
 Nedgearing foregår ved at et mindre tandhjul driver et større tandhjul.
-Faktoren (størrelsen af gearing) er styret af antallet af tænder på tandhjulene.
-For eksempel vil et 24-tands fører-tandhjul drive et 40-tands følger-tandhjul med faktoren $\frac{40}{24}$, hvilket betyder at der går 40 fører omdrejninger pr. 24 følger omdrejninger. Dvs. at motoren der driver fører-tandhjulet skal rotere $\frac{40}{24} = 1 \frac{2}{3}$ omgange for at rotere følger-tandhjulet én omgang.
+Gear rationen (størrelsen af gearing) er styret af antallet af tænder på tandhjulene.
+For eksempel vil et 24-tands fører-tandhjul drive et 40-tands følger-tandhjul med ratioen $1:1.667$, hvilket betyder at der for at give en enkelt følger omdrejning kræves $1.667$ fører omdrejninger. 
+Det betyder at motoren der driver fører-tandhjulet skal rotere $\frac{40}{24} = 1 \frac{2}{3}$ omgange for at rotere følger-tandhjulet én omgang og at følger tandhjulet roterer $\frac{1}{1.667} = 0.6$ omgange pr. omdrejning af fører tandhjulet.
+
+Til dette projekt bliver der kun gearet ned (jævnfør robottens design på \cref{robot:opbygnin}); dette gør sig gældende for begge sæt af gearinger.
+
 
 \begin{figure}[h]
 \centering
@@ -20,15 +25,15 @@ For eksempel vil et 24-tands fører-tandhjul drive et 40-tands følger-tandhjul 
 \end{figure}
 
 \subsection{Aktuelle gearing}
-Dette afsnit fokuserer på den teoretiske gearing for henholdsvis ultrasonisk sensor og hjul.
-\Cref{robot:gearing-test} beskriver forskellige test af begge gearinger for at undersøge om de lever op til de teoretiske værdier.
+Dette afsnit fokuserer på den teoretiske gearing for de ultrasoniske sensorer.
+\Cref{robot:gearing-test} beskriver forskellige test af gearingerne der driver sensor rotationen for at undersøge om gearingen lever op til de teoretiske værdier.
 
 
 \subsubsection{Ultrasonisk sensor}
-Denne bruges til at bestemme afstandentil et objekt i en bestemt retning, hvorfor det vil være en klar fordel at geare motoren ned for at opnå større præcision af denne når retningen af sensoren skal bestemmes.
-Rotationen vil naturligvis foregå langsommere end uden gearing, men tid er ikke en faktor på nuværende tidspunkt
+Denne bruges til at bestemme afstanden til et objekt i en bestemt retning, hvorfor det vil være en fordel at geare motoren ned for at opnå større præcision af denne når retningen af sensoren skal bestemmes.
+Rotationen vil naturligvis foregå langsommere end uden gearing, men da tid ikke er en faktor på nuværende tidspunkt er det ikke af nogen betydning for at løse problemet.
 
-Gearingen for den ultrasoniske sensor består af i alt 4 tandhjul, som alle kan ses i \cref{gearing:tandhjul}.
+Gearingen for den ultrasoniske sensor består af i alt 3 forskellige tandhjul (4 i alt), som alle kan ses i \cref{gearing:tandhjul}.
 
 \begin{figure}[h] % De anvendte tandhjul
 \centering
@@ -38,12 +43,12 @@ Gearingen for den ultrasoniske sensor består af i alt 4 tandhjul, som alle kan 
 \caption{Snekke}
 \label{gearing:snekke}
 \end{subfigure}
-\begin{subfigure}[b]{.19\textwidth}
-\centering
-\includegraphics[width=\textwidth]{gears/16-tooth}
-\caption{16-tands}
-\label{gearing:16tand}
-\end{subfigure}
+%\begin{subfigure}[b]{.19\textwidth}
+%\centering
+%\includegraphics[width=\textwidth]{gears/16-tooth}
+%\caption{16-tands}
+%\label{gearing:16tand}
+%\end{subfigure}
 \begin{subfigure}[b]{.19\textwidth}
 \centering
 \includegraphics[width=\textwidth]{gears/24-tooth}
@@ -56,54 +61,31 @@ Gearingen for den ultrasoniske sensor består af i alt 4 tandhjul, som alle kan 
 \caption{40-tands}
 \label{gearing:40tand}
 \end{subfigure}
-\caption{De anvendte tandhjul for sensor og hjul}
+\caption{De anvendte tandhjul til sensor rotation}
 \label{gearing:tandhjul}
 \end{figure}
 
-Den første kombination består af en snekke\cite{snekke} (se \cref{gearing:snekke}) som fører-tandhjul og 40-tands (se \cref{gearing:40tand}) som følger-tandhjul.
-Snekken kræver en hel rotation for at flytte én tand på følger-tandhjul.
-Dette giver en faktor på $\frac{40}{1} = 40$, hvilket betyder at der kræves 40 hele motor-rotationer for at rotere 40-tands tandhjulet én omgang.
+Den første kombination består af en snekke\cite{snekke} (se \cref{gearing:snekke}) som fører-tandhjul og 24-tands (se \cref{gearing:24tand}) som følger-tandhjul.
+Snekken kræver en hel rotation for at flytte én tand på følger-tandhjul giver en gear ratio på $1:24$, hvilket betyder at der kræves 24 hele motor-rotationer for at rotere 24-tands (følger) tandhjulet én omgang.
 
-Den anden kombination består af en 24-tands (se \cref{gearing:24tand}) som fører-tandhjul og en 40-tands (se \cref{gearing:40tand}) som følger-tandhjul.
-Dette giver en faktor på $\frac{40}{24} = 2\frac{2}{3}$.
+Den anden kombination består af et 24-tands (se \cref{gearing:24tand}) som fører-tandhjul og et 40-tands (se \cref{gearing:40tand}) som følger-tandhjul, hvilket giver en ratio på $1:1.667$.
 
-Den samlede gearing for sensoren ser derfor således ud: $$40 \cdot 2\frac{2}{3} = 106 \frac{2}{3}$$
-
-\subsubsection{Hjul}
-Motorene som styrer hjulsættet er ligesom sensoren også drevet af en gearing som gearer motorens omdrejninger ned, hvilket resulterer i to faktorer for kontrol af robotten:
-
-\begin{itemize}
-\item Højere præcision og mindskning af usikkerheder ved rotation af hjulene.
-\item Højere moment af motorene som driver hjulene, hvilket gør det muligt at kontrollere robotten ved lavere hastigheder samt kørsel på underlag med høj friktion.
-\end{itemize}
-
-Igen er tid ikke en faktor, så det er acceptabelt at robotten mister fart.
-Præcision af motorernes position er ikke af væsentlig faktor, da robottens lokationen bestemmes andetsteds og ikke vha. \textit{dead reckoning}.
-
-Gearingen for hjulene består hver især af to tandhjul; ét 40-tands og ét 24-tands.
-Derved er gearingen som i eksemplet i \cref{gearing:simpel_teori}: $$ \frac{40}{24} = 1 \frac{2}{3} $$
+Den samlede gear ratio for sensor motoren bliver derfor $1:40$, som beskriver at der for hver sensor omdrejning kræves 40 motor omdrejninger; hvilket er det samme som:
+$$\frac{24}{1} \cdot \frac{40}{24} = 40$$
 
 \subsection{Test af gearing}\label{robot:gearing-test}
-Nu hvor den teoretiske gearing er fastlagt, vil der her blive udført en række forsøg for at afgøre præcisionen af motorerne med gearing; og evt. at fastlægge en faktisk gearing, hvis denne afviger fra den teoretiske.
-
-\subsubsection{Hjul}
-Der blev udført handlinger med antal hjul-omdrejninger (og ikke motor-omdrejninger) som input, med en beregning fra hjul-omdrejninger til motor-omdrejninger, ud fra den teoretiske gearing.
-
-Der er blevet udført test af henholdsvis; $\frac{1}{8}$, $\frac{1}{4}$, $\frac{1}{2}$, 1, 2, 3, 10 hele hjul-omdrejninger.
-\stefan{resultater?}
-\paragraph{Resultatet} af testen var positiv.
-Samtlige tests gav ingen afvigelse.
-Dette resultat og det faktum at præcision ikke er en væsentlig faktor gjorde at der ikke fandtes behov for at udføre flere tests af hjul-gearingen.
+\thilemann{Jeg mener vi bør udføre testene igen og notere resultaterne således de kan komme i appendix sammen med de andre test resultater - de mangler lidt som argumentation i testen beskrevet herunder.}
+Nu hvor den teoretiske gearing er fastlagt, vil der her blive udført en række forsøg for at afgøre præcisionen af sensor motoren med gearing; og evt. at fastlægge en faktisk gearing, hvis denne afviger fra den teoretiske.
 
 \subsubsection{Sensor}
-Denne test er meget vigtigere end hjul-testen, da det er vigtigt at vide den nøjagtige rotation af sensoren, og dermed dens retning, for at få så præcise målinger som muligt.
+Det er vigtigt at kende den nøjagtige rotation af sensoren, og dermed dens retning, for at få så præcise målinger som muligt.
+Derfor er der foretaget to forskellige test, hvis formål er at kortlægge eventuelle usikkerheder der kan være indført med gearing af sensor motoren.
 
 \paragraph{Første test} var en grovtest, hvor der blev kørt i den samme retning i et antal sensor-omdrejninger.
-Igen blev der udført handling med sensor-omdrejninger som input, ud fra en beregnet motor-omdrejning, baseret på den teoretiske gearing.
+Der blev udført handling med sensor-omdrejninger som input, ud fra en beregnet motor-omdrejning, baseret på den teoretiske gearing.
 Denne test gav et godt resultat, uden afvigelse.
 \thilemann{en forsker udførte engang en meget hemmelighedsfuld test af en gearing helt ude i skoven, uden nogen former for resultater...}
 
 \paragraph{Anden test} blev udført ved at køre færre omdrejninger, skiftevis med og mod uret.
-Dette gav en upræcision, da der er slør i den øverste gearing, mellem 56-tands og 24-tands tandhjulene.
-Dette slør giver mellem $\frac{1}{4}$ og $\frac{3}{4}$ tands unøjagtighed, da der ved skift af rotations-retning bruges op til $\frac{3}{4}$ tandhjul-omdrejning for 24-tands tandhjulet at få fat i 56-tands tandhjulets tænder igen.
-\thilemann{Denne test skal genudføres og der skal skrives lidt om den nye løsning - man kunne evt. skrive at det er ændret pga. sløret (afsnit om sløret kan findes på git...)}
+Dette gav en upræcision, da der er slør i den øverste gearing mellem 40-tands og 24-tands tandhjulene.
+Dette slør giver mellem $\frac{1}{4}$ og $\frac{3}{4}$ tands unøjagtighed, da der ved skift af rotations-retning bruges op til $\frac{3}{4}$ tandhjul-omdrejning for 24-tands tandhjulet at få fat i 40-tands tandhjulets tænder igen.
