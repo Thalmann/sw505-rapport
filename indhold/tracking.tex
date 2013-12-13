@@ -38,7 +38,7 @@ dist_{C_aC_b} = |C_a - C_b|
 \end{equation}
 Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2} \approx 442$ (forskellen på hvid og sort).
 
-\paragraph{Maksimal afstand}
+\paragraph{Maksimal afstand}\label{tracking:maksimal_afstand}
 Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af hinanden.
 Der indføres derfor en konstant $\rho$ der definerer et maksimum for hvor langt to farver må være fra hinanden før de ikke længere er interssante.
 I \cref{tracking:adjust} beskrives bestemmelsen af denne konstant.
@@ -126,7 +126,7 @@ Reduceres problemet ikke tilstrækkeligt, vil robotten stadig bevæge sig for st
 Reduceres problemet derimod for meget, vil det reducerede problem ikke være af tilstrækkelig størrelse til at opfange ændringerne i robottens position.
 Herunder følger en beskrivelse af indførelsen af $\omega$:
 
-Lad $R^n$ være den firkant der spænder over alle interessante vægte i løsningen af et problem.
+Lad $R^n$ være den firkant der spænder over alle interessante vægte i løsningen af et problem(beskrevet i \cref{tracking:maksimal_afstand}).
 Denne defineres ved to diagonalt modsatte punkter:
 {
 \newcommand{\cvec}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
