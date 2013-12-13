@@ -1,5 +1,5 @@
 \section{Lokalisering af robot}\label{tracking}
-Til lokalisering af robotten anvendes (som nævnt i \cref{lokalisering:valg}) en \kinect.
+Til lokalisering af robotten anvendes (som nævnt i \cref{kinect:argumentation}) en \kinect.
 Denne er udstyret med et farvekamera (jvf. \cref{kinect:farvekamera}) der vil blive anvendt til at bestemme robottens placering.
 Ved at udstyre robotten med to mærkninger i klare farver vil det på billeder fra den være muligt at lokalisere robotten.
 
@@ -38,7 +38,7 @@ dist_{C_aC_b} = |C_a - C_b|
 \end{equation}
 Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2} \approx 442$ (forskellen på hvid og sort).
 
-\paragraph{Maksimal afstand}
+\paragraph{Maksimal afstand}\label{tracking:maksimal_afstand}
 Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af hinanden.
 Der indføres derfor en konstant $\rho$ der definerer et maksimum for hvor langt to farver må være fra hinanden før de ikke længere er interssante.
 I \cref{tracking:adjust} beskrives bestemmelsen af denne konstant.
@@ -83,6 +83,7 @@ I det følgende beskrives de metoder der er anvendt til at løse ovenstående pr
 I \cref{tracking:adjust} beskrives resultatet af indførelsen af disse metoder.
 
 \subsubsection{Filtrering af støj}
+\bruno{Nicolaj spørger: Kan det illustreres med et par eksempler?}
 %Beskrivelse af implementationen af mean-filter
 Den beskrevne \emph{farve-støj} der opstår i visse billeder fjernes ved at anvende en variation af et 3x3 median-filter\cite{medianfilter}.
 I filteret betragtes alle værdier som binære (0 eller ikke 0).
@@ -111,7 +112,7 @@ På denne måde opdateres den søgte farve løbende og tilpasser sig dermed de f
 \subsubsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
 En simpel løsning på at optimere tiden det tager at afsøge billedet, er ved at reducere problemets størrelse.
-Som et led i lokaliseringen bestemmes den mindste firkant der spændes over alle interessant pixels.
+Som et led i lokaliseringen bestemmes den mindste firkant der spændes over alle interessante pixels.
 Ved næste opdatering tages der udgangspunkt i at robotten ikke har bevæget sig meget.
 Problemet kan derfor reduceres til kun at løse samme problem, men for et mindre billede.
 Omend robotten ikke bevæger sig meget, er det naturligvis nødvendigt at opfange den lille ændring der måtte være.
@@ -125,13 +126,13 @@ Reduceres problemet ikke tilstrækkeligt, vil robotten stadig bevæge sig for st
 Reduceres problemet derimod for meget, vil det reducerede problem ikke være af tilstrækkelig størrelse til at opfange ændringerne i robottens position.
 Herunder følger en beskrivelse af indførelsen af $\omega$:
 
-Lad $R^n$ være den firkant der spænder over alle interessante vægte i løsningen af et problem.
+Lad $R^n$ være den firkant der spænder over alle interessante vægte i løsningen af et problem(beskrevet i \cref{tracking:maksimal_afstand}).
 Denne defineres ved to diagonalt modsatte punkter:
 {
 \newcommand{\cvec}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
 
 $$R^n = \left\{\cvec{x_1}{y_1}, \cvec{x_2}{y_2}\right\} \mid x_1 \leq x_2 , y_1 \leq y_2$$
-Ud fra denne definition kan det reducere problems størrelse $R^{n'}$ nu defineres:
+Ud fra denne definition kan det reducerede problems størrelse $R^{n'}$ nu defineres:
 \begin{equation}\label{tracking:eq:inflate}
 R^{n'} = \left\{
 	\cvec{R^n_{x_1}-\omega}{R^n_{y_1}-\omega},
