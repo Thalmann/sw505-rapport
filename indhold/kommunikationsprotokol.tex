@@ -1,7 +1,7 @@
 % !TeX spellcheck = da_DK
 
 Dette afsnit beskriver kommunikationen mellem NXT og computer.
-Afsnittet beskriver de beskeder der bliver sendt frem og tilbage og de indkodes inden de sendes.
+Afsnittet beskriver de beskeder der bliver sendt frem og tilbage og hvordan de indkodes inden de sendes.
 
 \subsection{Besked}
 Beskeder vil i dette afsnit beskrives ved brug af vinklede parenteser til at indikere dele af beskeden.
@@ -11,18 +11,16 @@ En besked er opbygget på følgende måde:
 \end{equation}
 Beskedens type indkodes som strengrepræsentationen af typenummeret.
 Dette tal er enten en eller to bytes.
-Beskeder på én byte sendes fra robotten og modtages af computeren mens beskeder på to byte sendes fra computeren og modtages af robotten.
+Beskeder på én byte sendes fra robotten og modtages af computeren, hvor beskeder på to bytes sendes fra computeren og modtages af robotten.
 Beskedindholdet består af ingen eller flere bytes.
 I det næste afsnit vil de forskellige beskeder der benyttes blive beskrevet.
 
 \subsection{Besked typer}
-Alle beskederne kan ses i \cref{design:protokol_tabel}.
-\\
+I \cref{design:protokol_tabel} ses en oversigt over alle beskedtyper.
 Første kolonne fortæller hvilken talkode der benyttes til at indikere beskedens type.
 Anden og tredje kolonne fortæller henholdsvis om beskeden går fra computerens eller NXT'ens inbox eller outbox.
 De to sidste beskriver hvad beskeden indeholder og gør.
-Nedenfor er de forskellige scenarier som beskederne fra tabellen bliver brugt, samt en uddybning af indkodningen af beskedindholdet.
-
+Scenarierne beskederne fra tabellen indgår i samt en uddybning af indkodningen af beskedindholdet, står beskrevet nedenunder.
 
 \begin{figure}[H]
 \renewcommand{\arraystretch}{1.8}
@@ -44,14 +42,14 @@ Besked type & Computer & NXT & Beskrivelse & Indhold\\
 
 \subsubsection{Nuværende lokation}\label{protokol:positur}
 Denne situation forekommer når robotten skal bede om sin lokation fra computeren.
-Robotten sender en besked på formen 
+Robotten sender en besked på formen:
 \[
 < \! ''0'' \! >
 \]
 
 
-Derefter returnerer computeren en besked på formen
-\[< \! ``52'' \!><x><y><a>\]
+Derefter returnerer computeren en besked på formen:
+\[< \! ''52'' \!><x><y><a>\]
 Denne besked indeholder lokationen og dens vinkel hvor $x$ og $y$ repræsenterer lokationen og $a$ vinkelen.
 Koordinaterne fortolkes i et koordinatsystem med millimeter på akserne.
 Værdierne indkodes som koordinatværdierne repræsenteret som en streng på 7 tegn.
@@ -62,7 +60,7 @@ Ligesom koordinaterne indkodes vinklen som strengrepræsentationen af vinklen p�
 \subsubsection{Naviger til en ny lokation}\label{design:protokol_navigertilny}
 Denne situation opstår når computeren sender en besked der fortæller robotten hvor den skal køre hen.
 
-computerens besked er på formen
+Computerens besked er på formen:
  \[<\! ''50'' \!><x><y>\] 
 hvor $x$ og $y$ er koordinaterne til det punkt robotten skal køre hen til.
 Koordinaterne fortolkes i et koordinatsystem med millimeter på akserne.
@@ -71,12 +69,16 @@ Der tilføjes nuller til venstre for tallet hvis tallet er 7 tegn.
 
 \subsubsection{Nået frem til lokation}
 Denne situation forekommer når robotten er nået frem til den ønskede lokation.
-Robotten sender da en besked på formen \[<\!''1''\!>\]
+Robotten sender da en besked på formen: \[<\!''1''\!>\]
+\thilemann{For ovenstående og nedenstående kunne man godt skrive hvorfor der ikke sendes nogen besked med.}
+\thilemann{Burde tekstrepræsentationerne ikke være beskrevet med 'numre' som f.eks. ligninger?}
 
 \subsubsection{Aflæs Sensordata}
-Når computeren beder om sensor data fra robotten, sender den en besked på formen \[<\!''51''\!>\]
-Robotten foretager derefter sensormålinger og returnerer dem med en besked på formen  
+Når computeren beder om sensor data fra robotten, sender den en besked på formen: \[<\!''51''\!>\]
+Robotten foretager derefter sensormålinger og returnerer dem med en besked på formen:
 \[<\!''2''\!><s1_x> <s2_x> <s1_y> <s2_y>\]
 Sensordata består af en måling fra hver sensor før sensorerne roterer 90 grader og efter.
 $ s1_x $ og $ s2_x $ er derfor to målinger mens sensorerne står i startpositionen, mens $ s1_y $ og $ s2_y $ er to måling efter sensorerne er drejet 90 grader.
 Sensormålingerne sendes hver som én byte.
+
+\thilemann{Afrunding?}
