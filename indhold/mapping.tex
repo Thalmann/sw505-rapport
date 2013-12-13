@@ -9,10 +9,6 @@ En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
 
 En simpel illustration af et occupancy grid map for det kørselsmiljø der er opstillet for vores robot kan ses på \cref{map:approx_occupancy_grid}.
 
-
-$$\int$$
-$$\bigints$$
-
 \begin{figure}[h] % Kørselsmiljø og et occupancy grid
 \centering
 	\begin{subfigure}[b]{.45\textwidth}
@@ -90,11 +86,21 @@ Da summen af uafhængige fejlmålinger, ifølge \emph{central limit theorem} vil
 den gaussiske normalfordeling. \cite[p. 223]{ArtificialIntelligence}
 Vil det være en god approximation for robottens måleusikkerhed.
 
+For at finde en passende normalfordeling skal vi vælge en passende middelværdi og en passende standard afvigelse. 
+Vi ved at centrum, dvs. middelværdien, for fordelingen skal være målingen $z_t$.
 
-Vi kan anvende en passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{6}\big)^2)$ 
+\begin{figure}
+\centering \includegraphics[scale=.75]{NormalDist}
+\label{normaldistimg}
+\caption{Normal fordeling $\mathcal{N}(\mu,\sigma^2)$}
+\end{figure}
 
+Udfra \cref{normaldistimg} kan vi se at det vil være passende hvis $\frac{\alpha}{2}$ svarer til tre standard afvigelser. dvs.
+\begin{equation}
+	3\sigma = \frac{\alpha}{2} \implies \sigma = \frac{\alpha}{6}
+\end{equation}
 
-
+Vi kan anvende den passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{6}\big)^2)$ der ses her. 
 
 \begin{equation}
 \mathcal{N}\bigg(z_t,\bigg(\frac{\alpha}{6}\bigg)^2\bigg) = 
@@ -108,7 +114,7 @@ l_{res} = \begin{cases}
 	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	
 	
-	\eta \int_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(r_{actual} - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}r
+	\eta \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(r_{actual} - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}r
 		&\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
 
 	l_{free} &\text{ellers}	
