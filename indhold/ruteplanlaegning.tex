@@ -24,39 +24,63 @@ Der gås ud fra at robotten opererer indenfor et occupancy grid, derved vil der 
 \paragraph{En mulig destinationscelle} er en celle med høj sandsynlighed for at være ledig.
 Desuden skal et vist antal celler omkring den mulige celle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
 
-\paragraph{Kriterier for en god destination} afhænger af den information gain som robotten potentielt ville få ved at scanne i destinationen.
+\paragraph{Kriterier for en god destination} afhænger af den \textit{information gain} som robotten potentielt ville få ved at scanne i destinationen.
 Dette afgøres af synsfeltet for cellen, dvs. de celler som robotten ville opdatere ved at scanne fra cellen.
 Da vi opererer i en vinkelret verden, vil synsfeltet for en given celle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen.
 
-Hvor høj information gain der opnås, skal bestemmes ud fra sandsynlighederne der er i forvejen, for cellerne i synsfeltet.
+Hvor høj \textit{information gain} der opnås, skal bestemmes ud fra sandsynlighederne der er i forvejen, for cellerne i synsfeltet.
 Kort sagt er der bedst gain på en celle, hvor der er flest ikke-hidtil-scannede celler i synsfeltet.
 
-\section{Teori}
-\begin{description}
-\item[$C = \{ c \mid c \textnormal{ er en celle i grid'et } \}$]{}
-\item[$D = \{ c \mid c \textnormal{ er en destinationscelle}\}$]{}
-\item[$x$]{-- Robottens lokation}
-\item[$p(d) = \{ c \mid c \textnormal{ er en celle i synsfeltet for } d \}$]{}
-\end{description}
+\section{Beregning af næste målings-celle}
+Til at beregne den næste destination, hvor fra der skal foretages en måling, skal følgende bruges:
+\begin{itemize}
+\item{$C = \{ c \mid c \textnormal{ er en celle i grid'et } \}$}
+\item{$D = \{ c \mid c \textnormal{ er en destinationscelle}\}$}
+\item{$x$}
+\item{$p(d) = \{ c \mid c \textnormal{ er en celle i synsfeltet for } d \}$}
+\end{itemize}
+Hvor $C$ er mængden af alle celler der er i occupancy grid'et, $D$ er alle mulige destinationsceller, $x$ er den celle hvori robotten er og $p(d)$ er alle celler i synsfeltet for en destinationscelle $d$.
 
+\subsubsection{Beregning af \textit{information gain}}
+Første skridt er at beregne værdi for alle de mulige destinationsceller:
 \begin{equation}
 v(d) = \sum_{s \in p(d)} |0.5 - P(s)|
 \end{equation}
 
+Her er lav værdi lig med høj \textit{information gain}.
+Dette skyldes at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$, afhængigt af om den er \textit{free} eller \textit{occupied}.
+Derved er der mere værdi i at scanne fra en celle med lav værdi, da dette betyder at der er flere hidtil ikke-scannede celler i dens synsfelt.
+Dette munder ud i en mængde, bestående af en værdi for samtlige $d$:
 \begin{equation}
 V = \{ v(d) \mid d \in D \}
 \end{equation}
 
+\subsubsection{Udvælgelse af den/de celler med lavest værdi}
 \begin{equation}
 Q = \{ d \in D \mid v(d) \in \min V \}
 \end{equation}
 
+\subsubsection{Beregning af afstand til robot}
+Hvis der i $Q$ er mere end én destinationscelle med samme værdi, beregnes afstanden til robotten for samtlige af de celler:
 \begin{equation}
 A = \{ \text{dist}(x,q) \mid q \in Q \}
 \end{equation}
 
+\subsubsection{Den endelige destinationscelle}
+Til sidst findes den endelige destinationscelle, som enten er:
+\begin{itemize}
+\item{den med den laveste værdi.}
+\item{den med kortest afstand til robotten, hvis der er flere med samme laveste værdi.}
+\item{noget helt tredje hvis der slet ikke var mulige destinationsceller til at starte med.}
+\end{itemize}
 \begin{equation}
-r =  q \mid \text{dist}(x,q) \in \min A
+r = \begin{cases}
+\begin{tabular}{lr}
+$q \mid \text{dist}(x,q) \in \min A$ & $|Q| > 1$\\
+$q \in Q$ & $|Q| = 1$ \\
+$?$ & $|D| = 0$
+\end{tabular}
+\end{cases}
 \end{equation}
 
 \section{Algoritme}
