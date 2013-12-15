@@ -1,19 +1,19 @@
-I dette kapitel vil den valgte platform, \legoms, blive kort beskrevet med en begrundelse for dette valg.
-Yderligere vil der blive argumenteret for valg af API til NXT-enheden.
+I dette kapitel vil den valgte platform, \legoms, kort blive beskrevet med en begrundelse for dette valg.
+Yderligere argumenteres der for valg af API til NXT-enheden.
 
-\section{Lego Mindstorms}\label{lego:mindstorms-nxt}
+\section{Lego$^{\textrm{\scriptsize\textregistered}}$ Mindstorms$^{\textrm{\scriptsize\textregistered}}$}\label{lego:mindstorms-nxt}
 \legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter i \lego-klodser.
 
-Til at bygge disse robotter er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser.
+Til at bygge disse robotter, er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser.
 Ved brug af aktuatorerne kan robotten reagere på disse inputs.
 
-Ud over de originale \lego dele er der også tredjeparts forhandlere, som har et udbud af andre sensorer og aktuatorer. \thilemann{Enten bør denne linje fjernes, eller også skal vi skrive om sådanne sensorer?}
+Ud over de originale \lego dele, er der også tredjeparts producenter, som har et udbud af andre typer sensorer og aktuatorer, der kan samarbejde med \legoms.
 
 \subsection{NXT}
-Denne sektion er baseret på \cite{nxt}, hvilket omhandler NXT 2.0, som er den version der bruges i dette projekt.
+Denne sektion er baseret på \cite{nxt}, hvilket omhandler NXT 2.0, som er den version, der bruges i dette projekt.
 NXT Intelligent Brick (oftest kaldt blot 'NXT' eller 'brick') er hjernen i \legoms robotten.
-Det er den der står for at modtage og behandle input fra sensorer samt styre de monterede aktuatorer.
-Et billede af NXT 2.0 kan ses i \cref{platform:nxt}.
+Det er den, der står for at modtage og behandle input fra sensorer samt styre de monterede aktuatorer.
+Et billede af NXT 2.0 kan ses på \cref{platform:nxt}.
 
 \begin{figure}
 \begin{center}
@@ -24,10 +24,10 @@ Et billede af NXT 2.0 kan ses i \cref{platform:nxt}.
 \end{figure}
 
 \subsubsection{Porte}
-NXT'en har 3 motor porte (kaldet A, B og C) og 4 sensor porte (kaldet 1, 2, 3 og 4).
+NXT'en har 3 motorporte (kaldet A, B og C) og 4 sensorporte (kaldet 1, 2, 3 og 4).
 
 \subsubsection{Tilslutningsmuligheder}
-Der kan kommunikeres med NXT'en ved at tilslutte den til en anden enhed med USB-kabel eller Bluetooth\textregistered.
+Der kan kommunikeres med NXT'en ved at tilslutte den til en anden enhed med USB-kabel eller Bluetooth.
 
 \subsubsection{Feedback}
 Til output har NXT'en en 100 x 64 pixel LCD display samt en 8 kHz højttaler.
@@ -62,14 +62,14 @@ Højttaler & 8 kHz lyd. 8-bit lydkanal og 2-16 kHz sample rate\\
 Strømkilde & 6 AA batteries\\
 \hline
 \end{tabular}
-\caption{LEGO MINDSTORMS NXT tekniske specifikationer}
+\caption{\legoms NXT tekniske specifikationer.}
 \label{mindstorms:tekniske_spec}
 \end{figure}
 
 
-\subsection{Valg af \legoms}
+\subsection{\legoms}
 Der er mange gode grunde til at vælge \legoms.
-Her er givet fire overordnede punkter, der vil blive gennemgået efterfølgende:
+Her er givet fire overordnede punkter, der efterfølgende vil blive gennemgået:
 
 \begin{itemize}
 \item{Tilgængelighed}
@@ -79,49 +79,50 @@ Her er givet fire overordnede punkter, der vil blive gennemgået efterfølgende:
 \end{itemize}
 
 \subsubsection{Tilgængelighed}
-Grundet at \lego (inkl. \legoms) er ment til almindelige brugere, er det masseproduceret og kan derved købes forholdsvist billigt og i helt almindelige butikker (legetøjsforretninger og ofte også supermarkeder).
+Grundet at \lego (inkl. \legoms) er ment til almindelige brugere er, at det masseproduceret og derved kan købes forholdsvist billigt og i helt almindelige butikker (legetøjsforretninger og ofte også supermarkeder).
 
 \subsubsection{Nemt at gå til}
-Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms sensorer/aktautorer gør det nemt at lave en konstruktion og derefter modificere den så den udfører sin opgave tilfredsstillende.
+Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms sensorer/aktautorer gør det nemt at lave en konstruktion og derefter modificere den, så den udfører sin opgave tilfredsstillende.
 
-Denne høje versatilitet gør at \lego er perfekt til en prototype-orienteret fremgangsmåde for bygning af robotter.
+Denne høje versatilitet gør, at \lego er perfekt til en prototype-orienteret fremgangsmåde for bygning af robotter.
 
 \subsubsection{Stort udvalg af sensorer}
-På grund af det store udvalg af sensorer kan man bygge robotter der kan løse et væld af opgaver.
-Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udskifte en sensor.
+På grund af det store udvalg af sensorer, kan man bygge robotter. der kan løse et væld af opgaver.
+Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udskifte en sensor, hvis en type ikke virker tilfredsstillende.
 
 \subsubsection{Mange muligheder ift. styring}
-Her menes der både overordnet den måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
-NXT'en kan udstyres med brugerdefineret firmware, der giver utroligt mange muligheder (og dermed også fleksibilitet) ift. hvordan den kan styres.
+Fleksibiliteten i forhold til styring er både overordnet den måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
+NXT'en kan udstyres med brugerdefineret firmware, der kan tilføje ekstra funktionalitet i forhold til \legos egen.
 
 I afsnittet herefter vil der blive argumenteret for valg af API, hvor API her skal forstås som måden hvorpå robotten skal styres.
 
-\section{Valg af NXT API}\label{nxt_api}
-Den ideelle løsning ville være at vælge et system, hvor robotten styrer alt; både navigation og indsamling af sensor-målinger og selve kortlægningsdelen.
-Dog er der begrænset med plads til data på NXT'en (256 KB flash, 64 KB RAM), samtidig med at dens regnekraft heller ikke er så god (32-bit ARM7 microcontroller).\thilemann{Måske skulle der nævnes hvor langsom den er?}
-På grund af robottens hardwaremæssige begrænsninger og at problemformuleringen siger at robotten til enhver tid skal kende sin position, er det derfor nødvendigt at 'outsource' visse opgaver til en PC.
-Dette ses blandt andet ved at der benyttes en Microsoft Kinect til at lokalisere robotten, hvilket gør en PC påkrævet for at bearbejde billeddata fra Kinecten for netop at fortælle robotten dens faktiske position.
+\section{NXT API}\label{nxt_api}
+Den ideelle løsning ville være at vælge et system, hvor robotten styrer alt; både navigation og indsamling af sensormålinger samt selve kortlægningsdelen.
+Dog er der begrænset med plads til data på NXT'en samtidig med, at den er begrænset af dens regnekraft (jævnfør \cref{mindstorms:tekniske_spec}).
+På grund af robottens hardwaremæssige begrænsninger og at problemformuleringen siger, at robotten til enhver tid skal kende sin position, er det derfor nødvendigt at 'outsource' visse opgaver til en PC.
+Dette ses blandt andet ved, at der benyttes en Microsoft Kinect til at lokalisere robotten, hvilket gør en PC påkrævet for at bearbejde billeddata fra Kinecten, for netop at fortælle robotten dens faktiske position.
 
-Grundet disse begrænsninger og givet problemet der skal løses, ville der sagtens kunne laves et to-delt system.
+Grundet disse begrænsninger og givet problemet der skal løses, er det muligt at lave et to-delt system.
 Den ene del bestående af selve robotten, som skal navigere sig rundt i verden og bruge sine sensorer til at opfatte verden omkring sig.
 Den anden del, som består af selve kortlægningen, kræver mere plads til data, samt større beregningskraft.
 
 \subsubsection*{Overordnet valg}
-For at kunne overholde ovenstående, skal der kunne laves et to-delt stykke software, hvor den ene del kører på robotten og den anden del på en stærkere platform, i vores tilfælde en PC.
+For at overholde ovenstående, skal der laves et to-delt stykke software, hvor den ene del kører på robotten og den anden del på en stærkere platform, i vores tilfælde en PC.
 
-Det der så skal vælges nu, er hvordan det software der skal køre på robotten skal laves, samt det software der skal køres på PC'en.
-Vigtigt er at det skal være muligt for den ene del at kommunikere med den anden, da der skal kunne sendes kommandoer til robotten fra PC'en, samt at PC'en skal kunne modtage sensor-input fra robotten.
+Dernæst vælges hvordan det software, der skal køre på henholdsvis robotten og på PC'en skal laves.
+Vigtigt er, at det skal være muligt for den ene del at kommunikere med den anden, da der skal kunne sendes kommandoer til robotten fra PC'en, samt at PC'en skal kunne modtage sensormålinger fra robotten.
+\thilemann{Louise siger at ovenstående sætning er selvmodsigende - skal delene kunne komunikere med hinanden som der står efter kommaet, eller er den kun den ene del der skal kommunikere med den anden som sætningen starter med? Alternativt kunne der stå: Vigtigt er, at det skal være muligt for delene at kunne kommunikere med hinanden, da der...}
 
 \subsubsection*{NXC}
-Til det software der skal køres på robotten har vi valgt NXC, da det er simpelt og dækker alle behov.
-NXC-programmer skrives i et C-lignende sprog, hvorefter disse programmer kan sendes til NXT'en og køres direkte der på.
+Til det software, der skal køre på robotten, har vi valgt NXC, da det er simpelt og dækker alle behov.
+NXC-programmer skrives i et C-lignende sprog, som kan sendes til NXT'en og køres direkte der på.
 Der er også stor mulighed for kommunikation mellem NXC-programmer og eksterne programmer.
-Dette gør det muligt at skrive et program til NXC'en, hvorefter der kan udføres forskellige handlinger afhængig af hvad PC'en beder den om.
+Dette gør det muligt at skrive et program til NXC'en, hvorefter der kan udføres forskellige handlinger, afhængig af hvad PC'en beder den om.
 Der vil blive gået mere i dybden med NXC i \cref{nxc}.
 
 \subsubsection*{MindSqualls}
-Til det software der skal køres på PC, altså det der skal sørge for selve opdateringen og beregningen af kort, har vi valgt \mindsqualls.
-\mindsqualls er et .NET bibliotek skrevet i \csharp, hvori det er muligt at kommunikere med en NXT, både ved at sende direkte kommandoer eller via abstraktion over NXTens aktuatorer/sensorer opfattet som objekter.
+Til det software, der skal køres på PC, altså det der skal sørge for selve opdateringen og beregningen af kort, har vi valgt \mindsqualls.
+\mindsqualls er et .NET bibliotek skrevet i \csharp, hvori det er muligt at kommunikere med en NXT, både ved at sende direkte kommandoer eller via abstraktion over NXT'ens aktuatorer/sensorer opfattet som objekter.
 Valget faldt på \mindsqualls da dette var simpelt og dækkede alle behov ift. kommunikation med NXT.
-Desuden har gruppen stor erfaring med \csharp og Visual Studio, hvilket også ses som værende en stor fordel.
+Desuden har gruppen stor erfaring med \csharp og Visual Studio, hvilket også ses som en stor fordel.
 \mindsqualls vil blive uddybet i \cref{mindsqualls}.

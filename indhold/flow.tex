@@ -23,11 +23,12 @@
 %\item Der var besked i robottens inbox
 %\end{enumerate}
 
-For at vise hvordan arkitekturen(\cref{arkitektur}) benyttes, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen, ikke mindst kommunikationen mellem robot og PC.
+For at vise hvordan arkitekturen (\cref{arkitektur}) \thilemann{mere specifik henvisning i stedet for til kapitlet selv?} benyttes, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen, ikke mindst kommunikationen mellem robot og PC.
 
 \subsection{Eksempel: Robotten anmoder om sin positur}
-Når robotten har brug for at kende dens positur, hvis den for eksempel er i gang med at navigere til et punkt, sker der kald i gennem samtlige lag.
+Når robotten har brug for at kende dens positur, hvis den for eksempel er i gang med at navigere til et punkt, sker der kald igennem samtlige lag.
 Den overordnede procedure er som følgende:
+\thilemann{lstinline}
 \begin{enumerate}
 \item{Robotten sender anmodning om sin positur}
 \item{RobotInterface afventer besked fra robotten}
@@ -45,21 +46,21 @@ Det overordnede flow kan ses i tilstand-sekvens-diagrammet i \cref{flow:ssd}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{arkitektur/ssd}
-\caption{Tilstand-sekvens-diagram for robottens anmodning om positur}
+\caption{Tilstand-sekvens-diagram for robottens anmodning om positur.}
 \label{flow:ssd}
 \end{figure}
 
 \subsubsection{Robotten sender anmodning om sin positur}
-Det første der sker er at robotten lægger beskeden \lstinline[style=c]!OUTGOING_WHERE_AM_I! i \lstinline[style=c]!OUTBOX!:
+Det første der sker er, at robotten lægger beskeden \lstinline[style=c]!OUTGOING_WHERE_AM_I! i \lstinline[style=c]!OUTBOX!:
 
-\begin{lstlisting}[style=csmall,label=lst:whereami_request,caption=Robotten sender anmodning om positur]
+\begin{lstlisting}[style=csmall,label=lst:whereami_request,caption=Robotten sender anmodning om positur.]
 string msg = NumToStr(OUTGOING_WHERE_AM_I);
 SendMessage(OUTBOX, msg);
 \end{lstlisting}
 
 Herefter går robotten i gang med kontinuerligt at checke \lstinline[style=c]!INBOX! indtil beskeden med typen \lstinline[style=c]!INCOMING_GET_POS! er at finde:
 
-\begin{lstlisting}[style=csmall,label=lst:whereami_response,caption=Robotten venter på svar]
+\begin{lstlisting}[style=csmall,label=lst:whereami_response,caption=Robotten venter på svar.]
 while(true) {
    ReceiveRemoteString(INBOX, true, in);
    if (StrLen(in) > 0) {
@@ -73,8 +74,8 @@ while(true) {
 \subsubsection{RobotInterface afventer besked fra robotten}
 Håndtering af robottens beskeder/anmodninger sker i \lstinline[style=csharp]!RobotInterface!.
 Her kører en seperat tråd med funktionen \lstinline[style=csharp]!listener()!:
-
-\begin{lstlisting}[style=csharpsmall,label=lst:listener,caption=listener() i RobotInterface]
+\thilemann{ret og tjek at vi er konsekvente med lstinlne.}
+\begin{lstlisting}[style=csharpsmall,label=lst:listener,caption=listener() i RobotInterface.]
 private void listener()
 {
     while (RUNNING)
@@ -98,9 +99,9 @@ private void listener()
 
 Tråden med \lstinline[style=csharp]!listener()! sættes i gang når PC programmet startes.
 
-I \cref{listener:checkformessages} i \cref{lst:listener} kontrolleres det om der findes besked i \lstinline[style=csharp]!PC_INBOX! af de indgående besked-typer:
+I \cref{listener:checkformessages} i \cref{lst:listener} kontrolleres det, om der findes besked i \lstinline[style=csharp]!PC_INBOX! af de indgående besked-typer:
 
-\begin{lstlisting}[style=csharpsmall,label=lst:checkformessages,caption=checkForMessages() i RobotInterface]
+\begin{lstlisting}[style=csharpsmall,label=lst:checkformessages,caption=checkForMessages() i RobotInterface.]
 private bool checkForMessages()
 {
     return postman.HasMessageArrived(NXTMessageType.RobotRequestsLocation)
@@ -110,7 +111,7 @@ private bool checkForMessages()
 
 Hvis der findes besked, hentes denne via \lstinline[style=csharp]!RetrieveMessage()! i \lstinline[style=csharp]!NXTPostman! (se \cref{listener:retrievemessage} i \cref{lst:listener}), som bruger Bluetooth-forbindelsen i \lstinline[style=csharp]!CommLink! til at checke efter nye beskeder på i robottens \lstinline[style=c]!OUTBOX!:
 
-\begin{lstlisting}[style=csharpsmall,label=lst:postman,caption=RetrieveMessage i NXTPostman]
+\begin{lstlisting}[style=csharpsmall,label=lst:postman,caption=RetrieveMessage i NXTPostman.]
 public NXTMessage RetrieveMessage()
 {
     try
@@ -124,7 +125,7 @@ public NXTMessage RetrieveMessage()
 
 Når beskeden \lstinline[style=csharp]!NXTMessageType.RobotRequestsLocation! findes i \lstinline[style=csharp]!PC_INBOX! (se \cref{listener:case} i \cref{lst:listener}) udføres den pågældende metode \lstinline[style=csharp]!RobotRequestLocation()!:
 
-\begin{lstlisting}[style=csharpsmall,label=lst:robotrequestslocation,caption=RobotRequestsLocation() i RobotInterface]
+\begin{lstlisting}[style=csharpsmall,label=lst:robotrequestslocation,caption=RobotRequestsLocation() i RobotInterface.]
 private void RobotRequestLocation()
 {
     IPose pose = locCon.RobotPose; (*\label{robotrequestslocation:pose}*)
@@ -146,7 +147,7 @@ LocationControl får den senest opdateret positur ved at aflæse en property i \
 RobotInterface har nu det seneste data om robottens positur.
 Den bruger så \lstinline[style=csharp]!NXTPostman! (se \cref{robotrequestslocation:send} i \cref{lst:robotrequestslocation}) til at lægge beskeden (først encodes beskeden jf. \cref{protokol:positur}) af type \lstinline[style=csharp]!NXTMessageType.SendPosition! i \lstinline[style=csharp]!PC_OUTBOX!, som er robottens \lstinline[style=c]!INBOX!:
 
-\begin{lstlisting}[style=csharpsmall,label=lst:sendmessage,caption=SendMessage i NXTPostman]
+\begin{lstlisting}[style=csharpsmall,label=lst:sendmessage,caption=SendMessage i NXTPostman.]
 public void SendMessage(NXTMessage msg)
 {
     string toSendMessage = String.Format("{0}{1}", (byte)msg.MessageType, msg.EncodedMsg);
@@ -155,4 +156,4 @@ public void SendMessage(NXTMessage msg)
 \end{lstlisting}
 
 \subsubsection{Robotten modtager svar indeholdende den ny positur}
-Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX! har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur, som er kroppen af if-sætningen i \cref{whereami_request:if} i \cref{lst:whereami_request} (ikke vist).
+Robotten, som ventede på besked ved kontinuerligt at checke sin \lstinline[style=c]!INBOX!, har nu fået en besked af typen \lstinline[style=c]!INCOMING_GET_POS! og kan derved opdatere sin interne repræsentation af dens nuværende positur, som er kroppen af if-sætningen i \cref{whereami_request:if} i \cref{lst:whereami_request} (ikke vist).

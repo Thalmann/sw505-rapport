@@ -1,14 +1,14 @@
 \section{Omregning fra punkt i billede til reelt punkt}\label{lokalisering:punktomregning}
-Det billede der fås ind fra kameraet, består af en mængde pixels.
+Det billede, der fås fra kameraet, består af en mængde pixels.
 Robottens centrum, og derved lokation, vil være i præcist én pixel.
 For at robotten skal kunne bruge denne til at navigere i den virkelige verden, er det nødvendigt at omregne pixel(-koordinat) til reelt koordinat.
 
 \subsection{Ensvinklede trekanter}
-Den overordnede idé er at bruge reglen om ensvinklede trekanter, da det passer på situationen som kan ses i \cref{fig:kameratrekant}.
-Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinect'en er det $57^\circ$ i bredden og $43^\circ$ i højden.
-$v$ er blot med for at vise at der er tale om ensvinklede trekanter.
-$x_1$ er størrelsen af den givne dimension for det billede der dannes af Kinect'en.
-$x_2$ svarer til $x_1$, blot den reelle størrelse af det billede der gives.
+Den overordnede tanke er, at bruge reglen om ensvinklede trekanter, da det passer på situationen, som kan ses på \cref{fig:kameratrekant}.
+Her er $v$ den synsvinkel som kameraet har i den givne dimension; for Kinecten er det $57^\circ$ i bredden og $43^\circ$ i højden.
+$v$ er blot med for at vise, at der er tale om ensvinklede trekanter.
+$x_1$ er størrelsen af den givne dimension for det billede der dannes af Kinecten.
+$x_2$ svarer til $x_1$, blot den reelle størrelse af det billede, der gives.
 \mikael{Der er underlige sætninger her der skal skrives om}
 
 \begin{figure}[h]
@@ -28,22 +28,23 @@ $x_2$ svarer til $x_1$, blot den reelle størrelse af det billede der gives.
 \draw (A2) -- (C2) node [midway,below] {$x_1$};
 \draw ($(B) + (-110:0.55)$) arc (-110:-70:0.55) node [right] {$v$};
 \end{tikzpicture}
-\caption{Situationen med de kendte variable}
+\caption{Situationen med de kendte variable.}
 \label{fig:kameratrekant}
 \end{figure}
 
 \begin{description}
 \item[Sætning:]{Hvis alle vinkler i to trekanter er parvis lige store, er siderne parvis proportionale.}
 \end{description}
-Som det kan ses i \cref{fig:udregningstrekant} er der tale om netop sådan en trekant i vores situation.
-Der tegnes en højde i trekanten så midten i trekanten kan findes. Midten i trekanten får koordinatet $(0,0)$, derved går en dimension fra $-\frac{1}{2}x$ til $+\frac{1}{2}x$.
+Som det kan ses på \cref{fig:udregningstrekant} er der tale om netop sådan en trekant i vores situation.
+Der tegnes en højde i trekanten, således at midten findes, og denne tildeles koordinatet $(0,0)$. 
+Derved går en dimension fra $-\frac{1}{2}x$ til $+\frac{1}{2}x$.
 
 \subsection{Beregning}
 For at finde proportionalitetsfaktoren deles en vilkårlig side af den store trekant med den tilsvarende side fra den lille trekant.
-Her vil proportionalitetsfaktoren derved blive $f = \frac{\frac{1}{2}x_2}{\frac{1}{2}x_1}$.
+Her vil proportionalitetsfaktoren blive $f = \frac{\frac{1}{2}x_2}{\frac{1}{2}x_1}$.
 
-For at omregne et pixel-koordinat $p = (p_1, p_2)$ om til et reelt koordinat, skal der blot påregnes proportionalitetsfaktoren.
-Så derved får vi vores reelle koordinat $k = f \cdot p$.
+For at omregne et pixel-koordinat $p = (p_1, p_2)$ om til et reelt koordinat, skal proportionalitetsfaktoren blot påregnes.
+Derved får vi vores reelle koordinat $k = f \cdot p$.
 For vores sitation er der 2 dimensioner; længde og bredde: \begin{equation*}
 (k_1,k_2) = (f \cdot p_1, f \cdot p_2)
 \end{equation*}
@@ -73,6 +74,6 @@ For vores sitation er der 2 dimensioner; længde og bredde: \begin{equation*}
 \filldraw (0.63,3) circle (0.05cm) node [left,yshift=-0.3cm] {$p$};
 \filldraw (1.25,0) circle (0.05cm) node [left,yshift=-0.3cm] {$k$};
 \end{tikzpicture}
-\caption{Selve omregningen}
+\caption{Selve omregningen.}
 \label{fig:udregningstrekant}
 \end{figure}

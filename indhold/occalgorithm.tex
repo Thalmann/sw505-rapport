@@ -1,9 +1,9 @@
 % !TeX spellcheck = da_DK
 \section{Occupancy Grid algoritmen}
-Dette afsnit vil gennemgå algoritmen der skal opdatere et occupancy grid.
+Dette afsnit vil gennemgå algoritmen, der skal opdatere et occupancy grid.
 Algoritmen er taget fra \cite[p.~xxx]{probabilisticRobotics}
 \stefan{indsæt sidehenvisning fra bogen til 9.2}
-Formålet med \textit{occupancy grid} algoritmen er at beregne	et nyt kort ud fra et kort og en samling data:
+Formålet med \textit{occupancy grid} algoritmen er, at beregne	et nyt kort ud fra et kort og en samling data:
 
 \begin{equation}
 p(m \mid z_{1:t}, x_{1:t})
@@ -20,15 +20,15 @@ m = \sum_{i}^{} m_i
 \end{equation}
 
 Hver celle er tilknyttet en binær værdi der betegner hvorvidt cellen er \textit{occupied} eller \textit{free}.
-Værdien 1 betegner \textit{occupied} mens 0 betegner \textit{free}.
+Værdien 1 betegner \textit{occupied}, mens 0 betegner \textit{free}.
 
-For at begrænse mængden af celler der skal beregnes ved en opdatering af et occupancy grid nedbrydes problemet til en mængde delproblemer af formen
+For at begrænse mængden af celler, der skal beregnes ved en opdatering af et occupancy grid, nedbrydes problemet til en mængde delproblemer af formen
 
 \begin{equation}
 p(m_i \mid z_{1:t}, x_{1:t})
 \end{equation} 
 
-Da der nu er et problem af denne type for hver celle kan man nøjes med kun at opdatere de celler der er ny information om.
+Da der nu er et problem af denne type for hver celle, kan man nøjes med kun at opdatere de celler, der er ny information om.
 
 Som i det originale binære filter (se evt. \cref{bayes_binaerfiltre}) benyttes log odds repræsentationen til at udtrykke om en celle er optaget
 
@@ -42,9 +42,9 @@ Sandsynligheden findes ud fra log odds repræsentationen ved
 p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} }
 \end{equation} 
 
-\Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler der er relevante for en aktuel sensormåling. 
-Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}. 
-Værdien $ l_0 $ er den a priori værdi for om cellen er optaget repræsenteret som log odds
+\Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler, der er relevante for en aktuel sensormåling. 
+Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}.\thilemann{Dobbelttjek lige at denne henvisning er korrekt}
+Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds
 
 \begin{equation}
   l_0 =  log \frac{p(m_i = 1)}{p(m_i = 0)} = log \frac{p(m_i)}{1- p(m_i)}
@@ -63,7 +63,7 @@ OccupancyGridMapping( \{$ l_{t-1,i} $ \}, $ x_t $, $ z_t $):
 { $ l_{t,i} = l_{t-1,i}  $\\ }
 }
 \Return {$ \{l_{t,i}\} $}
-\caption{Occupancy grid opdateringsalgoritmen}\label{occupancygrid:alg}
+\caption{Occupancy grid opdateringsalgoritmen.}\label{occupancygrid:alg}
 \end{algorithm}
 
 

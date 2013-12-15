@@ -2,7 +2,7 @@
 
 \section{Beskrivelse af API'er}
 
-I dette afsnit vil de API'er der er valgt i \cref{nxt_api} blive beskrevet.
+I dette afsnit vil de API'er, der er valgt i \cref{nxt_api}, blive beskrevet.
 
 \subsection{MindSqualls}\label{mindsqualls}
 \mindsqualls er et .NET bibliotek til \legos NXT robotter.
@@ -12,8 +12,8 @@ Biblioteket er skrevet i \csharp og kan dermed anvendes af alle de .NET kompatib
 \subsubsection{Kommunikation}
 Kommunikationen fra Mindsqualls til NXT enheden sker igennem klassen \lstinline!NxtCommunicationProtocol! som findes i en \lstinline!McNxtBrick!. 
 En \lstinline!McNxtBrick! er en abstraktion over hele NXT brick enheden. 
-Denne kan således også styre motorer og sensor direkte, men da dette projekt håndterer al kørsel og sensormåling på robotten er kun kommunikationsprotokollen nødvendig.
-\lstinline!NxtCommunicationProtocol! indeholder metoder til at sende og modtage beskeder. 
+Denne kan således også styre motorer og sensorer direkte, men da dette projekt håndterer al kørsel og sensormåling på robotten, er kun kommunikationsprotokollen nødvendig.
+\lstinline!NxtCommunicationProtocol! indeholder metoder til at sende og modtage beskeder.\thilemann{Styles på lstinline?}
 Metoderne til dette er:
 
 \begin{itemize}
@@ -21,23 +21,24 @@ Metoderne til dette er:
 \item MessageReadToBytes(NxtMailbox2 remoteInboxNo, NxtMailbox localInboxNo, bool remove)
 \end{itemize}
 
-\lstinline!NxtMailBox! er en enumeration type der indeholder de forskellige mailboxes der er tilgængelige på NXT enheden.
+\lstinline!NxtMailBox! er en enumeration type, der indeholder de forskellige mailboxes, der er tilgængelige på NXT enheden.
 
 Brugen af MessageWrite kan ses på \cref{messagewrite} hvor en streng sendes til outboxen \lstinline!PC_OUT!.
-CommunicationBrick er her en \lstinline!McNxtBrick! og CommLink er en property der returnerer den \lstinline!NxtCommunicationProtocol! der er tilknyttet CommunicationBrick 
+CommunicationBrick er her en \lstinline!McNxtBrick! og CommLink er en property der returnerer den \lstinline!NxtCommunicationProtocol!, der er tilknyttet CommunicationBrick 
 
-\begin{lstlisting}[style=c,label=messagewrite, caption={Brug af MessageWrite}]
+\begin{lstlisting}[style=c,label=messagewrite, caption={Brug af MessageWrite.}]
 public void SendMessage(string s)
 {
   CommunicationBrick.CommLink.MessageWrite(PC_OUTBOX, s);
 }
 \end{lstlisting}
+\thilemann{Lav "Listing" om til kodeeksempel.}
 
 Brugen af MessageReadToBytes kan ses på \cref
 {messageread}.
 Her kigger CommLink i inboxen \lstinline!PC_INBOX!, og hvis der er en besked returneres denne som et byte array. 
 Hvis der ikke er en besked i inboxen smides en \lstinline!NxtCommunicationProtocolException! exception.
 
-\begin{lstlisting}[style=c,label=messageread, caption={Brug af MessageReadToBytes}]
+\begin{lstlisting}[style=c,label=messageread, caption={Brug af MessageReadToBytes.}]
 byte[] msg = CommunicationBrick.CommLink.MessageReadToBytes(PC_INBOX, NxtMailbox.Box0, true);
 \end{lstlisting}

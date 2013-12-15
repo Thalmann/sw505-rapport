@@ -12,7 +12,27 @@
 	\RequirePackage{xcolor} % [dvipsnames] 
 	
 % Allows page-links in pdf file
-\usepackage[colorlinks=true]{hyperref}
+\usepackage{hyperref}
+\hypersetup{
+% Uncomment the line below to remove all links (to references, figures, tables, etc)
+%draft, 
+%colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,
+% Uncomment the line below if you want to have black links (e.g. for printing black and white)
+colorlinks=true, linktocpage=true, pdfborder={0 0 0}, 
+pdfstartpage=3, pdfstartview=FitV, hypertexnames=true, pdfhighlight=/O, 
+breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines, plainpages=false,
+bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,
+urlcolor=Blue, linkcolor=RoyalBlue, citecolor=Green,
+%------------------------------------------------
+% PDF file meta-information
+%pdftitle={\myTitle},
+%pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},
+%pdfsubject={},
+%pdfkeywords={},
+%pdfcreator={pdfLaTeX},
+%pdfproducer={LaTeX with hyperref and classicthesis}
+%------------------------------------------------
+} 
 
 \usepackage{pdfpages}
 % Todo notes package and commands
