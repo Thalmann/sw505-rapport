@@ -1,10 +1,11 @@
+\thilemann{Kapitel 7 hedder også Mapping + indledning mangler}
 \section{Metode til kortlægning}
-Behovet for at fremskaffe et kort over en robots omgivelser vil i den ene eller anden forstand altid være påkrævet før robotten er i stand til at interagere med det miljø den er placeret i.
-Det kan f.eks. være et stort udendørs areal man ønsker at bygge et kort over, eller f.eks. robottens eget syn på den verden hvori den bevæger sig.
+Behovet for at fremskaffe et kort over en robots omgivelser vil i den ene eller anden forstand altid være påkrævet før robotten er i stand til at interagere med det miljø, den er placeret i.
+Det kan fx være et stort udendørs areal man ønsker at bygge et kort over, eller f.eks. robottens eget syn på den verden, hvori den bevæger sig.
 Til at kortlægge vælges en algoritme kaldet occupancy grid. 
 
 \subsection{Occupancy grid}
-\textit{Occupancy grid} er en familie af algoritmer som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
+\textit{Occupancy grid} er en familie af algoritmer, som gør det muligt at generere konsistente kort ud fra målinger med usikkerhed og støj (upræcise sensor målinger).
 Et \textit{occupancy grid} opdeler kortet i celler og tildeler en binær tilfældig variabel til hver celle.
 Værdien af disse variabler repræsenterer sandsynligheden for at den pågældende celle er farbar eller ej.
 Ved at måle rundt omkring robotten gentagne gange opdateres sandsynlighederne og resulterer til sidst i et kort over området.

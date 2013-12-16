@@ -1,7 +1,7 @@
 \subsection{NXC}\label{nxc}
-Til at programmere robotten har vi valgt at benytte NXC, et programmeringssprog designet til NXT robotten. 
+Til at programmere robotten \thilemann{robotten? der menes vel bricken?} har vi valgt at benytte NXC; et programmeringssprog designet til NXT robotten. 
 Brugen af NXC til at styre robotten vil blive beskrevet her.\cite{NXC}
-Desuden bruges Enhanced Firmware, for at få adgang til trigonometriske funktioner som er nødvendige for projektet.\cite{enhanced_firmware}
+Desuden bruges Enhanced Firmware, for at få adgang til trigonometriske funktioner, som er nødvendige for projektet.\cite{enhanced_firmware}
 
 \subsubsection{NXC sproget}
 NXC har en syntax der minder meget om C syntax. 
@@ -16,7 +16,7 @@ Motorne i port A og C instrueres til at køre med 75 \% hastighed i linje 4 med 
 Der findes tilsvarende en \lstinline[style=c]!OnRev! til at køre baglæns.
 Motoren kører indtil der trykkes på touch sensoren, hvorefter \lstinline[style=c]!Off! kaldes for at standse motorerne.
 
-\begin{lstlisting}[style=c,label=nxc:sensors, caption={Brug af motorer og sensorer}]
+\begin{lstlisting}[style=c,label=nxc:sensors, caption={Brug af motorer og sensorer.}]
 task main()
 {
  SetSensor(IN_1,SENSOR_TOUCH);
@@ -27,7 +27,7 @@ task main()
 \end{lstlisting}
 
 \subsubsection{Tasks}
-Til at udnytte at NXT robotten understøtter multithreading findes der i NXC et \lstinline[style=c]!task! keyword.
+Til at udnytte at NXT robotten understøtter multithreading, findes der i NXC et \lstinline[style=c]!task! keyword.
 Et NXC program består af maksimalt 255 tasks, der hver har et unikt navn. 
 Der skal altid findes en \lstinline[style=c]!Main! task, da denne køres først.
 Main task'en skal terminere før andre tasks kan køres, og tasks skal enten køres eksplicit eller planlægges (schedules).
@@ -60,7 +60,7 @@ Stopper den angivne task
 Der er i sproget indbygget en \lstinline[style=c]!mutex! datatype til brug ved samtidig programmering, samt en \lstinline[style=c]!Acquire! og en \lstinline[style=c]!Release! funktion.
 Et eksempel på brug af mutex kan ses i \cref{nxc:mutex}
 
-\begin{lstlisting}[style=c,label=nxc:mutex, caption={Eksempel på brug af mutex}]
+\begin{lstlisting}[style=c,label=nxc:mutex, caption={Eksempel på brug af mutex.}]
 mutex moveMutex;
 
 task move_square()
@@ -96,14 +96,14 @@ task main()
 \end{lstlisting}
 
 \subsubsection{Kommunikation med PC}
-Da der skal indgå kommunikation med en Kinect sensor er det nødvendigt at kunne kommunikere med en PC fra NXT'en.
-Til kommunikation via bluetooth findes der på NXT et antal inboxe og outboxe. 
-Disse bruges til at sende og modtage beskeder.
+Da der skal kommunikeres med en Kinect sensor er det nødvendigt at kunne kommunikere med en PC fra NXT'en.\thilemann{Er dette første gang kinect nævnes? Hvis ja, så er den endnu ikke introduceret.}
+Til kommunikation via Bluetooth findes der på NXT et antal inboxe og outboxe. 
+Disse anvendes til at sende og modtage beskeder.
 Et eksempel på at modtage en besked kan ses i \cref{nxc:receive}.
 \lstinline[style=c]|ReceiveRemoteString| bruges til at kigge om der er en ny besked i \lstinline[style=c]!INBOX 5!.
-Denne bliver fjernet fra inboxen hvis det andet parameter er \lstinline[style=c]|true|, og beskeden bliver læst over i strengen \lstinline[style=c]|in|.
+Denne bliver fjernet fra inboxen, hvis det andet parameter er \lstinline[style=c]|true|, og beskeden bliver læst over i strengen \lstinline[style=c]|in|.
 
-\begin{lstlisting}[style=c,label=nxc:receive,caption={Et eksempel på at modtage beskeder over bluetooth}]
+\begin{lstlisting}[style=c,label=nxc:receive,caption={Et eksempel på at modtage beskeder over Bluetooth.}]
 #define INBOX 5
 #define OUTBOX 6
 
@@ -123,7 +123,7 @@ while(true){
 I \cref{nxc:receive-mindsqualls} er den tilhørende kode i \mindsqualls, der afsender en besked.
 Først gemmes beskeden i en streng og derefter afsendes beskeden via \lstinline[style=csharp]!NxtCommunicationProtocol! klassens \lstinline[style=csharp]!MessageWrite! funktion.
 
-\begin{lstlisting}[style=c,breaklines=true, label=nxc:receive-mindsqualls,caption={\mindsqualls kode der afsender en besked}]
+\begin{lstlisting}[style=c,breaklines=true, label=nxc:receive-mindsqualls,caption={\mindsqualls kode der afsender en besked.}]
 private const NxtMailbox2 PC_INBOX = NxtMailbox2.Box6;
 private const NxtMailbox PC_OUTBOX = NxtMailbox.Box5;
 
@@ -134,20 +134,20 @@ public static void NxtTone(NxtCommunicationProtocol commLink, int tone)
 }
 \end{lstlisting}
 
-Afsending af beskeder virker tilsvarende, ved brug af kommandoen \lstinline[style=c]|SendMessage|.
+Afsending af beskeder virker tilsvarende ved brug af kommandoen \lstinline[style=c]|SendMessage|.
 Et eksempel på at afsende en besked kan ses i \cref{nxc:send}.
 \lstinline[style=c]|SendMessage| benyttes til at sende beskeden \lstinline[style=c]|msg| til \lstinline[style=c]!OUTBOX!.
 
-\begin{lstlisting}[style=c,label=nxc:send,caption={Eksempel på afsending af besked}]
+\begin{lstlisting}[style=c,label=nxc:send,caption={Eksempel på afsending af besked.}]
 while(true){
   string msg = NumToStr(SENSOR_1);
   SendMessage(OUTBOX, msg);
 }
 \end{lstlisting}
 
-I \cref{nxc:send-mindsqualls} ses den tilhørende \mindsqualls kode der læser en besked sendt fra NXT'en.
+I \cref{nxc:send-mindsqualls} ses den tilhørende \mindsqualls kode, der læser en besked sendt fra NXT'en.
 
-\begin{lstlisting}[style=c,breaklines=true,label=nxc:send-mindsqualls,caption={\mindsqualls kode der læser en besked sendt fra NXT'en}]
+\begin{lstlisting}[style=c,breaklines=true,label=nxc:send-mindsqualls,caption={\mindsqualls kode der læser en besked sendt fra NXT'en.}]
 public static string NxtSensorReading(NxtCommunicationProtocol commLink)
 {
   return commLink.MessageRead(PC_INBOX, NxtMailbox.Box0, true);

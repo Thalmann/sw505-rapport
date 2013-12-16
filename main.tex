@@ -31,6 +31,7 @@
 \clearpage
 
 \setcounter{page}{4}
+\setcounter{secnumdepth}{3}
 
 \newcommand{\prefaceHeaderName}{Forord}
 \section*{\prefaceHeaderName}
@@ -38,8 +39,9 @@
 
 \clearpage
 
-
 %Table of content
+\pdfbookmark{\contentsname}{toc}
+\setcounter{tocdepth}{2}
 \tableofcontents
 
 \clearpage
@@ -93,11 +95,11 @@
 \input{indhold/gearing}
 \chapter{Forsøgsopstilling}
 \input{indhold/testmiljo}
-\chapter{Arkitektur}
+\chapter{System Arkitektur}
 \input{indhold/systemarkitektur}
 \section{Kommunikationsprotokol}\label{kommunikation}
 \input{indhold/kommunikationsprotokol}
-\section{Flow + Kode - eksempel}
+\section{Flow- og Kodeeksempel}
 \input{indhold/flow}
 
 \part{Konklusion}

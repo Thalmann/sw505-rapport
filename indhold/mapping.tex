@@ -1,13 +1,14 @@
 \section{Introduktion til Occupancy Grid}
-Til at kortlægge rummet robotten befinder sig i har vi valgt at bruge \textit{occupancy grid}.
+Til at kortlægge rummet robotten befinder sig i, har vi valgt at bruge \textit{occupancy grid}.
 Teorien bag denne algoritme vil blive beskrevet i dette afsnit
 
-\subsection{Overblik}
-Den overordnede idé bag et occupancy grid er at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær \textit{stokastisk variabel } der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
-Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på den aktuelle tilstand endnu ikke er kendt.
+\section{Overblik}
+Den overordnede tanke bag et occupancy grid er, at lave en ensartet inddeling af sit kort, hvor hver enkelt celle er repræsenteret af en binær \textit{stokastisk variabel}, der fortæller om den pågældende celle er 'optaget' eller ej, hvor optaget betegnes som sandsynligheden $\mathcal{P}(occupied) = 1$.
+Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på, at den aktuelle tilstand endnu ikke er kendt.
+
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
 
-En simpel illustration af et occupancy grid map for det kørselsmiljø der er opstillet for vores robot kan ses på \cref{map:approx_occupancy_grid}.
+En simpel illustration af et occupancy grid map for det kørselsmiljø, der er opstillet for vores robot, kan ses på \cref{map:approx_occupancy_grid}.
 
 \begin{figure}[h] % Kørselsmiljø og et occupancy grid
 \centering
@@ -27,7 +28,7 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø der er op
 \label{map:approx_occupancy_grid}
 \end{figure}
 
-\subsection{Vertikal og horisontal sensor model}
+\section{Vertikal og horisontal sensor model}\label{mapping:sensormodel}
 \stefan{kildehenvisning}
 Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser,
 kan vi konstruere en forholdsvis simpel basal sensormodel.
@@ -65,22 +66,19 @@ $r = |x_i - x + y_i - y|$ \\
 \Else{
 	\Return{$l_{free}$}
 }
-\caption{Invers sensor model algoritme}
+\caption{Invers sensor model algoritme.}
 \label{alg:inversesensormodel}
 \end{algorithm}
 
-\subsubsection{Gaussisk sensor model}
+\subsection{Gaussisk sensor model}
 
 % forklaring af gaussisk støj (central limit theorem)
 % tilfældige fejl vil tilnærme sig en gausssisk kurve.
-I modellen beskrevet i det forgående afsnit, antog vi at en celle
+I modellen, beskrevet i det forgående afsnit, antog vi, at en celle
 med afstanden $\frac{\alpha}{2}$ fra robottens måling på $z_t$ havde
 samme sandsynlighed som en celle med afstanden 0 fra $z_t$.
 
-Hvis vi antager, at de celler som ligger tættere på robottens måling,
-har en større sandsynlighed for at være \emph{occupied}. 
-Så kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for 
-cellen i $z_t$ til værdien $l_{free}$ for cellen på positionen $z_t \pm \frac{\alpha}{2}$. 
+Hvis vi antager, at de celler som ligger tættere på robottens måling, har en større sandsynlighed for at være \emph{occupied}, kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for cellen i $z_t$ til værdien $l_{free}$ for cellen på positionen $z_t \pm \frac{\alpha}{2}$. 
 
 Da summen af uafhængige fejlmålinger, ifølge \emph{central limit theorem} vil tilnærme sig
 den gaussiske normalfordeling. \cite[p. 223]{ArtificialIntelligence}

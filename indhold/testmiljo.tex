@@ -1,21 +1,22 @@
 \section{Testmiljø}
-I dette afsnit præsenteres testmiljøet der sat op til at teste robottens færdigheder.
+I dette afsnit præsenteres det testmiljø, der sat op til at teste robottens færdigheder.
 
 \subsection{Formål}
-Formålet med et testmiljø er for bedre at kunne kontrollere omgivelserne.
-Dette giver mindre unøjagtigheder ifht. hvis det skulle testes i et nyt miljø hver gang og muligheden for at sammenligne resultater.
+Formålet med et testmiljø er at bedre kunne kontrollere omgivelserne.
+Dette giver mindre unøjagtigheder, ift. hvis det skulle testes i et nyt miljø hver gang, og gør det dermed muligt at sammenligne resultater.
 
 \subsection{Opsætning}\label{testmiljo:opsaetning}
 Testmiljøet er opsat vha. papkasser og tape, som man kan se på \cref{testmiljo:perspektiv}.
-Størrelsen er $189 \ cm \times 261 \ cm$ grunden til denne størrelse er at dette præcis passer ifht. kinectens billede som man kan se på \cref{testmiljo:oppefra}.
-På \cref{testmiljo:forfra} kan man se hvordan kinecten er monteret under en loftplade.
+Størrelsen er $189 \ cm \times 261 \ cm$. 
+Denne størrelse er valgt, da dette præcis passer ift. Kinectens billede, som man kan se på \cref{testmiljo:oppefra}.
+På \cref{testmiljo:forfra} kan man se hvordan Kinecten er monteret under en loftplade ift. gulvet.
 
 \begin{figure}
 \begin{tikzpicture}
 \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\textwidth/2]{./verden/forfra}};
     \draw [->, red, ultra thick] (5.5,10.5) -- (4.2,11.2);
 \end{tikzpicture}
-\caption{Testmiljøet set forfra. Bemærk kinecten monteret i en loftplade(rød pil) med hul til RGB-kameraet.}
+\caption{Testmiljøet set forfra. Bemærk Kinecten monteret i en loftsplade (rød pil) med hul til RGB-kameraet.}
 \label{testmiljo:forfra}
 \end{figure}
 
@@ -33,6 +34,14 @@ På \cref{testmiljo:forfra} kan man se hvordan kinecten er monteret under en lof
     \draw [<->, red, ultra thick] (1.3,0.9) -- (16,1);
     \node [red, ultra thick] at (8, 2) {261 cm};
 \end{tikzpicture}
-\caption{Testmiljøet set fra kinecten.}
+\caption{Testmiljøet set fra Kinecten.\thilemann{trim billedet}}
 \label{testmiljo:oppefra}
+\end{figure}
+
+\thilemann{Ville det give mening at have et billede af vores occupancy grid?}
+
+\begin{figure}
+\includegraphics[width=((\textwidth)/2), clip, trim = 10cm 2cm 10cm 5cm]{./verden/kinect}
+\caption{Her kan man se hvordan Kinecten er monteret på loftspladen.}
+\label{testmiljo:kinect}
 \end{figure}

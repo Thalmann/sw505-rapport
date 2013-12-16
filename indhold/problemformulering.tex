@@ -1,9 +1,21 @@
 % !TeX spellcheck = da_DK
-\thilemann{Jeg kunne godt bruge lidt indledning til problemformuleringen og efterfølgende måske også lidt mere beskrivende tekst.}
+Da baggrunden for projektet er fastlagt, defineres nu en problemformulering, der kort og præcist beskriver hvilket problem vi ønsker at løse.
+Først afgrænses problemet, for på den måde at simplificerer det, og dermed gøre det realistisk at løse inden for tidsrammen.
+Derefter præsenteres problemformuleringen, som projektet vil arbejde ud fra.
+Til sidst vil en målsætning blive sat, så det er muligt at evaluere på resultatet til sidst i projektet.
+
 \section*{Afgrænsning}
-Pga. den stramme tidsramme fokuserer dette projekt på at løse mapping med kendt lokation dog med følgende afgrænsninger:
+Pga. den stramme tidsramme foretages en række afgrænsninger.
+For at undgå at skulle tage højde for en masse specialtilfælde antages det, at robotten altid tager sensormålinger når den står vinkelret på den bane, den kører på.
+Desuden skal alle objekter i verdenen dermed også være vinkelrette. 
+En anden afgrænsning er, at robottens verden er inde i et afgrænset område, hvilket gør lokaliseringen af robotten mere simpel.
+Desuden afgrænses robottens verden til at være plan og indendøre. 
+Dette gør kravene til konstruktionen af robotten simple, så fokus kan holdes på at lave en algoritme til mapping.
+
+\paragraph{}
+ Afgrænsningerne er således:
 \begin{itemize}
-\item Robottens verden er kun 90 grader
+\item Robottens verden er 90 grader
 \item Verdenen er et afgrænset område
 \item Verdenen er plan og befinder sig indendøre
 \end{itemize}
@@ -13,10 +25,9 @@ Vi vil arbejde ud fra følgende problemstilling på baggrund af ovenstående afg
 
 \begin{samepage}
 
-\quoter{Hvordan kan der konstrueres software til en robot hvis formål er at kortlægge en ukendt verden*, forudsat at den til enhver tid kender sin position?}
+\quoter{Hvordan kan der konstrueres software til en robot, hvis formål er at kortlægge en ukendt verden, forudsat at den til enhver tid kender sin position?}
 
 \end{samepage}
-*En verden med de begrænsninger der er beskrevet i afgrænsning ovenfor.
 
 \section*{Målsætning}
 \input{indhold/maalsaetning}
