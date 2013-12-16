@@ -10,9 +10,8 @@ Dette vil blive implementeret på en NXT-enhed.
 Systemet, som kører på robotten, skal skrives i programmeringssproget NXC, som er et C-lignende programmeringssprog.
 
 For at robotten effektivt kan løse lokaliseringsproblemet vil den kommunikere med en PC via MindSqualls frameworket.
-\thilemann{skal vi skrive nærmere om hvordan?}
+\thilemann{Bør vi skrive noget om at vi flytter de tunge beregninger til pc?}
 PC'en skal være tilkoblet en Microsoft Kinect, og skal via colortracking med Kinectens farvekamera gøre det muligt at søge efter farver på robotten, og derved være i stand til at returnere en position til robotten, når den forespørger det.
-\thilemann{tunge beregninger på pc?}
 
 Til at bygge kortet, i takt med at robotten navigerer rundt, benyttes et occupancy grid, der gør det muligt at differentiere mellem ledige og optagne celler.
 Opdelingen af verdenen i celler, skal gøre det muligt for robotten enten at styrke eller mindske sin tro på, om et område på kortet er fremkommeligt eller ej.
