@@ -28,7 +28,9 @@ Yderlige skal der være en rute hen til destinationscellen, hvor der er nok ledi
 
 \subsubsection{Synlig celle}\label{rute:synligcelle}
 De synlige celler for en destinationscelle, er de celler som vil blive opdateret ved en scanning fra destinationscellen.
-Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen (se \cref{rute:synsfelt});
+Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen (se \cref{rute:synsfelt}).
+Da sensoren(\cref{sensorer:us:resultater}) med sikkerhed har en maksimal rækkevidde på 170 cm, vil det også gælde her.
+Dvs. at felter der har afstand > 170 cm ikke er en del af synsfeltet.
 
 \subsubsection{Kriterier for en god destination}
 Dette afhænger af den \textit{information gain} som robotten potentielt ville få ved at scanne i destinationen.
