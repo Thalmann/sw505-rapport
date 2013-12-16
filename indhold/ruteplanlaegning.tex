@@ -15,7 +15,7 @@ minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\c
 minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
 
 For at automatisere kortlægningen af et rum, er det nødvendigt at automatisere ruteplanlægningen.
-Dette kapitel handler om den udledede metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra nogle kriterier.
+Dette kapitel handler om den udledede metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra valgte kriterier.
 
 \section{Overordnet beskrivelse}
 Den overordnede idé er at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation hvor der skal foretages en scanning.
@@ -28,7 +28,9 @@ Yderlige skal der være en rute hen til destinationscellen, hvor der er nok ledi
 
 \subsubsection{Synlig celle}\label{rute:synligcelle}
 De synlige celler for en destinationscelle, er de celler som vil blive opdateret ved en scanning fra destinationscellen.
-Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen (se \cref{rute:synsfelt});
+Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen (se \cref{rute:synsfelt}).
+Da sensoren(\cref{sensorer:us:resultater}) med sikkerhed har en maksimal rækkevidde på 170 cm, vil det også gælde her.
+Dvs. at felter der har afstand > 170 cm ikke er en del af synsfeltet.
 
 \subsubsection{Kriterier for en god destination}
 Dette afhænger af den \textit{information gain} som robotten potentielt ville få ved at scanne i destinationen.
@@ -51,7 +53,7 @@ Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og s
 \subsubsection{Beregning af \textit{information gain}}
 Første skridt er at beregne værdi for alle de mulige destinationsceller:
 \begin{equation}
-v(d) = \sum_{s \in p(d)} |0.5 - P(s)|
+v(d) = \sum_{s \in p(d)} 0.5-|0.5 - P(s)|
 \end{equation}
 
 Her er lav værdi lig med høj \textit{information gain}.
