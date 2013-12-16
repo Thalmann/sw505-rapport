@@ -53,10 +53,10 @@ Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og s
 \subsubsection{Beregning af \textit{information gain}}
 Første skridt er at beregne værdi for alle de mulige destinationsceller:
 \begin{equation}
-v(d) = \sum_{s \in p(d)} 0.5-|0.5 - P(s)|
+v(d) = \sum_{c \in p(d)} 0.5-|0.5 - P(c)|
 \end{equation}
 
-Her er lav værdi lig med høj \textit{information gain}.
+Her er høj værdi lig med høj \textit{information gain}.
 Dette skyldes at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$, afhængigt af om den er \textit{free} eller \textit{occupied}.
 Derved er der mere værdi i at scanne fra en celle med lav værdi, da dette betyder at der er flere hidtil ikke-scannede celler i dens synsfelt.
 Dette munder ud i en mængde, bestående af en værdi for samtlige $d$:
