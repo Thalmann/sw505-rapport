@@ -24,9 +24,9 @@ Scenarierne, som beskederne fra tabellen indgår i samt en uddybning af indkodni
 
 \begin{figure}[H]
 \renewcommand{\arraystretch}{1.8}
-\begin{longtable}{ c | c | c | p{0.4\textwidth} | c}
-Besked type & Computer & NXT & Beskrivelse & Indhold\\
+\begin{longtable}{ |c | c | c | p{0.3\textwidth} | c|}
 \hline
+Besked type & Computer & NXT & Beskrivelse & Indhold\\
 \hline
 0 & IN & OUT & Robotten forespørger om dens lokation & - \\
 1 & IN & OUT & Robotten er nået frem til dens lokation & - \\
@@ -35,7 +35,7 @@ Besked type & Computer & NXT & Beskrivelse & Indhold\\
 51 & OUT & IN & Computeren beder om at få sensor data fra robotten & - \\
 52 & OUT & IN & Computeren sender robottens position til robotten & $x,y,a$\\
 \hline
-\caption{Oversigt over de forskellige beskeder.\thilemann{skal trimmes eller så skal kolonnerne være smallere.}}\label{design:protokol_tabel}\\
+\caption{Oversigt over de forskellige beskeder.}\label{design:protokol_tabel}\\
 \end{longtable}
 
 \end{figure}
