@@ -7,7 +7,6 @@ Den overordnede tanke bag et occupancy grid er, at lave en ensartet inddeling af
 Til at begynde med initialiseres hver enkelt celle med værdien $\mathcal{P}(occupied) = 0,5$ som en indikation på, at den aktuelle tilstand endnu ikke er kendt.
 
 En 'ledig' celle har således værdien $\mathcal{P}(occupied) = 0$.
-
 En simpel illustration af et occupancy grid map for det kørselsmiljø, der er opstillet for vores robot, kan ses på \cref{map:approx_occupancy_grid}.
 
 \begin{figure}[h] % Kørselsmiljø og et occupancy grid
@@ -78,7 +77,7 @@ I modellen, beskrevet i det forgående afsnit, antog vi, at en celle
 med afstanden $\frac{\alpha}{2}$ fra robottens måling på $z_t$ havde
 samme sandsynlighed som en celle med afstanden 0 fra $z_t$.
 
-Hvis vi antager, at de celler som ligger tættere på robottens måling, har en større sandsynlighed for at være \emph{occupied}, kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for cellen i $z_t$ til værdien $l_{free}$ for cellen på positionen $z_t \pm \frac{\alpha}{2}$. 
+Hvis vi antager, at de celler som ligger tættere på robottens måling, har en større sandsynlighed for at være \emph{occupied}, end dem som ligger tæt på $z_t \pm \frac{\alpha}{2}$, kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for cellen i $z_t$ til værdierne $l_{free}$ og $l_0$ for cellerne på position $z_t \pm \frac{\alpha}{2}$. 
 
 Da summen af uafhængige fejlmålinger, ifølge \emph{central limit theorem} vil tilnærme sig
 den gaussiske normalfordeling. \cite[p. 223]{ArtificialIntelligence}
@@ -108,28 +107,29 @@ Vi kan anvende den passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{
 Den nye tildeling af sandsynlighed til cellen vil nu se således ud.
 
 \begin{equation}
-l_{res} = \begin{cases} 
-	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
+l_{r} = \begin{cases} 
+	l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
 	
 	
-	\eta \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(r_{actual} - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}r
-		&\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
+	\eta \lim \limits_{\rho \to 0} \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x
+		&\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t+\frac{\alpha}{2}\\ 
 
 	l_{free} &\text{ellers}	
 \end{cases}
 \end{equation}
 \\
-Hvor $\rho$ er en passende konstant og $\eta$ er en normaliseringskonstant.
+Normaliseringskonstanten $\eta$ kan vi bestemme da vi ved at vi vil have sandsynligheden $l_{occ}$ i centrum for normalfordelingen.
 
 \begin{equation}
-	\begin{split}
-	\eta \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(z_t - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}r &= l_{occ} \\
-    \implies \eta &= \frac{l_{occ}}{\bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{0}\, \mathrm{d}r} 
-	\end{split}
+	\eta \lim \limits_{\rho \to 0} \bigint_{z_t-\rho}^{z_t+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x = l_{occ} \implies \eta = \frac{l_{occ}}{\lim \limits_{\rho \to 0} \bigint_{z_t-\rho}^{z_t+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x}
 \end{equation}
 
 
-\thilemann{Mangler der noget her?}
+
+
+
+
+
 
 
 
