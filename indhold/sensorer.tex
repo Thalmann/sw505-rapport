@@ -1,6 +1,6 @@
 % !TeX spellcheck = da_DK
 \label{sensorer}
-Følgende afsnit undersøger de tilgængelige sensorer, som er interessante for projektet.
+Følgende afsnit undersøger de tilgængelige sensorer og motorer, som er interessante for projektet.
 Da der er stor forskel på sensorerne, der er til rådighed, er der foretaget forskellige forsøg, hvis formål er at klarlægge præcisionen af de forskellige sensorer.
 
 \begin{figure}[h]
@@ -31,9 +31,6 @@ Da der er stor forskel på sensorerne, der er til rådighed, er der foretaget fo
 \end{subfigure}
 \caption{Komponenter der betragtes til konstruktion af robotten.}
 \end{figure}
-\thilemann{Motoren er ikke en sensor - navnet på kapitlet samt indledning henviser kun til at afsnittene handler om sensorer - der skal således skrives noget om motorer i indledningen.}
-\thilemann{Louise: "Overskriften bør ændres så den dækker hele kapitlet, fx 'Sensorer og motorer'".}
-\bruno{Det er rotationssensoren der testes i motoren.}
 
 \section{Afstandssensorer}
 Dette afsnit beskriver testen af de to afstandssensorer (\cref{sensor:ultrasonic_sensor,sensor:infraroed_sensor}), som kan være interessante at montere på robotten.
@@ -62,7 +59,7 @@ Konstruktionen blev placeret i en række afstande fra en væg, hvor sensoreren v
 Herefter blev sensoren aflæst samtidig med, at afstanden mellem væg og sensor blev målt med lineal.
 Den samme test blev udført 3 gange.
 
-\subsubsection{Resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
+\subsubsection{Resultater}\label{sensorer:us:resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
 
 En graf-repræsentation af resultaterne kan ses i \cref{sensor:ultrasonic_resultat_diagram}.
 Den røde linje indikerer det ideele resultat. mens den blå, brune og grønne linje viser resultaterne fra de tre test.
@@ -134,7 +131,7 @@ Hvis motoren ikke har høj nøjagtighed, skal der tages højde for det, når den
 \subsection{Test}
 For at bestemme motorens nøjagtighed i praksis, blev en test opstillet hvor to moterer roteres med et bestemt antal grader.
 Motorernes egentlige rotation aflæses med vinkelmåler og holdes op mod den ønskede rotation, samt den rotation motorerne angiver at de har roteret.
-Sidstenævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
+Sidstnævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
 
 \paragraph{Resultaterne} fra forsøget kan ses i \cref{appendix:motor_test}. 
 \mikkel{Der er nogle fejl i dette afsnit som skal rettes efter vi har sendt til vejleder}
@@ -144,8 +141,7 @@ Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
 
 +7 og +6 grader målt optræder kun en gang.
 Ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager, at det er pga. unøjagtige målinger ved forsøgsudførelsen, er det stadig ikke $\pm$1 grad.
-\stefan{Man kan ikke direkte aflæse afvigelserne fra tabellen}
-\thilemann{Synes heller ikke meningen står helt klar}
+
 Kigger vi på \cref{sensor:motor_sensor_diagram} kan vi se, at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator for, at det er bedre at benytte tacho-værdien.
 
 \begin{figure}

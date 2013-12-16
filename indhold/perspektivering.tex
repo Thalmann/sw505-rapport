@@ -1,0 +1,49 @@
+% !TeX spellcheck = da_DK
+Projektets resultater kan som altid forbedres.
+Nogle elementer er bevidst ikke implementeret på grund af tidsbegrænsning, og andre er gruppen kommet frem til, givet de erfaringer der er gjort i løbet af projektet.
+
+I dette afsnit præsenteres forslag til forbedringer af systemet der kunne gøres, samt en beskrivelse af anvendeligheden af det endelige produkt.
+
+\section{Lokalisering}
+Kinecten brugt til lokalisering fra starten af projektet, da det var meningen at bruge dybdesensoren til at lokalisere objekter i et billede.
+Siden da blev løsningen ændret til at genkende objekter ved farve, men Kinecten blev beholdt.
+Det ville derfor være muligt at udskifte Kinecten med et almindeligt webcam, som ville være lettere at komme i besiddelse af. 
+Der er også et større udvalg af webcams, så det vil være muligt at finde en bedre opløsning, opdateringshastighed eller en anden parameter der vil forbedre lokaliseringen.
+
+\section{Implementering}
+I dette projekt er der blevet implementeret to forskellige sensormodeller. \stefan{indsæt vurdering af de to modeller}
+En forbedring ville være at implementere endnu bedre sensormodeller.
+
+I de udførte test er der benyttet en cellestørrelse på 10cm $ \times $ 10cm.
+Denne cellestørrelse blev valgt med henblik på at få cellerne så små som muligt, uden at tiden det ville tage at kortlægge området ville blive alt for stor.
+Man kunne således forsøge at variere størrelsen af celler for at finde ud af hvilken indvirkning det har på resultaterne.
+
+Allerede i problemformuleringen blev robottens verden afgrænset til kun at være 90 grader. 
+Denne afgrænsning gjorde nogle aspekter af problemer lettere. 
+Blandt andet simplificerede det den måde sensormålinger skal behandles når occupancy griddet skal opdateres.
+En forbedring ville være at ophæve denne begrænsning så der kan tages målinger i 360 grader.
+
+Ved test af systemet blev det bemærket at der blev brugt en del tid på at robotten flyttede sig fra et punkt til et andet.
+I dette tidsrum blev der ikke foretaget nogle målinger og var derfor 'spildt' tid. 
+Dette kunne forbedres ved at robotten tog løbende målinger, så tiden brugt mellem to punkter blev mere effektivt udnyttet.
+
+\section{Robotkonstruktion}
+Robotten er blevet konstrueret med to sensorer der kan dreje. 
+Således er det muligt at tage en sensormåling forud og bagud, og derefter dreje sensortårnet til at tage sensormålinger til begge sider.
+Dette har vist sig at være unødvendigt, da tiden det tager at dreje tårnet gør det upraktisk.
+Det viste sig også at komplicere registreringen af sensormålinger, da sensortårnet ikke kunne placeres lige over det punkt der blev brugt til at lokalisere robotten.
+En ændring af dette kunne være at fastmontere sensorerne og nøjes med at dreje robotten.
+Et andet alternativ vil være at montere 4 sensorer i stedet for to, så det slet ikke vil være nødvendigt at dreje hverken et sensortårn eller robotten for at tage målingerne.
+
+Ved konstruktionen af systemet blev det antaget at ruteplanlægningen skulle have ansvaret for at robotten ikke kører ind i noget. 
+Dette gøres ud fra det occupancy grid der ind til videre er konstrueret.
+Det viste sig dog til nogle af de indledende prøvekørsler at dette ikke altid var tilstrækkeligt, og at robotten kunne finde på at køre ind i en væg eller en forhindring.
+Det vil derfor være nyttigt at implementere en mekanisme der identificerer at robotten er på vej til at køre ind i en forhindring og i stedet stoppe robotten inden det sker. 
+
+\section{Anvendelse}
+Systemet er afhængig af at der sidder et kamera i loftet og lokaliserer robotten.
+Dette begrænser anvendeligheden en del, da det i mange tilfælde ikke vil være muligt at fastmontere et kamera i loftet.
+Systemet kan således ikke benyttes til at kortlægge et rum der er ufremkommeligt, såsom i en krigszone eller på Mars.
+Det vil derimod være muligt at bruge den til at kortlægge en bygninger som robotter skal navigere rundt i efterfølgende.
+
+For at robotten skulle være mere anvendelig, vil det være nødvendigt med en anden ekstern kilde til lokalisering.
