@@ -24,9 +24,7 @@ Til dette projekt bliver der kun gearet ned (jævnfør robottens design på \cre
 \end{figure}
 
 \subsection{Aktuelle gearing}
-Dette afsnit fokuserer på den teoretiske gearing for de ultrasoniske sensorer.
-\Cref{robot:gearing-test} beskriver forskellige test af gearingerne, der driver sensor rotationen for at undersøge om gearingen lever op til de teoretiske værdier.
-
+Dette afsnit fokuserer på den gearing der er monteret på de ultrasoniske sensorer.
 
 \subsubsection{Ultrasonisk sensor}
 Denne bruges til at bestemme afstanden til et objekt i en bestemt retning, hvorfor det vil være en fordel at geare motoren ned for at opnå større præcision af denne, når retningen af sensoren skal bestemmes.
@@ -71,21 +69,3 @@ Den anden kombination består af et 24-tands (se \cref{gearing:24tand}) som før
 
 Den samlede gear ratio for sensor motoren bliver derfor $1:40$, som beskriver, at der for hver sensor omdrejning kræves 40 motor omdrejninger; hvilket er det samme som:
 $$\frac{24}{1} \cdot \frac{40}{24} = 40$$
-
-\subsection{Test af gearing}\label{robot:gearing-test}
-\thilemann{Jeg mener vi bør udføre testene igen og notere resultaterne således de kan komme i appendix sammen med de andre test resultater - de mangler lidt som argumentation i testen beskrevet herunder.}
-Nu hvor den teoretiske gearing er fastlagt, vil der her blive udført en række forsøg for at afgøre præcisionen af sensor motoren med gearing; og evt. at fastlægge en faktisk gearing, hvis denne afviger fra den teoretiske.
-
-\subsubsection{Sensor}
-Det er vigtigt at kende den nøjagtige rotation af sensoren, og dermed dens retning, for at få så præcise målinger som muligt.
-Derfor er der foretaget to forskellige test, hvis formål er at kortlægge eventuelle usikkerheder, der kan være indført med gearing af sensor motoren.
-
-\paragraph{Første test} var en grovtest, hvor der blev kørt i den samme retning i et antal sensor-omdrejninger.
-Der blev udført handling med sensor-omdrejninger som input, ud fra en beregnet motor-omdrejning, baseret på den teoretiske gearing.
-Denne test gav et godt resultat, uden afvigelse.
-\thilemann{en forsker udførte engang en meget hemmelighedsfuld test af en gearing helt ude i skoven, uden nogen former for resultater...}
-\bruno{Nicolaj savner resultater fra de tests :s}
-
-\paragraph{Anden test} blev udført ved at køre færre omdrejninger, skiftevis med og mod uret.
-Dette gav en upræcision, da der er slør i den øverste gearing mellem 40-tands og 24-tands tandhjulene.
-Dette slør giver mellem $\frac{1}{4}$ og $\frac{3}{4}$ tands unøjagtighed, da der ved skift af rotations-retning bruges op til $\frac{3}{4}$ tandhjul-omdrejning for 24-tands tandhjulet at få fat i 40-tands tandhjulets tænder igen.
