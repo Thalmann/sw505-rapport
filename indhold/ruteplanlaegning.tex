@@ -23,7 +23,7 @@ Der gås ud fra at robotten opererer indenfor et occupancy grid, derved vil der 
 
 \subsubsection{Destinationscelle}\label{rute:destinationscelle}
 En mulig destinationscelle er en celle med høj sandsynlighed for at være ledig.
-Desuden skal et vist antal celler omkring den mulige destinationscelle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
+Desuden skal et vist antal celler omkring den mulige destinationscelle ligeledes være ledig, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
 Yderlige skal der være en rute hen til destinationscellen, hvor der er nok ledige celler i hele ruten, så robotten kan være indenfor de celler.
 
 \subsubsection{Synlig celle}\label{rute:synligcelle}
@@ -53,10 +53,10 @@ Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og s
 \subsubsection{Beregning af \textit{information gain}}
 Første skridt er at beregne værdi for alle de mulige destinationsceller:
 \begin{equation}
-v(d) = \sum_{s \in p(d)} 0.5-|0.5 - P(s)|
+v(d) = \sum_{c \in p(d)} 0.5-|0.5 - P(c)|
 \end{equation}
 
-Her er lav værdi lig med høj \textit{information gain}.
+Her er høj værdi lig med høj \textit{information gain}.
 Dette skyldes at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$, afhængigt af om den er \textit{free} eller \textit{occupied}.
 Derved er der mere værdi i at scanne fra en celle med lav værdi, da dette betyder at der er flere hidtil ikke-scannede celler i dens synsfelt.
 Dette munder ud i en mængde, bestående af en værdi for samtlige $d$:
