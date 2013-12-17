@@ -34,22 +34,21 @@ kan vi konstruere en forholdsvis simpel basal sensormodel.
 Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
 
 \begin{equation}
-r_{actual} = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid
+r = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid
 \end{equation}
 
 Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
 
 \begin{equation}
-\begin{split}
-l_{res} = \begin{cases} 
-	l_0 &\text{hvis }r_{actual} > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
-	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r_{actual} \leq z_t+\frac{\alpha}{2}\\ 
+l_{r} = \begin{cases} 
+	l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
+	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t+\frac{\alpha}{2}\\ 
 	l_{free} &\text{ellers}  
 \end{cases}
-\end{split}
 \end{equation}
-
-Hvor værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området.
+Hvor $l_0$ er defineret i \cref{eqn:l0}, værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området
+og $z_{max}$ er sensorens maksimale måleafstand.
+\\
 Modellen vil se således ud beskrevet i pseudokode:
 
 \begin{algorithm}[H]
@@ -104,36 +103,42 @@ Vi kan anvende den passende normalfordeling $\mathcal{N}(z_t,\big(\frac{\alpha}{
 \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}
 \end{equation}
 
-Vi kan beregne sandsynligheden for at en celle i afstand $r$ udfra.
+Vi kan beregne en sandsynlighed, for en celle i afstand $r$, udfra normalfordelingen ved at tage integralet af fordelingen på følgende måde.
 
 \begin{equation}
-	P(r) = \eta \lim \limits_{\rho \to 0} \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x
+P(r) = \lim \limits_{\rho \to 0} \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x
 \end{equation}
-\\
-Normaliseringskonstanten $\eta$ kan vi bestemme da vi ved at vi vil have sandsynligheden fra $l_{occ}$ i centrum for normalfordelingen.
-For at genskabe sandsynligheden udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
+
+Da vi vil have, at sandsynligheden i centrum af fordelingen er den samme, som sandsynligheden fra $l_{occ}$ ganger vi med konstanten $\eta$, for på den måde at strække fordelingen så den passer. 
 
 \begin{equation}
-	\begin{split}
-		&\eta \lim \limits_{\rho \to 0} \bigint_{z_t-\rho}^{z_t+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x = 1 - \frac{1}{1+e^{l_{occ}}} \\ 
-	&\implies \eta = \frac{1 - \frac{1}{1+e^{l_{occ}}}}{\lim \limits_{\rho \to 0} \bigint_{z_t-\rho}^{z_t+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x}
-	\end{split}
+	P_\eta(r) = \eta P(r) 
 \end{equation}
 
+For at beregne $\eta$ udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
+
+\begin{equation}
+	\eta P(r) = 1 - \frac{1}{1+e^{l_{occ}}} \implies \eta = \frac{1-\frac{1}{1+e^{l_{occ}}}}{P(r)}
+\end{equation}
+
+%\begin{equation}
+%	\begin{split}
+%		&\eta \lim \limits_{\rho \to 0} \bigint_{z_t-\rho}^{z_t+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x = 1 - \frac{1}{1+e^{l_{occ}}} \\ 
+%	&\implies \eta = \frac{1 - \frac{1}{1+e^{l_{occ}}}}{\lim \limits_{\rho \to 0} \bigint_{z_t-\rho}^{z_t+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x}
+%	\end{split}
+%\end{equation}
 
 Den nye tildeling af sandsynlighed til cellen vil nu se således ud.
 
 \begin{equation}
-l_{r} = \begin{cases} 
-	l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
-	log\Big(\frac{P(r)}{1-P(r)}\Big) &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t+\frac{\alpha}{2}\\ 
-	l_{free} &\text{ellers}	
-\end{cases}
+	l_{r} = \begin{cases} 
+		l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\
+		max\Bigg(l_{0},log\Big(\frac{P_\eta(r)}{1-P_\eta(r)}\Big)\Bigg) &\text{hvis } z_t < r \leq z_t+\frac{\alpha}{2} \\
+		max\Bigg(l_{free},log\Big(\frac{P_\eta(r)}{1-P_\eta(r)}\Big)\Bigg) &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t \\
+		l_{free} &\text{ellers}	
+	\end{cases} 
 \end{equation}
-
-
-
-
+Hvor $l_0$ er defineret i \cref{eqn:l0} og $z_{max}$ er sensorens maksimale måleafstand.
 
 
 
