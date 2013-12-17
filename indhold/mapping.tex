@@ -37,7 +37,12 @@ Først beregner vi afstanden fra robotten til den pågældende celle i vores occ
 r = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid
 \end{equation}
 
-Sandsynligheden for at cellen er  \emph{occupied} tildeles således.
+Sensormodellen tildeler de celler, som ligger tæt på den målte afstand fra robotten $z_t$ en højere værdi, kaldet $l_{occ}$, end den prior \textit{belief} $l_0$ fra \cref{eqn:l0}.
+De celler som ligger imellem robotten og sensormålingen, tildeles en lavere værdi end $l_0$, kaldet $l_{free}$. 
+
+for at komme frem til hvad tæt på $z_t$ er, indfører vi en konstant $\alpha$ som repræsentere den gennemsnitslige tykkelse af objekter i området.
+
+Sandsynligheden for at cellen er \emph{occupied}, kaldet $l_r$, tildeles således.
 
 \begin{equation}
 l_{r} = \begin{cases} 
@@ -45,9 +50,8 @@ l_{r} = \begin{cases}
 	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t+\frac{\alpha}{2}\\ 
 	l_{free} &\text{ellers}  
 \end{cases}
-\end{equation}
-Hvor $l_0$ er defineret i \cref{eqn:l0}, værdien $\alpha$ er den gennemsnitlige dybde af et objekt i området
-og $z_{max}$ er sensorens maksimale måleafstand.
+\end{equation} \\
+Hvor $z_{max}$ er sensorens maksimale måleafstand.
 \\
 Modellen vil se således ud beskrevet i pseudokode:
 
