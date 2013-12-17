@@ -1,4 +1,3 @@
-\thilemann{Den øverste del er mere opsummering, hvor den sidste del er en forklaring af hvad vi gør}
 Denne del fokuserer på hvilke metoder og værktøjer der skal til for at løse problemstillingen for projektet.
 Den beskriver de individuelle dele og deres formål og dermed også argumentationen for hvorfor netop det pågældende valg er truffet.
 
@@ -9,9 +8,8 @@ Da problemet består i at kortlægge en ukendt verden, vil der blive konstrueret
 Dette vil blive implementeret på en NXT-enhed.
 Systemet, som kører på robotten, skal skrives i programmeringssproget NXC, som er et C-lignende programmeringssprog.
 
-For at robotten effektivt kan løse lokaliseringsproblemet vil den kommunikere med en PC via MindSqualls frameworket.
-\thilemann{Bør vi skrive noget om at vi flytter de tunge beregninger til pc?}
-PC'en skal være tilkoblet en Microsoft Kinect, og skal via colortracking med Kinectens farvekamera gøre det muligt at søge efter farver på robotten, og derved være i stand til at returnere en position til robotten, når den forespørger det.
+Da det er computerdelen der skal stå for de tunge beregning vil robotten kommunikere med en computeren via MindSqualls frameworket.
+PC'en skal være tilkoblet en Microsoft Kinect, og skal via colortracking med Kinectens farvekamera gøre det muligt at søge efter farver på robotten, og derved være i stand til at sende en position til robotten, når den forespørger det.
 
 Til at bygge kortet, i takt med at robotten navigerer rundt, benyttes et occupancy grid, der gør det muligt at differentiere mellem ledige og optagne celler.
 Opdelingen af verdenen i celler, skal gøre det muligt for robotten enten at styrke eller mindske sin tro på, om et område på kortet er fremkommeligt eller ej.

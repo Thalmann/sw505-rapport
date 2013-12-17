@@ -70,8 +70,6 @@ Der tilføjes nuller til venstre for tallet hvis tallet er 7 tegn.
 \subsubsection{Nået frem til lokation}
 Denne situation forekommer, når robotten er nået frem til den ønskede lokation.
 Robotten sender da en besked på formen: \[<\!''1''\!>\]
-\thilemann{For ovenstående og nedenstående kunne man godt skrive hvorfor der ikke sendes nogen besked med.}
-\thilemann{Burde tekstrepræsentationerne ikke være beskrevet med 'numre' som f.eks. ligninger?}
 
 \subsubsection{Aflæs Sensordata}
 Når computeren beder om sensor data fra robotten, sender den en besked på formen: \[<\!''51''\!>\]
@@ -80,5 +78,3 @@ Robotten foretager derefter sensormålinger og returnerer dem med en besked på 
 Sensordata består af en måling fra hver sensor, før sensorerne roterer 90 grader og efter.
 $ s1_x $ og $ s2_x $ er derfor to målinger, hvor sensorerne står i startpositionen, mens $ s1_y $ og $ s2_y $ er to måling efter sensorerne er drejet 90 grader.
 Sensormålingerne sendes hver som én byte.
-
-\thilemann{Afrunding?}
