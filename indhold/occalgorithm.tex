@@ -42,7 +42,7 @@ p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} }
 \end{equation} 
 
 \Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler, der er relevante for en aktuel sensormåling. 
-Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}.\thilemann{Dobbelttjek lige at denne henvisning er korrekt}
+Til opdateringen bruges \textbf{inverse\_sensor\_model}, \cref{alg:inversesensormodel}.
 Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds
 
 \begin{equation}
