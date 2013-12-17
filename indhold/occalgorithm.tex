@@ -1,8 +1,7 @@
 % !TeX spellcheck = da_DK
 \section{Occupancy Grid algoritmen}
 Dette afsnit vil gennemgå algoritmen, der skal opdatere et occupancy grid.
-Algoritmen er taget fra \cite[p.~xxx]{probabilisticRobotics}
-\stefan{indsæt sidehenvisning fra bogen til 9.2}
+Algoritmen er taget fra \cite[p. 286]{probabilisticRobotics}.
 Formålet med \textit{occupancy grid} algoritmen er, at beregne	et nyt kort ud fra et kort og en samling data:
 
 \begin{equation}
@@ -43,7 +42,7 @@ p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} }
 \end{equation} 
 
 \Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler, der er relevante for en aktuel sensormåling. 
-Til opdateringen bruges \textbf{inverse\_sensor\_model} som findes i \cref{mapping:sensormodel}.\thilemann{Dobbelttjek lige at denne henvisning er korrekt}
+Til opdateringen bruges \textbf{inverse\_sensor\_model}, \cref{alg:inversesensormodel}.
 Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds
 
 \begin{equation}
