@@ -68,26 +68,26 @@ Al kontrol af robotten på kortet (occupancy grid) foregår gennem denne klasse.
 Den indeholder således metoder til at sende robotten til et nyt koordinat, opdatere kortet og hente nye sensormålinger.
 
 \section{Services.dll}\label{arkitektur:services}
-Dette er det nederste lag i arkitekturen og benyttes af \lstinline!!Control} namespacet når en handling ønskes udført.
+Dette er det nederste lag i arkitekturen og benyttes af \lstinline!Control! namespacet når en handling ønskes udført.
 
 \paragraph{Services.RobotServices}
 Dette namespace benyttes, når robotten skal kontrolleres.
 Det er således herigennem, der sendes beskeder til robotten, for at få den til at bevæge sig til en ny position og tage sensormålinger.
 
 \paragraph{Services.RouteService}
-For at få robotten til at køre en rute på kortet benyttes \lstinline!!RouteService} namespacet, der består af en grafisk komponent, der gør det muligt at klikke en rute ind på et occupancy grid samt en \lstinline[style=csharp]|SchedulingService|, der returnerer en kø af de punkter, som ruten består af.
+For at få robotten til at køre en rute på kortet benyttes \lstinline!RouteService! namespacet, der består af en grafisk komponent, der gør det muligt at klikke en rute ind på et occupancy grid samt en \lstinline[style=csharp]|SchedulingService|, der returnerer en kø af de punkter, som ruten består af.
 
 \paragraph{Services.KinectServices}
-Benyttes af \lstinline!!Control.DisplayControl} for at vise en videostrøm fra farvekameraet i Kinecten.
-Konverterer den returnerede videostrøm til en strøm af bitmaps, som kan vises grafisk i \lstinline!!SystemInterface}.
+Benyttes af \lstinline!Control.DisplayControl! for at vise en videostrøm fra farvekameraet i Kinecten.
+Konverterer den returnerede videostrøm til en strøm af bitmaps, som kan vises grafisk i \lstinline!SystemInterface!.
 
 \paragraph{Services.TrackingServices}
 Denne service er ansvarlig for at holde styr på robottens lokation samt positur.
-Robotten kan således gennem \lstinline!!Control} benytte dette namespace, når den ønsker en opdatering af sin positur.
+Robotten kan således gennem \lstinline!Control! benytte dette namespace, når den ønsker en opdatering af sin positur.
 
 \section{Data.dll}\label{arkitektur:data}
 Dette assembly indeholder alle data objekter for occupancy grid samt sensormodellen.
-Alt data opdateres fra \lstinline!!Control} når robotten har taget en ny måling.
+Alt data opdateres fra \lstinline!Control! når robotten har taget en ny måling.
 
 
 
