@@ -1,5 +1,12 @@
 Designet af robotten for dette projekt er yderst vigtigt; det er grundstenen i projektet, og uden en velfungerende robot (og specielt kontrol af denne), vil det blive svært at løse problemstillingen for projektet tilfredsstillende.
-Dette afsnit fokuserer på hvordan vi er kommet frem til designet af den endelige robot, samt hvilke særlige problemstillinger, der ligger til grund for designet.
+Dette afsnit fokuserer på hvordan vi er kommet frem til designet af den endelige robot, som kan ses på \cref{robot:opbygning}, samt hvilke særlige problemstillinger, der ligger til grund for designet.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{whalle}
+\caption{Endelige design af vores robot.}
+\label{robot:opbygning}
+\end{figure}
 
 \section{Design overvejelser}\label{robot:design}
 Designet af robotten har været en del af læringsprocessen for, hvordan man bygger en robot af \lego NXT komponenterne, hvorfor design processen kan ses som en iterativ process, hvor designet er blevet radikalt ændret for hver iteration, indtil et tilfredsstillende resultat er opnået.
@@ -32,13 +39,6 @@ Disse to design ledte frem til følgende krav til det endelige design af robotte
 \section{Endeligt design}
 Udgangspunktet for det endelige design er baseret på ovenstående design krav sammen med andre idéer, der tilsammen skal øge præcisionen af robotten og gøre den mere driftsikker.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{whalle}
-\caption{Endelige design af vores robot.}
-\label{robot:opbygning}
-\end{figure}
-
 Den vigtigste faktor, når robotten bygges, er placeringen af de primære komponenter, såsom de ultrasoniske sensorer, der skal foretage afstandsmålinger og motoren, der skal skabe fremdrift.
 
 \subsection{Kroppen}
@@ -68,7 +68,6 @@ Derfor er der valgt et lavere og bredere hjulsæt (Ø56mm x 26mm), som er meget 
 Den egentlige funktion af robotten er at tage afstandsmålinger til objekter indenfor sensorernes rækkevidde.
 Placeringen af sensorerne er derfor ikke kritisk, da de højst vil give en forskydelse af konstant faktor relativ til robottens midte fra deres placering i fronten.\thilemann{Skal vi skrive at vi faktisk tager hensyn til dette ved sensormålinger ved at bakke robotten tilbage?}
 Vigtigere er, at der er 360\degree~udsyn når de roterer, og at robotten ikke er i vejen for målingerne, hvilket er løst ved at montere sensorerne højere end resten af robotten. 
-\thilemann{Der bør nok i subsections laves henvisninger til det kommende billede af robotten}
 
 
 
