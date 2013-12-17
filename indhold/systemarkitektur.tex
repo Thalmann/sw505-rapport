@@ -7,19 +7,19 @@ Denne beslutning er taget for at overkomme kompleksiteten af systemet; altså fo
 I de efterfølgende afsnit vil arkitekturen (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
 Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål, samt hvordan lagene interagerer med hinanden.
 Som det også ses på figurerne, er det kun de ydre associationer, der er angivet for at simplificere beskrivelsen af systemet.
-Som det første beskrives \lstinline!!CommonLib.dll} i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
+Som det første beskrives \lstinline!CommonLib.dll! i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
 Efterfølgende vil lagene blive beskrevet i en rækkefølge, der følger kaldene internt i systemet.
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{./graphics/systemarkitektur_1}
-\caption{Lagene i systemarkitekturen med deres ydre associationer. Associationerne til højre fører alle til \lstinline!!CommonLib.dll}, som ses på \cref{arkitektur:klassediagram:2}.}
+\caption{Lagene i systemarkitekturen med deres ydre associationer. Associationerne til højre fører alle til \lstinline!CommonLib.dll!, som ses på \cref{arkitektur:klassediagram:2}.}
 \label{arkitektur:klassediagram:1}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{./graphics/systemarkitektur_2}
-\caption{Viser namespacet \lstinline!!CommonLib.dll} (uden interne associationer), som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \lstinline!!CommonLib.dll}, der indeholder de elementer, som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
+\caption{Viser namespacet \lstinline!CommonLib.dll!} (uden interne associationer), som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \lstinline!CommonLib.dll!, der indeholder de elementer, som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
 \label{arkitektur:klassediagram:2}
 \end{figure}
 \section{CommonLib.dll}\label{arkitektur:commonlib}
