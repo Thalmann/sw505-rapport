@@ -1,8 +1,6 @@
 % !TeX spellcheck = da_DK
-I dette kapitel kigges der nærmere på at benytte en Microsoft Kinect til at lokalisere robotten med.
-Kinecten beskrives i forhold til hvilke muligheder den giver i forhold til dens anvendelsesområder for projektet.
-Hvordan den er bygget op, samt hvilket hardware den består af, vil senere i projektet blive benyttet til den faktiske implementering.
-Afslutningsvis for kapitlet gives der en kort introduktion til Kinectens SDK.
+I forbindelse med kortlægningen af et område skal robotten have at vide hvor den er, og hvordan den står i forhold til dens omgivelser.
+Dette kapitel vil fokusere på hvordan vi har valgt at løse dette problem, både hvilken enhed og hvilken algoritme vi har valgt til formålet.
 
  \section{Microsoft Kinect}\label{kinect}
 En Kinect er et Natural User Interface (NUI) udviklet til Microsofts spillekonsol, Xbox.
@@ -76,38 +74,6 @@ Disse parametre er interessante i forhold til hvilket formål der søges opfyldt
 Det er fx vigtigt at kende dens betragningsvinkler, hvis den skal benyttes til at lokalisere objekter med, da placeringer af disse skal placeres ift. deres fysiske placering, og ikke kun i Kinectens koordinatsæt.
 Konverteringen mellem disse koordinatsæt er beskrevet yderligere i \cref{lokalisering:punktomregning}.
 
-%\subsubsection{Infrarød (IR) sender}
-%Metoden Kinecten benytter for at bestemme personers placeringer deres afstand fra Kinecten er vha. den infrarøde (IR) sender (\cref{kinect:opbygning}), som udsender et infrarødt lys der reflekteres så snart de rammer et objekt i rummet. 
-%Disse signaler bliver fanget af en anden sensor på Kinecten; nemlig den infrarøde dybde sensor.
-%
-%\subsubsection{IR dybde sensor}
-%Når det infrarøde lys bliver reflekteret tilbage mod Kinecten, bliver det opfanget af dybde sensoren (\cref{kinect:opbygning}), som konverterer lyset til dybde information, hvori man har en per-pixel afstand til de objekter der er tilstede i billedet.
-%
-%\subsubsection{Mikrofoner}
-%Kinecten er også i stand til at optage lyd via de indbyggede mikrofoner.
-%Dette er dog ikke det eneste mikrofonerne kan benyttes til; de kan også benyttes som en alternativ metode til at bestemme afstand og retning fra f.eks. en person der taler.
-%Rækken af mikrofoner (se \cref{kinect:opbygning}) består af 4 stk. som er placeret på fronten af Kinecten.
-%En enkelt mikrofon sidder i venstre side mens de tre andre er placeret til højre, hvilket gør det muligt at triangulere lydsignaler for at bestemme retningen af lydkilden.
-%Flere mikrofoner gør det også muligt at lave ``noise-suppression'' ift. omgivelserne, hvis man benytter Kinect, mens man spiller, til at kommunikerer med sine med-/modspillere således at unødig støj filtreres fra~\cite[s.~15]{kinectProgrammingGuide}.
-%
-%\subsubsection{Motor til justering af vinklen}
-%For at gøre det muligt for en Kinect at operere i flere forskellige miljøer og placeringer, er der indbygget en lille motor til at justere vinklen mellem Kinecten og foden den står på (jvf. \cref{kinect:opbygning}).
-%Den kan bevæge sig fra 0\degree~til 27\degree~ (op) og fra 0\degree~til -27\degree~(ned).
-%Denne funktionalitet er ideel hvis man ønsker at kalibrere Kinecten ift. dens fysiske placering og de omgivelser man ønsker at bruge den i.
-%Dog anbefaler Microsoft at man ikke benytter motoren kontinuert i sine programmer, da den ikke tåler vedvarende belastninger~\cite{kinectDocElevationAngle}.
-%
-%\subsubsection{LED}
-%Mellem kameraet og IR senderen er der placeret en status LED, der fortæller om driverne til Kinecten er indlæst korrekt eller ej.
-%Dette kan være nyttigt for udviklere, da det giver sikkerhed for at kommunikationen mellem PC og Kinect er ok~\cite[s.~15]{kinectProgrammingGuide}.
-%
-%\subsubsection{Accelerometer}
-%Kinect er også udstyret med et 3-akse accelerometer, som udvider den til andre anvendelsesområder end blot at følge (tracke) objekter og kropsbevægelser.
-%Det er konfigureret til at give målinger fra -2g til 2g (mere præcis ved langsomme bevægelser end hurtige)~\cite{kinectAccelerometer}.
-%Målingerne  er opbygget som en 3D vektor som peger mod tyngdekraften (gulv-planet), hvilket f.eks. gør det muligt at detektere om den er monteret korrekt (ovenpå eller under et fladskærms tv), således dens tilt kan korrigeres vha. den indbyggede motor.
-%En anden interessant anvendelsesmulighed er at accelerometeret kan benyttes til at give bedre 3D projektioner i Augmented Reality.
-%Ifølge dokumentationen~\cite{kinectDocAccelerometer}, er det præcist ned til en grad, dog med en nøjagtighed der kan varierer med op til 3 grader i forhold til rumtemperaturen.
-%De skriver endvidere i dokumentationen at der kan kompensateres for denne unøjagtighed ved at sammenligne den vertikale måling (y-aksen i accelerometerets koordinatsystem) med den benyttede gulvplans dybdedata.
-
 \subsection{Valg af Kinect}\label{kinect:argumentation}
 Microsoft Kinect giver generelt mange muligheder pga. alle dens sensorer samt brugervenligheden overfor udviklere.
 For at opsummere, så ser vi Kinectens overordnede fordele som:
@@ -122,13 +88,6 @@ For at opsummere, så ser vi Kinectens overordnede fordele som:
 
 
 Ovenstående fordele giver mange muligheder i forhold til hvordan Kinecten kan benyttes, men da der stræbes efter en simpel og pålidelig metode vil dette smitte af på den endelige løsning.
-Kinectens mange muligheder mht. tracking overvejes således ikke, med mindre første løsning med kun at benytte farvekameraet, ikke viser sig tilstrækkelig.
-
-For at løse lokaliseringsproblemet ved blot at benytte et farvekamera vil der blive fokuseret på at genkende unikke farver i billedet, for derved at kunne udregne robottens lokation.
-\thilemann{her mangler nok lidt mere argumentation/beskrivelse!}
-Hvordan \textit{colortracking} er implementeret i praksis, står detaljeret beskrevet i \cref{tracking}.
-
-\thilemann{Jeg kan ikke helt vurdere hvorvidt dele af dette afsnit er lidt en gentagelse af forrige afsnit, og om det i så fald gør noget? Louise: Jeg synes det er ok}
 
 \section{Kinect for Windows SDK}
 Til Kinecten findes der et officielt SDK\footnote{ Version 1.8, Udgivet 17 september, 2013~\cite{kinectSDK18}}, som åbner op for al funktionalitet i Kinecten med support fra Microsoft.
@@ -215,4 +174,8 @@ void sensor_ColorFrameReady(object sender,
 \end{lstlisting}
 
 \section{Colortracking}
-\stefan{Valget af denne metode mangler}
+Til at lokalisere robotten er det valgt at benytte Kinectens kamera og en farvegenkendelsesalgoritme.
+På den måde er det muligt at finde robotten i billedet uden at være afhængig af en bestemt form eller konstruktion.
+Derimod skal der bare være mulighed for at sætte nogle farvede mærkater på robotten.
+Ideen er at sætte to forskelligt farvede mærkater på kroppen af robotten og følge dem hver for sig. 
+Dette vil da give en mulighed for at beregne midtpunktet af disse to mærkater samt robottens vinkel, hvilket svarer til robottens positur.
