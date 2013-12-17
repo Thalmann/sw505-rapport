@@ -13,8 +13,7 @@ Det vil sige, at systemet skal være i stand til at lokalisere robotten ud fra \
 Som beskrevet ovenfor udstyres robotten med to mærkninger i klare farver, som skal spores.
 Det er altså målet at finde de dele af et enkelt billede, der matcher bestemte farver.
 
-\thilemann{Bedre med subsections istedet for paragraffer nedenunder?}
-\paragraph{Match af farver}
+\subsubsection{Match af farver}
 For at vurdere om to farver matcher hinanden, må det først gøres klart, at det ikke kan forventes at matche en farve eksakt.
 Til dette spiller faktorer som lys og skygge for stor en rolle.
 I stedet tages der udgangspunkt i en søgt farve, og ud fra denne ledes der efter alle \textit{nære} farver.
@@ -39,7 +38,7 @@ dist_{C_aC_b} = |C_a - C_b|
 \end{equation}
 Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2} \approx 442$ (forskellen på hvid og sort).
 
-\paragraph{Maksimal afstand}\label{tracking:maksimal_afstand}
+\subsubsection{Maksimal afstand}\label{tracking:maksimal_afstand}
 Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af hinanden.
 Der indføres derfor en konstant $\rho$ der definerer et maksimum for hvor langt to farver må være fra hinanden, før de ikke længere er interessante.
 I \cref{tracking:adjust} beskrives bestemmelsen af denne konstant.
