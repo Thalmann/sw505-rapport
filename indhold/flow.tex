@@ -23,25 +23,26 @@
 %\item Der var besked i robottens inbox
 %\end{enumerate}
 
-For at vise hvordan system arkitekturen (\cref{arkitektur}) \thilemann{mere specifik henvisning i stedet for til kapitlet selv?} benyttes, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen, ikke mindst kommunikationen mellem robot og PC.
+For at vise hvordan system arkitekturen (se evt. \cref{arkitektur:klassediagram:1}) benyttes, kommer der her et udvalgt eksempel, hvor det kan ses hvordan data traverserer gennem lagene i arkitekturen, ikke mindst kommunikationen mellem robot og PC.
 
 \subsection{Eksempel: Robotten anmoder om sin positur}
 Når robotten har brug for at kende dens positur, hvis den for eksempel er i gang med at navigere til et punkt, sker der kald igennem samtlige lag.
 Den overordnede procedure er som følgende:
-\thilemann{lstinline}
 \begin{enumerate}
 \item{Robotten sender anmodning om sin positur}
-\item{RobotInterface afventer besked fra robotten}
+\item{\lstinline[style=csharp]!RobotInterface! afventer besked fra robotten}
 \begin{enumerate}
 \item{Hvis der er svar, udføres noget handling}
 \item{Ellers fortsættes der med at lytte efter beskeder}
 \end{enumerate}
-\item{RobotInterface aflæser positur i LocationControl}
-\item{LocationControl aflæser positur i TrackingServices}
-\item{RobotInterface bruger Postman til at sende positur}
+\item{\lstinline[style=csharp]!RobotInterface! aflæser positur i \lstinline[style=csharp]!LocationControl!}
+\item{\lstinline[style=csharp]!LocationControl! aflæser positur i \lstinline[style=csharp]!TrackingServices!}
+\item{\lstinline[style=csharp]!RobotInterface! bruger \lstinline[style=csharp]!Postman! til at sende positur}
 \item{Robotten modtager svar indeholdende den ny positur}
 \end{enumerate}
 Det overordnede flow kan ses i tilstand-sekvens-diagrammet i \cref{flow:ssd}.
+Bemærk dog at dette er en meget abstrakt beskrivelse/illustration af flowet.
+Det egentlige flow vil blive beskrevet nu, i højere detalje og ved brug af konkrete kodeeksempler.
 
 \begin{figure}[H]
 \centering
@@ -74,7 +75,6 @@ while(true) {
 \subsubsection{RobotInterface afventer besked fra robotten}
 Håndtering af robottens beskeder/anmodninger sker i \lstinline[style=csharp]!RobotInterface!.
 Her kører en seperat tråd med funktionen \lstinline[style=csharp]!listener()!:
-\thilemann{ret og tjek at vi er konsekvente med lstinlne.}
 \begin{lstlisting}[style=csharpsmall,label=lst:listener,caption=listener() i RobotInterface.]
 private void listener()
 {
