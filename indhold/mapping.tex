@@ -78,11 +78,10 @@ I modellen, beskrevet i det forgående afsnit, antog vi, at en celle
 med afstanden $\frac{\alpha}{2}$ fra robottens måling på $z_t$ havde
 samme sandsynlighed som en celle med afstanden 0 fra $z_t$.
 
-Hvis vi antager, at de celler som ligger tættere på robottens måling, har en større sandsynlighed for at være \emph{occupied}, end dem som ligger tæt på $z_t \pm \frac{\alpha}{2}$, kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for cellen i $z_t$ til værdierne $l_{free}$ og $l_0$ for cellerne på position $z_t \pm \frac{\alpha}{2}$. 
+Hvis vi antager, at de celler, som ligger tættere på robottens måling, har en større sandsynlighed for at være \emph{occupied}, end dem som ligger tæt på $z_t \pm \frac{\alpha}{2}$, kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for cellen i $z_t$ til værdierne $l_{free}$ og $l_0$ for cellerne på position $z_t \pm \frac{\alpha}{2}$. 
 
 Da summen af uafhængige fejlmålinger, ifølge \emph{central limit theorem} vil tilnærme sig
-den gaussiske normalfordeling. \cite[p. 223]{ArtificialIntelligence}
-Vil det være en god approximation for robottens måleusikkerhed.
+den gaussiske normalfordeling, vil det være en god approximation for robottens måleusikkerhed.\cite[p. 223]{ArtificialIntelligence}
 
 For at finde en passende normalfordeling skal vi vælge en passende middelværdi og en passende standard afvigelse. 
 Vi ved at centrum, dvs. middelværdien, for fordelingen skal være målingen $z_t$.
@@ -93,7 +92,7 @@ Vi ved at centrum, dvs. middelværdien, for fordelingen skal være målingen $z_
 \caption{Normal fordeling $\mathcal{N}(\mu,\sigma^2)$}
 \end{figure}
 
-Udfra \cref{normaldistimg} kan vi se at det vil være passende hvis $\frac{\alpha}{2}$ svarer til tre standard afvigelser. dvs.
+Udfra \cref{normaldistimg} kan vi se, at det vil være passende hvis $\frac{\alpha}{2}$ svarer til tre standard afvigelser. dvs.
 \begin{equation}
 	3\sigma = \frac{\alpha}{2} \implies \sigma = \frac{\alpha}{6}
 \end{equation}

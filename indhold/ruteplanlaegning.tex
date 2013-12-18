@@ -15,50 +15,50 @@ minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\c
 minimum height=\cellsize cm,minimum width=\cellsize cm, align=right] at ($(#2*\cellsize,#3*\cellsize) + (\cellsize/2,\cellsize/2)$) {$\scriptstyle #1$};}
 
 For at automatisere kortlægningen af et rum, er det nødvendigt at automatisere ruteplanlægningen.
-Dette kapitel handler om den udledede metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra valgte kriterier.
+Dette kapitel handler om den udledte metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra valgte kriterier.
 
 \section{Overordnet beskrivelse}
-Den overordnede idé er at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation hvor der skal foretages en scanning.
-Ruten skal beregnes ud fra et occupancy grid, og destinationer vil derfor blive referet som celler.
-I det følgende vil der blive introduceret nogle begreber der skal bruges til beskrivelsen af ruteplanlægningen.
+Den overordnede tanke er, at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation, hvor der skal foretages en scanning.
+Ruten skal beregnes ud fra et occupancy grid, og destinationer vil derfor blive refereret til som celler.
+I det følgende vil der blive introduceret nogle begreber, der skal bruges til beskrivelsen af ruteplanlægningen.
 
 \subsection{Destinationscelle}\label{rute:destinationscelle}
 En mulig destinationscelle er en celle med høj sandsynlighed for at være ledig.
-Desuden skal et vist antal celler omkring den mulige destinationscelle ligeledes være ledig, afhængig af robottens størrelse, for at være sikker på at der er plads til robotten.
-Yderlige skal der være en rute hen til destinationscellen, hvor der er nok ledige celler i hele ruten, så robotten kan være indenfor de celler.
+Desuden skal et vist antal celler omkring den mulige destinationscelle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på, at der er plads til robotten.
+Yderligere skal der være en rute hen til destinationscellen, hvor der er nok ledige celler i hele ruten, således at robotten kan være indenfor de celler.
 
 \subsection{Synlig celle}\label{rute:synligcelle}
-De synlige celler for en destinationscelle, er de celler som vil blive opdateret ved en scanning fra destinationscellen.
-Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen.
-Desuden skal også medregnes maximum rækkevidden for en scanning, da der ikke vil kunne opnås information for de celler der er udenfor rækkevidden.
+De synlige celler for en destinationscelle, er de celler, som vil blive opdateret ved en scanning fra destinationscellen.
+Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler, som ligger lodret over og under cellen.
+Desuden skal også medregnes den maksimale rækkevidde for en scanning, da der ikke vil kunne opnås information for de celler, der er udenfor rækkevidden.
 
 \subsection{Kriterier for en god destination}
-Dette afhænger af den \textit{information gain} som robotten potentielt ville få ved at scanne i destinationen.
+Dette afhænger af den \textit{information gain}, som robotten potentielt vil få ved at scanne i destinationen.
 Dette afgøres af de synlige celler for destinationscellen.
 
-Hvor høj \textit{information gain} der opnås, skal bestemmes ud fra sandsynlighederne der er i forvejen, for cellerne i synsfeltet.
+Hvor høj \textit{information gain} der opnås, bestemmes ud fra de eksisterende sandsynligheder, der findes i de celler, der i forvejen er i synsfeltet.
 Kort sagt er der bedst \textit{information gain} på en celle, hvor der er flest ikke-hidtil-scannede celler i synsfeltet.
 
 \section{Beregning af næste målings-celle}
-Til at beregne den næste destination, hvor fra der skal foretages en måling, skal følgende bruges:
+Til at beregne den næste destination, hvorfra der skal foretages en måling, skal følgende bruges:
 \begin{itemize}
 \item{$C = \{ c \mid c \textnormal{ er en celle i grid'et } \}$}
 \item{$D = \{ d \mid d \textnormal{ er en destinationscelle}\}$}
 \item{$x$}
 \item{$p(d) = \{ e \mid e \textnormal{ er en celle i synsfeltet for } d \}$}
 \end{itemize}
-Hvor $C$ er mængden af alle celler der er i occupancy grid'et, $D$ er alle mulige destinationsceller, $x$ er den celle hvori robotten er og $p(d)$ er alle celler i synsfeltet for en destinationscelle $d$.
+Hvor $C$ er mængden af alle celler, der er i occupancy grid'et, er $D$ alle mulige destinationsceller, mens $x$ er den celle hvori robotten er og $p(d)$ er alle celler i synsfeltet for en destinationscelle $d$.
 Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og synlige celler.
 
 \subsection{Beregning af \textit{information gain}}
-Første skridt er at beregne værdi for alle de mulige destinationsceller:
+Første skridt er, at beregne værdi for alle de mulige destinationsceller:
 \begin{equation}
 v(d) = \sum_{c \in p(d)} 0.5-|0.5 - P(c)|
 \end{equation}
 
 Her er høj værdi lig med høj \textit{information gain}.
-Dette skyldes at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$, afhængigt af om den er \textit{free} eller \textit{occupied}.
-Derved er der mere værdi i at scanne fra en celle med høj \textit{information gain}, da dette betyder at der er flere celler der kun er lidt information om i dens synsfelt.
+Dette skyldes, at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$ afhængigt af, om de er \textit{free} eller \textit{occupied}.
+Derved er der mere værdi i at scanne fra en celle med høj \textit{information gain}, da dette betyder, at der er flere celler, hvor der kun er lidt information om i dens synsfelt.
 
 Dette munder ud i en mængde, bestående af en værdi for samtlige $d$:
 \begin{equation}
@@ -73,7 +73,7 @@ Ud fra V vælges de elementer der har det højeste \textit{information gain}.
 Q = \{ d \in D \mid v(d) \in \max V \}
 \end{equation}
 
-Hvis $ Q $ kun indeholder ét element er dette destinationscellen. 
+Hvis $ Q $ kun indeholder ét element, er dette destinationscellen. 
 Hvis der i $Q$ er mere end én destinationscelle med samme værdi, beregnes afstanden til robotten for samtlige af de celler:
 \begin{equation}
 A = \{ \text{dist}(x,q) \mid q \in Q \}

@@ -2,19 +2,20 @@ Dette kapitel evaluerer de to valgte sensormodeller (\cref{mapping:sensormodel})
 \thilemann{lidt fesen intro...}
 
 \section{Formål}
-Formålet med denne test er at se hvilken sensormodel der kommer frem til det mest præcise kort.
-Dette er for at se om målsætningen beskrevet i \cref{problem:maalsaetning} er opfyldt.
+Formålet med denne test er at se hvilken sensormodel, der kommer frem til det mest præcise kort.
+Dette er for at se om målsætningen beskrevet i \cref{problem:maalsaetning} er opfyldt.\thilemann{Er det kun mig som har problemer med denne henvisning?}
 
 \section{Vurderingsmål}
 Da alle tests vil returnere et helt eller delvist udfyldt occupancy grid, vil sammenligningen gå ud fra dette.
-Alle grids som er resultat af en test, vil blive sammenlignet med et optimalt occupancy grid (lavet ud fra fysisk observation).
+Alle grids, som er resultat af en test, vil blive sammenlignet med et optimalt occupancy grid (lavet ud fra fysisk observation).
 Ethvert grid (både test og optimalt) vil bestå af tre typer celler:
+\thilemann{Vi skriver tidligere i rapporten om at celler kan vær \textit{occupied} og \textit{free} - vi bør være konsekvente og kun benytte danske termer}
 \begin{description}
-\item[Optaget]{ er en celle hvor der er en forhindring.}
-\item[Fri]{ er en celle der er vurderet som fri, enten gennem måling eller ved at robotten er kørt hen over den.}
-\item[Ukendt]{ er en celle hvor om der ikke er opnået viden.
+\item[Optaget]{ er en celle, hvor der er en forhindring.}
+\item[Fri]{ er en celle, der er vurderet som fri, enten gennem måling eller ved at robotten er kørt hen over den.}
+\item[Ukendt]{ er en celle, hvor om der ikke er opnået viden.
 For det optimale grid, vil det være celler inde i en større forhindring.
-For et test grid, kan det være det samme som for det optimale, dog kan der også forekomme ukendte celler som skulle have været enten frie eller optagede.}
+For et test grid, kan det være det samme som for det optimale, dog kan der også forekomme ukendte celler, som skulle have været enten frie eller optagede.}
 \end{description}
 
 \subsection{Sammenligning}
@@ -37,13 +38,13 @@ Ukendt & $-1$ & $-1$ & $0$ \\ \hline
 
 \subsection{Resultat}
 Resultatet for et enkelt test grid vil være en akkumulering af sammenlignings-værdierne for cellerne.
-Derved kommer der et enkelt tal for enhver test, hvorfor disse let kan sammenlignes efterfølgende.
+Derved kommer der et enkelt tal for enhver test, hvorfor disse efterfølgende let kan sammenlignes.
 
 \section{Test}\label{evaluering:test_beskrivelse}
 Der bliver foretaget tre tests med hver sensormodel (\cref{mapping:sensormodel}).
 I alle test benyttes ruteplanlægning beskrevet i \cref{ruteplanleagning}.
 Robotten kører hen til et punkt og scanner to gange - dette foretages 75 gange.
-Alle data bliver logget så det er muligt at genskabe et kort udfra det.
+Alle data bliver logget, så det er muligt at genskabe et kort udfra det.
 Opstillingen af testen er beskrevet i \cref{evaluering:opstilling}
 
 \subsection{Opstilling}\label{evaluering:opstilling}
