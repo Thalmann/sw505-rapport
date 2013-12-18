@@ -19,7 +19,8 @@ Dette kapitel handler om den udledede metode til at planlægge en rute for robot
 
 \section{Overordnet beskrivelse}
 Den overordnede idé er at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation hvor der skal foretages en scanning.
-Der gås ud fra at robotten opererer indenfor et occupancy grid, derved vil der for destinationer og målinger blive brugt celler.
+Ruten skal beregnes ud fra et occupancy grid, og destinationer vil derfor blive referet som celler.
+I det følgende vil der blive introduceret nogle begreber der skal bruges til beskrivelsen af ruteplanlægningen.
 
 \subsubsection{Destinationscelle}\label{rute:destinationscelle}
 En mulig destinationscelle er en celle med høj sandsynlighed for at være ledig.
@@ -29,7 +30,7 @@ Yderlige skal der være en rute hen til destinationscellen, hvor der er nok ledi
 \subsubsection{Synlig celle}\label{rute:synligcelle}
 De synlige celler for en destinationscelle, er de celler som vil blive opdateret ved en scanning fra destinationscellen.
 Da vi opererer i en vinkelret verden, vil synsfeltet for en given destinationscelle være de celler som ligger vandret til højre og venstre for cellen, samt de celler som ligger lodret over og under cellen (se \cref{rute:synsfelt}).
-Da sensoren(\cref{sensorer:us:resultater}) med sikkerhed har en maksimal rækkevidde på 170 cm, vil det også gælde her.
+Da sensoren med sikkerhed har en maksimal rækkevidde på 170 cm, vil det også gælde her.(\cref{sensorer:us:resultater})
 Dvs. at felter der har afstand > 170 cm ikke er en del af synsfeltet.
 
 \subsubsection{Kriterier for en god destination}
@@ -43,9 +44,9 @@ Kort sagt er der bedst \textit{information gain} på en celle, hvor der er flest
 Til at beregne den næste destination, hvor fra der skal foretages en måling, skal følgende bruges:
 \begin{itemize}
 \item{$C = \{ c \mid c \textnormal{ er en celle i grid'et } \}$}
-\item{$D = \{ c \mid c \textnormal{ er en destinationscelle}\}$}
+\item{$D = \{ d \mid d \textnormal{ er en destinationscelle}\}$}
 \item{$x$}
-\item{$p(d) = \{ c \mid c \textnormal{ er en celle i synsfeltet for } d \}$}
+\item{$p(d) = \{ e \mid e \textnormal{ er en celle i synsfeltet for } d \}$}
 \end{itemize}
 Hvor $C$ er mængden af alle celler der er i occupancy grid'et, $D$ er alle mulige destinationsceller, $x$ er den celle hvori robotten er og $p(d)$ er alle celler i synsfeltet for en destinationscelle $d$.
 Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og synlige celler.
@@ -58,74 +59,24 @@ v(d) = \sum_{c \in p(d)} 0.5-|0.5 - P(c)|
 
 Her er høj værdi lig med høj \textit{information gain}.
 Dette skyldes at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$, afhængigt af om den er \textit{free} eller \textit{occupied}.
-Derved er der mere værdi i at scanne fra en celle med lav værdi, da dette betyder at der er flere hidtil ikke-scannede celler i dens synsfelt.
+Derved er der mere værdi i at scanne fra en celle med høj \textit{information gain}, da dette betyder at der er flere celler der kun er lidt information om i dens synsfelt.
+
 Dette munder ud i en mængde, bestående af en værdi for samtlige $d$:
 \begin{equation}
 V = \{ v(d) \mid d \in D \}
 \end{equation}
 
-\subsubsection{Udvælgelse af den/de celler med lavest værdi}
+\subsubsection{Udvælgelse af celler }
+Ud fra V vælges de elementer der har det højeste \textit{information gain}. 
+
+
 \begin{equation}
-Q = \{ d \in D \mid v(d) \in \min V \}
+Q = \{ d \in D \mid v(d) \in \max V \}
 \end{equation}
 
-\subsubsection{Beregning af afstand til robot}
+Hvis $ Q $ kun indeholder ét element er dette destinationscellen. 
 Hvis der i $Q$ er mere end én destinationscelle med samme værdi, beregnes afstanden til robotten for samtlige af de celler:
 \begin{equation}
 A = \{ \text{dist}(x,q) \mid q \in Q \}
 \end{equation}
-
-\subsubsection{Den endelige destinationscelle}
-Til sidst findes den endelige destinationscelle, som enten er:
-\begin{itemize}
-\item{den med den laveste værdi.}
-\item{den med kortest afstand til robotten, hvis der er flere med samme laveste værdi.}
-\item{noget helt tredje hvis der slet ikke var mulige destinationsceller til at starte med.}
-\end{itemize}
-\begin{equation}
-r = \begin{cases}
-\begin{tabular}{lr}
-$q \mid \text{dist}(x,q) \in \min A$ & $|Q| > 1$\\
-$q \in Q$ & $|Q| = 1$ \\
-$?$ & $|D| = 0$
-\end{tabular}
-\end{cases}
-\end{equation}
-
-\section{Algoritme}
-\begin{algorithm}
-\SetKwFunction{Fn}{GetNextScanDest}
-\Fn{$D$}{\\
-	
-}
-\end{algorithm}
-
-\section{Illustration}
-
-\begin{figure}
-\centering
-\begin{tikzpicture}[]
-\newcommand{\gridsize}{10}
-\newcommand{\cellsize}{0.7}
-
-\coordinate (bl) at (0,0);
-\coordinate (tr) at (\gridsize,\gridsize);
-
-\foreach \x in {0,\cellsize,...,\gridsize}
-	\foreach \y in {0,\cellsize,...,\gridsize}
-		\draw [fill=yellow] ($(bl) + (\x,\y)$) rectangle ($(bl) + (\x + \cellsize, \y + \cellsize)$);
-		
-\emptycell{6}{6}
-\emptycell{6}{7}
-\emptycell{6}{8}
-\emptycell{7}{6}
-\emptycell[x]{7}{7}
-\emptycell{7}{8}
-\emptycell{8}{6}
-\emptycell{8}{7}
-\emptycell{8}{8}
-
-\end{tikzpicture}
-\label{rute:udgangspunkt}
-\caption{Udgangspunkt}
-\end{figure}
+Destinationscellen vælges da som den celle med den korteste afstand.
