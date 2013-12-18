@@ -1,11 +1,11 @@
 % !TeX spellcheck = da_DK
-I forbindelse med kortlægningen af et område skal robotten have at vide hvor den er, og hvordan den står i forhold til dens omgivelser.
-Dette kapitel vil fokusere på hvordan vi har valgt at løse dette problem, både hvilken enhed og hvilken algoritme vi har valgt til formålet.
+I forbindelse med kortlægningen af et område skal robotten have at vide hvor den er og hvordan den står i forhold til dens omgivelser.
+I dette kapitel vil der blive beskrevet den valgte metode i forhold til lokalisering, ved brug af Microsoft Kinect og color-tracking.
 
  \section{Microsoft Kinect}\label{kinect}
 En Kinect er et Natural User Interface (NUI) udviklet til Microsofts spillekonsol, Xbox.
-Dens primære formål er, at gøre det muligt at interagere med sin konsol vha. bevægelse og talte kommandoer.
-Dog har den også mange andre anvendelsesområder, fx:
+Dens primære formål er at gøre det muligt at interagere med sin konsol vha. bevægelse og talte kommandoer.
+Dog har den også mange andre anvendelsesområder, fx.:
 %Den første version der udkom i november 2010~\cite{kinectWiki} er oprindeligt udviklet med henblik på at lokke nye typer brugere til Xbox med det argument at det via naturlig (og aktiv) bevægelse er sjovere og mere virkelighedstro at spille.
 %
 %I februar 2012 blev der lanceret en ny type Kinect, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), der gør det muligt at udvikle både kommercielle og non-kommercielle applikationer til Kinect der kan køres på Windows platformen.
@@ -13,17 +13,17 @@ Dog har den også mange andre anvendelsesområder, fx:
 
 \begin{itemize}
 \item Optagelse af video i real-tid
-\item Generere et dybde billede ved hjælp af kameraet og de to IR sensorer
+\item Generere et dybde billede ved brug af kameraet og de to IR sensorer
 \item Vurdering af omgivelserne ved hjælp af lyd
 \end{itemize}
 
-Oprindeligt eksisterede der kun en Kinect til XBox, men i februar 2012 blev der lanceret en ny type kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og ikke-kommercielle applikationer til Windows platformen.
+Oprindeligt eksisterede der kun en Kinect til XBox, men i februar 2012 blev der lanceret en ny type, kaldet Kinect for Windows, der sammen med et Software Development Kit (SDK), gør det muligt at udvikle både kommercielle og ikke-kommercielle applikationer til Windows platformen.
 
-I dette projekt skal Kinecten benyttes til at bestemme en autonom robots placering i ukendte omgivelser. 
-Følgende afsnit giver en kort introduktion til Kinectens egenskaber, der skal danne grundlag for hvorfor Microsoft Kinect er valgt som løsningsmetode til at lokalisere robotten.\cite{kinectProgrammingGuide}
+I dette projekt skal Kinecten benyttes til at bestemme robottens placering i ukendte omgivelser. 
+Følgende afsnit giver en kort introduktion til Kinectens egenskaber.\cite{kinectProgrammingGuide}
 
 \subsection{Opbygning af Kinect}\label{kinect:komponenter}
-I denne rapport er det versionen Kinect for Windows der fokuseres på, da den giver bedst kompatibilitet med PC samt det faktum, at den er tilgængelig gennem universitetet.
+I denne rapport er det versionen Kinect for Windows der fokuseres på, da den giver bedst kompatibilitet med PC, samt det faktum at den er tilgængelig gennem universitetet.
 
 %Dog kan det nævnes at forskellene mellem den og versionen til Xbox er meget små.
 %Hardware mæssigt har Kinect for Windows den fordel at firmwaren indeholder en såkaldt Near Mode, hvilket gør det muligt at følge objekter indtil 40 cm fra enheden.
@@ -39,7 +39,7 @@ I denne rapport er det versionen Kinect for Windows der fokuseres på, da den gi
 \label{kinect:opbygning}
 \end{figure}
 
-Microsoft Kinect for Windows består af en mængde hardware, som kan tilgås via det medfølgende SDK\footnote{Der findes også andre tredjeparts SDK'er til Microsoft Kinect, men som ikke er relevante ift. projektet, hvorfor de ikke nævnes.}.
+Microsoft Kinect for Windows består af en nogle hardware-komponenter, som kan tilgås via det medfølgende SDK\footnote{Der findes også andre tredjeparts SDK'er til Microsoft Kinect, men som ikke er relevante ift. projektet, hvorfor de ikke nævnes.}.
 Microsoft Kinect for Windows består af følgende komponenter:
 
 \begin{itemize}
@@ -52,15 +52,15 @@ Microsoft Kinect for Windows består af følgende komponenter:
 \item Accelerometer
 \end{itemize}
 
-Microsoft Kinect for Windows kan ses på \cref{kinect:opbygning} sammen med dens synlige komponenter, som nævnes ovenfor.
+Microsoft Kinect for Windows kan ses på \cref{kinect:opbygning}, sammen med dens synlige komponenter, som nævnes ovenfor.
 
-For at løse lokaliseringsproblemet benyttes Kinectens farvekamera, og der ses således bort fra alle dens andre komponenter.
+For at løse lokaliseringsproblemet benyttes Kinectens farvekamera, der ses således bort fra alle dens andre komponenter.
 Derfor bliver farvekameraets specifikationer på Kinecten i følgende afsnit beskrevet detaljeret.
 
 \subsection{Farvekamera}\label{kinect:farvekamera}
-For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera, som er placeret ca. i midten af enheden (jvf. \cref{kinect:opbygning}).
-Videoen bliver sendt som en RGB videostrøm med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet eller en lavere opløsning på 640x480 og 30 billeder i sekundet~\cite{kinectForWindowsFeatures}.
-Kinecten har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree, hvilket giver den et vertikalt synsfelt på $\pm 21.5$\degree, hvis den er placeret ift. 0\degree~vandret.
+For at gøre Kinecten i stand til at se, er den udstyret med et farvekamera, som er placeret ca. i midten af enheden (se evt. \cref{kinect:opbygning}).
+Videoen bliver sendt som en RGB videostrøm, med mulighed for en opløsning på 1280x960 med en opdateringshastighed på 12 billeder i sekundet, eller en lavere opløsning på 640x480 og 30 billeder i sekundet.\cite{kinectForWindowsFeatures}
+Kinecten har en horisontal betragtningsvinkel på 57\degree~og en vertikal betragtningsvinkel på 43\degree.
 Et billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
 
 \begin{figure}
@@ -70,12 +70,8 @@ Et billede af Kinectens betragtningsvinkler kan ses på \cref{kinect:vinkler}.
 \label{kinect:vinkler}
 \end{figure}
 
-Disse parametre er interessante i forhold til hvilket formål der søges opfyldt med Kinecten samt miljøet hvori den skal bruges. 
-Det er fx vigtigt at kende dens betragningsvinkler, hvis den skal benyttes til at lokalisere objekter med, da placeringer af disse skal placeres ift. deres fysiske placering, og ikke kun i Kinectens koordinatsæt.
-Konverteringen mellem disse koordinatsæt er beskrevet yderligere i \cref{lokalisering:punktomregning}.
-
 \subsection{Valg af Kinect}\label{kinect:argumentation}
-Microsoft Kinect giver generelt mange muligheder pga. alle dens sensorer samt brugervenligheden overfor udviklere.
+Microsoft Kinect giver generelt mange muligheder pga. alle dens komponenter, samt brugervenligheden overfor udviklere.
 For at opsummere, så ser vi Kinectens overordnede fordele som:
 
 \begin{itemize}
@@ -87,20 +83,20 @@ For at opsummere, så ser vi Kinectens overordnede fordele som:
 \end{itemize}
 
 
-Ovenstående fordele giver mange muligheder i forhold til hvordan Kinecten kan benyttes, men da der stræbes efter en simpel og pålidelig metode vil dette smitte af på den endelige løsning.
+Ovenstående fordele giver mange muligheder i forhold til hvordan Kinecten kan benyttes, men da der stræbes efter en simpel og pålidelig metode, vil dette smitte af på den endelige løsning.
 
 \section{Kinect for Windows SDK}
-Til Kinecten findes der et officielt SDK\footnote{ Version 1.8, Udgivet 17 september, 2013~\cite{kinectSDK18}}, som åbner op for al funktionalitet i Kinecten med support fra Microsoft.
+Til Kinecten findes der et officielt SDK\footnote{ Version 1.8, udgivet 17 september, 2013~\cite{kinectSDK18}}, som åbner op for al funktionalitet i Kinecten med support fra Microsoft.
 
-API'en er bygget op omkring en solid forståelse for menneskers bevægelser og karaktertræk således API'en kan fungere som et interface, der kan genkende personers bevægelser, følge ansigter, genkende gestus og tale.
+API'en er bygget op omkring en solid forståelse for menneskers bevægelser og karaktertræk, således API'en kan fungere som et interface, der kan genkende personers bevægelser, følge ansigter, genkende gestus og tale.
 %Med Microsoft Kinect Toolkit installeret kan man endvidere få adgang til Kinect Fusion der gør det muligt at rekonstruere 3D objekter ud fra Kinectens kamera og dybdebilleder fra IR sensorerne.~\cite{kinectForWindowsFeatures}
 
 \subsection{Kinect API}\label{kinect:kinectapi}
-De følgende afsnit vil fokusere på, hvordan SDK'et benyttes for at tilgå Kinectens mest basale funktionalitet med fokus på, hvordan billeddata hentes fra dets farvekamera.
+De følgende afsnit vil fokusere på, hvordan SDK'et benyttes for at tilgå Kinectens mest basale funktionalitet, med fokus på hvordan billeddata hentes fra dets farvekamera.
 
 \subsubsection{Initialisering}
-For at initialisere Kinecten og få adgang til dens sensorer, skal Kinecten initialiseres.
-Et eksempel på initialisering af en Kinect kan se på \cref{kinect:initialisering}. \lstinline[style=csharp]|Form1_Load| metoden i linje \ref{kinect:load} køres ved applikationens opstart og sørger for at starte sensoren, hvis den findes. Fra linje \ref{kinect:enablebegin} til \ref{kinect:enableend} tændes for de billedstreams, der er nødvendige. I eksemplet tændes for RGB-kameraet, dybdekameraet samt skeletdetektoren. Hvis der ikke er en Kinect tilsluttet, meldes der fejl (linje \ref{kinect:error}).
+Før Kinecten kan anvendes og der er adgang til dens sensorer, skal Kinecten initialiseres.
+Et eksempel på initialisering af en Kinect kan se i \cref{kinect:initialisering}. \lstinline[style=csharp]|Form1_Load| metoden i \cref{kinect:load} køres ved applikationens opstart og sørger for at starte sensoren, hvis den findes. Fra \cref{kinect:enablebegin} til \cref{kinect:enableend} tændes for de billedstreams, der er nødvendige. I eksemplet tændes for RGB-kameraet, dybdekameraet, samt skeletdetektoren. Hvis der ikke er en Kinect tilsluttet, meldes der fejl (\cref{kinect:error}).
 
 \begin{lstlisting}[style=csharp, label=kinect:initialisering, caption={Initialisering af en Kinect sensor.}]
 KinectSensor sensor;
@@ -140,9 +136,9 @@ private void StartSensors()
 \subsubsection{Visning af Kinectens billeddata}
 For at vise de billeder, som Kinecten optager, benyttes \lstinline[style=csharp]!sensor_ColorFrameReady! eventet. 
 Dette event affyres hver gang der modtages et nyt billede fra Kinecten. 
-Et eksempel på at vise Kinectens data ses på \cref{kinect:picture}, hvor der i linje \ref{kinect:openframe} gemmes en reference til den frame, der netop er blevet optaget af Kinecten.
-I linje \ref{kinect:pixeldata} kopieres data over i et bytearray for at arbejde på dataen. 
-I linje \ref{kinect:source} sættes billedets source til et billede konstrueret ud fra dataen fra Kinecten.
+Et eksempel på visning af Kinectens data ses i \cref{kinect:picture}, hvor der i \cref{kinect:openframe} gemmes en reference til den frame, der netop er blevet optaget af Kinecten.
+I \cref{kinect:pixeldata} kopieres data over i et bytearray for at arbejde på dataen. 
+I \cref{kinect:source} sættes billedets source til et billede konstrueret ud fra dataen fra Kinecten.
 Billedet \lstinline[style=csharp]|imageFrame| viser nu hvad Kinecten ser.
 
 \begin{lstlisting}[style=csharp,caption={Visning af billeddata fra Kinectens RGB-kamera.}, label=kinect:picture]
