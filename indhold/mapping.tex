@@ -30,7 +30,6 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø, der er o
 \end{figure}
 
 \section{Vertikal og horisontal sensor model}\label{mapping:sensormodel}
-\stefan{kildehenvisning}
 Hvis vi antager, at alle objekter i opstillingen er placeret vinkelret til områdets x og y akser,
 kan vi konstruere en forholdsvis simpel basal sensormodel.
 Først beregner vi afstanden fra robotten til den pågældende celle i vores occupancy grid.
@@ -58,7 +57,7 @@ Hvor $z_{max}$ er sensorens maksimale måleafstand.
 Modellen vil se således ud beskrevet i pseudokode:
 
 \begin{algorithm}[H]
-\textbf{InversSensorModel($i, x_t, z_t$)} \\
+\textbf{InversSensorModel($m_i, x_t, z_t$)} \\
 Let $x_i,y_i$ be the center-of-mass of $m_i$ \\
 $r = |x_i - x + y_i - y|$ \\
 \If{$r > min(z_{max}, z_t + \frac{\alpha}{2}$)}{
@@ -115,17 +114,36 @@ Vi kan beregne en sandsynlighed, for en celle i afstand $r$, udfra normalfordeli
 P(r) = \lim \limits_{\rho \to 0} \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x
 \end{equation}
 
-Da vi vil have, at sandsynligheden i centrum af fordelingen er den samme, som sandsynligheden fra $l_{occ}$ ganger vi med konstanten $\eta$, for på den måde at strække fordelingen så den passer. 
+% Indsæt billede som viser hvorden mapningen vil se ud.
+
+Da vi vil have at sandsynlighederne mellem $z_t-\frac{\alpha}{2}$ og $z_t$ går i en glidende overgang fra $P_{free}$ til $P_{occ}$,
+mens vi vil have en overgang fra $P_{occ}$ til ${P_0}$ for afstande imellem $z_t$ og $z_t+\frac{\alpha}{2}$.
+Har vi valgt at lave en linær mapning, af de sandsynligheder vi får fra normalfordelingen til de to intervaller, ved hjælp af linjens ligning.
+Her er $P_{occ}$,$P_{free}$ og $P_0$ sandsynlighederne for henholdsvis $l_{occ}$,$l_{free}$ og $l_0$.
+
 
 \begin{equation}
-	P_\eta(r) = \eta P(r) 
+	P_\kappa(r) = \begin{cases}
+		\frac{P_{occ}-P_0}{P(z_t)-P(z_t+\frac{\alpha}{2})}(r-P(z_t))+P_{occ} &\text{hvis } z_t < r \\
+		\frac{P_{free}-P_{occ}}{P(z_t-\frac{\alpha}{2})-P(z_t)}(r-P(z_t))+P_{occ} &\text{hvis } z_t \leq r 
+	\end{cases}
 \end{equation}
 
-For at beregne $\eta$ udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
+%######################################
 
-\begin{equation}
-	\eta P(r) = 1 - \frac{1}{1+e^{l_{occ}}} \implies \eta = \frac{1-\frac{1}{1+e^{l_{occ}}}}{P(r)}
-\end{equation}
+%Da vi vil have, at sandsynligheden i centrum af fordelingen er den samme, som sandsynligheden fra $l_{occ}$ ganger vi med konstanten $\eta$, for på den måde at strække fordelingen så den passer. 
+
+%\begin{equation}
+%	P_\eta(r) = \eta P(r) 
+%\end{equation}
+
+%For at beregne $\eta$ udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
+
+%\begin{equation}
+%	\eta P(r) = 1 - \frac{1}{1+e^{l_{occ}}} \implies \eta = \frac{1-\frac{1}{1+e^{l_{occ}}}}{P(r)}
+%\end{equation}
+
+%########################################
 
 %\begin{equation}
 %	\begin{split}
@@ -136,16 +154,25 @@ For at beregne $\eta$ udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
 
 Den nye tildeling af sandsynlighed til cellen vil nu se således ud.
 
+%\begin{equation}
+%	l_{r} = \begin{cases} 
+%		l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\
+%		max\Bigg(l_{0},log\Big(\frac{P_\eta(r)}{1-P_\eta(r)}\Big)\Bigg) &\text{hvis } z_t < r \leq z_t+\frac{\alpha}{2} \\
+%		max\Bigg(l_{free},log\Big(\frac{P_\eta(r)}{1-P_\eta(r)}\Big)\Bigg) &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t \\
+%		l_{free} &\text{ellers}	
+%	\end{cases} 
+%\end{equation}
+%Hvor $l_0$ er defineret i \cref{eqn:l0} og $z_{max}$ er sensorens maksimale måleafstand.
+
 \begin{equation}
 	l_{r} = \begin{cases} 
 		l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\
-		max\Bigg(l_{0},log\Big(\frac{P_\eta(r)}{1-P_\eta(r)}\Big)\Bigg) &\text{hvis } z_t < r \leq z_t+\frac{\alpha}{2} \\
-		max\Bigg(l_{free},log\Big(\frac{P_\eta(r)}{1-P_\eta(r)}\Big)\Bigg) &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t \\
+		log\Big(\frac{P_\kappa(r)}{1-P_\kappa(r)}\Big) &\text{hvis } z_t < r \leq z_t+\frac{\alpha}{2} \\
+		log\Big(\frac{P_\kappa(r)}{1-P_\kappa(r)}\Big) &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t \\
 		l_{free} &\text{ellers}	
 	\end{cases} 
 \end{equation}
 Hvor $l_0$ er defineret i \cref{eqn:l0} og $z_{max}$ er sensorens maksimale måleafstand.
-
 
 
 

@@ -28,6 +28,7 @@ task main()
 
 \subsubsection{Tasks}
 \mikael{Så vidt jeg ved bruger vi ikke dette, så mon ikke bare det bør undlades?}
+\bruno{enig med mikael}
 Til at udnytte at NXT robotten understøtter multithreading, findes der i NXC et \lstinline[style=c]!task! keyword.
 Et NXC program består af maksimalt 255 tasks, der hver har et unikt navn. 
 Der skal altid findes en \lstinline[style=c]!Main! task, da denne køres først.
@@ -97,7 +98,6 @@ task main()
 \end{lstlisting}
 
 \subsubsection{Kommunikation med PC}
-\mikael{Burde vi beskrive at der i virkeligheden ikke sendes noget direkte til PC'en, fra NXT'en? Da der blot lægges en besked i en mailbox på NXT'en, som PC'en selv aflæser.}
 Da der skal bruges en ekstern enhed (en PC) til visse dele af systemet, er det nødvendigt at kunne kommunikere med en PC fra NXT'en.
 Til kommunikation via Bluetooth findes der på NXT et antal mailboxe.
 Disse anvendes til at sende og modtage beskeder.
