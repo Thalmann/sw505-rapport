@@ -197,9 +197,9 @@ Oversætter vi værdierne 50.00\% og 50.01\% får vi henholdsvis 0dB og 0.0017dB
 Ønsker vi at genskabe vores \textit{belief} udfra log odds ($l_x$), kan vi benytte følgende ligning:
 
 \begin{equation}
-bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}
+	bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}\label{logodds:bel}
 \end{equation}
- \\
+\\
 \cite[s. 95]{probabilisticRobotics} 
 
 \subsubsection{Udledning af opdateringsalgoritmen}
