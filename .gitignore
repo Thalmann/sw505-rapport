@@ -15,7 +15,7 @@ tmp*
 *.lot
 main.pdf
 *.out
-*.gz
+*.gz*
 *.dvi
 
 # mstest test results

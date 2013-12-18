@@ -1,7 +1,7 @@
 \input{./indhold/notation}
 
 \section{Sandsynlighedsteori}
-Som beskrevet i \cref{sensorer}, kan robottens viden omkring verdenen den bevæger sig i, ikke være komplet pga. måleusikkerheder.\thilemann{Bør vi nævne at den dog kender sin position via kameraet?}
+Som beskrevet i \cref{sensorer}, kan robottens viden omkring verdenen den bevæger sig i, ikke være komplet pga. måleusikkerheder.
 På trods af dette, er den nødt til at kunne reagere på den netop tilgængelige viden, hvorfor det er nødvendigt med metoder, der gør det muligt at resonere sig frem til et 'bedste' valg.
 Dette afsnit introducerer den nødvendige sandsynlighedsteori, for at kunne beskrive, hvad der gør sig gældende i en given verden, baseret på robottens observationer af netop denne.
 
@@ -197,9 +197,9 @@ Oversætter vi værdierne 50.00\% og 50.01\% får vi henholdsvis 0dB og 0.0017dB
 Ønsker vi at genskabe vores \textit{belief} udfra log odds ($l_x$), kan vi benytte følgende ligning:
 
 \begin{equation}
-bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}
+	bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}\label{logodds:bel}
 \end{equation}
- \\
+\\
 \cite[s. 95]{probabilisticRobotics} 
 
 \subsubsection{Udledning af opdateringsalgoritmen}
@@ -251,7 +251,7 @@ sandsynligheden for $x$. Den \textit{prior} sandsynlighed er også med til at de
 \textit{belief} før der tages højde for \textit{evidens} i form af sensormålinger.
 
 \begin{equation}
- l_0 = log\Bigg(\frac{P(x)}{1-P(x)}\Bigg)
+	l_0 = log\Bigg(\frac{P(x)}{1-P(x)}\Bigg) \label{eqn:l0}
  \end{equation}
 \cite[s. 96]{probabilisticRobotics} \\
 

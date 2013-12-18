@@ -1,6 +1,6 @@
 % !TeX spellcheck = da_DK
 \label{sensorer}
-Følgende afsnit undersøger de tilgængelige sensorer, som er interessante for projektet.
+Følgende afsnit undersøger de tilgængelige sensorer og motorer, som er interessante for projektet.
 Da der er stor forskel på sensorerne, der er til rådighed, er der foretaget forskellige forsøg, hvis formål er at klarlægge præcisionen af de forskellige sensorer.
 
 \begin{figure}[h]
@@ -31,11 +31,9 @@ Da der er stor forskel på sensorerne, der er til rådighed, er der foretaget fo
 \end{subfigure}
 \caption{Komponenter der betragtes til konstruktion af robotten.}
 \end{figure}
-\thilemann{Motoren er ikke en sensor - navnet på kapitlet samt indledning henviser kun til at afsnittene handler om sensorer - der skal således skrives noget om motorer i indledningen.}
-\thilemann{Louise: "Overskriften bør ændres så den dækker hele kapitlet, fx 'Sensorer og motorer'".}
-\bruno{Det er rotationssensoren der testes i motoren.}
 
 \section{Afstandssensorer}
+\mikael{I kompas konkluderer vi at det ikke kunne bruges. Vi konkluderer ikke noget for hverken afstandssensor eller motor, bør vi ikke det?}
 Dette afsnit beskriver testen af de to afstandssensorer (\cref{sensor:ultrasonic_sensor,sensor:infraroed_sensor}), som kan være interessante at montere på robotten.
 For at afgøre hvilken der passer bedst til at løse problemet, er de blevet testet.
 
@@ -43,32 +41,31 @@ Formålet med at teste disse sensorer er, at robotten skal have en måde at afg�
 Derfor vil disse tests undersøge følgende:
 \begin{itemize}
 \item Hvor nøjagtigt kan sensorerne bestemme afstanden til et objekt?
-\item Hvilket interval kan der måles i samt hvad den minimale og maksimale måleafstand er?
+\item Hvilket interval kan der måles i (hvad er den minimale og maksimale måleafstand)?
 \end{itemize}
 
 \subsection{Ultrasonisk Sensor}
 Den ultrasoniske sensor, som kan ses på \cref{sensor:ultrasonic_sensor}, kan måle afstand til objekter.
 
 Det gøres ved at sende en lydbølge, hvorefter der beregnes hvor lang tid det tager for denne at ramme objektet, for derefter at blive reflekteret tilbage igen.
-Sensoren måler afstanden i cm eller tommer.
-Den maksimale afstand der kan måles, er 255 cm med en præcision på $\pm$3 centimeter.
+Den maksimale afstand der kan måles er 255 cm, med en præcision på $\pm 3$ centimeter.
 De bedste aflæsninger fåes ved måling af store flade objekter med hård overflade, i modsætning til mindre objekter med rund og/eller blød overflade.\cite{nxt}
 
 \subsubsection{Test}
 Der er gennemført en mindre test af sensoren, for at finde ud af hvor nøjagtig den er.
 
-Testen blev udført ved at lave en simpel konstruktion kun bestående af NXT og den ultrasoniske sensor.
-Konstruktionen blev placeret i en række afstande fra en væg, hvor sensoreren var placeret vandret, pegende direkte på væggen.
-Herefter blev sensoren aflæst samtidig med, at afstanden mellem væg og sensor blev målt med lineal.
-Den samme test blev udført 3 gange.
+Testen blev udført ved at lave en simpel \lego konstruktion, kun bestående af NXT og den ultrasoniske sensor.
+Konstruktionen blev placeret i en bestemt afstand fra en væg, hvor sensoreren var placeret vandret, pegende direkte på væggen.
+Herefter blev sensoren aflæst, samtidig med at afstanden mellem væg og sensor blev målt med lineal.
+Der blev udført den samme test 3 gange, hver gang for en bestemt række afstande mellem 0 og 255 cm.
 
 \subsubsection{Resultater}\label{sensorer:us:resultater} Tabel med resultater fra forsøget kan ses i \cref{appendix:ultrasonisk}.
 
 En graf-repræsentation af resultaterne kan ses i \cref{sensor:ultrasonic_resultat_diagram}.
-Den røde linje indikerer det ideele resultat. mens den blå, brune og grønne linje viser resultaterne fra de tre test.
+Den røde linje indikerer det ideele resultat. mens den brune, grønne og lilla linje viser resultaterne fra de tre test.
 Det ses på grafen, at de tre test alle giver forkerte resultater, når sensoren er mindre en 20 cm fra objektet.
-Desuden kan det ses, at der i test1 kun kunne måles op til 170 cm, før der opstod usikkerhed, hvor de andre tests nåede 200 (test2) og 230 (test3) cm før der opstod større usikkerhed.
-Generelt overholder sensoren dens specifikationer, idet der er en afvigelse på 3 cm på målingerne, men forsøget viser, at der kun med sikkerhed kan måles mellem 20 og 170 cm.
+Desuden kan det ses, at der i test 1 (brun) kun kunne måles op til 170 cm, før der opstod usikkerhed, hvor de andre tests nåede 200 cm (test 2 -- grøn) og 230 cm (test 3 -- lilla) før der opstod større usikkerhed.
+Generelt overholder sensoren dens specifikationer, idet der er en afvigelse på 3 cm på målingerne, men forsøget viser, at der kun kan måles mellem 20 og 170 cm, uden der opstår større usikkerheder.
 
 \begin{figure}[h]
 \centering
@@ -81,7 +78,7 @@ Generelt overholder sensoren dens specifikationer, idet der er en afvigelse på 
 
 \subsection{Infrarød Sensor}
 Den infrarøde afstandssensor fra mindsensors.com, som kan ses på \cref{sensor:infraroed_sensor}, er en afstandssensor med høj præcision, der kan måle afstande mellem 10 og 80 cm.
-Sensoren virker som den ultrasonisk sensor, men sender et infrarødt lys i stedet for en ultrasonisk impuls.
+Sensoren virker som den ultrasoniske sensor, men sender et infrarødt lys i stedet for en ultrasonisk impuls.
 
 \subsubsection{Test}
 For at afprøve sensorens præcision og rækkevidde, er der foretaget en test af sensoren.
@@ -114,18 +111,15 @@ Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forvente
 Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor og den infrarøde sensor. 
 Den ultrasoniske sensor var præcis med en afvigelse på $\pm$3 cm mellem 20 cm og 170 cm.
 Den infrarøde sensor var præcis med afvigelse på $\pm$3 cm, mellem 10 cm og 56 cm.
-Den infrarøde sensor angiver sine målinger med højere præcision, men da fejlmarginen er 3 cm anses den ikke som værende mere præcis end den ultrasoniske sensor.
+Den infrarøde sensor angiver sine målinger med højere præcision, men da fejlmarginen er 3 cm, anses den ikke som værende mere præcis end den ultrasoniske sensor.
 I forhold til rækkevidden, måler den ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
 Valget mellem de to sensorer er derfor afhængig af hvilket krav robotten har til rækkevidden.
 
 \section{Motor}\label{sensorer:motorer}
-Motoren, der er testet her, er fremstillet af \lego.
-Den består af en rotationssensor, som måler omdrejningerne ved grader med en nøjagtighed på \'en grad ifølge \lego. 
+Motoren, der er testet her, er fremstillet af \lego og kan ses i \cref{sensor:servo_motor}.
+Den består af en rotationssensor, som måler omdrejningerne ved grader, med en nøjagtighed på \'en grad i følge \lego. 
 Desuden gør denne sensor det også muligt at styre hvor meget kraft motoren skal køre med.
-Køres der med flere motorer har NXT'en indbygget software, der gør det muligt at synkronisere disse, hvilket er hensigtsmæssig hvis fx den ene motor skulle være stærkere eller svagere end den anden.\cite{tikNXT}
-Motoren kan ses på \cref{sensor:servo_motor}.
-\mikkel{Ovenstående skal skrives om - jeg nåede det bare ikke inden vi sendte til vejleder}
-\thilemann{Jeg synes det er meget fint?}
+Køres der med flere motorer har NXT'en indbygget software, der gør det muligt at synkronisere disse, hvilket er hensigtsmæssig hvis fx. den ene motor skulle være stærkere eller svagere end den anden.\cite{tikNXT}
 
 \subsection{Formål}
 Formålet med denne test er at teste motorens nøjagtighed.
@@ -134,18 +128,17 @@ Hvis motoren ikke har høj nøjagtighed, skal der tages højde for det, når den
 \subsection{Test}
 For at bestemme motorens nøjagtighed i praksis, blev en test opstillet hvor to moterer roteres med et bestemt antal grader.
 Motorernes egentlige rotation aflæses med vinkelmåler og holdes op mod den ønskede rotation, samt den rotation motorerne angiver at de har roteret.
-Sidstenævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
+Sidstnævnte fås ved at aflæse motorernes \lstinline[style=csharp]!TachoCount! egenskab.
 
-\paragraph{Resultaterne} fra forsøget kan ses i \cref{appendix:motor_test}. 
-\mikkel{Der er nogle fejl i dette afsnit som skal rettes efter vi har sendt til vejleder}
-Af resultaterne kan vi bestemme den største afvigelse til +7 og -4 grader målt.
-Tacho-værdien har en afvigelse på maksimalt +1 og -4 grader.
-Dette stemmer ikke overens med de antagede $\pm$1 grad afvigelse.
+\subsubsection{Resultat}
+Resultaterne fra forsøget kan ses i \cref{appendix:motor_test}. 
+Af resultaterne kan vi bestemme de største afvigelser til +7 og -4 grader.
+Tacho-værdien har en afvigelse på maksimalt +1 og -4 grad.
+Dette stemmer ikke overens med de antagede $\pm$1 grads afvigelse.
 
-+7 og +6 grader målt optræder kun en gang.
++7 og +6 grader målt optræder kun \'en gang.
 Ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager, at det er pga. unøjagtige målinger ved forsøgsudførelsen, er det stadig ikke $\pm$1 grad.
-\stefan{Man kan ikke direkte aflæse afvigelserne fra tabellen}
-\thilemann{Synes heller ikke meningen står helt klar}
+
 Kigger vi på \cref{sensor:motor_sensor_diagram} kan vi se, at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator for, at det er bedre at benytte tacho-værdien.
 
 \begin{figure}
@@ -220,7 +213,7 @@ De første to test er taget med, da forbedringen af præcisionen højst kunne v�
 Altså en marginal forbedring i forhold til testresultaterne.
 
 \subsubsection{Resultater}
-Resultaterne kan ses i \cref{appendix:kompas_test}. Som det fremgår af \cref{kompas:boksplot} er den gennemsnitlige afvigelse i alle test meget tæt på 0.
+Resultaterne kan ses i \cref{appendix:kompas_test}. Som det fremgår af \cref{kompas:boksplot} er den gennemsnitlige afvigelse (prikken) i alle test meget tæt på 0.
 Altså ved vi at kompasset laver lige mange og lige store (i gennemsnit) udsving til begge sider, hvilket gør det sværere at kalibrere for sådanne udsving.
 Samtidig viser plottet, at halvdelen af kompassets målinger er over 2-3$\dg$ ved siden af de egentlige målinger - med den største afvigelse på 9$\dg$.
 
