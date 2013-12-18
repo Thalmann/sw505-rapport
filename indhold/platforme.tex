@@ -1,18 +1,18 @@
-I dette kapitel vil den valgte platform, \legoms, kort blive beskrevet med en begrundelse for dette valg.
+I dette kapitel vil den valgte platform, \legoms, kort blive beskrevet, sammen med en begrundelse for dette valg.
 Yderligere argumenteres der for valg af API til NXT-enheden.
 
-\section{Lego$^{\textrm{\scriptsize\textregistered}}$ Mindstorms$^{\textrm{\scriptsize\textregistered}}$}\label{lego:mindstorms-nxt}
+\section{\legoms}\label{lego:mindstorms-nxt}
 \legoms er et byggesæt, hvor det er muligt at bygge programmerbare robotter i \lego-klodser.
 
 Til at bygge disse robotter, er der i \legoms nogle sensorer og aktuatorer. Sensorerne gør det muligt for robotten at modtage input fra sine omgivelser.
-Ved brug af aktuatorerne kan robotten reagere på disse inputs.
+Ved brug af aktuatorerne kan robotten agere i verden og evt. reagere på inputs fra sine sensorer.
 
 Ud over de originale \lego dele, er der også tredjeparts producenter, som har et udbud af andre typer sensorer og aktuatorer, der kan samarbejde med \legoms.
 
 \subsection{NXT}
-Denne sektion er baseret på \cite{nxt}, hvilket omhandler NXT 2.0, som er den version, der bruges i dette projekt.
+Denne sektion er baseret på \cite{nxt}, hvilket omhandler NXT 2.0, som er den version der bruges i dette projekt.
 NXT Intelligent Brick (oftest kaldt blot 'NXT' eller 'brick') er hjernen i \legoms robotten.
-Det er den, der står for at modtage og behandle input fra sensorer samt styre de monterede aktuatorer.
+Det er den der står for at modtage og behandle input fra sensorer, samt styre de monterede aktuatorer.
 Et billede af NXT 2.0 kan ses på \cref{platform:nxt}.
 
 \begin{figure}
@@ -30,7 +30,7 @@ NXT'en har 3 motorporte (kaldet A, B og C) og 4 sensorporte (kaldet 1, 2, 3 og 4
 Der kan kommunikeres med NXT'en ved at tilslutte den til en anden enhed med USB-kabel eller Bluetooth.
 
 \subsubsection{Feedback}
-Til output har NXT'en en 100 x 64 pixel LCD display samt en 8 kHz højttaler.
+Til output har NXT'en en 100 x 64 pixel LCD display, samt en 8 kHz højttaler.
 
 \subsubsection{Styring}
 NXT'en kan styres på to måder:
@@ -39,10 +39,10 @@ Alternativt kan programmer sendes (via Bluetooth eller USB) til NXT'en, hvorfra 
 
 
 \subsubsection{Tekniske specifikationer}
-De tekniske specifikationer for NXT 2.0 kan ses på \cref{mindstorms:tekniske_spec} \cite{nxt}. 
+De tekniske specifikationer for NXT 2.0 kan ses i \cref{mindstorms:tekniske_spec} \cite{nxt}. 
 
 
-\begin{figure}
+\begin{table}[h]
 \begin{tabular}{|c |c|}
 \hline
 Microcontroller & \shortstack{\\32-bit ARM7 microcontroller\\ 8-bit AVR controller}\\
@@ -64,10 +64,10 @@ Strømkilde & 6 AA batteries\\
 \end{tabular}
 \caption{\legoms NXT tekniske specifikationer.}
 \label{mindstorms:tekniske_spec}
-\end{figure}
+\end{table}
 
 
-\subsection{\legoms}
+\subsection{Valg af \legoms}
 Der er mange gode grunde til at vælge \legoms.
 Her er givet fire overordnede punkter, der efterfølgende vil blive gennemgået:
 
@@ -79,7 +79,7 @@ Her er givet fire overordnede punkter, der efterfølgende vil blive gennemgået:
 \end{itemize}
 
 \subsubsection{Tilgængelighed}
-Grundet at \lego (inkl. \legoms) er ment til almindelige brugere er, at det masseproduceret og derved kan købes forholdsvist billigt og i helt almindelige butikker (legetøjsforretninger og ofte også supermarkeder).
+Grundet at \lego (inkl. \legoms) er ment til almindelige brugere, er det masseproduceret og derved kan købes forholdsvist billigt og i helt almindelige butikker (legetøjsforretninger og ofte også supermarkeder).
 
 \subsubsection{Nemt at gå til}
 Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms sensorer/aktautorer gør det nemt at lave en konstruktion og derefter modificere den, så den udfører sin opgave tilfredsstillende.
@@ -87,18 +87,18 @@ Det faktum at man bygger sin robot i \lego klodser, med tilføjelse af \legoms s
 Denne høje versatilitet gør, at \lego er perfekt til en prototype-orienteret fremgangsmåde for bygning af robotter.
 
 \subsubsection{Stort udvalg af sensorer}
-På grund af det store udvalg af sensorer, kan man bygge robotter. der kan løse et væld af opgaver.
-Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udskifte en sensor, hvis en type ikke virker tilfredsstillende.
+På grund af det store udvalg af sensorer, kan man bygge robotter der kan løse et væld af opgaver.
+Ved et projekt med høj usikkerhed, er det derved også nemt og billigt at udskifte en sensor, hvis den ikke virker tilfredsstillende.
 
 \subsubsection{Mange muligheder ift. styring}
-Fleksibiliteten i forhold til styring er både overordnet den måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
+Fleksibiliteten i forhold til styring er ment både som den overordnet  måde hvorpå robotten styres, men især også den måde hvorpå NXT'en styres.
 NXT'en kan udstyres med brugerdefineret firmware, der kan tilføje ekstra funktionalitet i forhold til \legos egen.
 
 I afsnittet herefter vil der blive argumenteret for valg af API, hvor API her skal forstås som måden hvorpå robotten skal styres.
 
 \section{NXT API}\label{nxt_api}
-Den ideelle løsning ville være at vælge et system, hvor robotten styrer alt; både navigation og indsamling af sensormålinger samt selve kortlægningsdelen.
-Dog er der begrænset med plads til data på NXT'en samtidig med, at den er begrænset af dens regnekraft (jævnfør \cref{mindstorms:tekniske_spec}).
+Den ideelle løsning ville være at vælge et system, hvor robotten styrer alt; navigation og indsamling af sensormålinger, samt selve kortlægningsdelen.
+Dog er der begrænset med plads til data på NXT'en, samtidig med at den er begrænset af dens regnekraft (se evt. \cref{mindstorms:tekniske_spec}).
 På grund af robottens hardwaremæssige begrænsninger og at problemformuleringen siger, at robotten til enhver tid skal kende sin position, er det derfor nødvendigt at 'outsource' visse opgaver til en PC.
 Dette ses blandt andet ved, at der benyttes en Microsoft Kinect til at lokalisere robotten, hvilket gør en PC påkrævet for at bearbejde billeddata fra Kinecten, for netop at fortælle robotten dens faktiske position.
 
