@@ -10,7 +10,7 @@ I dette afsnit vil de API'er, der er valgt i \cref{nxt_api}, blive beskrevet.
 Biblioteket er skrevet i \csharp og kan dermed anvendes af alle de .NET kompatible sprog.
 
 \subsubsection{Kommunikation}
-Kommunikationen fra Mindsqualls til NXT enheden sker igennem klassen \lstinline[style=csharp]!NxtCommunicationProtocol! som findes i en \lstinline[style=csharp]!McNxtBrick!. 
+Kommunikationen fra Mindsqualls til NXT enheden sker igennem klassen \lstinline[style=csharp]!NxtCommunicationProtocol!, som findes i en \lstinline[style=csharp]!McNxtBrick!. 
 En \lstinline[style=csharp]!McNxtBrick! er en abstraktion over hele NXT brick enheden. 
 Denne kan således også styre motorer og sensorer direkte, men da dette projekt håndterer al kørsel og sensormåling på robotten, er kun kommunikationsprotokollen nødvendig.
 \lstinline[style=csharp]!NxtCommunicationProtocol! indeholder metoder til at sende og modtage beskeder.
@@ -23,8 +23,8 @@ Metoderne til dette er:
 
 \lstinline[style=csharp]!NxtMailBox! er en enumeration type, der indeholder de forskellige mailboxes, der er tilgængelige på NXT enheden.
 
-Brugen af \lstinline[style=csharp]!MessageWrite! kan ses på \cref{messagewrite} hvor en streng sendes til outboxen \lstinline[style=csharp]!PC_OUT!.
-CommunicationBrick er her en \lstinline[style=csharp]!McNxtBrick! og CommLink er en property der returnerer den \lstinline[style=csharp]!NxtCommunicationProtocol!, der er tilknyttet CommunicationBrick 
+Brugen af \lstinline[style=csharp]!MessageWrite! kan ses i \cref{messagewrite} hvor en streng sendes til outboxen \lstinline[style=csharp]!PC_OUT!.
+CommunicationBrick er her en \lstinline[style=csharp]!McNxtBrick! og \lstinline[style=csharp]!CommLink! er en property, der returnerer den \lstinline[style=csharp]!NxtCommunicationProtocol!,der er tilknyttet CommunicationBrick 
 
 \begin{lstlisting}[style=c,label=messagewrite, caption={Brug af MessageWrite.}]
 public void SendMessage(string s)
@@ -33,9 +33,9 @@ public void SendMessage(string s)
 }
 \end{lstlisting}
 
-Brugen af \lstinline[style=csharp]!MessageReadToBytes! kan ses på \cref
+Brugen af \lstinline[style=csharp]!MessageReadToBytes! kan ses i \cref
 {messageread}.
-Her kigger CommLink i inboxen \lstinline[style=csharp]!PC_INBOX!, og hvis der er en besked returneres denne som et byte array. 
+Her kigger \lstinline[style=csharp]!CommLink! i mailboxen \lstinline[style=csharp]!PC_INBOX!, og hvis der er en besked returneres denne som et byte array. 
 Hvis der ikke er en besked i inboxen smides en \lstinline[style=csharp]!NxtCommunicationProtocolException! exception.
 
 \begin{lstlisting}[style=c,label=messageread, caption={Brug af MessageReadToBytes.}]
