@@ -1,7 +1,7 @@
 % !TeX spellcheck = da_DK
 \section{Occupancy Grid algoritmen}
 Dette afsnit vil gennemgå algoritmen, der skal opdatere et occupancy grid.
-Algoritmen er taget fra \cite[p. 286]{probabilisticRobotics}.
+Algoritmen er baseret på occupancy algoritmen fra \cite[p. 286]{probabilisticRobotics}.
 Formålet med \textit{occupancy grid} algoritmen er, at beregne	et nyt kort ud fra et kort og en samling data:
 
 \begin{equation}
@@ -27,23 +27,35 @@ For at begrænse mængden af celler, der skal beregnes ved en opdatering af et o
 p(m_i \mid z_{1:t}, x_{1:t})
 \end{equation} 
 
-Da der nu er et problem af denne type for hver celle, kan man nøjes med kun at opdatere de celler, der er ny information om.
+Da der nu er et problem af denne type for hver celle, kan man nøjes med kun at opdatere de celler, der er ny information om. 
+Det er således kun de celler, som er indenfor robottens synsfelt, dvs. de celler som ligger i samme række eller kolonne som robotten i vores occupancy grid, der skal opdateres.
 
-Som i det originale binære filter (se evt. \cref{bayes_binaerfiltre}) benyttes log odds repræsentationen til at udtrykke om en celle er optaget
+
+Som i det originale binære filter (se evt. \cref{bayes_binaerfiltre}) benyttes log odds repræsentationen til at udtrykke om en celle er \textit{occupied}.
+$l_{t,i}$ repræsentere sandsynligheden til tiden $t$ for at cellen $m_i$ er \textit{occupied} på logodds form og $l_r$ er værdien fra vores sensor model. \\
+
+$l_{t,i}$ opdateres på følgende måde.
+\begin{equation}
+	l_{t,i} = \begin{cases}
+		l_{t-1,i} + l_r - l_0 &\text{hvis } x_i = x_r \vee y_i = y_r \\
+		l_{t-1,i} &\text{ellers}
+	\end{cases}
+\end{equation}
+Hvor $x_i, y_i$ er grid koordinatet for cellen $m_i$ mens $x_r, y_r$ er grid koordinatet for robotten. Hvilket giver.
 
 \begin{equation}
 l_{t,i} = log{ \frac{p(m_i \mid z_{1:t}, x_{1:t})}{1 - p(m_i \mid z_{1:t}, x_{1:t})}} 
 \end{equation} 
 
-Sandsynligheden findes ud fra log odds repræsentationen ved
+Sandsynligheden genfindes ud fra log odds repræsentationen ved
 
 \begin{equation}
-p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + exp \{ l_{t,i} \} }
+	p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + e^{l_{t,i}}}
 \end{equation} 
 
-\Cref{occupancygrid:alg} viser hvordan værdierne i et occupancy grid kunne opdaterer de celler, der er relevante for en aktuel sensormåling. 
+\Cref{occupancygrid:alg} viser hvordan cellerne i vores occupancy grid opdateres udfra en sensormåling. 
 Til opdateringen bruges \textbf{inverse\_sensor\_model}, \cref{alg:inversesensormodel}.
-Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds
+Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds udfra \cref{eqn:l0}.
 
 \begin{equation}
   l_0 =  log \frac{p(m_i = 1)}{p(m_i = 0)} = log \frac{p(m_i)}{1- p(m_i)}
@@ -51,11 +63,11 @@ Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret
 
 \begin{algorithm}[H]
 \LinesNumbered
-OccupancyGridMapping( \{$ l_{t-1,i} $ \}, $ x_t $, $ z_t $):
+OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
 
 \ForAll{cells $ m_i $}
 {
-\eIf{$ m_i $ is in perceptual field of $ z_t $ \\}
+\eIf{$ x_i = x_r$ or $y_i = y_r$}
 %then
 { $ l_{t,i} = l_{t-1,i} $ + \textbf{inverse\_sensor\_model} $( m_i, x_t, z_t ) - l_0$\\ }
 %else
