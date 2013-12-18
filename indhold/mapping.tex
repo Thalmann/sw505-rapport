@@ -56,7 +56,7 @@ Hvor $z_{max}$ er sensorens maksimale måleafstand.
 Modellen vil se således ud beskrevet i pseudokode:
 
 \begin{algorithm}[H]
-\textbf{InversSensorModel($i, x_t, z_t$)} \\
+\textbf{InversSensorModel($m_i, x_t, z_t$)} \\
 Let $x_i,y_i$ be the center-of-mass of $m_i$ \\
 $r = |x_i - x + y_i - y|$ \\
 \If{$r > min(z_{max}, z_t + \frac{\alpha}{2}$)}{
@@ -113,17 +113,24 @@ Vi kan beregne en sandsynlighed, for en celle i afstand $r$, udfra normalfordeli
 P(r) = \lim \limits_{\rho \to 0} \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi \big(\frac{\alpha}{6}\big)^2}}e^{- \frac{(x - z_t)^2}{2 (\frac{\alpha}{6})^2}}\, \mathrm{d}x
 \end{equation}
 
-Da vi vil have, at sandsynligheden i centrum af fordelingen er den samme, som sandsynligheden fra $l_{occ}$ ganger vi med konstanten $\eta$, for på den måde at strække fordelingen så den passer. 
+% Indsæt billede som viser hvorden mapningen vil se ud.
 
-\begin{equation}
-	P_\eta(r) = \eta P(r) 
-\end{equation}
+Da vi vil have at sandsynlighederne mellem $z_t-\frac{\alpha}{2}$ og $z_t$ går i en glidende overgang fra 
+%######################################
 
-For at beregne $\eta$ udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
+%Da vi vil have, at sandsynligheden i centrum af fordelingen er den samme, som sandsynligheden fra $l_{occ}$ ganger vi med konstanten $\eta$, for på den måde at strække fordelingen så den passer. 
 
-\begin{equation}
-	\eta P(r) = 1 - \frac{1}{1+e^{l_{occ}}} \implies \eta = \frac{1-\frac{1}{1+e^{l_{occ}}}}{P(r)}
-\end{equation}
+%\begin{equation}
+%	P_\eta(r) = \eta P(r) 
+%\end{equation}
+
+%For at beregne $\eta$ udfra $l_{occ}$ benytter vi os af \cref{logodds:bel}.
+
+%\begin{equation}
+%	\eta P(r) = 1 - \frac{1}{1+e^{l_{occ}}} \implies \eta = \frac{1-\frac{1}{1+e^{l_{occ}}}}{P(r)}
+%\end{equation}
+
+%########################################
 
 %\begin{equation}
 %	\begin{split}
