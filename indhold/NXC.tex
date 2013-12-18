@@ -1,11 +1,11 @@
 \subsection{NXC}\label{nxc}
-Til at programmere robotten(NXT'en) har vi valgt at benytte NXC; et programmeringssprog designet til NXT robotten. 
+Til at programmere robotten (NXT'en) har vi valgt at benytte NXC; et programmeringssprog designet til NXT robotten. 
 Brugen af NXC til at styre robotten vil blive beskrevet her.\cite{NXC}
 Desuden bruges Enhanced Firmware, for at få adgang til trigonometriske funktioner, som er nødvendige for projektet.\cite{enhanced_firmware}
 
 \subsubsection{NXC sproget}
 NXC har en syntax der minder meget om C syntax. 
-Udover de traditionelle programmeringskonstruktioner indeholder NXC en masse standardfunktioner til at interagere med robottens sensorer og motorer.
+Ud over de traditionelle programmeringskonstruktioner indeholder NXC en masse standardfunktioner til at interagere med robottens sensorer og motorer.
 
 \subsubsection{Sensorer og motorer}
 NXC sproget indeholder funktioner til at styre sensorer og motorer tilsluttet NXT'en.
@@ -27,6 +27,7 @@ task main()
 \end{lstlisting}
 
 \subsubsection{Tasks}
+\mikael{Så vidt jeg ved bruger vi ikke dette, så mon ikke bare det bør undlades?}
 Til at udnytte at NXT robotten understøtter multithreading, findes der i NXC et \lstinline[style=c]!task! keyword.
 Et NXC program består af maksimalt 255 tasks, der hver har et unikt navn. 
 Der skal altid findes en \lstinline[style=c]!Main! task, da denne køres først.
@@ -96,11 +97,11 @@ task main()
 \end{lstlisting}
 
 \subsubsection{Kommunikation med PC}
-Da der skal bruges en ekstern enhed til at lokalisere robotten er det nødvendigt at kunne kommunikere med en PC fra NXT'en.
-Til kommunikation via Bluetooth findes der på NXT et antal inboxe og outboxe. 
+Da der skal bruges en ekstern enhed (en PC) til visse dele af systemet, er det nødvendigt at kunne kommunikere med en PC fra NXT'en.
+Til kommunikation via Bluetooth findes der på NXT et antal mailboxe.
 Disse anvendes til at sende og modtage beskeder.
 Et eksempel på at modtage en besked kan ses i \cref{nxc:receive}.
-\lstinline[style=c]|ReceiveRemoteString| bruges til at kigge om der er en ny besked i \lstinline[style=c]!INBOX 5!.
+\lstinline[style=c]|ReceiveRemoteString| bruges til at kigge om der er en ny besked i \lstinline[style=c]!INBOX!.
 Denne bliver fjernet fra inboxen, hvis det andet parameter er \lstinline[style=c]|true|, og beskeden bliver læst over i strengen \lstinline[style=c]|in|.
 
 \begin{lstlisting}[style=c,label=nxc:receive,caption={Et eksempel på at modtage beskeder over Bluetooth.}]
