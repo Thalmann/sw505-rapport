@@ -69,7 +69,26 @@ Vægten af en pixel beskriver hvor interessant den er.
 Således er pixels med vægt 0 ikke interessante.
 De resterende pixels betegnes herefter som \emph{interessante pixels}.
 
-\mikkel{Indsæt evt. sort/hvid billede af tracking}
+\Cref{tracking:img:track:weight} viser et eksempel på vægtning af pixels efter sporing af pink i \cref{tracking:img:initial}.
+Da nogle interessante pixels har meget lav vægt er de svære at se på billedet.
+På \cref{tracking:img:track:full} vises derfor alle de interessante pixels efter sporing af pink.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{tracking/emptyGrid_TRACK2}
+\caption{Farve-vægte.}
+\label{tracking:img:track:weight}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{tracking/emptyGrid_TRACK}
+\caption{Interessante pixels}
+\label{tracking:img:track:full}
+\end{subfigure}
+
+\caption{Billedet fra \cref{tracking:img:initial} hvori farven pink er blevet sporet.}
+\end{figure}
 
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
@@ -80,6 +99,7 @@ Der blev dog ved testen introduceret tre problemstillinger:
 \begin{enumerate}
 \item Dele af billedet indeholdt \emph{farve-støj}.
 Ved farvestøj forstås pixels der ligger i tæt farve-afstand til den søgte farve, men langt fra det eftersøgte objekt.
+Dette fremgår tydeligt af \cref{tracking:img:track:full} hvor den mindste udspændende firkant ville dække næsten hele billedet.
 \item Farveændringer som følge af lys/skygge.
 I takt med at robotten bevæger sig vil lys falde forskelligt på de farvede overflader.
 Dette betyder at farven opfanget af kameraet ikke længere matcher den søgte farve godt.
