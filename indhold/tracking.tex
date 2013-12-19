@@ -12,6 +12,17 @@ Det vil sige, at systemet skal være i stand til at lokalisere robotten ud fra \
 Som beskrevet ovenfor udstyres robotten med to mærkninger i klare farver, som skal spores.
 Det er altså målet at finde de dele af et enkelt billede, der matcher bestemte farver.
 
+\begin{figure}[h]
+\centering
+\includegraphics{tracking/emptyGrid}
+\caption{Et billede af robotten hvori en farve skal spores.}
+\label{tracking:img:initial}
+\end{figure}
+
+I \cref{tracking:img:initial} vises et billede af robotten og en papkasse.
+Vi ønsker her at spore den blå og pink seddel der er sat fast på robotten.
+I de følgende billeder tages der udgangspunkt i sporing af den pinke farve.
+
 \subsection{Match af farver}
 For at vurdere om to farver matcher hinanden, må det først gøres klart, at det ikke kan forventes at matche en farve eksakt.
 Til dette spiller faktorer som lys og skygge for stor en rolle.
@@ -58,7 +69,26 @@ Vægten af en pixel beskriver hvor interessant den er.
 Således er pixels med vægt 0 ikke interessante.
 De resterende pixels betegnes herefter som \emph{interessante pixels}.
 
-\mikkel{Indsæt evt. sort/hvid billede af tracking}
+\Cref{tracking:img:track:weight} viser et eksempel på vægtning af pixels efter sporing af pink i \cref{tracking:img:initial}.
+Da nogle interessante pixels har meget lav vægt er de svære at se på billedet.
+På \cref{tracking:img:track:full} vises derfor alle de interessante pixels efter sporing af pink.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{tracking/emptyGrid_TRACK2}
+\caption{Farve-vægte.}
+\label{tracking:img:track:weight}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=\textwidth]{tracking/emptyGrid_TRACK}
+\caption{Interessante pixels}
+\label{tracking:img:track:full}
+\end{subfigure}
+
+\caption{Billedet fra \cref{tracking:img:initial} hvori farven pink er blevet sporet.}
+\end{figure}
 
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
@@ -69,6 +99,7 @@ Der blev dog ved testen introduceret tre problemstillinger:
 \begin{enumerate}
 \item Dele af billedet indeholdt \emph{farve-støj}.
 Ved farvestøj forstås pixels der ligger i tæt farve-afstand til den søgte farve, men langt fra det eftersøgte objekt.
+Dette fremgår tydeligt af \cref{tracking:img:track:full} hvor den mindste udspændende firkant ville dække næsten hele billedet.
 \item Farveændringer som følge af lys/skygge.
 I takt med at robotten bevæger sig vil lys falde forskelligt på de farvede overflader.
 Dette betyder at farven opfanget af kameraet ikke længere matcher den søgte farve godt.
@@ -82,7 +113,6 @@ I det følgende beskrives de metoder, der er anvendt til at løse ovenstående p
 I \cref{tracking:adjust} beskrives resultatet af indførelsen af disse metoder.
 
 \subsection{Filtrering af støj}
-\bruno{Nicolaj spørger: Kan det illustreres med et par eksempler?}
 %Beskrivelse af implementationen af mean-filter
 Den beskrevne \emph{farve-støj}, der opstår i visse billeder, fjernes ved at anvende en variation af et 3x3 median-filter\cite{medianfilter}.
 I filteret betragtes alle værdier som binære (0 eller ikke 0).
@@ -100,6 +130,20 @@ $$\text{hvor } V_{x,y} = \{ w \in N_{x,y} \mid w > 0 \}$$
 Ved at anvende ovenstående filter på alle koordinat-sæt fjernes noget af den uønskede farve-støj.
 Filteret påføres gentagne gange, indtil ingen vægte opdateres.
 Herefter anses støjen som fjernet.
+
+\begin{figure}[h]
+\centering
+\includegraphics{tracking/emptyGrid_FILTER}
+\caption{Billedet fra \cref{tracking:img:track:full} efter filtrering.}
+\label{tracking:img:filter}
+\end{figure}
+
+\Cref{tracking:img:filter} vises resultatet af at anvende det beskrevne filter.
+Bemærk af billedet kun viser interessante pixels og ikke deres vægte.
+
+Det ses også på billedet, at papkassen stadig spores som værende pink.
+Dette problem løses indirekte som følge af de forskellige optimeringer der anvendes.
+Se \cref{tracking:optimizing} for yderligere detaljer.
 
 \subsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
@@ -138,7 +182,7 @@ R^{n'} = \left\{
 	\cvec{R^n_{x_2}+\omega}{R^n_{y_2}+\omega}
 \right\}
 \end{equation}
-Herved er det reducerede problems størrelse, beskrevet med udgangspunkt i det forrige problems løsning som illustreret på \cref{tracking:reduction}.
+Herved er det reducerede problems størrelse, beskrevet med udgangspunkt i det forrige problems løsning, som illustreret på \cref{tracking:reduction}.
 }
 
 \begin{figure}
@@ -190,6 +234,22 @@ Igennem forsøg fremgik det tydeligt at reduktionen i størrelse har en kraftig 
 Derved kunne $\omega$ sættes lavt og en hurtig opdateringshastighed kunne opnås.
 I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedredes som følge af $\omega = 5$.
 \end{description}
+
+\subsection{Løbende optimering}\label{tracking:optimizing}
+Efter filtrering af støj i et billede, vil der stadig være områder som vi ikke ønsker at spore der stadig bliver sporet.
+På billedet i \cref{tracking:img:filter} ses det at sporingen stadig \textit{genkender} papkassen som værende pink.
+Af \cref{tracking:img:track:weight} ses det dog, at den del af billedet har meget lav vægt.
+
+Ved løbende at beskære billedet og ændre den sporede farve til den med højest vægt i forrige sporing, vil støj i kanten af billedet løbende blive reduceret.
+Det betyder at efter få opdateringer vil papkassen ikke længere blive sporet.
+I \cref{tracking:img:final} ses resultatet af sporing efter et antal opdateringer.
+
+\begin{figure}[h]
+\centering
+\includegraphics{tracking/emptyGrid_FINAL}
+\caption{Den del af billedet der spores efter \textit{en række} opdateringer.}
+\label{tracking:img:final}
+\end{figure}
 
 \section{Opdateringshastighed}\label{tracking:updatespeed}
 Farvebilleder fra Kinecten kan indsamles på to forskellige måder:
