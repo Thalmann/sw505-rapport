@@ -89,8 +89,8 @@ Vi ved at centrum, dvs. middelværdien, for fordelingen skal være målingen $z_
 
 \begin{figure}
 \centering \includegraphics[scale=.75]{NormalDist}
-\label{normaldistimg}
 \caption{Normal fordeling $\mathcal{N}(\mu,\sigma^2)$.}
+\label{normaldistimg}
 \end{figure}
 
 Udfra \cref{normaldistimg} kan vi se, at det vil være passende hvis $\frac{\alpha}{2}$ svarer til tre standard afvigelser. dvs.
@@ -122,7 +122,7 @@ Her er $P_{occ}$,$P_{free}$ og $P_0$ sandsynlighederne for henholdsvis $l_{occ}$
 \begin{equation}
 	P_\kappa(r) = \begin{cases}
 		\frac{P_{occ}-P_0}{P(z_t)-P(z_t+\frac{\alpha}{2})}(r-P(z_t))+P_{occ} &\text{hvis } z_t < r \\
-		\frac{P_{free}-P_{occ}}{P(z_t-\frac{\alpha}{2})-P(z_t)}(r-P(z_t))+P_{occ} &\text{hvis } z_t \leq r 
+		\frac{P_{free}-P_{occ}}{P(z_t-\frac{\alpha}{2})-P(z_t)}(r-P(z_t))+P_{occ} &\text{hvis } z_t \geq r 
 	\end{cases}
 \end{equation}
 
