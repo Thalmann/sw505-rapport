@@ -20,7 +20,7 @@ Det er altså målet at finde de dele af et enkelt billede, der matcher bestemte
 \end{figure}
 
 I \cref{tracking:img:initial} vises et billede af robotten og en papkasse.
-Vi ønsker her at spore den blå og pink seddel der er sat fast på robotten.
+Vi ønsker her at spore den blå og pink seddel, der er sat fast på robotten.
 I de følgende billeder tages der udgangspunkt i sporing af den pinke farve.
 
 \subsection{Match af farver}
@@ -77,7 +77,7 @@ På \cref{tracking:img:track:full} vises derfor alle de interessante pixels efte
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
 \includegraphics[width=\textwidth]{tracking/emptyGrid_TRACK2}
-\caption{Farve-vægte.}
+\caption{Farve-vægte}
 \label{tracking:img:track:weight}
 \end{subfigure}
 \hfill
@@ -90,7 +90,7 @@ På \cref{tracking:img:track:full} vises derfor alle de interessante pixels efte
 \caption{Billedet fra \cref{tracking:img:initial} hvori farven pink er blevet sporet.}
 \end{figure}
 
-Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
+Ved at finde den mindste firkant, der spænder over alle interessante pixels og udvælge dens centrum, kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
 \section{Forbedringer}\label{tracking:improvements}
 For at teste implementeringen af ovenstående, blev det forsøgt at lokalisere forskellige farver for varierende $\rho$-værdier.
@@ -139,10 +139,10 @@ Herefter anses støjen som fjernet.
 \end{figure}
 
 \Cref{tracking:img:filter} vises resultatet af at anvende det beskrevne filter.
-Bemærk af billedet kun viser interessante pixels og ikke deres vægte.
+Bemærk af billedet kun viser interessante pixels, og ikke deres vægte.
 
 Det ses også på billedet, at papkassen stadig spores som værende pink.
-Dette problem løses indirekte som følge af de forskellige optimeringer der anvendes.
+Dette problem løses indirekte, som følge af de forskellige optimeringer der anvendes.
 Se \cref{tracking:optimizing} for yderligere detaljer.
 
 \subsection{Farve-afstand}
