@@ -1,15 +1,17 @@
 \label{ruteplanleagning}
 For at automatisere kortlægningen af et rum, er det nødvendigt at automatisere ruteplanlægningen.
-Dette kapitel handler om den udledte metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra valgte kriterier.
+Dette kapitel handler om den udledte metode til at planlægge en rute for robotten, så der bliver valgt den bedst mulige rute ud fra bestemte kriterier.
 
-\section{Overordnet beskrivelse}
+\section{Overordnet beskrivelse}\label{rute:main}
 Den overordnede tanke er, at efter robotten har taget en scanning, skal den ud fra de celler som har høj sandsynlighed for at være ledige, finde den næste lokation, hvor der skal foretages en scanning.
 Ruten skal beregnes ud fra et occupancy grid, og destinationer vil derfor blive refereret til som celler.
 I det følgende vil der blive introduceret nogle begreber, der skal bruges til beskrivelsen af ruteplanlægningen.
 
 \subsection{Destinationscelle}\label{rute:destinationscelle}
-En mulig destinationscelle er en celle med høj sandsynlighed for at være ledig.
-Desuden skal et vist antal celler omkring den mulige destinationscelle ligeledes være ledige, afhængig af robottens størrelse, for at være sikker på, at der er plads til robotten.
+En destinationscelle er en celle med høj sandsynlighed for at være ledig.
+Desuden skal alle cellens nabo-celler ligeledes være ledige.
+Hvor mange celler der regnes for nabo-celler afhænger af robottens størrelse.
+Denne tilgang har til formål at sikre, at der er plads til robotten på den planlagte rute.
 Yderligere skal der være en rute hen til destinationscellen, hvor der er nok ledige celler i hele ruten, således at robotten kan være indenfor de celler.
 
 \subsection{Synlig celle}\label{rute:synligcelle}
@@ -19,21 +21,23 @@ Desuden skal også medregnes den maksimale rækkevidde for en scanning, da der i
 
 \subsection{Kriterier for en god destination}
 Dette afhænger af den \textit{information gain}, som robotten potentielt vil få ved at scanne i destinationen.
-Dette afgøres af de synlige celler for destinationscellen.
-
-Hvor høj \textit{information gain} der opnås, bestemmes ud fra de eksisterende sandsynligheder, der findes i de celler, der i forvejen er i synsfeltet.
+Hvor høj \textit{information gain} der kan opnås, bestemmes ud fra de eksisterende sandsynligheder, der findes i de celler, der i forvejen er i synsfeltet.
 Kort sagt er der bedst \textit{information gain} på en celle, hvor der er flest ikke-hidtil-scannede celler i synsfeltet.
 
-\section{Beregning af næste målings-celle}
-Til at beregne den næste destination, hvorfra der skal foretages en måling, skal følgende bruges:
-\begin{itemize}
-\item{$C = \{ c \mid c \textnormal{ er en celle i grid'et } \}$}
-\item{$D = \{ d \mid d \textnormal{ er en destinationscelle}\}$}
-\item{$x$}
-\item{$p(d) = \{ e \mid e \textnormal{ er en celle i synsfeltet for } d \}$}
-\end{itemize}
-Hvor $C$ er mængden af alle celler, der er i occupancy grid'et, er $D$ alle mulige destinationsceller, mens $x$ er den celle hvori robotten er og $p(d)$ er alle celler i synsfeltet for en destinationscelle $d$.
-Se evt. \cref{rute:destinationscelle} for beskrivelse af destinationsceller og synlige celler.
+\section{Beregning af næste målings-celle}\label{rute:mathintro}
+Til bestemmelse af den næste celle, hvorfra der skal foretages en måling, gives de følgende definitioner:
+Lad $C$ betegne mængden af alle de celler der udgør et occupancy grid.
+For alle celler $c \in C$ betegnes sandsynligheden for at cellen er optaget da som $P(c)$.
+Vi lader desuden $x \in C$ betegne den celle robotten starter i.
+
+Lad funktionen $dest(d)$ udtrykke om cellen $d$ overholder betingelserne beskrevet i \cref{rute:destinationscelle}.
+Da kan de mulige destinationer $D$ bestemmes således:
+\begin{equation}D = \{ d \in C \mid dest(d) \}\end{equation}
+
+Endelig bestemmes også de celler der er i en celles synsfelt.
+Lad funktionen $visible(d, c)$ udtrykke om en celle $c$ er i cellen $d$s synsfelt (se \cref{rute:synligcelle}).
+De celler der ligger i $d$s synsfelt kan da bestemmes således:
+\begin{equation}p(d) = \{e \in C \mid visible(d, e)\}\end{equation}
 
 \subsection{Beregning af \textit{information gain}}
 Første skridt er, at beregne værdi for alle de mulige destinationsceller:
@@ -42,7 +46,7 @@ v(d) = \sum_{c \in p(d)} 0.5-|0.5 - P(c)|
 \end{equation}
 
 Her er høj værdi lig med høj \textit{information gain}.
-Dette skyldes, at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$ afhængigt af, om de er \textit{free} eller \textit{occupied}.
+Dette skyldes, at alle celler har sandsynlighedsværdien $0.5$ til at starte med, og når de opdateres kommer de enten tættere på $0$ eller $1$ afhængigt af, om de er ledige eller optagede.
 Derved er der mere værdi i at scanne fra en celle med høj \textit{information gain}, da dette betyder, at der er flere celler, hvor der kun er lidt information om i dens synsfelt.
 
 Dette munder ud i en mængde, bestående af en værdi for samtlige $d$:
@@ -59,9 +63,20 @@ Q = \{ d \in D \mid v(d) \in \max V \}
 \end{equation}
 
 Hvis $ Q $ kun indeholder ét element, er dette destinationscellen. 
-\mikkel{Afstanden til robotten udregnes først - D findes vha. Dijkstra, og der findes afstandene også}
 Hvis der i $Q$ er mere end én destinationscelle med samme værdi, beregnes afstanden til robotten for samtlige af de celler:
 \begin{equation}
 A = \{ \text{dist}(x,q) \mid q \in Q \}
 \end{equation}
 Destinationscellen vælges da som den celle med den korteste afstand.
+
+\section{Ingen mulig rute}
+Som det fremgår af \cref{rute:destinationscelle} skal celler, samt deres nabo-celler, være ledige for at kunne indgå i en rute.
+Inden mapping-processen startes vil ingen celler kunne overholde denne egenskab.
+Derfor introduceres en særlig ruteplanlægning der \textit{beregner} ruter indtil metoden beskrevet i \cref{rute:main} kan beregne en rute.
+
+Denne særlige ruteplanlægning angiver først $x$ (se \cref{rute:mathintro}) som destinations celle.
+Herefter scannes $x$s nabo-celler en af gangen.
+Ved denne proces vil der blier angivet en række nabo-celler som ledige hvori der kan planlægges en rute.
+
+Skulle der ikke efter denne process kunne planlægges en rute, er robotten startet i et lukket rum hvorfra der ikke eksisterer udveje.
+Ovenstående sker med udgangspunkt i at robotten startes i en celle hvor der er plads til at foretage denne initierende ruteplanlægning.
