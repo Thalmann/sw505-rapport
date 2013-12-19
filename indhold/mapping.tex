@@ -81,7 +81,7 @@ samme sandsynlighed som en celle med afstanden 0 fra $z_t$.
 Hvis vi antager, at de celler, som ligger tættere på robottens måling, har en større sandsynlighed for at være \emph{occupied}, end dem som ligger tæt på $z_t \pm \frac{\alpha}{2}$, kan vi konstruere en sensor model med en glidende overgang fra værdien $l_{occ}$ for cellen i $z_t$ til værdierne $l_{free}$ og $l_0$ for cellerne på position $z_t \pm \frac{\alpha}{2}$. 
 
 Da summen af uafhængige fejlmålinger, ifølge \emph{central limit theorem} vil tilnærme sig
-den gaussiske normalfordeling, vil det være en god approximation for robottens måleusikkerhed.\cite[p. 223]{ArtificialIntelligence}
+den gaussiske normalfordeling, vil det være en god approksimation for robottens måleusikkerhed.\cite[p. 223]{ArtificialIntelligence}
 
 For at finde en passende normalfordeling skal vi vælge en passende middelværdi og en passende standard afvigelse. 
 Vi ved at centrum, dvs. middelværdien, for fordelingen skal være målingen $z_t$.
@@ -114,7 +114,7 @@ P(r) = \lim \limits_{\rho \to 0} \bigint_{r-\rho}^{r+\rho} \frac{1}{\sqrt{2 \pi 
 
 Da vi vil have at sandsynlighederne mellem $z_t-\frac{\alpha}{2}$ og $z_t$ går i en glidende overgang fra $P_{free}$ til $P_{occ}$,
 mens vi vil have en overgang fra $P_{occ}$ til ${P_0}$ for afstande imellem $z_t$ og $z_t+\frac{\alpha}{2}$.
-Har vi valgt at lave en linær mapning, af de sandsynligheder vi får fra normalfordelingen til de to intervaller, ved hjælp af linjens ligning.
+Har vi valgt at lave en lineær mapning, af de sandsynligheder vi får fra normalfordelingen til de to intervaller, ved hjælp af linjens ligning.
 Her er $P_{occ}$,$P_{free}$ og $P_0$ sandsynlighederne for henholdsvis $l_{occ}$,$l_{free}$ og $l_0$.
 
 

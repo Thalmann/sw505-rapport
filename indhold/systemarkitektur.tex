@@ -45,7 +45,7 @@ Dette namespace indeholder de grafiske komponenter for systemet, og er derfor pr
 Det er ansvarlig for at modtage og reagere på brugerens input.
 
 \paragraph{SystemInterface.RobotInterface}
-Essensen i dette namespace er en tråd, der konstant tjekker efter nye beskeder på NXTen.
+Essensen i dette namespace er en tråd, der konstant tjekker efter nye beskeder på NXT'en.
 Den benytter så henholdsvis \lstinline[style=csharp]|LocationControl| og \lstinline[style=csharp]|MappingControl| til at reagere på beskeder den finder, og anmoder dermed \lstinline[style=csharp]!Services! namespacet om at udføre den pågældende handling.
 
 \section{Control}\label{arkitektur:control}

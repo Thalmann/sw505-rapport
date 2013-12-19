@@ -32,7 +32,7 @@ Det er således kun de celler, som er indenfor robottens synsfelt, dvs. de celle
 
 
 Som i det originale binære filter (se evt. \cref{bayes_binaerfiltre}) benyttes log odds repræsentationen til at udtrykke om en celle er \textit{occupied}.
-$l_{t,i}$ repræsenteree sandsynligheden til tiden $t$ for at cellen $m_i$ er \textit{occupied} på logodds form og $l_r$ er værdien fra vores sensor model. \\
+$l_{t,i}$ repræsenterer sandsynligheden til tiden $t$ for at cellen $m_i$ er \textit{occupied} på log odds form og $l_r$ er værdien fra vores sensor model. \\
 
 $l_{t,i}$ opdateres på følgende måde.
 \begin{equation}
@@ -53,9 +53,9 @@ Sandsynligheden genfindes ud fra log odds repræsentationen ved
 	p(m_i \mid z_{1:t}, x_{1:t}) = 1 - \frac{1}{1 + e^{l_{t,i}}}
 \end{equation} 
 
-\Cref{occupancygrid:alg} viser hvordan cellerne i vores occupancy grid opdateres udfra en sensormåling. 
+\Cref{occupancygrid:alg} viser hvordan cellerne i vores occupancy grid opdateres ud fra en sensormåling. 
 Til opdateringen bruges \textbf{inverse\_sensor\_model}, \cref{alg:inversesensormodel}.
-Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds udfra \cref{eqn:l0}.
+Værdien $ l_0 $ er den a priori værdi for, om cellen er optaget repræsenteret som log odds ud fra \cref{eqn:l0}.
 
 \begin{equation}
   l_0 =  log \frac{p(m_i = 1)}{p(m_i = 0)} = log \frac{p(m_i)}{1- p(m_i)}
@@ -74,7 +74,8 @@ OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
 { $ l_{t,i} = l_{t-1,i}  $\\ }
 }
 \Return {$ \{l_{t,i}\} $}
-\caption{Occupancy grid opdateringsalgoritmen.}\label{occupancygrid:alg}
+\caption{Occupancy grid opdateringsalgoritmen.}
+\label{occupancygrid:alg}
 \end{algorithm}
 
 
