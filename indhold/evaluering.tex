@@ -1,18 +1,18 @@
-Dette kapitel evaluerer de to valgte sensormodeller (\cref{mapping:sensormodel}).
-\thilemann{lidt fesen intro, men måske svær at gøre mere interessant...}
+% !TeX spellcheck = da_DK
+Dette kapitel præsenterer en evaluering af projektets endelige løsning.
+I evalueringen testes de to valgte sensormodeller (\cref{mapping:sensormodel}) for at finde ud af hvilken af de to der fungerer bedst.
 
 \section{Formål}
 Formålet med denne test er at se hvilken sensormodel, der kommer frem til det mest præcise kort.
-Dette er for at se om målsætningen beskrevet i \cref{problem:maalsaetning} er opfyldt.\thilemann{Er det kun mig som har problemer med denne henvisning?}
+Dette er for at se om målsætningen beskrevet på side \pageref{problem:maalsaetning} er opfyldt.
 
 \section{Vurderingsmål}
 Da alle tests vil returnere et helt eller delvist udfyldt occupancy grid, vil sammenligningen gå ud fra dette.
 Alle grids, som er resultat af en test, vil blive sammenlignet med et optimalt occupancy grid (lavet ud fra fysisk observation).
 Ethvert grid (både test og optimalt) vil bestå af tre typer celler:
-\thilemann{Vi skriver tidligere i rapporten om at celler kan vær \textit{occupied} og \textit{free} - vi bør være konsekvente og kun benytte danske termer}
 \begin{description}
 \item[Optaget]{ er en celle, hvor der er en forhindring.}
-\item[Fri]{ er en celle, der er vurderet som fri, enten gennem måling eller ved at robotten er kørt hen over den.}
+\item[Fri]{ er en celle der er fri.}
 \item[Ukendt]{ er en celle, hvor om der ikke er opnået viden.
 For det optimale grid, vil det være celler inde i en større forhindring.
 For et test grid, kan det være det samme som for det optimale, dog kan der også forekomme ukendte celler, som skulle have været enten frie eller optagede.}
@@ -45,11 +45,10 @@ Der bliver foretaget tre tests med hver sensormodel (\cref{mapping:sensormodel})
 I alle test benyttes ruteplanlægning beskrevet i \cref{ruteplanleagning}.
 Robotten kører hen til et punkt og scanner to gange - dette foretages 75 gange.
 Alle data bliver logget, så det er muligt at genskabe et kort udfra det.
-Opstillingen af testen er beskrevet i \cref{evaluering:opstilling}
 
 \subsection{Opstilling}\label{evaluering:opstilling}
 Testmiljøet er beskrevet i \cref{testmiljo}.
-Selve opstillingen til testen kan man se på \cref{evaluering:emptyGrid}, her kan man desuden se robottens startposition, som er den samme i alle tests.
+Selve opstillingen til testen kan ses på \cref{evaluering:emptyGrid}, her kan man desuden se robottens startposition, som er den samme i alle tests.
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{emptyGrid}
@@ -59,7 +58,7 @@ Selve opstillingen til testen kan man se på \cref{evaluering:emptyGrid}, her ka
 
 \subsection{Resultater}
 
-\subsubsection{Optimalt resultat}
+\subsubsection*{Optimalt resultat}
 For at kunne lave en sammenligning mellem resultater, skal hvert enkelt resultat først sammenlignes med det optimale, hvorefter afvigelsen kan måles og sammenlignes.
 
 Det optimale grid består af i alt 555 markede celler; 110 optagede celler og 445 frie celler.
@@ -79,15 +78,27 @@ Det optimale grid kan ses i \cref{evaluering:optimaltgrid}.
 \caption{Det bedste resultat}
 \label{evaluering:gauss3}
 \end{subfigure}
+\begin{subfigure}[b]{.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{testresultater/simpel1}
+\caption{Det bedste resultat med den simple sensormodel}
+\label{evaluering:simpel1}
+\end{subfigure}
 \caption{Det optimale grid, kontra det bedste resultat}
 \label{evaluering:optvsbedst}
 \end{figure}
 
-\subsubsection{Bedste resultat}
-Det bedste resultat var for den 3. test med Gaussian Sensor Model.
-Resultatet var 337 korrekte celler (ud af de 555 mulige), som det kan ses i \cref{evaluering:gauss3}.
 
-\subsubsection{Øvrige resultater}
+
+
+\subsubsection*{Bedste resultat}
+Det bedste resultat var for den 3. test med Gaussian Sensor Model.
+Resultatet var 337 korrekte celler (ud af de 555 mulige), som det kan ses i \cref{evaluering:gauss3}. 
+Det  bedste resultat med den simple sensormodel var den 1. test. 
+Dette kan ses på \cref{evaluering:simpel1}.
+Resultatet for denne var 193 korrekte celler.
+
+\subsubsection*{Øvrige resultater}
 De øvrige test-resultater kan ses i \cref{evaluering:testresultater}.
 Her kan det ses at den Gaussiske sensor model giver klart det bedste resultat, og at resultaterne er nogenlunde konsistente hver især for de to modeller.
 
@@ -106,3 +117,11 @@ Gaussisk, Test 3 & 337 \\ \hline
 \caption{Oversigt over test-resultaterne}
 \label{evaluering:testresultater}
 \end{table}
+
+\subsubsection*{Konklusion}
+Ud fra resultaterne kan det ses at den gaussiske model præsterer bedre end den simple sensormodel. 
+Resultaterne for den simple model ligger omkring 190 mens resultaterne for den gaussiske liger omkring 300.
+
+Ud fra kortene kan det dog ses at den simple finder kassen bedre end den gaussiske.
+Som det ses på \cref{evaluering:gauss3} er kassens omrids kun markeret i nederste højre hjørne, mens den simple model på \cref{evaluering:simpel1} har har et større område der er markeret som optaget.
+I praksis vil det betyde at selvom den gaussiske giver et mere præcist resultat er der en risiko for at den vil lave et kort hvor der er frie celler hvor der burde være optaget, hvilket kan få robotten til at køre ind i en væg.
