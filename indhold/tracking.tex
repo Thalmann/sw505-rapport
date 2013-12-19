@@ -113,7 +113,6 @@ I det følgende beskrives de metoder, der er anvendt til at løse ovenstående p
 I \cref{tracking:adjust} beskrives resultatet af indførelsen af disse metoder.
 
 \subsection{Filtrering af støj}
-\bruno{Nicolaj spørger: Kan det illustreres med et par eksempler?}
 %Beskrivelse af implementationen af mean-filter
 Den beskrevne \emph{farve-støj}, der opstår i visse billeder, fjernes ved at anvende en variation af et 3x3 median-filter\cite{medianfilter}.
 I filteret betragtes alle værdier som binære (0 eller ikke 0).
@@ -131,6 +130,20 @@ $$\text{hvor } V_{x,y} = \{ w \in N_{x,y} \mid w > 0 \}$$
 Ved at anvende ovenstående filter på alle koordinat-sæt fjernes noget af den uønskede farve-støj.
 Filteret påføres gentagne gange, indtil ingen vægte opdateres.
 Herefter anses støjen som fjernet.
+
+\begin{figure}[h]
+\centering
+\includegraphics{tracking/emptyGrid_FILTER}
+\caption{Billedet fra \cref{tracking:img:track:full} efter filtrering.}
+\label{tracking:img:filter}
+\end{figure}
+
+\Cref{tracking:img:filter} vises resultatet af at anvende det beskrevne filter.
+Bemærk af billedet kun viser interessante pixels og ikke deres vægte.
+
+Det ses også på billedet, at papkassen stadig spores som værende pink.
+Dette problem løses indirekte som følge af de forskellige optimeringer der anvendes.
+Se \cref{tracking:optimizing} for yderligere detaljer.
 
 \subsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
@@ -169,7 +182,7 @@ R^{n'} = \left\{
 	\cvec{R^n_{x_2}+\omega}{R^n_{y_2}+\omega}
 \right\}
 \end{equation}
-Herved er det reducerede problems størrelse, beskrevet med udgangspunkt i det forrige problems løsning som illustreret på \cref{tracking:reduction}.
+Herved er det reducerede problems størrelse, beskrevet med udgangspunkt i det forrige problems løsning, som illustreret på \cref{tracking:reduction}.
 }
 
 \begin{figure}
@@ -221,6 +234,8 @@ Igennem forsøg fremgik det tydeligt at reduktionen i størrelse har en kraftig 
 Derved kunne $\omega$ sættes lavt og en hurtig opdateringshastighed kunne opnås.
 I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedredes som følge af $\omega = 5$.
 \end{description}
+
+\subsection{Løbende optimering}\label{tracking:optimizing}
 
 \section{Opdateringshastighed}\label{tracking:updatespeed}
 Farvebilleder fra Kinecten kan indsamles på to forskellige måder:
