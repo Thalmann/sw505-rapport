@@ -55,7 +55,7 @@ Hvor $z_{max}$ er sensorens maksimale måleafstand.
 Modellen vil se således ud beskrevet i pseudokode:
 
 \begin{algorithm}[H]
-\textbf{InversSensorModel($m_i, x_t, z_t$)} \\
+\textbf{inverse_sensor_model($m_i, x_t, z_t$)} \\
 Let $x_i,y_i$ be the center-of-mass of $m_i$ \\
 $r = |x_i - x + y_i - y|$ \\
 \If{$r > min(z_{max}, z_t + \frac{\alpha}{2}$)}{
