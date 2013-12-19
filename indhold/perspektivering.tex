@@ -6,8 +6,12 @@ Andre forbedringer er gruppen kommet frem til i løbet af projektet.
 I dette afsnit præsenteres forslag til mulige forbedringer af systemet, samt en vurdering af, hvor anvendeligt det endelige produkt er.
 
 \section{Implementering}
-I dette projekt, er der blevet implementeret to forskellige sensormodeller. \stefan{indsæt vurdering af de to modeller}
-En forbedring vil være at implementere endnu bedre sensormodeller.\thilemann{giver det ikke lidt sig selv?}
+I dette projekt, er der blevet implementeret to forskellige sensormodeller. 
+Udfra de test vi har udført (se \cref{evaluering:testresultater}), kan vi se at den gaussiske sensormodel er bedre end den simple. \\
+En mulig forbedring af den gaussiske model vil være at lave fordelingen i 2 dimensioner, således at alle de omkringliggende celler bliver opdateret. 
+Dette giver mening, da der er en forøget sandsynlighed for, at en celle er optaget, hvis de omkringliggende celler er optaget. \\
+Vi overvejede også at benytte en sensormodel som var baseret på vores målinger fra \cref{subsection:ultrasonic}.
+Hvilket ville betyde at fordelingen reflektere sensorens faktiske måde at opføre sig på.
 
 I de udførte test, er der benyttet en cellestørrelse på 10cm $ \times $ 10cm.
 Denne cellestørrelse er blevet valgt med henblik på at gøre cellerne så små som muligt, uden at tiden det vil tage at kortlægge området, vil blive alt for stor.
