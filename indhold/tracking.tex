@@ -236,6 +236,20 @@ I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedred
 \end{description}
 
 \subsection{Løbende optimering}\label{tracking:optimizing}
+Efter filtrering af støj i et billede, vil der stadig være områder som vi ikke ønsker at spore der stadig bliver sporet.
+På billedet i \cref{tracking:img:filter} ses det at sporingen stadig \textit{genkender} papkassen som værende pink.
+Af \cref{tracking:img:track:weight} ses det dog, at den del af billedet har meget lav vægt.
+
+Ved løbende at beskære billedet og ændre den sporede farve til den med højest vægt i forrige sporing, vil støj i kanten af billedet løbende blive reduceret.
+Det betyder at efter få opdateringer vil papkassen ikke længere blive sporet.
+I \cref{tracking:img:final} ses resultatet af sporing efter et antal opdateringer.
+
+\begin{figure}[h]
+\centering
+\includegraphics{tracking/emptyGrid_FINAL}
+\caption{Den del af billedet der spores efter \textit{en række} opdateringer.}
+\label{tracking:img:final}
+\end{figure}
 
 \section{Opdateringshastighed}\label{tracking:updatespeed}
 Farvebilleder fra Kinecten kan indsamles på to forskellige måder:
