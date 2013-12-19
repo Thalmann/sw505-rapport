@@ -56,6 +56,53 @@ Selve opstillingen til testen kan man se på \cref{evaluering:emptyGrid}, her ka
 \caption{Forsøgsopstillingen inden hver test sættes i gang.}
 \label{evaluering:emptyGrid}
 \end{figure}
+
 \subsection{Resultater}
 
-\subsection{Opsummering}
+\subsubsection{Optimalt resultat}
+For at kunne lave en sammenligning mellem resultater, skal hvert enkelt resultat først sammenlignes med det optimale, hvorefter afvigelsen kan måles og sammenlignes.
+
+Det optimale grid består af i alt 555 markede celler; 110 optagede celler og 445 frie celler.
+Det optimale grid kan ses i \cref{evaluering:optimaltgrid}.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[b]{.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{testresultater/optimalt}
+\caption{Det optimale grid}
+\label{evaluering:optimaltgrid}
+\end{subfigure}
+\begin{subfigure}[b]{.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{testresultater/gauss3}
+\caption{Det bedste resultat}
+\label{evaluering:gauss3}
+\end{subfigure}
+\caption{Det optimale grid, kontra det bedste resultat}
+\label{evaluering:optvsbedst}
+\end{figure}
+
+\subsubsection{Bedste resultat}
+Det bedste resultat var for den 3. test med Gaussian Sensor Model.
+Resultatet var 337 korrekte celler (ud af de 555 mulige), som det kan ses i \cref{evaluering:gauss3}.
+
+\subsubsection{Øvrige resultater}
+De øvrige test-resultater kan ses i \cref{evaluering:testresultater}.
+Her kan det ses at den Gaussiske sensor model giver klart det bedste resultat, og at resultaterne er nogenlunde konsistente hver især for de to modeller.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Test \#} & \textbf{Resultat} \\ \hline \hline
+Simpel, Test 1 & 193 \\ \hline
+Simpel, Test 2 & 187 \\ \hline
+Simpel, Test 3 & 193 \\ \hline \hline
+Gaussisk, Test 1 & 297 \\ \hline
+Gaussisk, Test 2 & 325 \\ \hline
+Gaussisk, Test 3 & 337 \\ \hline
+\end{tabular}
+\caption{Oversigt over test-resultaterne}
+\label{evaluering:testresultater}
+\end{table}
