@@ -10,16 +10,17 @@ En simpel illustration af et occupancy grid map for det kørselsmiljø, der er o
 
 \begin{figure}[h] % Kørselsmiljø og et occupancy grid
 \centering
-	\begin{subfigure}[b]{.45\textwidth}
+	\begin{subfigure}[b]{.48\textwidth}
 	\centering
 	\includegraphics[width=\textwidth]{verden/oppefra}
-	\caption{Aktuelt Kørselsmiljø}
+	\caption{Aktuelt Kørselsmiljø.}
 	\label{map:world}
 	\end{subfigure}
-	\begin{subfigure}[b]{.45\textwidth}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
 	\centering
 	\includegraphics[width=\textwidth]{verden/occupancy_grid_verden}
-	\caption{Eksempel på Occupancy Grid}
+	\caption{Eksempel på Occupancy Grid.}
 	\label{map:occupancy_grid}
 	\end{subfigure}
 \caption{Illustration af et occupancy grid baseret på projekts kørselsmiljø for robotten. Sorte celler i \cref{map:occupancy_grid} indikerer at $\mathcal{P}(occupied) = 1$, hvilket betegner væggene i kørselsmiljøet (\cref{map:world}). Hvide celler indikerer at $\mathcal{P}(occupied) = 0$ og grå celler angiver ikke-udforsket område. Den røde cirkel indikerer robottens position.}
@@ -92,7 +93,8 @@ Vi ved at centrum, dvs. middelværdien, for fordelingen skal være målingen $z_
 \label{normaldistimg}
 \end{figure}
 
-Udfra \cref{normaldistimg} kan vi se, at det vil være passende hvis $\frac{\alpha}{2}$ svarer til tre standard afvigelser. dvs.
+Udfra \cref{normaldistimg} kan vi se, at det vil være passende hvis $\frac{\alpha}{2}$ svarer til tre standard afvigelser. 
+Dvs.:
 \begin{equation}
 	3\sigma = \frac{\alpha}{2} \implies \sigma = \frac{\alpha}{6}
 \end{equation}

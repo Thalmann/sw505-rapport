@@ -35,8 +35,8 @@ Da kan de mulige destinationer $D$ bestemmes således:
 \begin{equation}D = \{ d \in C \mid dest(d) \}\end{equation}
 
 Endelig bestemmes også de celler der er i en celles synsfelt.
-Lad funktionen $visible(d, c)$ udtrykke om en celle $c$ er i cellen $d$s synsfelt (se \cref{rute:synligcelle}).
-De celler der ligger i $d$s synsfelt kan da bestemmes således:
+Lad funktionen $visible(d, c)$ udtrykke om en celle $c$ er i cellen $d$'s synsfelt (se \cref{rute:synligcelle}).
+De celler der ligger i $d$'s synsfelt kan da bestemmes således:
 \begin{equation}p(d) = \{e \in C \mid visible(d, e)\}\end{equation}
 
 \subsection{Beregning af \textit{information gain}}
@@ -75,8 +75,8 @@ Inden mapping-processen startes vil ingen celler kunne overholde denne egenskab.
 Derfor introduceres en særlig ruteplanlægning der \textit{beregner} ruter indtil metoden beskrevet i \cref{rute:main} kan beregne en rute.
 
 Denne særlige ruteplanlægning angiver først $x$ (se \cref{rute:mathintro}) som destinations celle.
-Herefter scannes $x$s nabo-celler en af gangen.
-Ved denne proces vil der blier angivet en række nabo-celler som ledige hvori der kan planlægges en rute.
+Herefter scannes $x$'s nabo-celler en af gangen.
+Ved denne proces vil der bliver angivet en række nabo-celler som ledige hvori der kan planlægges en rute.
 
 Skulle der ikke efter denne process kunne planlægges en rute, er robotten startet i et lukket rum hvorfra der ikke eksisterer udveje.
 Ovenstående sker med udgangspunkt i at robotten startes i en celle hvor der er plads til at foretage denne initierende ruteplanlægning.
