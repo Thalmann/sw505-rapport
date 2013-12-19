@@ -1,11 +1,6 @@
-\thilemann{Dette hænger ikke så godt sammen med forrige afsnit om nxc arkitektur.}
 \label{arkitektur}
 \section{Computer Arkitektur}
-\mikkel{Jeg synes det ser mystisk ud at angive de forskellige lag med filnavn - kan vi fx ikke bare skrive CommonLib istedet for CommonLib.dll ?}
-Til dette projekt er det besluttet at bygge systemet efter en lag-delt struktur.
-Denne beslutning er taget for at overkomme kompleksiteten af systemet; altså for at give hvert gruppemedlem bedre overblik over koden, men også for at skabe nogle generelle retningslinjer for placering af dets komponenter.
-
-I de efterfølgende afsnit vil arkitekturen (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
+I de efterfølgende afsnit vil arkitekturen på PC (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
 Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål, samt hvordan lagene interagerer med hinanden.
 Som det også ses på figurerne, er det kun de ydre associationer, der er angivet for at simplificere beskrivelsen af systemet.
 Som det første beskrives \lstinline[style=csharp]!CommonLib.dll! i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
