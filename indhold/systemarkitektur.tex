@@ -1,14 +1,13 @@
 \thilemann{Dette hænger ikke så godt sammen med forrige afsnit om nxc arkitektur.}
 \label{arkitektur}
-\section{Computer Arkitektur}
-\mikkel{Jeg synes det ser mystisk ud at angive de forskellige lag med filnavn - kan vi fx ikke bare skrive CommonLib istedet for CommonLib.dll ?}
+\section{PC Software}
 Til dette projekt er det besluttet at bygge systemet efter en lag-delt struktur.
 Denne beslutning er taget for at overkomme kompleksiteten af systemet; altså for at give hvert gruppemedlem bedre overblik over koden, men også for at skabe nogle generelle retningslinjer for placering af dets komponenter.
 
 I de efterfølgende afsnit vil arkitekturen (som ses på  \cref{arkitektur:klassediagram:1,arkitektur:klassediagram:2}) blive beskrevet.
 Beskrivelsen vil fokusere på hvad de enkelte lag (namespaces) har til formål, samt hvordan lagene interagerer med hinanden.
 Som det også ses på figurerne, er det kun de ydre associationer, der er angivet for at simplificere beskrivelsen af systemet.
-Som det første beskrives \lstinline[style=csharp]!CommonLib.dll! i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
+Som det første beskrives \lstinline[style=csharp]!CommonLib! i \cref{arkitektur:commonlib}, da systemets lag alle holder referencer hertil.
 Efterfølgende vil lagene blive beskrevet i en rækkefølge, der følger kaldene internt i systemet.
 \begin{figure}
 \centering
@@ -20,10 +19,10 @@ Efterfølgende vil lagene blive beskrevet i en rækkefølge, der følger kaldene
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{./graphics/systemarkitektur_2}
-\caption{Viser namespacet \lstinline[style=csharp]!CommonLib.dll! (uden interne associationer), som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \lstinline[style=csharp]!CommonLib.dll!, der indeholder de elementer, som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
+\caption{Viser namespacet \lstinline[style=csharp]!CommonLib! (uden interne associationer), som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \lstinline[style=csharp]!CommonLib!, der indeholder de elementer, som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
 \label{arkitektur:klassediagram:2}
 \end{figure}
-\section{CommonLib.dll}\label{arkitektur:commonlib}
+\section{CommonLib}\label{arkitektur:commonlib}
 Benyttes af alle lag i arkitekturen.
 Dets formål er at samle de komponenter som i systemet kan benyttes af alle lag.
 Derfor holder det også en reference til namespacet \lstinline[style=csharp]!NKH.MindSqualls! for at kunne tilgå den del af MindSqualls (\cref{mindsqualls}) som indeholder kommunikationen til NXTen.
@@ -45,7 +44,7 @@ Det er dog ikke alle komponenter i frameworket der benyttes; det benyttes primæ
 \section{SystemInterface}\label{arkitektur:systeminterface}
 Dette er "indgangen" til systemet og er derfor også den komponent, som er ansvarlig for alle ydre påvirkninger; det være sig f.eks. brugerinput eller andre systemer, som ønsker at tilgå systemet.
 
-\paragraph{SystemInterface.GUI.exe}
+\paragraph{SystemInterface.GUI}
 Dette namespace indeholder de grafiske komponenter for systemet, og er derfor programmet, der starter systemet.
 Det er ansvarlig for at modtage og reagere på brugerens input.
 
@@ -53,7 +52,7 @@ Det er ansvarlig for at modtage og reagere på brugerens input.
 Essensen i dette namespace er en tråd, der konstant tjekker efter nye beskeder på NXTen.
 Den benytter så henholdsvis \lstinline[style=csharp]|LocationControl| og \lstinline[style=csharp]|MappingControl| til at reagere på beskeder den finder, og anmoder dermed \lstinline[style=csharp]!Services! namespacet om at udføre den pågældende handling.
 
-\section{Control.dll}\label{arkitektur:control}
+\section{Control}\label{arkitektur:control}
 Denne komponent i arkitekturen er ansvarlig for kontrol af robotten samt opdatering af data.
 Kald hertil stammer fra \lstinline[style=csharp]!SystemInterface!, der anmoder om en action, som dette namespace så reagerer på ved at benytte \lstinline[style=csharp]!Services! namespacet.
 
@@ -68,7 +67,7 @@ Den indeholder således også information om robottens omgivelser og robotten se
 Al kontrol af robotten på kortet (occupancy grid) foregår gennem denne klasse.
 Den indeholder således metoder til at sende robotten til et nyt koordinat, opdatere kortet og hente nye sensormålinger.
 
-\section{Services.dll}\label{arkitektur:services}
+\section{Services}\label{arkitektur:services}
 Dette er det nederste lag i arkitekturen og benyttes af \lstinline[style=csharp]!Control! namespacet når en handling ønskes udført.
 
 \paragraph{Services.RobotServices}
@@ -86,7 +85,7 @@ Konverterer den returnerede videostrøm til en strøm af bitmaps, som kan vises 
 Denne service er ansvarlig for at holde styr på robottens lokation samt positur.
 Robotten kan således gennem \lstinline[style=csharp]!Control! benytte dette namespace, når den ønsker en opdatering af sin positur.
 
-\section{Data.dll}\label{arkitektur:data}
+\section{Data}\label{arkitektur:data}
 Dette assembly indeholder alle data objekter for occupancy grid samt sensormodellen.
 Alt data opdateres fra \lstinline[style=csharp]!Control! når robotten har taget en ny måling.
 
