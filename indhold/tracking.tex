@@ -205,7 +205,8 @@ Målingerne herunder er kun \emph{omtrentlige}.
 \newcommand{\mr}[1]{\multirow{2}{*}{#1}}
 \newcommand{\ce}[1]{\multicolumn{1}{c|}{#1}}
 
-\begin{center}
+\begin{table}[h]
+\centering
 \begin{tabular}{| l | r | r |}
 \hline
 & \ce{Opdateringer} & \ce{Bevægelse}\\
@@ -219,8 +220,8 @@ Ingen reduktion&&\\\hline
 1280x960&\mr{$12-13$}&\mr{$<1$cm}\\
 Med reduktion&&\\\hline
 \end{tabular}
-\end{center}}
-\thilemann{bør denne tabel ikke have en caption og derved også et nummer til henvisning?}
+\caption{Opdateringshastighed af farvesøgning med og uden reduktion af problemets størrelse.}
+\end{table}}
 %
 %%Bemærk at implementationen af farve-afstand og afgrænset område forudsætter 'høj' fps
 %
