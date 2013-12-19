@@ -107,14 +107,16 @@ Mellem 8cm og 56cm er der maximalt 27 mm afvigelse fra det forventede, (forvente
 \label{sensor:infrared_chart}
 \end{figure}
 
-\subsection{Sammenligning af afstandssensorer}
+\subsection{Sammenligning af afstandssensorer}\label{sensor:sammenligningIRvsSonar}
 
-Der er nu foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor og den infrarøde sensor. 
+Der er foretaget test af to forskellige afstandssensorer, den ultrasoniske sensor og den infrarøde sensor. 
 Den ultrasoniske sensor var præcis med en afvigelse på $\pm$3 cm mellem 20 cm og 170 cm.
 Den infrarøde sensor var præcis med afvigelse på $\pm$3 cm, mellem 10 cm og 56 cm.
 Den infrarøde sensor angiver sine målinger med højere præcision, men da fejlmarginen er 3 cm, anses den ikke som værende mere præcis end den ultrasoniske sensor.
-I forhold til rækkevidden, måler den ultrasoniske længere væk end den infrarøde, mens den infrarøde sensor måler tættere på end den ultrasoniske.
-Valget mellem de to sensorer er derfor afhængig af hvilket krav robotten har til rækkevidden.
+
+Med en fejlmargin på 3cm, i de respektive intervaller, anses begge afstandssensorer for at være præcise nok til anvendelse i projektet.
+I forhold til rækkevidde er den ultrasoniske sensor den mest \textit{præcise} af de to på større afstand, mens den infrarøde sensor er den mest \textit{præcise} på kort afstand.
+Valget mellem de to sensorer er derfor afhængig af hvilket krav robotten har til rækkevidde.
 
 \section{Motor}\label{sensorer:motorer}
 Motoren, der er testet her, er fremstillet af \lego og kan ses i \cref{sensor:servo_motor}.
@@ -140,7 +142,7 @@ Dette stemmer ikke overens med de antagede $\pm$1 grads afvigelse.
 +7 og +6 grader målt optræder kun \'en gang.
 Ellers er den maksimale målte afvigelse $\pm$4 grader, men selvom vi antager, at det er pga. unøjagtige målinger ved forsøgsudførelsen, er det stadig ikke $\pm$1 grad.
 
-Kigger vi på \cref{sensor:motor_sensor_diagram} kan vi se, at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator for, at det er bedre at benytte tacho-værdien.
+Af \cref{sensor:motor_sensor_diagram} ses det at målingerne ligger længst udenfor det optimale (sorte stiplede linje), hvilket er en god indikator for, at det er bedre at benytte tacho-værdien.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{motor_diagram}
@@ -152,6 +154,9 @@ Desuden kan vi se på samme figur, at motor b er meget mere unøjagtig end motor
 Ideelt ville de to motorer give det samme resultat.
 
 Dvs. den målte værdi har en afvigelse på $\pm$4 grader, mens tacho-værdien har en afvigelse på +1 og -4 grader, og at synkronisering af de to motorer ikke giver den ønskede effekt.
+
+Afvigelserne i motorernes præcision er ofte ikke store, og evt. fejl vil delvist blive afhjulpet af det system der konstrueres til lokalisering af robotten.
+Det vurderes derfor at præcisionen af motorerne er god nok til anvendelse i projektet.
 
 \section{HiTechnic NXT Kompas Sensor}
 Kompasset fra HiTechnic er et digitalt kompas, der måler jordens magnetiske felt.
