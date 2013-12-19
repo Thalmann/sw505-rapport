@@ -13,7 +13,7 @@ Gear rationen (størrelsen af gearing) er styret af antallet af tænder på tand
 For eksempel vil et 24-tands fører-tandhjul drive et 40-tands følger-tandhjul med ratioen $1:1.667$, hvilket betyder, at der for at give en enkelt følger-omdrejning kræves $1.667$ fører-omdrejninger. 
 Det betyder, at motoren der driver fører-tandhjulet skal rotere $\frac{40}{24} = 1 \frac{2}{3}$ omgange for at rotere følger-tandhjulet én omgang og at følger-tandhjulet roterer $\frac{1}{1.667} = 0.6$ omgange pr. omdrejning af fører-tandhjulet.
 
-Til dette projekt bliver der kun gearet ned (jævnfør robottens design på \cref{robot:opbygning}); dette gør sig gældende for begge sæt af gearinger.
+Til dette projekt bliver der kun gearet ned (jævnfør robottens design på \cref{robot:opbygning}).
 
 
 \begin{figure}[h]
@@ -23,11 +23,8 @@ Til dette projekt bliver der kun gearet ned (jævnfør robottens design på \cre
 \label{gearing:nedgearing}
 \end{figure}
 
-\subsection{Aktuelle gearing}
-Dette afsnit fokuserer på den gearing der er monteret på de ultrasoniske sensorer.
-Den aktuelle gearing kan ses på \cref{robot:opbygning}.
-
-\subsubsection{Ultrasonisk sensor}
+\subsection{Gearing på ultrasonisk sensor}
+Dette afsnit fokuserer på den gearing, der er monteret på de ultrasoniske sensorer, som kan ses i \cref{robot:opbygning}.
 Denne bruges til at bestemme afstanden til et objekt i en bestemt retning, hvorfor det vil være en fordel at geare motoren ned for at opnå større præcision af denne, når retningen af sensoren skal bestemmes.
 Rotationen vil naturligvis foregå langsommere end uden gearing, men da tid ikke er en faktor på nuværende tidspunkt, er det ikke af nogen betydning for at løse problemet.
 
@@ -64,9 +61,9 @@ Gearingen for den ultrasoniske sensor består af i alt 3 forskellige tandhjul (4
 \end{figure}
 
 Den første kombination består af en snekke\cite{snekke} (se \cref{gearing:snekke}) som fører-tandhjul og 24-tands (se \cref{gearing:24tand}) som følger-tandhjul.
-Snekken kræver en hel rotation for at flytte én tand på følger-tandhjul, hvilet giver en gear ratio på $1:24$, som betyder, at der kræves 24 hele motor-rotationer for at rotere 24-tands (følger) tandhjulet én omgang.
+Snekken kræver en hel rotation for at flytte én tand på følger-tandhjul, hvilket giver en gear ratio på $1:24$, som betyder, at der kræves 24 hele motor-rotationer for at rotere 24-tands (følger) tandhjulet én omgang.
 
 Den anden kombination består af et 24-tands (se \cref{gearing:24tand}) som fører-tandhjul og et 40-tands (se \cref{gearing:40tand}) som følger-tandhjul, hvilket giver en ratio på $1:1.667$.
 
-Den samlede gear ratio for sensor motoren bliver derfor $1:40$, som beskriver, at der for hver sensor omdrejning kræves 40 motor omdrejninger; hvilket er det samme som:
+Den samlede gear ratio for sensormotoren bliver derfor $1:40$, som beskriver, at der for hver sensor omdrejning kræves 40 motor omdrejninger; hvilket er det samme som:
 $$\frac{24}{1} \cdot \frac{40}{24} = 40$$

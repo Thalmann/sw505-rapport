@@ -12,8 +12,13 @@
 \textsc{ \Huge Mapping}\\
 
 \HRule \\[1cm]
+\mikael{Bør vi ikke finde en bedre titel?}
+\thilemann{Whalle, en autonom robot til kortlægning af ukendte områder}
+\thilemann{Whalle, kortlægning vha. autonom robot.}
 
-\textsc{\Large SW505E13}
+\textsc{\Large SW505E13} \\[2cm]
+
+\includegraphics[width=.8\textwidth]{whalle}
 
 \vfill
 {\Large Indlejrede systemer}
@@ -41,7 +46,7 @@
 
 %Table of content
 \pdfbookmark{\contentsname}{toc}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 \tableofcontents
 
 \clearpage
@@ -92,7 +97,7 @@
 	\centering
 	\vspace{2cm}
 	\normalsize{\textnormal{
-		\textit{Indledning til parten her...\mikael{Husk!}}
+		\textit{\input{indhold/indledning_teori}}
 	}}
 	\end{minipage}
 }
@@ -105,7 +110,7 @@
 \input{indhold/tracking.tex}
 \input{indhold/punktomregning.tex}
 \chapter{Ruteplanlægning}
-\include{indhold/ruteplanlaegning}
+\input{indhold/ruteplanlaegning}
 
 % PART ******************************
 \part[Design]{Design\\
@@ -113,7 +118,7 @@
 	\centering
 	\vspace{2cm}
 	\normalsize{\textnormal{
-		\textit{Indledning til parten her...}
+		\textit{I denne del beskrives designet af de enkelte elementer, der indgår i projektet. Først beskrives robotten der er brugt til at udføre kortlægning, dernæst den forsøgsopstilling den er blevet brugt i, og til sidst arkitekturen som softwaren på både NXTen og PCen er opbygget omkring.}
 	}}
 	\end{minipage}
 }
@@ -123,6 +128,8 @@
 \chapter{Forsøgsopstilling}
 \input{indhold/testmiljo}
 \chapter{System Arkitektur}
+\input{indhold/strukturintro}
+\input{indhold/nxc-struktur}
 \input{indhold/systemarkitektur}
 \section{Kommunikationsprotokol}\label{kommunikation}
 \input{indhold/kommunikationsprotokol}
@@ -135,7 +142,7 @@
 	\centering
 	\vspace{2cm}
 	\normalsize{\textnormal{
-		\textit{Indledning til parten her...}
+		\textit{Denne del giver en evaluering af rapportens resultater ud fra målsætningen, samt en opsummering af indholdet. Slutteligt perspektiveres der over resultaterne med forslag til fremtidige forbedringer.\thilemann{review please}}
 	}}
 	\end{minipage}
 }
@@ -147,12 +154,12 @@
 
 \appendix
 % PART ******************************
-\part[Appendix]{Appendix\\
+\part[Bilag]{Bilag\\
 	\begin{minipage}[c]{10cm}
 	\centering
 	\vspace{2cm}
 	\normalsize{\textnormal{
-		\textit{Indledning til parten her...}
+		\textit{I denne del findes rapportens bilag. Først præsenteres test resultaterne for sensorerne præsenteret i \cref{sensorer}, hvorefter en delmængde af diagrammet på \cref{flow:ssd} beskrives mere detaljeret.}
 	}}
 	\end{minipage}
 }
@@ -164,6 +171,8 @@
 \input{appendix/motor_test}
 \chapter{Test af kompas sensor}
 \input{appendix/kompas_test}
+\chapter{Sekvensdiagrammer}
+\input{appendix/sequenceDiagrams}
 
 \bibliography{bibliography}
 \bibliographystyle{plain}

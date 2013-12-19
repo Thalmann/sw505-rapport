@@ -1,0 +1,37 @@
+% !TeX spellcheck = da_DK
+\section{NXT arkitektur}
+Koden, der kører på robotten, er bygget op omkring et modul, der hedder MotorControl. \cite{MotorControl}
+MotorControl er et program, der kører på NXTen og sørger for at motorerne kører præcis den afstand, de bliver bedt om. 
+Uden MotorControl er motorerne meget upræcise, hvilket gør det svært at navigere robotten til et bestemt sted.
+
+Da der kun kan køre ét program ad gangen på NXTen, indeholder vores program en modificeret version af MotorControl, hvor alle navigationsfunktioner udnytter MotorControl.
+
+Koden på robotten er opdelt i filer efter hvilket ansvar de har.
+I det følgende vil hver fil blive beskrevet.
+
+\subsection{MotorControl}
+For at MotorControl kan fungere, er der inkluderet følgende filer, der ikke er ændrede i forhold til kilden.
+
+\begin{itemize}
+\item \textbf{SpeedFromPosLookup.nxc}
+\item \textbf{MotorFunctions.nxc}
+\item \textbf{ControllerCore.nxc}
+\item \textbf{Controller.nxc}
+\end{itemize}
+
+Filen \textbf{MCTasks.nxc} indeholder de tasks, der er i den originale MotorControl, men med ændringer, som gør dem brugbare i vores program.
+Den indeholder desuden en \lstinline[style=c]!Run! metode, som sætter MotorControl igang. 
+Denne Run funktion var i det originale MotorControl en del af et switch statement i \lstinline[style=c]!Main! funktionen, og er derfor trukket ud, så det er en funktion, der kan kaldes.
+
+\subsection{NXC koden}
+
+Programmet samles i filen \textbf{MainTask.nxc}, som indeholder den løkke, der sættes i gang og efterfølgende køres kontinuerligt ved program-start. 
+I denne løkke venter robotten på komandoer fra computeren og reagerer derefter på dem.
+
+Alt hvad robotten skal gøre håndteres i en af disse tre filer:
+
+\begin{description}
+\item[Navigation.nxc]{styrer robottens generelle navigation, fx \lstinline[style=c]!RunForward!, der beder robotten køre fremad, \lstinline[style=c]!TurnAngle!, der drejer robotten og \lstinline[style=c]!GoToPoint!, der beder robotten køre hen til et bestemt punkt.}
+\item[Sensor.nxc]{bliver brugt hver gang der skal foretages en sensormåling.}
+\item[Communication.nxc]{bliver brugt til at kommunikere med computeren med funktionerne \lstinline[style=c]!IAmThere!, når robotten har nået sin destination og funktionen \lstinline[style=c]!WhereAmI!, når robotten forespørger sin position.}
+\end{description}

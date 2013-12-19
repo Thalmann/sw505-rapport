@@ -1,4 +1,3 @@
-Designet af robotten for dette projekt er yderst vigtigt; det er grundstenen i projektet, og uden en velfungerende robot (og specielt kontrol af denne), vil det blive svært at løse problemstillingen for projektet tilfredsstillende.
 Dette afsnit fokuserer på hvordan vi er kommet frem til designet af den endelige robot, som kan ses på \cref{robot:opbygning}, samt hvilke særlige problemstillinger, der ligger til grund for designet.
 
 \begin{figure}
@@ -8,24 +7,7 @@ Dette afsnit fokuserer på hvordan vi er kommet frem til designet af den endelig
 \label{robot:opbygning}
 \end{figure}
 
-\section{Design overvejelser}\label{robot:design}
-Designet af robotten har været en del af læringsprocessen for, hvordan man bygger en robot af \lego NXT komponenterne, hvorfor design processen kan ses som en iterativ process, hvor designet er blevet radikalt ændret for hver iteration, indtil et tilfredsstillende resultat er opnået.
-
-
-\paragraph{Erfaringer fra tidligere designs} 
-Der blev konstrueret flere forslag til en robot inden det endelige resultat. 
-I dette afsnit vil det blive gennemgået hvilke erfaringer disse initierende designs gav.
-I disse forudgående design blev der eksperimenteret med opbygning af en robot med en enkelt ultrasonisk sensor.
-
-\begin{itemize}
-\item Hvis NXT enheden fungerer som base med alle andre komponenter monteret på, vanskeliggør det at finde en god placering af robottens ultrasoniske sensor.
-
-\item Hvis sensoren monteres i 1:1 forhold mellem motoren der roterer den, er der alt for store usikkerheder, når sensoren skal roteres x-antal grader (ofte mere end 5\degree).
-Disse usikkerheder er et resultat af den manglende præcisionen forbundet med styringen af motoren samt slid af dens interne komponenter, hvilket testes i \cref{sensorer:motorer} også beskriver.
-\end{itemize}
-
 \section{Design krav}
-Disse to design ledte frem til følgende krav til det endelige design af robotten:
 \thilemann{Disse design krav gør sig ikke helt gældende længere. Vi antager bl.a. 90graders verden, hvorfor det ikke er et krav at sensoren kan rotere 360grader.}
 
 \begin{itemize}
@@ -35,20 +17,17 @@ Disse to design ledte frem til følgende krav til det endelige design af robotte
 \item Mere stabil opbygning for at mindske generelle usikkerheder (bl.a. sidder hjulene bedre fast på basen).
 \end{itemize} 
 
-
 \section{Endeligt design}
 Udgangspunktet for det endelige design er baseret på ovenstående design krav sammen med andre idéer, der tilsammen skal øge præcisionen af robotten og gøre den mere driftsikker.
 
 Den vigtigste faktor, når robotten bygges, er placeringen af de primære komponenter, såsom de ultrasoniske sensorer, der skal foretage afstandsmålinger og motoren, der skal skabe fremdrift.
 
 \subsection{Kroppen}
-Kroppen er den centrale komponent, der er bygget op omkring motorene som styrer henholdsvis hjulene og rotation af sensorerne. 
+Kroppen er den centrale komponent, hvor motorene, som styrer henholdsvis hjulene og rotation af sensorerne, er bygget på. 
 Samtidig fungere den som det, der "holder robotten sammen".
-Desuden er NXT-enheden også en central del af denne konstruktion.
+Desuden er NXTen også en central del af denne konstruktion.
 Placeringen af denne er primært i forhold til funktionelle behov, da der på fronten er knapper til at tænde/slukke og vælge indstillinger med.
 Dens placering gør det også nemt at få adgang til dens porte for tilslutning af motor, sensor, opladning samt tilslutning af PC for opdatering af software med mere.
-
-Vigtigt for basen er højden i forhold til armen hvorpå sensorerne er monteret; for at disse skal kunne se i alle retninger er det essentielt at basens relative højde er så lav som muligt i forhold til de ultrasoniske sensorer, således den ikke er i vejen når der f.eks. måles bagud i retningen af basen. 
 
 \subsection{Fremdrift}
 Robotten er konstrueret med et \textit{aktivt} hjulsæt, der både giver fremdrift og styring.
@@ -57,12 +36,7 @@ Dette design gør det muligt at rotere robotten omkring sin egen akse for maksim
 Foruden det forreste hjulsæt, er der bagerst på robotten monteret et 'baghjul', hvis eneste funktion er at balancere/stabilisere robotten.
 Valget af et hjul til at udføre en sådan funktion er forholdsvis begrænset i \lego, hvorfor valget faldt på et "slæbehjul" med en masse ruller, der gør det muligt for hjulet at rotere i alle retninger.
 
-På de to første design af robotten, var der monteret to store (Ø81,6mm x 15mm) hjul direkte på motorene.
-Denne løsning fungerede fint i forhold til højden af basen (og det faktum at robotten stod så godt som vandret), men da gummiet på disse hjul er meget fleksibelt i forhold til sideværts bevægelse (når robotten roterer), blev det vurderet, at det vil give for store usikkerheder ved beregning af rotationen, og at der vil være risiko for at gummiet kan vrides af fælgen med det resultat, at robotten ikke kan køre videre.
-Derfor er der valgt et lavere og bredere hjulsæt (Ø56mm x 26mm), som er meget mere stabilt.
-%Med dette valg samt den højere friktion (større kontaktflade med underlaget), er det valgt at geare motorene der styrer hjulene, hvilket er beskrevet i \cref{robot:gearing}.
-
 \subsection{Sensorer}
 Den egentlige funktion af robotten er at tage afstandsmålinger til objekter indenfor sensorernes rækkevidde.
 Placeringen af sensorerne er derfor ikke kritisk, da de højst vil give en forskydelse af konstant faktor relativ til robottens midte fra deres placering i fronten.
-Vigtigere er, at der er 360\degree~udsyn når de roterer, og at robotten ikke er i vejen for målingerne, hvilket er løst ved at montere sensorerne højere end resten af robotten. 
+Vigtigere er, at der er 360\degree~udsyn når de roterer, og at robotten ikke er i vejen for målingerne, hvilket er løst ved at montere sensorerne højere end resten af robotten.

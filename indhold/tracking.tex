@@ -1,19 +1,18 @@
-\section{Lokalisering af robot}\label{tracking}
-Til lokalisering af robotten anvendes (som nævnt i \cref{kinect:argumentation}) en \kinect.
-Denne er udstyret med et farvekamera (jvf. \cref{kinect:farvekamera}), der vil blive anvendt til at bestemme robottens placering.
-Ved at udstyre robotten med to mærkninger i klare farver, vil det på billeder fra den være muligt at lokalisere robotten.
+Til lokalisering af robotten anvendes en \kinect (se evt. \cref{kinect:argumentation}).
+Denne er udstyret med et farvekamera (se evt. \cref{kinect:farvekamera}), der vil blive anvendt til at bestemme robottens placering.
+Ved at udstyre robotten med to mærkninger i klare farver, vil det på billeder fra Kinecten være muligt at lokalisere robotten.
 
 I det følgende beskrives den anvendte metode til lokalisering af robotten.
 Først beskrives den overordnede metode, hvorefter forbedringer af metoden præsenteres.
 
-\subsection{Farveforskel}\label{tracking:colordiff}
+\section{Farveforskel}\label{tracking:colordiff}
 %Beskrivelse af den metode der anvendes til at beskrive forskellen mellem farver
 Lokalisering af robotten foretages som udgangspunkt ud fra \'et billede.
 Det vil sige, at systemet skal være i stand til at lokalisere robotten ud fra \'et billede alene.
 Som beskrevet ovenfor udstyres robotten med to mærkninger i klare farver, som skal spores.
 Det er altså målet at finde de dele af et enkelt billede, der matcher bestemte farver.
 
-\subsubsection{Match af farver}
+\subsection{Match af farver}
 For at vurdere om to farver matcher hinanden, må det først gøres klart, at det ikke kan forventes at matche en farve eksakt.
 Til dette spiller faktorer som lys og skygge for stor en rolle.
 I stedet tages der udgangspunkt i en søgt farve, og ud fra denne ledes der efter alle \textit{nære} farver.
@@ -38,9 +37,9 @@ dist_{C_aC_b} = |C_a - C_b|
 \end{equation}
 Hver af de tre RGB farver repræsenteres ved 1 byte og afstanden mellem to farver kan derfor højst være $\sqrt{3 \cdot 255^2} \approx 442$ (forskellen på hvid og sort).
 
-\subsubsection{Maksimal afstand}\label{tracking:maksimal_afstand}
+\subsection{Maksimal afstand}\label{tracking:maksimal_afstand}
 Det er dog kun interessant at kigge på de farver der ligger i en vis afstand af hinanden.
-Der indføres derfor en konstant $\rho$ der definerer et maksimum for hvor langt to farver må være fra hinanden, før de ikke længere er interessante.
+Der indføres derfor en konstant $\rho$, der definerer et maksimum for hvor langt to farver må være fra hinanden, før de ikke længere er interessante.
 I \cref{tracking:adjust} beskrives bestemmelsen af denne konstant.
 Med $\rho$ i mente kan der udregnes en vægt, der bestemmer hvor interessant en farve er i forhold til en anden farve.
 Lad $C_a$ og $C_b$ være to farver, da har vi:
@@ -63,7 +62,7 @@ De resterende pixels betegnes herefter som \emph{interessante pixels}.
 
 Ved at finde den mindste firkant der spænder over alle interessante pixels og udvælge dens centrum kan farvens (og dermed robottens) \textit{position} nu bestemmes.
 
-\subsection{Forbedringer}\label{tracking:improvements}
+\section{Forbedringer}\label{tracking:improvements}
 For at teste implementeringen af ovenstående, blev det forsøgt at lokalisere forskellige farver for varierende $\rho$-værdier.
 Af dette fremgik det tydeligt, at metoden var effektiv til genkendelse af farver.
 Der blev dog ved testen introduceret tre problemstillinger:
@@ -82,7 +81,7 @@ Ved lave opdateringshastigheder bliver ændringerne i robottens lokation for hø
 I det følgende beskrives de metoder, der er anvendt til at løse ovenstående problemstillinger.
 I \cref{tracking:adjust} beskrives resultatet af indførelsen af disse metoder.
 
-\subsubsection{Filtrering af støj}
+\subsection{Filtrering af støj}
 \bruno{Nicolaj spørger: Kan det illustreres med et par eksempler?}
 %Beskrivelse af implementationen af mean-filter
 Den beskrevne \emph{farve-støj}, der opstår i visse billeder, fjernes ved at anvende en variation af et 3x3 median-filter\cite{medianfilter}.
@@ -102,14 +101,14 @@ Ved at anvende ovenstående filter på alle koordinat-sæt fjernes noget af den 
 Filteret påføres gentagne gange, indtil ingen vægte opdateres.
 Herefter anses støjen som fjernet.
 
-\subsubsection{Farve-afstand}
+\subsection{Farve-afstand}
 %Beskrivelse af farve-afstand optimering, ved opdatering af den søgte farve
 Som løsning på problemet med lys og skygge foretages en løbende opdatering af den farve der søges efter.
 Dette gøres ved, for hver opdatering, at finde den højeste vægt (efter filtrering) og dermed den farve, der er tættest på den søgte farve.
 Denne farve anvendes efterfølgende som den søgte farve.
 På denne måde opdateres den søgte farve løbende og tilpasser sig dermed de forskellige lys/skygge forhold.
 
-\subsubsection{Afgrænset område}
+\subsection{Afgrænset område}
 %Beskrivelse af opdatering af det område der afsøges
 En simpel løsning på at optimere den tid det tager at afsøge billedet, er ved at reducere problemets størrelse, altså mængden af pixels, der søges i.
 Som et led i lokaliseringen bestemmes den mindste firkant, der spændes over alle interessante pixels.
@@ -149,7 +148,7 @@ Herved er det reducerede problems størrelse, beskrevet med udgangspunkt i det f
 \label{tracking:reduction}
 \end{figure}
 
-\subsection{Justering}\label{tracking:adjust}
+\section{Justering}\label{tracking:adjust}
 %Beskrivelse af diverse thresholds og hvilke værdier "der fungerer"
 Af de forrige afsnit fås tre variable, der søges justeret således, at de løser de beskrevne problemer tilfredsstillende.
 Herunder listes de tre variable, samt en beskrivelse af deres betydning og endelig justering.
@@ -192,7 +191,7 @@ Derved kunne $\omega$ sættes lavt og en hurtig opdateringshastighed kunne opnå
 I \cref{tracking:updatespeed} beskrives i hvilken grad farvesøgningen forbedredes som følge af $\omega = 5$.
 \end{description}
 
-\subsection{Opdateringshastighed}\label{tracking:updatespeed}
+\section{Opdateringshastighed}\label{tracking:updatespeed}
 Farvebilleder fra Kinecten kan indsamles på to forskellige måder:
 \begin{itemize}
 \item I opløsningen 640x480 ved 30 billeder i sekundet
