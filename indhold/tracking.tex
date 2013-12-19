@@ -12,6 +12,17 @@ Det vil sige, at systemet skal være i stand til at lokalisere robotten ud fra \
 Som beskrevet ovenfor udstyres robotten med to mærkninger i klare farver, som skal spores.
 Det er altså målet at finde de dele af et enkelt billede, der matcher bestemte farver.
 
+\begin{figure}[h]
+\centering
+\includegraphics{tracking/emptyGrid}
+\caption{Et billede af robotten hvori en farve skal spores.}
+\label{tracking:img:initial}
+\end{figure}
+
+I \cref{tracking:img:initial} vises et billede af robotten og en papkasse.
+Vi ønsker her at spore den blå og pink seddel der er sat fast på robotten.
+I de følgende billeder tages der udgangspunkt i sporing af den pinke farve.
+
 \subsection{Match af farver}
 For at vurdere om to farver matcher hinanden, må det først gøres klart, at det ikke kan forventes at matche en farve eksakt.
 Til dette spiller faktorer som lys og skygge for stor en rolle.
