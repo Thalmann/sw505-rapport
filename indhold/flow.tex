@@ -44,14 +44,12 @@ Det overordnede flow kan ses i tilstand-sekvens-diagrammet i \cref{flow:ssd}.
 Bemærk dog at dette er en meget abstrakt beskrivelse/illustration af flowet.
 Det egentlige flow vil blive beskrevet nu, i højere detalje og ved brug af konkrete kodeeksempler.
 
-\begin{landscape}
-	\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.65]{sdRequestLocation}
-	\caption{Sekvens-diagram for robottens anmodning om positur.}
-	\label{flow:ssd}
-	\end{figure}
-\end{landscape}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.65,angle=90]{sdRequestLocation}
+\caption{Sekvens-diagram for robottens anmodning om positur.}
+\label{flow:ssd}
+\end{figure}
 
 \subsubsection{Robotten sender anmodning om sin positur}
 Det første der sker er, at robotten lægger beskeden \lstinline[style=c]!OUTGOING_WHERE_AM_I! i \lstinline[style=c]!OUTBOX!:
