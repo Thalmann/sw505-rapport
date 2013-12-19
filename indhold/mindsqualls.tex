@@ -24,7 +24,7 @@ Metoderne til dette er:
 \lstinline[style=csharp]!NxtMailBox! er en enumeration type, der indeholder de forskellige mailboxes, der er tilgængelige på NXT enheden.
 
 Brugen af \lstinline[style=csharp]!MessageWrite! kan ses i \cref{messagewrite} hvor en streng sendes til outboxen \lstinline[style=csharp]!PC_OUT!.
-CommunicationBrick er her en \lstinline[style=csharp]!McNxtBrick! og \lstinline[style=csharp]!CommLink! er en property, der returnerer den \lstinline[style=csharp]!NxtCommunicationProtocol!,der er tilknyttet CommunicationBrick 
+\lstinline[style=csharp]!CommunicationBrick! er her en \lstinline[style=csharp]!McNxtBrick! og \lstinline[style=csharp]!CommLink! er en property, der returnerer den \lstinline[style=csharp]!NxtCommunicationProtocol!,der er tilknyttet \lstinline[style=csharp]!CommunicationBrick!
 
 \begin{lstlisting}[style=c,label=messagewrite, caption={Brug af MessageWrite.}]
 public void SendMessage(string s)

@@ -117,7 +117,7 @@ I \cref{tracking:adjust} beskrives resultatet af indførelsen af disse metoder.
 Den beskrevne \emph{farve-støj}, der opstår i visse billeder, fjernes ved at anvende en variation af et 3x3 median-filter\cite{medianfilter}.
 I filteret betragtes alle værdier som binære (0 eller ikke 0).
 Midten af boksen erstattes af 0 hvis kun få naboer ikke har værdien 0.
-Variablen $\sigma$ indføres her til at beskrive ''få naboer``.
+Variablen $\sigma$ indføres her til at beskrive 'få naboer'.
 Lad $w_{x,y}$ beskrive vægten af den pixel i et billede, der har koordinat-sæt $x,y$ og $N_{x,y}$ beskrive de \emph{højst} 8 nabo-vægte til dette koordinat-sæt, da kan filteret beskrives således:
 \begin{equation}\label{tracking:eq:filter}
 w_{x,y}' = \left\{ 
@@ -280,6 +280,7 @@ Ingen reduktion&&\\\hline
 Med reduktion&&\\\hline
 \end{tabular}
 \end{center}}
+\thilemann{bør denne tabel ikke have en caption og derved også et nummer til henvisning?}
 %
 %%Bemærk at implementationen af farve-afstand og afgrænset område forudsætter 'høj' fps
 %

@@ -18,7 +18,7 @@ Efterfølgende vil lagene blive beskrevet i en rækkefølge, der følger kaldene
 \caption{Viser namespacet \lstinline[style=csharp]!CommonLib! (uden interne associationer), som er en del af den lagdelte systemarkitektur. De fleste lag i arkitekturen har associationer til netop \lstinline[style=csharp]!CommonLib!, der indeholder de elementer, som benyttes af alle lag. De refererende namespaces kan ses på \cref{arkitektur:klassediagram:1}.}
 \label{arkitektur:klassediagram:2}
 \end{figure}
-\section{CommonLib}\label{arkitektur:commonlib}
+\subsection{CommonLib}\label{arkitektur:commonlib}
 Benyttes af alle lag i arkitekturen.
 Dets formål er at samle de komponenter som i systemet kan benyttes af alle lag.
 Derfor holder det også en reference til namespacet \lstinline[style=csharp]!NKH.MindSqualls! for at kunne tilgå den del af MindSqualls (\cref{mindsqualls}) som indeholder kommunikationen til NXTen.
@@ -30,25 +30,25 @@ Dette namespace indeholder alle \textit{Data Transferring Objects} som har til o
 Som navnet på namespacet antyder, så er formålet med \lstinline[style=csharp]!CommonLib.NXTPostMan! at sende beskeder frem og tilbage mellem PC og robotten; hvilket gør det ansvarlig for al kommunikation imellem de to, som beskrives detaljeret i \cref{kommunikation}.
 
 \paragraph{CommonLib.Interfaces}
-Definerer en række interfaces, som implementeres af de respektive DTO'er.
+Definerer en række interfaces, som implementeres af de respektive DTO.
 Dette minimerer koblingen af koden og gør dem samtidig mere modulær, da komponenter nemt kan udskiftes.
 
-\section{NKH.MindSqualls}\label{arkitektur:mindsqualls}
+\subsection{NKH.MindSqualls}\label{arkitektur:mindsqualls}
 Dette er koden fra MindSqualls frameworket (beskrevet i \cref{mindsqualls}).
 Det er dog ikke alle komponenter i frameworket der benyttes; det benyttes primært til at etablere kommunikation mellem NXTen og PC samt exceptions, hvilket implementeres gennem \lstinline[style=csharp]|PostMan| klassen.
 
-\section{SystemInterface}\label{arkitektur:systeminterface}
-Dette er "indgangen" til systemet og er derfor også den komponent, som er ansvarlig for alle ydre påvirkninger; det være sig f.eks. brugerinput eller andre systemer, som ønsker at tilgå systemet.
+\subsection{SystemInterface}\label{arkitektur:systeminterface}
+Dette er 'indgangen' til systemet og er derfor også den komponent, som er ansvarlig for alle ydre påvirkninger; det være sig fx brugerinput eller andre systemer, som ønsker at tilgå systemet.
 
 \paragraph{SystemInterface.GUI}
 Dette namespace indeholder de grafiske komponenter for systemet, og er derfor programmet, der starter systemet.
 Det er ansvarlig for at modtage og reagere på brugerens input.
 
 \paragraph{SystemInterface.RobotInterface}
-Essensen i dette namespace er en tråd, der konstant tjekker efter nye beskeder på NXT'en.
+Essensen i dette namespace er en tråd, der konstant tjekker efter nye beskeder på NXTen.
 Den benytter så henholdsvis \lstinline[style=csharp]|LocationControl| og \lstinline[style=csharp]|MappingControl| til at reagere på beskeder den finder, og anmoder dermed \lstinline[style=csharp]!Services! namespacet om at udføre den pågældende handling.
 
-\section{Control}\label{arkitektur:control}
+\subsection{Control}\label{arkitektur:control}
 Denne komponent i arkitekturen er ansvarlig for kontrol af robotten samt opdatering af data.
 Kald hertil stammer fra \lstinline[style=csharp]!SystemInterface!, der anmoder om en action, som dette namespace så reagerer på ved at benytte \lstinline[style=csharp]!Services! namespacet.
 
@@ -63,7 +63,7 @@ Den indeholder således også information om robottens omgivelser og robotten se
 Al kontrol af robotten på kortet (occupancy grid) foregår gennem denne klasse.
 Den indeholder således metoder til at sende robotten til et nyt koordinat, opdatere kortet og hente nye sensormålinger.
 
-\section{Services}\label{arkitektur:services}
+\subsection{Services}\label{arkitektur:services}
 Dette er det nederste lag i arkitekturen og benyttes af \lstinline[style=csharp]!Control! namespacet når en handling ønskes udført.
 
 \paragraph{Services.RobotServices}
@@ -81,12 +81,6 @@ Konverterer den returnerede videostrøm til en strøm af bitmaps, som kan vises 
 Denne service er ansvarlig for at holde styr på robottens lokation samt positur.
 Robotten kan således gennem \lstinline[style=csharp]!Control! benytte dette namespace, når den ønsker en opdatering af sin positur.
 
-\section{Data}\label{arkitektur:data}
+\subsection{Data}\label{arkitektur:data}
 Dette assembly indeholder alle data objekter for occupancy grid samt sensormodellen.
 Alt data opdateres fra \lstinline[style=csharp]!Control! når robotten har taget en ny måling.
-
-
-
-
-
-

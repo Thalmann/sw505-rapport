@@ -1,6 +1,44 @@
 % !TeX spellcheck = da_DK
 Dette kapitel præsenterer en evaluering af projektets endelige løsning.
-I evalueringen testes de to valgte sensormodeller (\cref{mapping:sensormodel}) for at finde ud af hvilken af de to der fungerer bedst.
+Først evalueres der på hvad robotten rent faktisk gør, hvorefter de to valgte sensormodeller (\cref{mapping:sensormodel}) for at finde ud af hvilken af de to der fungerer bedst.
+
+\section{Observationer af robotten}
+Efter gentagne kørsler med de to sensormodeller, har vi gjort vigtige observationer af hvor godt systemet fungerer.
+
+Herunder beskrives de observationer, som har indvirkning på kvaliteten af det genererede kort.
+
+\paragraph{Roterer og kører ikke præcist}
+Et generelt problem, som kan observeres for alle kørsler, er hvordan robotten til tider placerer sig forkert i forhold til, hvor den bør placere sig inden en måling.
+Dette giver dog ikke målinger det forkerte sted, da alle opdateringer af kortet sker efter robottens faktiske placering. 
+Det betyder dog at det ikke altid er muligt, at foretage målinger hvor det ønskes.
+
+\paragraph{Holder sig ikke altid indenfor den planlagte rute}
+Når robotten følger den planlagte rute, skal den ideelt holde sig indenfor områder den ved der er ledige.
+Dog betyder flere faktorer (for eksempel cellestørrelsen og at robotten ikke kører lige), at robotten ikke altid kan holde sig indenfor ruten.
+
+\paragraph{Tager ikke højde for placering af sin bagende (og forende)}
+Dette gælder især når den drejer, og når der foretages sensormålinger.
+Når robotten drejer eller roterer, er der stor chance for at enten bagenden eller fronten af robotten rammer udenfor de kendte celler omkring den.
+Robotten bakker tilbage for at tage højde for, at sensorerne ikke er placeret i midten ift. lokalisering, og kan også resultere i, at den kører udenfor de områder den kender til.
+
+\paragraph{Sletter dele af kortet grundet forkerte sensormålinger}
+Det er gentagne gange blevet observeret at dele af kortet, der ser fornuftigt ud, bliver ødelagt at gentagne fejlmålinger.
+Dette kan betyde at robotten ikke længere kan nå frem til de områder, som er påvirket af fejlmålingerne.
+
+\paragraph{Uendelig løkke}
+Fejlmålinger kan også føre til en \textit{uendelig løkke}, hvilket henviser til at gentagne fejlmålinger kan 'fjerne' allerede kendte forhindringer fra kortet.
+Sker det, og robotten ønsker at opdatere det \textit{nyopdagede} område (hvilket den ikke kan, da det er en fejl), så vil robotten blive ved med at forsøge at komme til det ufremkommelige område, ved at køre ind i forhindringen.
+Da den aldrig kommer til den nye destination, men blot rammer forhindringen, vil det fortsætte med dette sålænge der er strøm på batteriet.
+
+\paragraph{Kører ind i forhindringer}
+At robotten kan risikere at ramme forhindringer, hænger sammen med alle ovenstående beskrivelser.
+Dette sker således ved fejlmålinger, rotation og navigation.
+For at forhindre dette sker, vil det være nødvendigt enten altid at tage afstandsmålinger i kørselsretningen, eller vha. en kontakt der aktiveres ved kontakt med et objekt.
+
+\paragraph{}
+
+På trods af disse svagheder, opnås der stadig resultater som stemmer overens med virkeligheden; altså hvordan testmiljøet ser ud.
+Både banens kanter og forhindringer findes af robotten så den kan navigere rundt i området.
 
 \section{Formål}
 Formålet med denne test er at se hvilken sensormodel, der kommer frem til det mest præcise kort.
@@ -113,7 +151,7 @@ Gaussisk, Test 1 & 297 \\ \hline
 Gaussisk, Test 2 & 325 \\ \hline
 Gaussisk, Test 3 & 337 \\ \hline
 \end{tabular}
-\caption{Oversigt over test-resultaterne}
+\caption{Oversigt over test-resultaterne.}
 \label{evaluering:testresultater}
 \end{table}
 
