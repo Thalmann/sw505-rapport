@@ -3,8 +3,7 @@ Dette kapitel præsenterer en evaluering af projektets endelige løsning.
 Først evalueres der på hvad robotten rent faktisk gør, hvorefter de to valgte sensormodeller (\cref{mapping:sensormodel}) for at finde ud af hvilken af de to der fungerer bedst.
 
 \section{Observationer af robotten}
-Efter gentagne kørsler med de to sensormodeller, har vi gjort vigtige observationer, der alle kan have indflydelse på hvor godt kortet, der bliver genereret, er i forhold til virkeligheden.
-Det skal bemærkes, at der ikke findes konkret dokumentation for alle observationerne.
+Efter gentagne kørsler med de to sensormodeller, har vi gjort vigtige observationer af hvor godt systemet fungerer.
 
 Herunder beskrives de observationer, som har indvirkning på kvaliteten af det genererede kort.
 
@@ -15,7 +14,7 @@ Det betyder dog at det ikke altid er muligt, at foretage målinger hvor det øns
 
 \paragraph{Holder sig ikke altid indenfor den planlagte rute}
 Når robotten følger den planlagte rute, skal den ideelt holde sig indenfor områder den ved der er ledige.
-Dog betyder flere faktorer (fx 90 graders verden, cellestørrelsen og placering i forhold til celler), at robotten ikke altid kan holde sig indenfor ruten.
+Dog betyder flere faktorer (for eksempel cellestørrelsen og at robotten ikke kører lige), at robotten ikke altid kan holde sig indenfor ruten.
 
 \paragraph{Tager ikke højde for placering af sin bagende (og forende)}
 Dette gælder især når den drejer, og når der foretages sensormålinger.
@@ -36,10 +35,10 @@ At robotten kan risikere at ramme forhindringer, hænger sammen med alle ovenst�
 Dette sker således ved fejlmålinger, rotation og navigation.
 For at forhindre dette sker, vil det være nødvendigt enten altid at tage afstandsmålinger i kørselsretningen, eller vha. en kontakt der aktiveres ved kontakt med et objekt.
 
-\thilemann{latex guru: hvordan adskiller man tekst fra paragraffer?}
+\paragraph{}
 
 På trods af disse svagheder, opnås der stadig resultater som stemmer overens med virkeligheden; altså hvordan testmiljøet ser ud.
-\thilemann{Her kan der evt. siges noget om hastigheden og hvor godt kortet vurderes til at være - eller en henvisning til nedenstående afsnit.}
+Både banens kanter og forhindringer findes af robotten så den kan navigere rundt i området.
 
 \section{Formål}
 Formålet med denne test er at se hvilken sensormodel, der kommer frem til det mest præcise kort.
