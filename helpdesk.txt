@@ -1,0 +1,29 @@
+Intro 
+	baggrund
+	problemformulering + målsætning + evalueringsmetode + forsøgsopstilling 
+---
+	præsenter walle, præsenter ændringer
+	valg af løsningsmetode kort
+---
+
+Teori
+	overordnet (bayes regel - occupancy grid )
+	sensor model
+---
+	lokalisering 
+	rute - demo
+---
+
+Arkitektur
+	systemopbygning
+
+	NXT - (perspektiver om at den ikke verificerer sin position) 
+	PC 
+---
+	Kommunikation - flow
+
+Konklusion
+	Evaluering
+	perspektivering opsummering
+
+
