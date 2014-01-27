@@ -1,29 +1,29 @@
 Intro 
-	baggrund
+Thile	baggrund
 	problemformulering + målsætning + evalueringsmetode + forsøgsopstilling 
 ---
-	præsenter walle, præsenter ændringer
+Bruno	præsenter walle, præsenter ændringer
 	valg af løsningsmetode kort
 ---
 
 Teori
-	overordnet (bayes regel - occupancy grid )
+Stefan	overordnet (bayes regel - occupancy grid )
 	sensor model
 ---
-	lokalisering 
+Anders	lokalisering 
 	rute - demo
 ---
 
 Arkitektur
-	systemopbygning
+Mikael	systemopbygning
 
 	NXT - (perspektiver om at den ikke verificerer sin position) 
 	PC 
----
 	Kommunikation - flow
+---
 
 Konklusion
-	Evaluering
+Mikkel	Evaluering
 	perspektivering opsummering
 
 
