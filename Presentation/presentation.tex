@@ -1,0 +1,62 @@
+\documentclass{beamer}
+\graphicspath{{../graphics/}}
+\usepackage{listings}
+\usepackage{ulem}
+
+\mode<presentation>
+{
+  \usetheme{Darmstadt}
+  \setbeamertemplate{footline}[frame number]
+  \setbeamercovered{navigation symbols}
+  \setbeamercovered{transparent}
+}
+
+\AtBeginSection[]
+{
+   \begin{frame}
+        \frametitle{Table of Contents}
+        \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/show/hide]
+   \end{frame}
+}
+
+%\usepackage[danish]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{times}
+
+\usepackage{tikz}
+
+\title[Mapping med Lego-robot]{Mapping med Lego-robot}
+
+\subtitle{SW505E13}
+
+\author[SW505E13]{Mikkel Sand\o ~Larsen, \and Bruno Thalmann, \and Stefan Marstrand Getreuer Micheelsen, \and Stefan Thilemann, \and Mikael Elki\ae r Christensen, \and Anders R. Nielsen}
+
+\institute[Aalborg University]
+{
+  Department of Computer Science\\
+  Aalborg University}
+
+\date[CFP 2003]{31. Januar 2014}
+
+\begin{document}
+
+%--------------------------------------------------
+%     INTRODUKTION
+%--------------------------------------------------
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[sectionstyle=show/show,subsectionstyle=hide/hide/hide]
+\end{frame}
+
+\section{Introduction}
+
+\input{slides/intro}
+\end{document}
