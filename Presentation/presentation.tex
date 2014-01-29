@@ -2,6 +2,8 @@
 \graphicspath{{../graphics/}}
 \usepackage{listings}
 \usepackage{ulem}
+\usepackage{subcaption}
+\usepackage{algorithm2e}
 
 \mode<presentation>
 {
@@ -14,7 +16,7 @@
 \AtBeginSection[]
 {
    \begin{frame}
-        \frametitle{Table of Contents}
+        \frametitle{Indhold}
         \tableofcontents[sectionstyle=show/hide,subsectionstyle=show/show/hide]
    \end{frame}
 }
@@ -53,12 +55,22 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Table of Contents}
+    \frametitle{Indhold}
     \tableofcontents[sectionstyle=show/show,subsectionstyle=hide/hide/hide]
 \end{frame}
 
 \section{Introduction}
 
 \input{slides/intro}
+\input{slides/teori}
+\input{slides/localization}
+\input{slides/ruteplan}
+%Robottens design
+\section{Robottens design}
+\input{slides/walle}
+
+\section{Løsningsmetoder}
+%Løsningsmetoder
+\input{slides/losningsmetoder}
 \input{slides/evaluering}
 \end{document}
