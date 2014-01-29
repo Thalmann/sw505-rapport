@@ -17,20 +17,9 @@
 \end{description}
 \end{frame}
 
-\begin{frame}{Hardware Komponenter (3)}
-\begin{itemize}
-\item{Begrænset anvendelighed;}
-\begin{itemize}
-\item{Fokus på selve kortlægningen}
-\item{God lokationsberegning (afhængig af Kinect)}
-\item{Større regnekraft (afhængig af PC)}
-\end{itemize}
-\end{itemize}
-\end{frame}
-
 \subsection{NXT}
 
-\begin{frame}{NXT Software (1)}
+\begin{frame}{NXT Software}
 3 overordnede filer, med hver deres funktionalitet:
 \begin{description}
 \item[Sensor.nxc]{Observation af verden}
@@ -39,45 +28,10 @@
 \end{description}
 \end{frame}
 
-\begin{frame}{NXT Software (2)}
-\begin{itemize}
-\item{Selvstændig (embedded)}
-\item{Ingen tunge beregninger}
-\item{Gøre op for unøjagtiheder:}
-\begin{itemize}
-\item{Inkrementerende ''skridt'' ved navigering}
-\item{Foretag 2 målinger ved lokation}
-\end{itemize}
-\end{itemize}
-\end{frame}
-
 \subsection{PC}
 
-\begin{frame}{PC Software (1)}
+\begin{frame}{PC Software}
 Indsæt overordnet diagram (Yderste komponenter)
-\end{frame}
-
-\begin{frame}{PC Software (2)}
-\begin{description}
-\item[CommonLib]{DTOs, NXTPostMan, Interfaces}
-\item[SystemInterface]{GUI og RobotInterface}
-\item[Control]{Display, Location og Mapping}
-\item[Services]{Robot, Route, Kinect, Tracking}
-\item[Data]
-\end{description}
-\end{frame}
-
-\begin{frame}{PC Software (3)}
-\begin{itemize}
-\item{Mange processer, samt tunge beregninger:}
-\begin{itemize}
-\item{Prioritering og samtidighed}
-\end{itemize}
-\item{Streng/meget arkitektur}
-\begin{itemize}
-\item{(Fordele/ulemper)}
-\end{itemize}
-\end{itemize}
 \end{frame}
 
 \subsection{Kommunikation}
@@ -85,16 +39,13 @@ Indsæt overordnet diagram (Yderste komponenter)
 \begin{frame}{Protokol}
 \begin{description}
 \item[Generelt]{$< BeskedType >< Indhold >$}
-\item[Eksempel 1]{Robot anmoder om lokation\\
-\texttt{0}}
-\item[Eksempel 2]{PC sender lokation\\
+\item[Eksempel]{Robot anmoder om lokation\\
+\texttt{0}\\
+PC sender lokation\\
 \texttt{\textcolor{red}{52}-0213.5\textcolor{red}{00126.9}00187.4}}
 \end{description}
 \end{frame}
 
 \begin{frame}{Flow}
 Tilstandssekvensdiagram? Komponentdiagram? Vigtigt/spændende?
-\end{frame}
-
-\begin{frame}{Sidste tanker}
 \end{frame}
