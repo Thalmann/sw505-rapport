@@ -1,0 +1,76 @@
+\section{Evaluering}
+
+\subsection{Test af sensormodeller}
+\begin{frame}
+\frametitle{Sammenlignings-skema}
+\begin{columns}
+\begin{column}{.59\textwidth}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{testresultater/emptygrid}\\
+\include{slides/evaluering_point}
+\end{center}
+\end{column}
+\begin{column}{.40\textwidth}
+\visible<2->{\includegraphics[width=\textwidth]{testresultater/optimalt}}\\
+\visible<3->{\includegraphics[width=\textwidth]{testresultater/simpel1}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Testresultater}
+\begin{columns}
+\begin{column}{.59\textwidth}
+\begin{center}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Test \#} & \textbf{Resultat} \\ \hline \hline
+Optimalt & 555 \\ \hline \hline
+Simpel, Test 1 & 193 \\ \hline
+Simpel, Test 2 & 187 \\ \hline
+Simpel, Test 3 & 193 \\ \hline \hline
+Gaussisk, Test 1 & 297 \\ \hline
+Gaussisk, Test 2 & 325 \\ \hline
+Gaussisk, Test 3 & 337 \\ \hline
+\end{tabular}
+\end{center}
+\end{column}
+\begin{column}{.40\textwidth}
+\includegraphics[width=\textwidth]{testresultater/optimalt}\\
+\includegraphics[width=\textwidth]{testresultater/simpel1}
+\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Problemstillinger}
+
+\begin{frame}
+\frametitle{Punkter fra rapporten}
+\begin{itemize}
+\item Roterer og kører ikke præcist
+\item Holder sig ikke altid indenfor den planlagte rute
+\item Tager ikke højde for placering af sin bagende (og forende)
+\item Sletter dele af kortet grundet forkerte sensormålinger
+\item Uendelig løkke
+\item Kører ind i forhindringer
+\item Problemer med $90^\circ$ verden
+\item Cellestørrelse
+\item Gaussisk sensormodel i to dimensioner
+\item Løbende målinger
+\item Intet tårn
+\item Robot bevist om egen størrelse og nærmeste omgivelser
+\end{itemize}
+\end{frame}
+
+
+\subsection{Konklusion}
+
+\begin{frame}
+\frametitle{Konklusion}
+\begin{itemize}
+\item Problemformulering:\\
+\textit{- Hvordan kan der konstrueres software til en robot, hvis formål er at kortlægge en ukendt verden, forudsat at den til enhver tid kender sin position?}
+\pause
+\item Robotten kortlægger en ukendt verden og anvender denne information til at navigere i verdenen.
+\end{itemize}
+\end{frame}
