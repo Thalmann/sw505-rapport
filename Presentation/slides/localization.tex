@@ -1,11 +1,31 @@
 \section{Localization}
 
-\begin{frame}{Gennemgang af metoden}
+\begin{frame}{afstande mellem farver}
 
-afstande mellem farver
+Insert 3d picture of color distances!
 
+\end{frame}
 
+\begin{frame}{maksimal afstand}
 
+$$dist_{C_aC_b} = \vert C_a - C_b \vert$$
+
+$$w_{C_aC_b} = \begin{cases}
+	0 &\text{hvis } dist_{C_aC_b} > \rho \\
+	1 - \frac{dist_{C_aC_b}}{\rho} &\text{hvis } dist_{C_aC_b} \leq \rho
+\end{cases}$$
+
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}
+\centering
+\includegraphics[scale=.7]{tracking/emptyGrid_TRACK2}
+
+\includegraphics[scale=.7]{tracking/emptyGrid_TRACK}
+
+\end{figure}
 \end{frame}
 
 \begin{frame}{Problemer med metoden}
@@ -17,14 +37,25 @@ afstande mellem farver
 
 \end{frame}
 
-\begin{frame}{Filtrering af støj}
-3x3 Median filter
 
+
+\begin{frame}{Filtrering af støj}
+3x3 Median filter \\
+
+
+$$w'_{x,y} = \begin{cases}
+	0 &\text{hvis } \vert V_{x,y} \vert < \rho \\
+	w_{x,y} &\text{hvis } \vert V_{x,y} \vert \geq \rho
+\end{cases}$$ \\
+hvor $$V_{x,y} = \{w \in N_{x,y} \vert w > 0 \}$$
 \end{frame}
 
 \begin{frame}{Farveændring (lys/skygge)}
-dfsdfsd
-dsfdsf
+Løbende opdatering af sporingsfarve.
+\begin{figure}
+\centering
+\includegraphics[scale=.7]{tracking/emptyGrid_FILTER}
+\end{figure}
 
 \end{frame}
 
@@ -78,10 +109,7 @@ dsfdsf
 
 \begin{frame}{Omregning fra punkt i billede til reelt punkt}
 
-
-
-
-
+Insæt billede der viser ensvinklede trekanter.
 
 
 \end{frame}
