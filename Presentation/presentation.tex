@@ -3,6 +3,7 @@
 \usepackage{listings}
 \usepackage{ulem}
 \usepackage{subcaption}
+\captionsetup{compatibility=false}
 \usepackage{algorithm2e}
 
 \newcommand{\linespace}{\vspace{1em}}
@@ -65,16 +66,18 @@
 \section{Overblik}
 
 \input{slides/intro}
-\input{slides/teori}
-\input{slides/localization}
-\input{slides/ruteplan}
-%Robottens design
-\section{Robottens design}
-\input{slides/walle}
+
 \section{Løsningsmetoder}
 %Løsningsmetoder
 \input{slides/losningsmetoder}
-\section{Arkitektur}
+%Robottens design
+\section{Robottens design}
+\input{slides/walle}
+\input{slides/teori}
+\input{slides/localization}
+\input{slides/ruteplan}
+
+\section{Design}
 \input{slides/arkitektur}
 \input{slides/evaluering}
 \end{document}
