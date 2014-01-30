@@ -1,35 +1,32 @@
-\section{Ruteplanlægning}
+\subsection{Ruteplanlægning}
 
-\begin{frame}{begreber}
-
+\begin{frame}{Ruteplanlægning}
+Begreber:
 \begin{itemize}
 \item Destinationscelle
+$$D = \{d \in C \vert dest(d) \}$$
 \item Synlig celle
-\item cellens information gain
+$$p(d) = \{e \in C \vert visible(d,e) \}$$
+\item Cellens information gain
+$$v(d) = \sum_{c \in p(d)}{0.5- \vert 0.5 - P(c) \vert}$$
 \end{itemize}
 
 \end{frame}
 
 
-
 \begin{frame}
 
-$$D = \{d \in C \vert dest(d) \}$$
-
-$$p(d) = \{e \in C \vert visible(d,e) \}$$
-
-$$v(d) = \sum_{c \in p(d)}{0.5- \vert 0.5 - P(c) \vert}$$
+\begin{itemize}
+\item Mængde af værdier
+$$V = \{v(d) \vert d \in D \}$$
+\item Celler med maksimal information gain
+$$Q = \{ d \in D \vert v(d) \in maxV \}$$
+\item Mængde af distance mellem celler i Q
+$$A = \{dist(x,q) \vert q \in Q \}$$
+\end{itemize}
 
 \end{frame}
 
-
-\begin{frame}
-
-$$V = \{v(d) \vert d \in D \}$$
-
-$$Q = \{ d \in D \vert v(d) \in maxV \}$$
-
-$$A = \{dist(x,q) \vert q \in Q \}$$
-
+\begin{frame}{Dijkstra's algoritme}
 
 \end{frame}
