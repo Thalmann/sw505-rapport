@@ -33,7 +33,7 @@ l(x) = \log \frac{p(x)}{1 - p(x)}
 \centering
 	\begin{subfigure}[b]{.48\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{verden/oppefra}
+	\includegraphics[width=\textwidth]{verden/oppefra_m_walle}
 	\caption{Aktuelt Kørselsmiljø.}
 	\label{map:world}
 	\end{subfigure}
@@ -46,6 +46,16 @@ l(x) = \log \frac{p(x)}{1 - p(x)}
 	\end{subfigure}
 
 \end{figure}
+\end{frame}
+
+\begin{frame}{Binært Bayes Filter}
+Kan bruges når tilstanden er statisk
+
+\begin{algorithm}[H]
+\textbf{BinaryBayesFilter($l_{t-1}, z_t$)} \\
+\Indp $l_t = l_{t-1} + \log \frac{p(x \mid z_t)}{1-p(x \mid z_t)} - \log \frac{p(x)}{1-p(x)}$ \\
+\Return{$l_t$}
+\end{algorithm}
 \end{frame}
 
 \begin{frame}
@@ -66,7 +76,6 @@ OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
 
 \subsection{Sensormodeller}
 \begin{frame}{Simpel sensormodel}
-Illustration?!
 \[
 l_{r} = \begin{cases} 
 	l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
@@ -77,16 +86,13 @@ l_{r} = \begin{cases}
 
 \[ r = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid \]
 
+\includegraphics{simple_sensormodel.pdf}
 \end{frame}
 
+\pgfmathdeclarefunction{gauss}{4}{%
+  \pgfmathparse{((1-cos((x - #1)*(180/(#3-#1))))/2)*(#4-#2)+#2}}
+  
 \begin{frame}{Gaussisk sensormodel}
-\[
-	P_\kappa(r) = \begin{cases}
-		\frac{P_{occ}-P_0}{P(z_t)-P(z_t+\frac{\alpha}{2})}(r-P(z_t))+P_{occ} &\text{hvis } z_t < r \\
-		\frac{P_{free}-P_{occ}}{P(z_t-\frac{\alpha}{2})-P(z_t)}(r-P(z_t))+P_{occ} &\text{hvis } z_t \geq r 
-	\end{cases}
-\]
-
 \[
 	l_{r} = \begin{cases} 
 		l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\
@@ -95,5 +101,7 @@ l_{r} = \begin{cases}
 		l_{free} &\text{ellers}	
 	\end{cases} 
 \]
+
+\includegraphics{gaussian_sensormodel.pdf}
 \end{frame}
 
