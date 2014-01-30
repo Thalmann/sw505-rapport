@@ -80,26 +80,66 @@
 \end{columns}
 \end{frame}
 
-\subsection{Problemstillinger}
+\subsection{Problemstillinger \& Forbedringer}
 
 \begin{frame}
-\frametitle{Punkter fra rapporten}
+\frametitle{Navigation}
+Robotten roterer ikke korrekt, hvilket medfører:
 \begin{itemize}
-\item Roterer og kører ikke præcist
-\item Holder sig ikke altid indenfor den planlagte rute
-\item Tager ikke højde for placering af sin bagende (og forende)
-\item Sletter dele af kortet grundet forkerte sensormålinger
-\item Uendelig løkke
-\item Kører ind i forhindringer
-\item Problemer med $90^\circ$ verden
-\item Cellestørrelse
-\item Gaussisk sensormodel i to dimensioner
-\item Løbende målinger
-\item Intet tårn
-\item Robot bevist om egen størrelse og nærmeste omgivelser
+\item afvigelse fra den planlagte rute.
+\item opdatering af nabocelle istedet for den ønskede celle.
+\item kollision med kassen i testmiljøet.
+\end{itemize}
+\pause
+Robotten forespørger kun sin position indtil den er \textit{tilpas} tæt på sin destination.
+Den når derfor ikke altid sin destination.
+\end{frame}
+
+\begin{frame}
+\frametitle{Konstruktion}
+\textit{Måletårnet} er placeret forskudt ift. det punkt der spores.\\
+Denne konstruktion har medført:
+\begin{itemize}
+\item øget kompleksitet af kode.
+\item en større robot konstruktion.
+\item problemer i forhold til robottens bagende.
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Omgivelser}
+\begin{itemize}
+\item PC'en der planlægger robottens rute gør udelukkende dette med udgangspunkt i occupancy grid.
+\item Robottens sensorer anvendes ikke under navigationen.
+\end{itemize}
+\centering
+\visible<2->{\includegraphics[width=0.6\textwidth]{testresultater/simpel1}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Yderligere sensor-information}
+Informationen fra robottens sensorer kunne give anledning til bedre definition af den verden robotten befinder sig i.
+\begin{itemize}
+\item Kontinuerlige målinger.
+\item Gaussisk fordeling i to dimensioner.
+\item Opfattelse af verden i 360$^\circ$.
+\begin{itemize}
+\item Ydervægge måles kun fra \'en retning.
+\item Hjørner kan ikke identificeres
+\item Bayes regel har svært ved at stabilisere information når alle målinger højst kan komme fra fire retninger.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Celle-størrelse}
+De afgrænsninger vi har valgt for projektet har medført problemstillinger i forhold til vores målsætning.
+\begin{itemize}
+\item Alle test udført med 10x10 cm grid.
+\item Præcision som målsætning.
+\item Reduktion i størrelse er problematisk.
+\end{itemize}
+\end{frame}
 
 \subsection{Konklusion}
 
