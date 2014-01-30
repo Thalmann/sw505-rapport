@@ -33,7 +33,7 @@ l(x) = \log \frac{p(x)}{1 - p(x)}
 \centering
 	\begin{subfigure}[b]{.48\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{verden/oppefra}
+	\includegraphics[width=\textwidth]{verden/oppefra_m_walle}
 	\caption{Aktuelt Kørselsmiljø.}
 	\label{map:world}
 	\end{subfigure}
@@ -46,6 +46,16 @@ l(x) = \log \frac{p(x)}{1 - p(x)}
 	\end{subfigure}
 
 \end{figure}
+\end{frame}
+
+\begin{frame}{Binært Bayes Filter}
+Kan bruges når tilstanden er statisk
+
+\begin{algorithm}[H]
+\textbf{BinaryBayesFilter($l_{t-1}, z_t$)} \\
+\Indp $l_t = l_{t-1} + \log \frac{p(x \mid z_t)}{1-p(x \mid z_t)} - \log \frac{p(x)}{1-p(x)}$ \\
+\Return{$l_t$}
+\end{algorithm}
 \end{frame}
 
 \begin{frame}
