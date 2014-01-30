@@ -1,4 +1,4 @@
-\subsection{Localization}
+\subsection{Lokalisering}
 
 \begin{frame}{Afstande mellem farver}
 
@@ -22,9 +22,9 @@ $$w_{C_aC_b} = \begin{cases}
 
 \begin{figure}
 \centering
-\includegraphics[scale=.7]{tracking/emptyGrid_TRACK2}
-
-\includegraphics[scale=.7]{tracking/emptyGrid_TRACK}
+\includegraphics[scale=.6]{tracking/emptyGrid}
+\includegraphics[scale=.6]{tracking/emptyGrid_TRACK2} \\
+\includegraphics[scale=.6]{tracking/emptyGrid_TRACK}
 
 \end{figure}
 \end{frame}
@@ -45,8 +45,8 @@ $$w_{C_aC_b} = \begin{cases}
 
 
 $$w'_{x,y} = \begin{cases}
-	0 &\text{hvis } \vert V_{x,y} \vert < \rho \\
-	w_{x,y} &\text{hvis } \vert V_{x,y} \vert \geq \rho
+	0 &\text{hvis } \vert V_{x,y} \vert < \sigma \\
+	w_{x,y} &\text{hvis } \vert V_{x,y} \vert \geq \sigma
 \end{cases}$$ \\
 hvor $$V_{x,y} = \{w \in N_{x,y} \vert w > 0 \}$$
 \end{frame}
@@ -61,13 +61,12 @@ Løbende opdatering af sporingsfarve.
 \end{frame}
 
 \begin{frame}{Opdateringshastighed}
-\begin{itemize}
-\item reducere problemets størrelse.
-\item robotten bevæger sig kun korte afstande mellem opdateringer.
-\end{itemize}
-\end{frame}
 
-\begin{frame}
+\begin{itemize}
+\item Reducere problemets størrelse
+\item Robotten bevæger sig kun korte afstande mellem opdateringer
+\end{itemize}
+
 \begin{figure}
 \centering
 
@@ -112,6 +111,7 @@ Løbende opdatering af sporingsfarve.
 
 
 \begin{frame}{Omregning fra punkt i billede til reelt punkt}
+
 \centering
 \includegraphics[scale=1]{conversion_figure}
 
