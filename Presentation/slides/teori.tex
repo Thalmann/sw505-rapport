@@ -1,6 +1,24 @@
 \section{Teori}
-
 \subsection{Grundlæggende}
+\begin{frame}{Occupancy Grid}
+\begin{figure}[h] % Kørselsmiljø og et occupancy grid
+\centering
+	\begin{subfigure}[b]{.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{verden/oppefra_m_walle}
+	\caption{Aktuelt Kørselsmiljø.}
+	\label{map:world}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{verden/occupancy_grid_verden}
+	\caption{Occupancy Grid.}
+	\label{map:occupancy_grid}
+	\end{subfigure}
+
+\end{figure}
+\end{frame}
 \begin{frame}{Bayes Regel}
 Opdatering af troen på en proposition ved ny evidens
 \[
@@ -28,28 +46,9 @@ l(x) = \log \frac{p(x)}{1 - p(x)}
 \end{frame}
 
 \subsection{Occupancy Grid}
-\begin{frame}{Occupancy Grid}
-\begin{figure}[h] % Kørselsmiljø og et occupancy grid
-\centering
-	\begin{subfigure}[b]{.48\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{verden/oppefra_m_walle}
-	\caption{Aktuelt Kørselsmiljø.}
-	\label{map:world}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{.48\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{verden/occupancy_grid_verden}
-	\caption{Occupancy Grid.}
-	\label{map:occupancy_grid}
-	\end{subfigure}
-
-\end{figure}
-\end{frame}
 
 \begin{frame}{Binært Bayes Filter}
-Kan bruges når tilstanden er statisk
+Kan bruges når verdenens tilstand er statisk
 
 \begin{algorithm}[H]
 \textbf{BinaryBayesFilter($l_{t-1}, z_t$)} \\
@@ -58,7 +57,23 @@ Kan bruges når tilstanden er statisk
 \end{algorithm}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Occupancy grid}
+\begin{algorithm}[H]
+OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
+
+\ForAll{cells $ m_i $}
+{
+\eIf{$ m_i $ is in the perceptual field of $ x_t $}
+%then
+{ $ l_{t,i} = l_{t-1,i} $ + \textbf{inverse\_sensor\_model} $( m_i, x_t, z_t ) - l_0$\\ }
+%else
+{ $ l_{t,i} = l_{t-1,i}  $\\ }
+}
+\Return {$ \{l_{t,i}\} $}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}{Occupancy grid}
 \begin{algorithm}[H]
 OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
 
@@ -76,15 +91,6 @@ OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
 
 \subsection{Sensormodeller}
 \begin{frame}{Simpel sensormodel}
-\[
-l_{r} = \begin{cases} 
-	l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\ 
-	l_{occ} &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t+\frac{\alpha}{2}\\ 
-	l_{free} &\text{ellers}  
-\end{cases}
-\]
-
-\[ r = \mid x_{cell} - x_{robot} + y_{cell} - y_{robot} \mid \]
 
 \includegraphics{simple_sensormodel.pdf}
 \end{frame}
@@ -93,14 +99,6 @@ l_{r} = \begin{cases}
   \pgfmathparse{((1-cos((x - #1)*(180/(#3-#1))))/2)*(#4-#2)+#2}}
   
 \begin{frame}{Gaussisk sensormodel}
-\[
-	l_{r} = \begin{cases} 
-		l_0 &\text{hvis }r > \text{min}(z_{max},z_t+\frac{\alpha}{2}) \\
-		log\Big(\frac{P_\kappa(r)}{1-P_\kappa(r)}\Big) &\text{hvis } z_t < r \leq z_t+\frac{\alpha}{2} \\
-		log\Big(\frac{P_\kappa(r)}{1-P_\kappa(r)}\Big) &\text{hvis } z_t-\frac{\alpha}{2} \leq r \leq z_t \\
-		l_{free} &\text{ellers}	
-	\end{cases} 
-\]
 
 \includegraphics{gaussian_sensormodel.pdf}
 \end{frame}
