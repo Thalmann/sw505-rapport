@@ -10,3 +10,5 @@ del *.lof
 del *.lot
 del *.nav
 del *.snm
+del *.gnuplot
+del *.vrb
