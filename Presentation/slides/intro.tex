@@ -6,19 +6,14 @@
 	Stort anvendelsesområde for robotter
 	\begin{itemize}
 		\item Industri
-		\begin{itemize}
-		\item Maler robotter
-		\item Svejse robotter
-		\item Samle robotter
-		\item Droner
-		\item Osv.
-		\end{itemize}
+			\begin{itemize}
+			\item Droner (overvågning/kortlægning)
+			\item Lager robotter
+			\end{itemize}
 		\item Privat
-		\begin{itemize}
-		\item Støvsuger robotter
-		\item Plæne robotter
-		\item Robotter som personlig hjælper
-		\item Osv.
+			\begin{itemize}
+			\item Støvsuger robotter
+			\item Plæneklipper robotter
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -120,10 +115,26 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Kørselsmiljø set oppefra (Kinect)}
-	\begin{figure}
-		\includegraphics[width=.75\textwidth]{evaluering/emptyGrid.png}
-	\end{figure}
+\begin{frame}[fragile]{Forsøgsopstilling og Kinect}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Kørselsmiljø set fra Kinect
+			\end{itemize}
+			\begin{figure}
+				\includegraphics[width=1\textwidth]{evaluering/emptyGrid.png}
+			\end{figure}
+		\end{column}
+		
+		\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item Montering af Kinect i loft
+				\end{itemize}
+			\begin{figure}
+				\includegraphics[width=1\textwidth]{verden/kinect.jpg}
+			\end{figure}
+	\end{column}
+\end{columns}
 \end{frame}
 
 %--------------------------------------------------
@@ -131,94 +142,11 @@
 %--------------------------------------------------
 \subsection{Evaluering af målsætning}
 \begin{frame}[fragile]{Vurderingsmål}
-	\linespace
-	\begin{columns}
-		\begin{column}{0.4\textwidth}
-			\begin{itemize}
-				\item Approximering af et optimalt kort for forsøgsopstillingen
-			\end{itemize}
-			\linespace
-			\includegraphics[width=\textwidth]{evaluering/optimalgrid.png}
-		\end{column}
-		
-		\pause
-		
-		\begin{column}{0.6\textwidth}
-			\begin{itemize}
-				\item Vurdering af målsætning
-			\end{itemize}
-			\linespace
-			\begin{tabular}{|l|c|c|c|}
-			\hline
-			& \multicolumn{3}{|c|}{Optimalt} \\
-			\hline
-			Test & \textbf{Optaget} & \textbf{Fri} & \textbf{Ukendt} \\ \hline
-			\textbf{Optaget} & $+1$ & $-1$ & $0$ \\ \hline
-			\textbf{Fri} & $-1$ & $+1$ & $0$ \\ \hline
-			\textbf{Ukendt} & $-1$ & $-1$ & $0$ \\ \hline
-			\end{tabular}
-		\end{column}
-\end{columns}
-\end{frame}
-
-% SIMPEL SENSOR MODEL
-\begin{frame}[fragile]{Simpel sensormodel}
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-			\item \textbf{100}/150 opdateringer
-			\item \textbf{127}/555 point
-			\end{itemize}
-			\includegraphics[width=\textwidth]{evaluering/simple3_100.png}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-			\item \textbf{150}/150 opdateringer
-			\item \textbf{193}/555 point
-			\end{itemize}
-			\includegraphics[width=\textwidth]{evaluering/simple3_150.png}
-		\end{column}
-\end{columns}
-\end{frame}
-
-% GAUSISK SENSOR MODEL
-\begin{frame}[fragile]{Gausisk sensormodel}
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-			\item \textbf{100}/150 opdateringer
-			\item \textbf{295}/555 point
-			\end{itemize}
-			\includegraphics[width=\textwidth]{evaluering/gauss3_100.png}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-			\item \textbf{150}/150 opdateringer
-			\item \textbf{337}/555 point
-			\end{itemize}
-			\includegraphics[width=\textwidth]{evaluering/gauss3_150.png}
-		\end{column}
-\end{columns}
-\end{frame}
-
-% SAMMENLIGNING AF SENSOR MODELLER
-\begin{frame}[fragile]{Sammenligning af simpel- og gausisk sensormodel}
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			Simpel:
-			\begin{itemize}
-			\item \textbf{150}/150 opdateringer
-			\item \textbf{193}/555 point
-			\end{itemize}
-			\includegraphics[width=\textwidth]{evaluering/simple3_150.png}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			Gausisk:
-			\begin{itemize}
-			\item \textbf{150}/150 opdateringer
-			\item \textbf{337}/555 point
-			\end{itemize}
-			\includegraphics[width=\textwidth]{evaluering/gauss3_150.png}
-		\end{column}
-\end{columns}
+	\begin{itemize}
+		\item Approximering af et optimalt kort for forsøgsopstillingen
+	\end{itemize}
+	
+	\begin{figure}
+		\includegraphics[width=.65\textwidth]{evaluering/optimalgrid.png}
+	\end{figure}
 \end{frame}

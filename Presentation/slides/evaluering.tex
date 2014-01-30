@@ -3,65 +3,143 @@
 \subsection{Test af sensormodeller}
 \begin{frame}
 \frametitle{Sammenlignings-skema}
-\begin{columns}
-\begin{column}{.59\textwidth}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{testresultater/emptygrid}\\
+\centering
+\vspace{-1em}
 \include{slides/evaluering_point}
-\end{center}
+\vspace{1em}
+\begin{columns}
+\begin{column}{.49\textwidth}
+\visible<2->{\includegraphics[width=\textwidth]{testresultater/optimalt}}
 \end{column}
-\begin{column}{.40\textwidth}
-\visible<2->{\includegraphics[width=\textwidth]{testresultater/optimalt}}\\
+\begin{column}{.49\textwidth}
 \visible<3->{\includegraphics[width=\textwidth]{testresultater/simpel1}}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}
-\frametitle{Testresultater}
-\begin{columns}
-\begin{column}{.59\textwidth}
-\begin{center}
-\begin{tabular}{|l|r|}
-\hline
-\textbf{Test \#} & \textbf{Resultat} \\ \hline \hline
-Optimalt & 555 \\ \hline \hline
-Simpel, Test 1 & 193 \\ \hline
-Simpel, Test 2 & 187 \\ \hline
-Simpel, Test 3 & 193 \\ \hline \hline
-Gaussisk, Test 1 & 297 \\ \hline
-Gaussisk, Test 2 & 325 \\ \hline
-Gaussisk, Test 3 & 337 \\ \hline
-\end{tabular}
-\end{center}
-\end{column}
-\begin{column}{.40\textwidth}
-\includegraphics[width=\textwidth]{testresultater/optimalt}\\
-\includegraphics[width=\textwidth]{testresultater/simpel1}
-\end{column}
+
+% SIMPEL SENSOR MODEL
+\begin{frame}[fragile]{Simpel sensormodel}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item \textbf{100}/150 opdateringer
+			\item \textbf{127}/555 point
+			\end{itemize}
+			\includegraphics[width=\textwidth]{evaluering/simple3_100.png}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item \textbf{150}/150 opdateringer
+			\item \textbf{193}/555 point
+			\end{itemize}
+			\includegraphics[width=\textwidth]{evaluering/simple3_150.png}
+		\end{column}
 \end{columns}
 \end{frame}
 
-\subsection{Problemstillinger}
+% GAUSISK SENSOR MODEL
+\begin{frame}[fragile]{Gausisk sensormodel}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item \textbf{100}/150 opdateringer
+			\item \textbf{295}/555 point
+			\end{itemize}
+			\includegraphics[width=\textwidth]{evaluering/gauss3_100.png}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+			\item \textbf{150}/150 opdateringer
+			\item \textbf{337}/555 point
+			\end{itemize}
+			\includegraphics[width=\textwidth]{evaluering/gauss3_150.png}
+		\end{column}
+\end{columns}
+\end{frame}
+
+% SAMMENLIGNING AF SENSOR MODELLER
+\begin{frame}[fragile]{Sammenligning af modeller}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			Simpel:
+			\begin{itemize}
+			\item \textbf{150}/150 opdateringer
+			\item \textbf{193}/555 point
+			\end{itemize}
+			\includegraphics[width=\textwidth]{evaluering/simple3_150.png}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Gausisk:
+			\begin{itemize}
+			\item \textbf{150}/150 opdateringer
+			\item \textbf{337}/555 point
+			\end{itemize}
+			\includegraphics[width=\textwidth]{evaluering/gauss3_150.png}
+		\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Problemstillinger \& Forbedringer}
 
 \begin{frame}
-\frametitle{Punkter fra rapporten}
+\frametitle{Navigation}
+Robotten roterer ikke korrekt, hvilket medfører:
 \begin{itemize}
-\item Roterer og kører ikke præcist
-\item Holder sig ikke altid indenfor den planlagte rute
-\item Tager ikke højde for placering af sin bagende (og forende)
-\item Sletter dele af kortet grundet forkerte sensormålinger
-\item Uendelig løkke
-\item Kører ind i forhindringer
-\item Problemer med $90^\circ$ verden
-\item Cellestørrelse
-\item Gaussisk sensormodel i to dimensioner
-\item Løbende målinger
-\item Intet tårn
-\item Robot bevist om egen størrelse og nærmeste omgivelser
+\item afvigelse fra den planlagte rute.
+\item opdatering af nabocelle istedet for den ønskede celle.
+\item kollision med kassen i testmiljøet.
+\end{itemize}
+\pause
+Robotten forespørger kun sin position indtil den er \textit{tilpas} tæt på sin destination.
+Den når derfor ikke altid sin destination.
+\end{frame}
+
+\begin{frame}
+\frametitle{Konstruktion}
+\textit{Måletårnet} er placeret forskudt ift. det punkt der spores.\\
+Denne konstruktion har medført:
+\begin{itemize}
+\item øget kompleksitet af kode.
+\item en større robot konstruktion.
+\item problemer i forhold til robottens bagende.
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Omgivelser}
+\begin{itemize}
+\item PC'en der planlægger robottens rute gør udelukkende dette med udgangspunkt i occupancy grid.
+\item Robottens sensorer anvendes ikke under navigationen.
+\end{itemize}
+\centering
+\visible<2->{\includegraphics[width=0.6\textwidth]{testresultater/simpel1}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Yderligere sensor-information}
+Informationen fra robottens sensorer kunne give anledning til bedre definition af den verden robotten befinder sig i.
+\begin{itemize}
+\item Kontinuerlige målinger.
+\item Gaussisk fordeling i to dimensioner.
+\item Opfattelse af verden i 360$^\circ$.
+\begin{itemize}
+\item Ydervægge måles kun fra \'en retning.
+\item Hjørner kan ikke identificeres
+\item Bayes regel har svært ved at stabilisere information når alle målinger højst kan komme fra fire retninger.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Celle-størrelse}
+De afgrænsninger vi har valgt for projektet har medført problemstillinger i forhold til vores målsætning.
+\begin{itemize}
+\item Alle test udført med 10x10 cm grid.
+\item Præcision som målsætning.
+\item Reduktion i størrelse er problematisk.
+\end{itemize}
+\end{frame}
 
 \subsection{Konklusion}
 
