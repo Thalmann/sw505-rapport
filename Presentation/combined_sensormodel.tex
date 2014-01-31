@@ -20,17 +20,15 @@
   ]
   \addplot [draw=none] {1};
   \addplot [draw=none] {0};
+  
+  \addplot [very thick,cyan!50!black, domain=0:4] {0.4};
+  \addplot [very thick,cyan!50!black, domain=4:8] {0.6};
+  \addplot [very thick,cyan!50!black, domain=8:10] {0.5};
 
   \addplot [very thick,red!75!black, domain=0:4] {0.4};
   \addplot [very thick,red!75!black, domain=4:6] {gauss(4, 0.4, 6, 0.7)};
   \addplot [very thick,red!75!black, domain=6:8] {gauss(6, 0.7, 8, 0.5)};
   \addplot [very thick,red!75!black, domain=8:10] {0.5};
-  
-  
-    \addplot [very thick,cyan!50!black, domain=0:4] {0.4};
-    \addplot [very thick,cyan!50!black, domain=4:8] {0.6};
-    \addplot [very thick,cyan!50!black, domain=8:10] {0.5};
-
 
 %\draw [yshift=-0.6cm, latex-latex](axis cs:4,0) -- node [fill=white] {$1.96\sigma$} (axis cs:5.96,0);
 \end{axis}
