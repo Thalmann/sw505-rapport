@@ -4,17 +4,23 @@
 \begin{frame}
 \frametitle{Sammenlignings-skema}
 \centering
-\vspace{-1em}
-\include{slides/evaluering_point}
-\vspace{1em}
 \begin{columns}
 \begin{column}{.49\textwidth}
-\visible<2->{\includegraphics[width=\textwidth]{testresultater/optimalt}}
+\includegraphics[width=\textwidth]{testresultater/optimalt}
 \end{column}
 \begin{column}{.49\textwidth}
-\visible<3->{\includegraphics[width=\textwidth]{testresultater/simpel1}}
+$P(occupied)$
+\begin{itemize}
+\item Optaget: $> 0.5$
+\item Fri: $< 0.5$
+\item Ukendt: $= 0.5$
+\end{itemize}
+\visible<3->{Maksimal score: 555}
 \end{column}
 \end{columns}
+\pause
+\vspace{1em}
+\include{slides/evaluering_point}
 \end{frame}
 
 
@@ -28,13 +34,14 @@
 			\end{itemize}
 			\includegraphics[width=\textwidth]{evaluering/simple3_100.png}
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\visible<2->
+		{\begin{column}{0.5\textwidth}
 			\begin{itemize}
 			\item \textbf{150}/150 opdateringer
 			\item \textbf{193}/555 point
 			\end{itemize}
 			\includegraphics[width=\textwidth]{evaluering/simple3_150.png}
-		\end{column}
+		\end{column}}
 \end{columns}
 \end{frame}
 
@@ -48,13 +55,14 @@
 			\end{itemize}
 			\includegraphics[width=\textwidth]{evaluering/gauss3_100.png}
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\visible<2->
+		{\begin{column}{0.5\textwidth}
 			\begin{itemize}
 			\item \textbf{150}/150 opdateringer
 			\item \textbf{337}/555 point
 			\end{itemize}
 			\includegraphics[width=\textwidth]{evaluering/gauss3_150.png}
-		\end{column}
+		\end{column}}
 \end{columns}
 \end{frame}
 
