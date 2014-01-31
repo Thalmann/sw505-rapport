@@ -39,10 +39,10 @@ P(h \mid e) = \frac{P(e \mid h) \times P(h)}{P(e)}
 %Der kan derfor indføres en funktion, \textit{log odds ratio}, som mapper sandsynlighedsværdierne fra $[0;1]$ til $[-\infty;\infty]$.
 %Oddset for tilstand $x$ er defineret som forholdet mellem sandsynlighederne for $x$ og $\lnot x$: 
 
-\[
-l(x) = \log \frac{p(x)}{1 - p(x)}
-\]
-
+\begin{tabular}{ p{0.5\linewidth} p{0.5\linewidth} }
+$ l(x) = \log \frac{p(x)}{1 - p(x)} $ & 
+$ bel_t(x) = 1 - \frac{1}{1 + exp\{l_x\}}\label{logodds:bel} $
+\end{tabular}
 \end{frame}
 
 \subsection{Occupancy Grid}
@@ -95,9 +95,6 @@ OccupancyGridMapping(\{$l_{t-1,i}$\}, $x_t$, $z_t$):
 \includegraphics{simple_sensormodel.pdf}
 \end{frame}
 
-\pgfmathdeclarefunction{gauss}{4}{%
-  \pgfmathparse{((1-cos((x - #1)*(180/(#3-#1))))/2)*(#4-#2)+#2}}
-  
 \begin{frame}{Gaussisk sensormodel}
 
 \includegraphics{gaussian_sensormodel.pdf}
