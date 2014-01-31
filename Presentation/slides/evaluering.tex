@@ -69,23 +69,17 @@ $P(occupied)$
 % SAMMENLIGNING AF SENSOR MODELLER
 \begin{frame}[fragile]{Sammenligning af modeller}
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			Simpel:
-			\begin{itemize}
-			\item \textbf{150}/150 opdateringer
-			\item \textbf{193}/555 point
-			\end{itemize}
+		\begin{column}{0.45\textwidth}
 			\includegraphics[width=\textwidth]{evaluering/simple3_150.png}
 		\end{column}
-		\begin{column}{0.5\textwidth}
-			Gausisk:
-			\begin{itemize}
-			\item \textbf{150}/150 opdateringer
-			\item \textbf{337}/555 point
-			\end{itemize}
+		\begin{column}{0.45\textwidth}
 			\includegraphics[width=\textwidth]{evaluering/gauss3_150.png}
 		\end{column}
-\end{columns}
+	\end{columns}
+	\vspace{-0.5em}
+	\begin{center}
+	\includegraphics[width=0.45\textwidth]{testresultater/optimalt}
+	\end{center}
 \end{frame}
 
 \subsection{Problemstillinger \& Forbedringer}
@@ -95,8 +89,9 @@ $P(occupied)$
 Robotten roterer ikke korrekt, hvilket medfører:
 \begin{itemize}
 \item afvigelse fra den planlagte rute.
-\item opdatering af nabocelle istedet for den ønskede celle.
 \item kollision med kassen i testmiljøet.
+\item opdatering af nabocelle istedet for den ønskede celle.
+\item robotten er ikke altid orienteret i 90$^\circ$ ved opdatering.
 \end{itemize}
 \pause
 Robotten forespørger kun sin position indtil den er \textit{tilpas} tæt på sin destination.
